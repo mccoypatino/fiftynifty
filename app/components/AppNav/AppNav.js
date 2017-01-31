@@ -20,8 +20,7 @@ export const AppNav = React.createClass({
 
 	render() {
 		const localUserData = localStorage.getItem('userData');
-
-		const user = localUserData.length > 1 ? JSON.parse(localUserData) : {};
+		const user = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
 		return (
 			<nav style={styles.navStyle}>
 				<div style={styles.navContent}>

@@ -46,6 +46,7 @@ export const Landing = React.createClass({
 		const referral = this.props.location.query.ref;
 		this.props.dispatch(postUser(this.state.name, this.state.phone, this.state.zipcode, referral));
 	},
+
 	render() {
 
 		return (
@@ -155,6 +156,4 @@ styles = {
 		fontSize: '1.5em',
 		marginBottom: '1.5em',
 	},
-	
-	
 };
