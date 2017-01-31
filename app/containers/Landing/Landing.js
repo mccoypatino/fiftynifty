@@ -2,13 +2,16 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Button } from '@blueprintjs/core';
+import { browserHistory } from 'react-router';
 import Radium from 'radium';
+import Phone from 'react-phone-number-input';
+import { postUser } from './actions';
 
 let styles;
 
 export const Landing = React.createClass({
 	propTypes: {
-		accountData: PropTypes.object,
+		appData: PropTypes.object,
 		location: PropTypes.object,
 		params: PropTypes.object,
 		dispatch: PropTypes.func,
@@ -18,10 +21,25 @@ export const Landing = React.createClass({
 		return {
 			name: '',
 			phone: '',
-			zip: '',
+			zipcode: '',
 		};
 	},
+
+	componentWillReceiveProps(nextProps) {
+		const lastLoading = this.props.appData.signupLoading;
+		const nextLoading = nextProps.appData.signupLoading;
+		const nextError = nextProps.appData.signupLoading;
+		const nextResult = nextProps.appData.signupResult;
+		if (lastLoading && !nextLoading && !nextError && nextResult.id) {
+			browserHistory.push(`/${nextResult.id}`);
+		}
+	},
 	
+	formSubmit: function(evt) {
+		evt.preventDefault();
+		const referral = this.props.location.query.ref;
+		this.props.dispatch(postUser(this.state.name, this.state.phone, this.state.zipcode, referral));
+	},
 	render() {
 
 		return (
@@ -34,20 +52,20 @@ export const Landing = React.createClass({
 						<div>Collect all 50</div>
 						<div>Play for Freedom</div>
 
-						<form>
+						<form onSubmit={this.formSubmit} >
 							<label htmlFor={'name-input'} style={styles.inputLabel}>
 								Name
-								<input id={'name-input'} className={'pt-input'} value={this.state.name} onChange={(evt)=> this.setState({ name: evt.target.value })}/>
+								<input id={'name-input'} className={'pt-input'} value={this.state.name} onChange={(evt)=> this.setState({ name: evt.target.value })} />
 							</label>
 							<label htmlFor={'phone-input'} style={styles.inputLabel}>
 								Phone
-								<input id={'phone-input'} className={'pt-input'} value={this.state.phone} onChange={(evt)=> this.setState({ phone: evt.target.value })}/>
+								<Phone country={'US'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} />
 							</label>
 							<label htmlFor={'zip-input'} style={styles.inputLabel}>
 								Zip
-								<input id={'zip-input'} className={'pt-input'} value={this.state.zip} onChange={(evt)=> this.setState({ zip: evt.target.value })}/>
+								<input id={'zip-input'} className={'pt-input'} value={this.state.zipcode} onChange={(evt)=> this.setState({ zipcode: evt.target.value })} />
 							</label>
-							<Button style={styles.button} text={'Join'} className={'pt-intent-primary'} />
+							<Button loading={this.props.appData.signupLoading} style={styles.button} text={'Join'} className={'pt-intent-primary'} onClick={this.formSubmit} />
 
 						</form>
 					</div>
@@ -65,7 +83,7 @@ export const Landing = React.createClass({
 
 function mapStateToProps(state) {
 	return {
-		// accountData: state.account.toJS(),
+		appData: state.app.toJS(),
 	};
 }
 
@@ -109,7 +127,7 @@ styles = {
 		zIndex: 2,
 		fontWeight: '200',
 
-		padding: '2em 1em',
+		padding: '4rem 1rem',
 		maxWidth: '1024px',
 		margin: '0 auto',
 	},
@@ -117,6 +135,7 @@ styles = {
 		fontSize: '1rem',
 		display: 'inline-block',
 		padding: '0em 0.5em',
+		verticalAlign: 'bottom',
 	},
 	button: {
 		verticalAlign: 'bottom',
