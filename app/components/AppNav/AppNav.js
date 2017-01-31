@@ -23,8 +23,8 @@ export const AppNav = React.createClass({
 		
 		return (
 			<nav style={styles.navStyle}>
-				Fifty Nifty
-				
+				<Link to={'/'}>Fifty Nifty</Link>
+
 			</nav>
 		);
 	}
@@ -37,6 +37,10 @@ styles = {
 	navStyle: {
 		minHeight: '75px',
 		lineHeight: '75px',
-		boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.5)',
+		// boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.5)',
+		padding: '0em 1em',
+		position: 'absolute',
+		zIndex: '3',
+		width: '100%',
 	},
 };
