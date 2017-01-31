@@ -1,17 +1,13 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import { StyleRoot } from 'radium';
 import Helmet from 'react-helmet';
 import { AppNav, AppFooter } from 'components';
-import { login, logout } from './actions';
 
 require('../../../static/blueprint.scss');
 require('../../../static/style.css');
 
 export const App = React.createClass({
 	propTypes: {
-		appData: PropTypes.object,
-		accountData: PropTypes.object,
 		location: PropTypes.object,
 		params: PropTypes.object,
 		children: PropTypes.object,
@@ -21,11 +17,6 @@ export const App = React.createClass({
 	componentWillMount() {
 		const FocusStyleManager = require('@blueprintjs/core').FocusStyleManager;
 		FocusStyleManager.onlyShowFocusOnTabs();
-		this.props.dispatch(login());
-	},
-
-	logoutHandler: function() {
-		this.props.dispatch(logout());
 	},
 
 	render() {
@@ -50,7 +41,7 @@ export const App = React.createClass({
 						{ name: 'twitter:image:alt', content: 'Logo for List of Links' }
 					]} 
 				/> 
-				<AppNav accountData={this.props.accountData} location={this.props.location} params={this.props.params} logoutHandler={this.logoutHandler} />
+				<AppNav params={this.props.params} logoutHandler={this.logoutHandler} />
 				<div style={{ minHeight: '600px' }}>{this.props.children}</div>
 				<AppFooter />
 			</StyleRoot>
@@ -59,11 +50,4 @@ export const App = React.createClass({
 
 });
 
-function mapStateToProps(state) {
-	return {
-		appData: state.app.toJS(),
-	};
-}
-
-export default connect(mapStateToProps)(App);
-
+export default App;

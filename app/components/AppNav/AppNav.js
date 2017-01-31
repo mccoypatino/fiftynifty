@@ -18,13 +18,24 @@ export const AppNav = React.createClass({
 		};
 	},
 
-
 	render() {
-		
+		const localUserData = localStorage.getItem('userData');
+
+		const user = localUserData.length > 1 ? JSON.parse(localUserData) : {};
 		return (
 			<nav style={styles.navStyle}>
-				<Link to={'/'}>Fifty Nifty</Link>
-
+				<div style={styles.navContent}>
+					<Link to={'/'} style={styles.link}>Fifty Nifty</Link>
+					<Link to={'/leaderboard'} style={styles.link}>Leaderboard</Link>
+					<div style={styles.rightContent}>
+						{!!user.id &&
+							<Link to={`/${user.id}`}>Your Profile</Link>	
+						}
+					</div>
+					
+				</div>
+				
+				
 			</nav>
 		);
 	}
@@ -38,9 +49,20 @@ styles = {
 		minHeight: '75px',
 		lineHeight: '75px',
 		// boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.5)',
-		padding: '0em 1em',
 		position: 'absolute',
 		zIndex: '3',
 		width: '100%',
+	},
+	navContent: {
+		padding: '0em 1em',
+		maxWidth: '1024px',
+		margin: '0 auto',
+	},
+	link: {
+		paddingRight: '1em',
+	},
+	rightContent: {
+		float: 'right',
+		paddingLeft: '1em',
 	},
 };

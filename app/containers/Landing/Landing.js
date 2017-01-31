@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import { Button } from '@blueprintjs/core';
-import { browserHistory } from 'react-router';
 import Radium from 'radium';
 import Phone from 'react-phone-number-input';
 import { postUser } from './actions';
@@ -11,7 +10,7 @@ let styles;
 
 export const Landing = React.createClass({
 	propTypes: {
-		appData: PropTypes.object,
+		landingData: PropTypes.object,
 		location: PropTypes.object,
 		params: PropTypes.object,
 		dispatch: PropTypes.func,
@@ -26,15 +25,22 @@ export const Landing = React.createClass({
 	},
 
 	componentWillReceiveProps(nextProps) {
-		const lastLoading = this.props.appData.signupLoading;
-		const nextLoading = nextProps.appData.signupLoading;
-		const nextError = nextProps.appData.signupLoading;
-		const nextResult = nextProps.appData.signupResult;
+		const lastLoading = this.props.landingData.signupLoading;
+		const nextLoading = nextProps.landingData.signupLoading;
+		const nextError = nextProps.landingData.signupLoading;
+		const nextResult = nextProps.landingData.signupResult;
 		if (lastLoading && !nextLoading && !nextError && nextResult.id) {
+			localStorage.setItem('userData', JSON.stringify(nextResult));
 			browserHistory.push(`/${nextResult.id}`);
 		}
 	},
 	
+	updateZipcode: function(evt) {
+		this.setState({
+			zipcode: evt.target.value.substring(0, 5)
+		});
+	},
+
 	formSubmit: function(evt) {
 		evt.preventDefault();
 		const referral = this.props.location.query.ref;
@@ -63,9 +69,9 @@ export const Landing = React.createClass({
 							</label>
 							<label htmlFor={'zip-input'} style={styles.inputLabel}>
 								Zip
-								<input id={'zip-input'} className={'pt-input'} value={this.state.zipcode} onChange={(evt)=> this.setState({ zipcode: evt.target.value })} />
+								<input id={'zip-input'} type={'number'} className={'pt-input'} value={this.state.zipcode} onChange={this.updateZipcode} />
 							</label>
-							<Button loading={this.props.appData.signupLoading} style={styles.button} text={'Join'} className={'pt-intent-primary'} onClick={this.formSubmit} />
+							<Button loading={this.props.landingData.signupLoading} style={styles.button} text={'Join'} className={'pt-intent-primary'} onClick={this.formSubmit} />
 
 						</form>
 					</div>
@@ -83,7 +89,7 @@ export const Landing = React.createClass({
 
 function mapStateToProps(state) {
 	return {
-		appData: state.app.toJS(),
+		landingData: state.landing.toJS(),
 	};
 }
 
@@ -91,9 +97,7 @@ export default connect(mapStateToProps)(Radium(Landing));
 
 styles = {
 	container: {
-		// padding: '2em 1em',
-		// maxWidth: '1024px',
-		// margin: '0 auto',
+
 	},
 	header: {
 		position: 'relative',		

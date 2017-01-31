@@ -1,0 +1,60 @@
+import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { Link, browserHistory } from 'react-router';
+import { Button, Spinner } from '@blueprintjs/core';
+import Radium from 'radium';
+import { getLeaderboard } from './actions';
+
+let styles;
+
+export const Leaderboard = React.createClass({
+	propTypes: {
+		leaderboardData: PropTypes.object,
+		location: PropTypes.object,
+		params: PropTypes.object,
+		dispatch: PropTypes.func,
+	},
+
+	componentWillMount() {
+		this.props.dispatch(getLeaderboard());
+	},
+	
+	render() {
+		const leaders = this.props.leaderboardData.leaders || {};
+		return (
+			<div style={styles.container}>
+				{this.props.leaderboardData.loading &&
+					<Spinner />
+				}
+				<div style={styles.content}>
+					<div style={styles.title}>Leaders</div>
+				</div>
+				
+			</div>
+		);
+	}
+});
+
+function mapStateToProps(state) {
+	return {
+		leaderboardData: state.leaderboard.toJS(),
+	};
+}
+
+export default connect(mapStateToProps)(Radium(Leaderboard));
+
+styles = {
+	container: {
+		padding: '75px 1em',
+		maxWidth: '1024px',
+		margin: '0 auto',
+	},
+	content: {
+		padding: '2em 0em',
+	},
+	title: {
+		fontSize: '2.5em',
+		fontWeight: '200',
+	},
+		
+};

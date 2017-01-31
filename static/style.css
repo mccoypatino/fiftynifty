@@ -30,3 +30,9 @@ a {
 .react-phone-number-input__country.rrui__select.rrui__select--collapsed {
 	display: none !important;
 }
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}

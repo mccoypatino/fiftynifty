@@ -5,15 +5,16 @@ import { ensureImmutable } from './index';
 // Load Actions
 /* ---------- */
 import {
-	LOGIN_POST_LOAD,
-	LOGIN_POST_SUCCESS,
-	LOGIN_POST_FAIL,
-} from 'containers/Login/actions';
+	GET_LEADERBOARD_LOAD,
+	GET_LEADERBOARD_SUCCESS,
+	GET_LEADERBOARD_FAIL,
+} from 'containers/Leaderboard/actions';
 
 /* ------------------- */
 // Define Default State
 /* ------------------- */
 const defaultState = Immutable.Map({
+	leaders: {},
 	loading: false,
 	error: undefined,
 });
@@ -24,20 +25,23 @@ const defaultState = Immutable.Map({
 export default function reducer(state = defaultState, action) {
 	switch (action.type) {
 	
-	case LOGIN_POST_LOAD:
+	case GET_LEADERBOARD_LOAD:
 		return state.merge({
 			loading: true,
 			error: undefined,
+			leaders: {},
 		});	
-	case LOGIN_POST_SUCCESS:
+	case GET_LEADERBOARD_SUCCESS:
 		return state.merge({
 			loading: false,
-			error: false,
+			error: undefined,
+			leaders: action.result
 		});
-	case LOGIN_POST_FAIL:
+	case GET_LEADERBOARD_FAIL:
 		return state.merge({
 			loading: false,
-			error: true,
+			error: action.error,
+			leaders: null,
 		});
 
 	default:
