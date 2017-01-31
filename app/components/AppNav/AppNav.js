@@ -57,6 +57,7 @@ styles = {
 		padding: '0em 1em',
 		maxWidth: '1024px',
 		margin: '0 auto',
+		borderBottom: '1px solid rgba(0, 0, 0, 0.25)',
 	},
 	link: {
 		paddingRight: '1em',

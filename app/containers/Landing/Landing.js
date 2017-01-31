@@ -116,7 +116,9 @@ styles = {
 	},
 	headerSplash: {
 		position: 'absolute',
-		backgroundColor: 'rgba(19, 24, 187, 0.7)',
+		// backgroundColor: 'rgba(19, 24, 187, 0.7)',
+		backgroundImage: 'url("/static/denim.png")',
+		opacity: 0.85,
 		top: 0,
 		left: 0,
 		width: '100%',
