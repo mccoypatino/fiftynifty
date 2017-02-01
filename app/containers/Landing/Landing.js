@@ -50,6 +50,10 @@ export const Landing = React.createClass({
 
 	render() {
 
+/* 
+	Still to do: 
+   * Form verification
+*/
 		return (
 			<div style={styles.container}>
 				<div style={styles.header}>
@@ -62,16 +66,24 @@ export const Landing = React.createClass({
 
 						<form onSubmit={this.formSubmit} >
 							<label htmlFor={'name-input'} style={styles.inputLabel}>
-								Name
-								<input id={'name-input'} className={'pt-input'} value={this.state.name} onChange={(evt)=> this.setState({ name: evt.target.value })} />
-							</label>
-							<label htmlFor={'phone-input'} style={styles.inputLabel}>
-								Phone
-								<Phone country={'US'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} />
+								What is your name?
+								<input id={'name-input'} className={'pt-input pt-large pt-fill'} placeholder={"(It doesn't have to be your real name)"} value={this.state.name} onChange={(evt)=> this.setState({ name: evt.target.value })} />
 							</label>
 							<label htmlFor={'zip-input'} style={styles.inputLabel}>
-								Zip
-								<input id={'zip-input'} type={'number'} className={'pt-input'} value={this.state.zipcode} onChange={this.updateZipcode} />
+								In which zipcode do you vote?
+								<input id={'zip-input'} type={'number'} className={'pt-input pt-large pt-fill'} placeholder={'(Where are you registered?)'} value={this.state.zipcode} onChange={this.updateZipcode} />
+							</label>
+							<label htmlFor={'phone-input'} style={styles.inputLabel}>
+								What is your phone number?
+								<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'(The one with which you will call)'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} />
+								<div style={styles.smallInformation}> 
+									<img alt="lock" src={'/static/lock.png'} style={styles.lockImage} />
+									<div style={styles.smallInformationText}> We will never, ever, share it with anyone; and no human will be able to read it. </div>
+								</div>
+								<div style={styles.smallInformation}> 
+									<img alt="lock" src={'/static/notification.png'} style={styles.lockImage} />
+									<div style={styles.smallInformationText}> We may send you notifications about your progress. No spam, ever. </div>
+								</div>
 							</label>
 							<Button loading={this.props.landingData.signupLoading} style={styles.button} text={'Join'} className={'pt-intent-primary'} onClick={this.formSubmit} />
 
@@ -141,8 +153,9 @@ styles = {
 	},
 	inputLabel: {
 		fontSize: '1rem',
-		display: 'inline-block',
+		display: 'block',
 		padding: '0em 0.5em',
+		marginBottom: '1em',
 		verticalAlign: 'bottom',
 	},
 	button: {
@@ -157,4 +170,20 @@ styles = {
 		fontSize: '1.5em',
 		marginBottom: '1.5em',
 	},
+	smallInformation: {
+		fontSize: '0.75em',
+		width: '38em',
+		marginTop: '0.5em',
+		padding: '0.3em 0.3em',
+		clear: 'both',
+	},
+	smallInformationText: {
+		float: 'right',
+		width: '36em',
+	},
+	lockImage: {
+		height: '1em',
+		position: 'relative',
+		top: '0.2em',
+	}
 };
