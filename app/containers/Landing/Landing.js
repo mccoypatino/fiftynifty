@@ -102,6 +102,14 @@ export const Landing = React.createClass({
 
 					<p>Teachable moment [or perhaps civics lesson]:  If you ever thought that your vote didn’t matter because you knew your choice won or lost anyway, here’s why you still should vote:  it forces them to take you seriously now.  No one ignores a voter not matter who they voted for. They didn’t teach this in civics class, but it’s yet another reason to cast a ballot.</p>
 				</div>
+
+				<div style={styles.section}>
+					<div style={styles.sectionHeader}>Sites for Inspiration</div>
+					<a href={'https://democracy.io/#/'}>https://democracy.io/#/</a>
+					<a href="https://vote.gov/">https://vote.gov/</a>
+					<a href="https://votinginfoproject.org/">https://votinginfoproject.org/</a>
+					<a href="https://dribbble.com/shots/713806-Political-Site">https://dribbble.com/shots/713806-Political-Site</a>
+				</div>
 				
 				
 			</div>
