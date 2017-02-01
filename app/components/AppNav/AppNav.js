@@ -53,13 +53,14 @@ styles = {
 		position: 'absolute',
 		zIndex: '3',
 		width: '100%',
+		color: 'white',
 	},
 	navContent: {
 		padding: '0em 1em',
 		maxWidth: '1024px',
 		margin: '0 auto',
 		borderBottom: '1px solid rgba(0, 0, 0, 0.25)',
-		backgroundColor: '#F29696',
+		// backgroundColor: '#F29696',
 	},
 	link: {
 		paddingRight: '1em',
@@ -71,6 +72,6 @@ styles = {
 	logo: {
 		fontFamily: 'Bungee Shade',
 		fontSize: '2em',
-		color: '#083699',
+		color: '#fff',
 	}
 };

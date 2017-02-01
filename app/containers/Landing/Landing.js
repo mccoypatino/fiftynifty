@@ -63,37 +63,38 @@ export const Landing = React.createClass({
 					<div style={styles.headerImage} />
 					<div style={styles.headerSplash} />
 					<div style={styles.headerPresentation}>
+						<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
+							Join the Challenge
+							<form onSubmit={this.formSubmit} style={styles.form}>
+								<label htmlFor={'name-input'} style={styles.inputLabel}>
+									Name
+									<input id={'name-input'} className={'pt-input pt-large pt-fill'} placeholder={"(It doesn't have to be your real name)"} value={this.state.name} onChange={(evt)=> this.setState({ name: evt.target.value })} />
+								</label>
+								<label htmlFor={'zip-input'} style={styles.inputLabel}>
+									Zipcode (where you vote)
+									<input id={'zip-input'} type={'number'} className={'pt-input pt-large pt-fill'} placeholder={'(Where are you registered?)'} value={this.state.zipcode} onChange={this.updateZipcode} />
+								</label>
+								<label htmlFor={'phone-input'} style={styles.inputLabel}>
+									Phone number (we'll connect you to your reps!)
+									<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'(The one with which you will call)'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} />
+									{/*<div style={styles.smallInformation}> 
+										<img alt="lock" src={'/static/lock.png'} style={styles.lockImage} />
+										<div style={styles.smallInformationText}> We will never, ever, share it with anyone; and no human will be able to read it. </div>
+									</div>
+									<div style={styles.smallInformation}> 
+										<img alt="lock" src={'/static/notification.png'} style={styles.lockImage} />
+										<div style={styles.smallInformationText}> We may send you notifications about your progress. No spam, ever. </div>
+									</div>*/}
+								</label>
+								<Button loading={this.props.landingData.signupLoading} style={styles.button} text={'Join'} className={'pt-intent-primary'} onClick={this.formSubmit} />
+
+							</form>
+						</div>
 						<div>Call your Reps</div>
 						<div>Collect all 50</div>
 						<div>Play for Freedom</div>
 					</div>
-					<div style={styles.headerCall}>
-						Step 1: Call your Congressman
-						<form onSubmit={this.formSubmit} >
-							<label htmlFor={'name-input'} style={styles.inputLabel}>
-								What is your name?
-								<input id={'name-input'} className={'pt-input pt-large pt-fill'} placeholder={"(It doesn't have to be your real name)"} value={this.state.name} onChange={(evt)=> this.setState({ name: evt.target.value })} />
-							</label>
-							<label htmlFor={'zip-input'} style={styles.inputLabel}>
-								In which zipcode do you vote?
-								<input id={'zip-input'} type={'number'} className={'pt-input pt-large pt-fill'} placeholder={'(Where are you registered?)'} value={this.state.zipcode} onChange={this.updateZipcode} />
-							</label>
-							<label htmlFor={'phone-input'} style={styles.inputLabel}>
-								What is your phone number?
-								<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'(The one with which you will call)'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} />
-								<div style={styles.smallInformation}> 
-									<img alt="lock" src={'/static/lock.png'} style={styles.lockImage} />
-									<div style={styles.smallInformationText}> We will never, ever, share it with anyone; and no human will be able to read it. </div>
-								</div>
-								<div style={styles.smallInformation}> 
-									<img alt="lock" src={'/static/notification.png'} style={styles.lockImage} />
-									<div style={styles.smallInformationText}> We may send you notifications about your progress. No spam, ever. </div>
-								</div>
-							</label>
-							<Button loading={this.props.landingData.signupLoading} style={styles.button} text={'Join'} className={'pt-intent-primary'} onClick={this.formSubmit} />
-
-						</form>
-					</div>
+					
 				</div>
 				<div style={styles.section}>
 					<div style={styles.sectionHeader}>How to Play</div>
@@ -136,8 +137,9 @@ styles = {
 	headerSplash: {
 		position: 'absolute',
 		// backgroundColor: 'rgba(19, 24, 187, 0.7)',
-		backgroundImage: 'url("/static/denim.png")',
-		opacity: 0.85,
+		// backgroundImage: 'url("/static/denim.png")',
+		backgroundColor: '#76a9f5',
+		opacity: 0.9,
 		top: 0,
 		left: 0,
 		width: '100%',
@@ -145,17 +147,18 @@ styles = {
 		zIndex: 1,
 	},
 	headerPresentation: {
-		backgroundColor: 'red',
+		// backgroundColor: 'red',
 		position: 'relative',
 		fontSize: '2em',
 		zIndex: 2,
 		padding: '6rem 1rem 3rem 1rem',
 		maxWidth: '1024px',
 		margin: '0 auto',
+		minHeight: '600px',
 	},
 	headerCall: {
-		backgroundColor: 'blue',
-		color: 'white',
+		backgroundColor: 'white',
+		// color: 'white',
 		position: 'relative',
 		fontSize: '1.7em',
 		lineHeight: '1.5',
@@ -165,6 +168,7 @@ styles = {
 		padding: '2rem 1rem',
 		maxWidth: '1024px',
 		margin: '0 auto',
+		float: 'right',
 	},
 	inputLabel: {
 		fontSize: '1rem',
@@ -180,6 +184,10 @@ styles = {
 		padding: '2em 1em',
 		maxWidth: '1024px',
 		margin: '0 auto',
+	},
+	form: {
+		padding: 0,
+		margin: 0,
 	},
 	sectionHeader: {
 		fontSize: '1.5em',
