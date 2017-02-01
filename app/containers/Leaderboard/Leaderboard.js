@@ -24,12 +24,13 @@ export const Leaderboard = React.createClass({
 		const leaders = this.props.leaderboardData.leaders || [];
 		return (
 			<div style={styles.container}>
-				{this.props.leaderboardData.loading &&
-					<Spinner />
-				}
 				<div style={styles.content}>
 					<div style={styles.title}>Leaders</div>
 				</div>
+
+				{this.props.leaderboardData.loading &&
+					<Spinner />
+				}
 
 				{leaders.map((node)=> {
 					return <UserNode key={node.id} node={node} />;
