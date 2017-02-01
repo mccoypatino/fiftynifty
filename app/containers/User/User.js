@@ -8,6 +8,13 @@ import { UserNode } from './UserNode';
 
 let styles;
 
+// This key is publicly available, but in the future we may want to hide it with our own private thing
+const SUNLIGHT_FOUNDATION_KEY='55a27bdc46b947c4b63b791b7cf6fa2f';
+
+// Shamelessly stolen from the call-congress code
+const CONGRESS_API_URL = `https://congress.api.sunlightfoundation.com/legislators/locate?apikey=${
+    SUNLIGHT_FOUNDATION_KEY}`;
+
 export const User = React.createClass({
 	propTypes: {
 		userData: PropTypes.object,
@@ -22,6 +29,9 @@ export const User = React.createClass({
 	
 	render() {
 		const user = this.props.userData.user || {};
+		// Get the list of Congresspeople
+		const url = `${CONGRESS_API_URL}&zip=${user.zipcode}`;
+		console.log('Lookup', url);
 		const nodes = user.children || [];
 		return (
 			<div style={styles.container}>

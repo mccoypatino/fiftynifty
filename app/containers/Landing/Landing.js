@@ -52,18 +52,23 @@ export const Landing = React.createClass({
 
 /* 
 	Still to do: 
-   * Form verification
+	* Form verification
+	* Re-insert 
+	  <div style={styles.headerImage} />
+	  <div style={styles.headerSplash} /> ?
 */
 		return (
 			<div style={styles.container}>
 				<div style={styles.header}>
 					<div style={styles.headerImage} />
 					<div style={styles.headerSplash} />
-					<div style={styles.headerCall}>
+					<div style={styles.headerPresentation}>
 						<div>Call your Reps</div>
 						<div>Collect all 50</div>
 						<div>Play for Freedom</div>
-
+					</div>
+					<div style={styles.headerCall}>
+						Step 1: Call your Congressman
 						<form onSubmit={this.formSubmit} >
 							<label htmlFor={'name-input'} style={styles.inputLabel}>
 								What is your name?
@@ -139,15 +144,25 @@ styles = {
 		height: '100%',
 		zIndex: 1,
 	},
+	headerPresentation: {
+		backgroundColor: 'red',
+		position: 'relative',
+		fontSize: '2em',
+		zIndex: 2,
+		padding: '6rem 1rem 3rem 1rem',
+		maxWidth: '1024px',
+		margin: '0 auto',
+	},
 	headerCall: {
+		backgroundColor: 'blue',
 		color: 'white',
 		position: 'relative',
-		fontSize: '4em',
+		fontSize: '1.7em',
 		lineHeight: '1.5',
 		zIndex: 2,
 		fontWeight: '200',
 
-		padding: '4rem 1rem',
+		padding: '2rem 1rem',
 		maxWidth: '1024px',
 		margin: '0 auto',
 	},
@@ -172,14 +187,14 @@ styles = {
 	},
 	smallInformation: {
 		fontSize: '0.75em',
-		width: '38em',
+		width: '100%',
 		marginTop: '0.5em',
 		padding: '0.3em 0.3em',
 		clear: 'both',
 	},
 	smallInformationText: {
 		float: 'right',
-		width: '36em',
+		width: '90%',
 	},
 	lockImage: {
 		height: '1em',

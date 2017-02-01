@@ -24,7 +24,9 @@ export const AppNav = React.createClass({
 		return (
 			<nav style={styles.navStyle}>
 				<div style={styles.navContent}>
-					<Link to={'/'} style={styles.link}>Fifty Nifty</Link>
+					<Link to={'/'} style={styles.link}>
+						<span style={styles.logo}> Fifty Nifty </span>
+					</Link>
 					<Link to={'/leaderboard'} style={styles.link}>Leaderboard</Link>
 					<div style={styles.rightContent}>
 						{!!user.id &&
@@ -57,6 +59,7 @@ styles = {
 		maxWidth: '1024px',
 		margin: '0 auto',
 		borderBottom: '1px solid rgba(0, 0, 0, 0.25)',
+		backgroundColor: '#F29696',
 	},
 	link: {
 		paddingRight: '1em',
@@ -65,4 +68,9 @@ styles = {
 		float: 'right',
 		paddingLeft: '1em',
 	},
+	logo: {
+		fontFamily: 'Bungee Shade',
+		fontSize: '2em',
+		color: '#083699',
+	}
 };
