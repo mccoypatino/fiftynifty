@@ -105,10 +105,10 @@ export const Landing = React.createClass({
 
 				<div style={styles.section}>
 					<div style={styles.sectionHeader}>Sites for Inspiration</div>
-					<a href={'https://democracy.io/#/'}>https://democracy.io/#/</a>
-					<a href="https://vote.gov/">https://vote.gov/</a>
-					<a href="https://votinginfoproject.org/">https://votinginfoproject.org/</a>
-					<a href="https://dribbble.com/shots/713806-Political-Site">https://dribbble.com/shots/713806-Political-Site</a>
+					<div><a href={'https://democracy.io/#/'}>https://democracy.io/#/</a></div>
+					<div><a href="https://vote.gov/">https://vote.gov/</a></div>
+					<div><a href="https://votinginfoproject.org/">https://votinginfoproject.org/</a></div>
+					<div><a href="https://dribbble.com/shots/713806-Political-Site">https://dribbble.com/shots/713806-Political-Site</a></div>
 				</div>
 				
 				
