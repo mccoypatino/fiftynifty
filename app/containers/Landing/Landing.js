@@ -92,7 +92,7 @@ export const Landing = React.createClass({
 						</div>
 						<div>Call your Reps</div>
 						<div>Collect all 50</div>
-						<div>Play for Freedom</div>
+						<div>Play for a better Democracy</div>
 					</div>
 					
 				</div>
