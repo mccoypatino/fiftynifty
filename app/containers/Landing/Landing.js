@@ -109,6 +109,10 @@ export const Landing = React.createClass({
 					<div><a href="https://vote.gov/">https://vote.gov/</a></div>
 					<div><a href="https://votinginfoproject.org/">https://votinginfoproject.org/</a></div>
 					<div><a href="https://dribbble.com/shots/713806-Political-Site">https://dribbble.com/shots/713806-Political-Site</a></div>
+					<div><a href="https://dribbble.com/shots/2227088-Home">https://dribbble.com/shots/2227088-Home</a></div>
+					<div><a href="https://dribbble.com/shots/1121048-Democracy-Great-for-politics-bad-for-design">https://dribbble.com/shots/1121048-Democracy-Great-for-politics-bad-for-design</a></div>
+					<div><a href="https://www.data.gov/impact/">https://www.data.gov/impact/</a></div>
+
 				</div>
 				
 				
