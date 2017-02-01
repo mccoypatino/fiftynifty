@@ -24,11 +24,11 @@ export const AppNav = React.createClass({
 		return (
 			<nav style={styles.navStyle}>
 				<div style={styles.navContent}>
-					<Link to={'/'} style={styles.link}>
-						<span style={styles.logo}> Fifty Nifty </span>
+					<Link to={'/'}>
+						<span style={styles.logo}>Fifty Nifty</span>
 					</Link>
-					<Link to={'/leaderboard'} style={styles.link}>Leaderboard</Link>
 					<div style={styles.rightContent}>
+						<Link to={'/leaderboard'} style={styles.link}>Leaderboard</Link>
 						{!!user.id &&
 							<Link to={`/${user.id}`}>Your Profile</Link>	
 						}

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { Spinner } from '@blueprintjs/core';
 import Radium from 'radium';
+import fetch from 'isomorphic-fetch';
 import { getUser } from './actions';
 import { UserNode } from './UserNode';
 
@@ -23,16 +24,51 @@ export const User = React.createClass({
 		dispatch: PropTypes.func,
 	},
 
+	getInitialState() {
+		return {
+			reps: [],
+		};
+	},
+
 	componentWillMount() {
-		this.props.dispatch(getUser(this.props.params.userId));
+		this.props.dispatch(getUser(this.props.params.userId))
+		.then((result)=> {
+			console.log(this.props.userData);
+			const zipcode = this.props.userData.user.zipcode;
+			if (zipcode) {
+				return fetch(`${CONGRESS_API_URL}&zip=${zipcode}`)
+				.then((response)=> {
+					if (!response.ok) { 
+						return response.json().then(err => { throw err; });
+					}
+					return response.json();
+				})
+				.then((repResults)=> {
+					this.setState({ reps: repResults.results });
+				});
+			}
+		});
 	},
 	
+	returnCalls: function(user) {
+		const children = user.children || [];
+		const userCalls = user.calls || [];
+		const childrensCalls = children.map((child)=> {
+			return this.returnCalls(child);
+		});
+		return userCalls.concat(...childrensCalls);
+	},
+
 	render() {
 		const user = this.props.userData.user || {};
+		const children = user.children || [];
+		// const calls = user.calls || [];
+		const allCalls = this.returnCalls(user);
+		console.log(allCalls);
 		// Get the list of Congresspeople
-		const url = `${CONGRESS_API_URL}&zip=${user.zipcode}`;
-		console.log('Lookup', url);
-		const nodes = user.children || [];
+		// const url = `${CONGRESS_API_URL}&zip=${user.zipcode}`;
+		// console.log('Lookup', url);
+		
 		return (
 			<div style={styles.container}>
 				{this.props.userData.loading &&
@@ -41,9 +77,44 @@ export const User = React.createClass({
 				<div style={styles.content}>
 					<div style={styles.title}>{user.name} · {user.zipcode}</div>
 
-					{nodes.map((node)=> {
-						return <UserNode key={node.id} node={node} />;
-					})}
+					<div style={styles.section}>
+						<div style={styles.sectionTitle}>Progress</div>
+						{allCalls.map((call)=> {
+							return (
+								<div key={`call${call.id}`}>
+									{call.state} · {call.callerId} · {call.zip}
+								</div>
+							);
+						})}
+					</div>
+
+					<div style={styles.section}>
+						<div style={styles.sectionTitle}>Representatives</div>
+						{this.state.reps.length === 0 &&
+							<Spinner />
+						}
+
+						{this.state.reps.map((rep, index)=> {
+							return (
+								<div key={`rep-${index}`}>
+									{rep.first_name} {rep.last_name}
+								</div>
+							);
+						})}
+					</div>
+
+					<div style={styles.section}>
+						<div style={styles.sectionTitle}>Invite</div>
+						<p>Invite people to join your network by joining Fifty Nifty with this link: <Link to={`/?ref=${user.id}`}>fiftynifty.org/?ref={user.id}</Link></p>
+					</div>
+
+					<div style={styles.section}>
+						<div style={styles.sectionTitle}>Influence</div>
+						{children.map((node)=> {
+							return <UserNode key={node.id} node={node} />;
+						})}
+					</div>
+					
 				</div>
 				
 			</div>
@@ -71,6 +142,12 @@ styles = {
 	title: {
 		fontSize: '2.5em',
 		fontWeight: '200',
+	},
+	section: {
+		padding: '2em 0em',
+	},
+	sectionTitle: {
+		fontSize: '2em',
 	},
 		
 };
