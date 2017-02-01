@@ -9,7 +9,6 @@ export const AppNav = React.createClass({
 		accountData: PropTypes.object,
 		location: PropTypes.object,
 		params: PropTypes.object,
-		logoutHandler: PropTypes.func,
 	},
 
 	getInitialState() {
@@ -21,8 +20,11 @@ export const AppNav = React.createClass({
 	render() {
 		const localUserData = localStorage.getItem('userData');
 		const user = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
+		const location = this.props.location || {};
+		const pathname = location.pathname;
+		const isLight = pathname !== '/';
 		return (
-			<nav style={styles.navStyle}>
+			<nav style={styles.navStyle(isLight)}>
 				<div style={styles.navContent}>
 					<Link to={'/'}>
 						<span style={styles.logo}>Fifty Nifty</span>
@@ -46,14 +48,16 @@ export const AppNav = React.createClass({
 export default Radium(AppNav);
 
 styles = {
-	navStyle: {
-		minHeight: '75px',
-		lineHeight: '75px',
-		// boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.5)',
-		position: 'absolute',
-		zIndex: '3',
-		width: '100%',
-		color: 'white',
+	navStyle: (isLight)=> {
+		return {
+			minHeight: '75px',
+			lineHeight: '75px',
+			// boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.5)',
+			position: 'absolute',
+			zIndex: '3',
+			width: '100%',
+			color: isLight ? 'inherit' : 'white',
+		};
 	},
 	navContent: {
 		padding: '0em 1em',
@@ -72,6 +76,5 @@ styles = {
 	logo: {
 		fontFamily: 'Bungee Shade',
 		fontSize: '2em',
-		color: '#fff',
 	}
 };

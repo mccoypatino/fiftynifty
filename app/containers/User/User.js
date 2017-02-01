@@ -4,6 +4,7 @@ import { Link, browserHistory } from 'react-router';
 import { Spinner } from '@blueprintjs/core';
 import Radium from 'radium';
 import fetch from 'isomorphic-fetch';
+import { Representative } from 'components';
 import { getUser } from './actions';
 import { UserNode } from './UserNode';
 
@@ -79,6 +80,8 @@ export const User = React.createClass({
 
 					<div style={styles.section}>
 						<div style={styles.sectionTitle}>Progress</div>
+						<p>Call: (508) 659-9127</p>
+						<h5>Calls made</h5>
 						{allCalls.map((call)=> {
 							return (
 								<div key={`call${call.id}`}>
@@ -96,9 +99,7 @@ export const User = React.createClass({
 
 						{this.state.reps.map((rep, index)=> {
 							return (
-								<div key={`rep-${index}`}>
-									{rep.first_name} {rep.last_name}
-								</div>
+								<Representative key={`rep-${index}`} repData={rep}/>
 							);
 						})}
 					</div>

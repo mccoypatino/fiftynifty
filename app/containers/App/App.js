@@ -41,7 +41,7 @@ export const App = React.createClass({
 						{ name: 'twitter:image:alt', content: 'Logo for List of Links' }
 					]} 
 				/> 
-				<AppNav params={this.props.params} logoutHandler={this.logoutHandler} />
+				<AppNav location={this.props.location} params={this.props.params} />
 				<div style={{ minHeight: '600px' }}>{this.props.children}</div>
 				<AppFooter />
 			</StyleRoot>
