@@ -98,7 +98,9 @@ export const Landing = React.createClass({
 				</div>
 				<div style={styles.section}>
 					<div style={styles.sectionHeader}>How to Play</div>
-					<p>Describe the project and how to join here. Explain the game.</p>
+					<p>Constituent calls matter to congresspeople (click here to learn more).  Tell them who you are and that you are a voter.  Tell them why you are calling (sample below, or hover for a popup of samples) and ask to be informed of their response by phone, web or email.  Keep in mind that the staffer you are talking to is the congressman’s window into public — better than their polls and as good as a cash contribution.</p>
+
+					<p>Teachable moment [or perhaps civics lesson]:  If you ever thought that your vote didn’t matter because you knew your choice won or lost anyway, here’s why you still should vote:  it forces them to take you seriously now.  No one ignores a voter not matter who they voted for. They didn’t teach this in civics class, but it’s yet another reason to cast a ballot.</p>
 				</div>
 				
 				
