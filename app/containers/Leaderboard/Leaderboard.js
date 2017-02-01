@@ -4,6 +4,7 @@ import { Link, browserHistory } from 'react-router';
 import { Button, Spinner } from '@blueprintjs/core';
 import Radium from 'radium';
 import { getLeaderboard } from './actions';
+import { UserNode } from '../User/UserNode';
 
 let styles;
 
@@ -20,7 +21,7 @@ export const Leaderboard = React.createClass({
 	},
 	
 	render() {
-		const leaders = this.props.leaderboardData.leaders || {};
+		const leaders = this.props.leaderboardData.leaders || [];
 		return (
 			<div style={styles.container}>
 				{this.props.leaderboardData.loading &&
@@ -29,6 +30,10 @@ export const Leaderboard = React.createClass({
 				<div style={styles.content}>
 					<div style={styles.title}>Leaders</div>
 				</div>
+
+				{leaders.map((node)=> {
+					return <UserNode key={node.id} node={node} />;
+				})}
 				
 			</div>
 		);

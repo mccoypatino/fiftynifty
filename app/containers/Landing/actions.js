@@ -15,7 +15,7 @@ export const POST_USER_FAIL = 'user/POST_USER_FAIL';
 // action objects (e.g. {type:example, payload:data} ) within dispatch()
 // function calls
 /*--------*/
-export function postUser(name, phone, zipcode, referral) {
+export function postUser(name, phone, zipcode, parentId) {
 	return (dispatch) => {
 		dispatch({ type: POST_USER_LOAD });
 		return clientFetch('/api/user', {
@@ -28,7 +28,7 @@ export function postUser(name, phone, zipcode, referral) {
 				name: name,
 				phone: phone,
 				zipcode: zipcode,
-				referral: referral,
+				parentId: parentId,
 			})
 		})
 		.then((result) => {

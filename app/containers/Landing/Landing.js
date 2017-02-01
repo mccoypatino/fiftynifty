@@ -44,6 +44,7 @@ export const Landing = React.createClass({
 	formSubmit: function(evt) {
 		evt.preventDefault();
 		const referral = this.props.location.query.ref;
+		console.log('referral is ', referral)
 		this.props.dispatch(postUser(this.state.name, this.state.phone, this.state.zipcode, referral));
 	},
 

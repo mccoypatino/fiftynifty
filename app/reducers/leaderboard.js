@@ -14,7 +14,7 @@ import {
 // Define Default State
 /* ------------------- */
 const defaultState = Immutable.Map({
-	leaders: {},
+	leaders: [],
 	loading: false,
 	error: undefined,
 });
@@ -29,7 +29,7 @@ export default function reducer(state = defaultState, action) {
 		return state.merge({
 			loading: true,
 			error: undefined,
-			leaders: {},
+			leaders: [],
 		});	
 	case GET_LEADERBOARD_SUCCESS:
 		return state.merge({

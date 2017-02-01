@@ -1,10 +1,10 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
-import { Button, Spinner } from '@blueprintjs/core';
+import { Spinner } from '@blueprintjs/core';
 import Radium from 'radium';
-import Phone from 'react-phone-number-input';
 import { getUser } from './actions';
+import { UserNode } from './UserNode';
 
 let styles;
 
@@ -22,6 +22,7 @@ export const User = React.createClass({
 	
 	render() {
 		const user = this.props.userData.user || {};
+		const nodes = user.children || [];
 		return (
 			<div style={styles.container}>
 				{this.props.userData.loading &&
@@ -29,6 +30,10 @@ export const User = React.createClass({
 				}
 				<div style={styles.content}>
 					<div style={styles.title}>{user.name} · {user.zipcode}</div>
+
+					{nodes.map((node)=> {
+						return <UserNode key={node.id} node={node} />;
+					})}
 				</div>
 				
 			</div>
