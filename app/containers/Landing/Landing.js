@@ -63,6 +63,11 @@ export const Landing = React.createClass({
 					<div style={styles.headerImage} />
 					<div style={styles.headerSplash} />
 					<div style={styles.headerPresentation}>
+						<div style={styles.headerText}>
+							<div>Call your Reps</div>
+							<div>Collect all 50</div>
+							<div>Play for a better Democracy</div>
+						</div>
 						<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
 							Join the Challenge
 							<form onSubmit={this.formSubmit} style={styles.form}>
@@ -90,11 +95,7 @@ export const Landing = React.createClass({
 
 							</form>
 						</div>
-						<div>Call your Reps</div>
-						<div>Collect all 50</div>
-						<div>Play for a better Democracy</div>
 					</div>
-					
 				</div>
 				<div style={styles.section}>
 					<div style={styles.sectionHeader}>How to Play</div>
@@ -222,5 +223,8 @@ styles = {
 		height: '1em',
 		position: 'relative',
 		top: '0.2em',
+	},
+	headerText: {
+		float: 'left',
 	}
 };
