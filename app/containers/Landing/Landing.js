@@ -50,28 +50,45 @@ export const Landing = React.createClass({
 
 	render() {
 
+/* 
+	Still to do: 
+	* Form verification
+	* Re-insert 
+	  <div style={styles.headerImage} />
+	  <div style={styles.headerSplash} /> ?
+*/
 		return (
 			<div style={styles.container}>
 				<div style={styles.header}>
 					<div style={styles.headerImage} />
 					<div style={styles.headerSplash} />
-					<div style={styles.headerCall}>
+					<div style={styles.headerPresentation}>
 						<div>Call your Reps</div>
 						<div>Collect all 50</div>
 						<div>Play for Freedom</div>
-
+					</div>
+					<div style={styles.headerCall}>
+						Step 1: Call your Congressman
 						<form onSubmit={this.formSubmit} >
 							<label htmlFor={'name-input'} style={styles.inputLabel}>
-								Name
-								<input id={'name-input'} className={'pt-input'} value={this.state.name} onChange={(evt)=> this.setState({ name: evt.target.value })} />
-							</label>
-							<label htmlFor={'phone-input'} style={styles.inputLabel}>
-								Phone
-								<Phone country={'US'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} />
+								What is your name?
+								<input id={'name-input'} className={'pt-input pt-large pt-fill'} placeholder={"(It doesn't have to be your real name)"} value={this.state.name} onChange={(evt)=> this.setState({ name: evt.target.value })} />
 							</label>
 							<label htmlFor={'zip-input'} style={styles.inputLabel}>
-								Zip
-								<input id={'zip-input'} type={'number'} className={'pt-input'} value={this.state.zipcode} onChange={this.updateZipcode} />
+								In which zipcode do you vote?
+								<input id={'zip-input'} type={'number'} className={'pt-input pt-large pt-fill'} placeholder={'(Where are you registered?)'} value={this.state.zipcode} onChange={this.updateZipcode} />
+							</label>
+							<label htmlFor={'phone-input'} style={styles.inputLabel}>
+								What is your phone number?
+								<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'(The one with which you will call)'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} />
+								<div style={styles.smallInformation}> 
+									<img alt="lock" src={'/static/lock.png'} style={styles.lockImage} />
+									<div style={styles.smallInformationText}> We will never, ever, share it with anyone; and no human will be able to read it. </div>
+								</div>
+								<div style={styles.smallInformation}> 
+									<img alt="lock" src={'/static/notification.png'} style={styles.lockImage} />
+									<div style={styles.smallInformationText}> We may send you notifications about your progress. No spam, ever. </div>
+								</div>
 							</label>
 							<Button loading={this.props.landingData.signupLoading} style={styles.button} text={'Join'} className={'pt-intent-primary'} onClick={this.formSubmit} />
 
@@ -127,22 +144,33 @@ styles = {
 		height: '100%',
 		zIndex: 1,
 	},
+	headerPresentation: {
+		backgroundColor: 'red',
+		position: 'relative',
+		fontSize: '2em',
+		zIndex: 2,
+		padding: '6rem 1rem 3rem 1rem',
+		maxWidth: '1024px',
+		margin: '0 auto',
+	},
 	headerCall: {
+		backgroundColor: 'blue',
 		color: 'white',
 		position: 'relative',
-		fontSize: '4em',
+		fontSize: '1.7em',
 		lineHeight: '1.5',
 		zIndex: 2,
 		fontWeight: '200',
 
-		padding: '4rem 1rem',
+		padding: '2rem 1rem',
 		maxWidth: '1024px',
 		margin: '0 auto',
 	},
 	inputLabel: {
 		fontSize: '1rem',
-		display: 'inline-block',
+		display: 'block',
 		padding: '0em 0.5em',
+		marginBottom: '1em',
 		verticalAlign: 'bottom',
 	},
 	button: {
@@ -157,4 +185,20 @@ styles = {
 		fontSize: '1.5em',
 		marginBottom: '1.5em',
 	},
+	smallInformation: {
+		fontSize: '0.75em',
+		width: '100%',
+		marginTop: '0.5em',
+		padding: '0.3em 0.3em',
+		clear: 'both',
+	},
+	smallInformationText: {
+		float: 'right',
+		width: '90%',
+	},
+	lockImage: {
+		height: '1em',
+		position: 'relative',
+		top: '0.2em',
+	}
 };
