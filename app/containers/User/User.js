@@ -34,7 +34,6 @@ export const User = React.createClass({
 	componentWillMount() {
 		this.props.dispatch(getUser(this.props.params.userId))
 		.then((result)=> {
-			console.log(this.props.userData);
 			const zipcode = this.props.userData.user.zipcode;
 			if (zipcode) {
 				return fetch(`${CONGRESS_API_URL}&zip=${zipcode}`)
@@ -63,12 +62,7 @@ export const User = React.createClass({
 	render() {
 		const user = this.props.userData.user || {};
 		const children = user.children || [];
-		// const calls = user.calls || [];
 		const allCalls = this.returnCalls(user);
-		console.log(allCalls);
-		// Get the list of Congresspeople
-		// const url = `${CONGRESS_API_URL}&zip=${user.zipcode}`;
-		// console.log('Lookup', url);
 		
 		return (
 			<div style={styles.container}>
@@ -80,6 +74,7 @@ export const User = React.createClass({
 
 					<div style={styles.section}>
 						<div style={styles.sectionTitle}>Progress</div>
+						<p>Map and progress of your network displayed here</p>
 						<p>Call: (508) 659-9127</p>
 						<h5>Calls made</h5>
 						{allCalls.map((call)=> {
@@ -110,7 +105,8 @@ export const User = React.createClass({
 					</div>
 
 					<div style={styles.section}>
-						<div style={styles.sectionTitle}>Influence</div>
+						<div style={styles.sectionTitle}>Your Fifty Nifty Family</div>
+						<p>Child nodes listed and displayed here</p>
 						{children.map((node)=> {
 							return <UserNode key={node.id} node={node} />;
 						})}
