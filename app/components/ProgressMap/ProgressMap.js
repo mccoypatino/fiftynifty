@@ -45,19 +45,18 @@ export const ProgressMap  = React.createClass({
             });
 
         }
-        const res = objectAssign({}, statesDefaults, statesCount);
-        console.log(res);
-        return res;
+        return objectAssign({}, statesDefaults, statesCount);
     },
 
     renderMap: function(){
         return new Datamap({
             element: this.refs.container,
             scope: 'usa',
+            responsive: true,
             data: this.reducedData(),
             geographyConfig: {
                 borderWidth: 0.5,
-                highlightFillColor: '#FFCC80',
+                highlightFillColor: '#ffc5bb',
                 popupTemplate: function(geography, data) {
                     if (data && data.value) {
                         return '<div class="hoverinfo"><strong>' + geography.properties.name + ', ' + data.value + '</strong></div>';
@@ -70,7 +69,6 @@ export const ProgressMap  = React.createClass({
     },
 
     resizeMap: function() {
-        console.log('resize!');
         this.datamap.resize();
     },
 
@@ -100,7 +98,6 @@ export const ProgressMap  = React.createClass({
     },
     render: function() {
         const style = {
-            height: '100%',
             position: 'relative',
             width: '100%'
         };
