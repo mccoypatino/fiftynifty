@@ -28,3 +28,19 @@ export function getUser(userId) {
 		});
 	};
 }
+
+export function requestCall(congressNumber, userId) {
+	return (dispatch) => {
+		return clientFetch('/api/callfromserver', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				congressNumber: congressNumber,
+				userId: userId,
+			})
+		});
+	}; // Do then and catch
+}

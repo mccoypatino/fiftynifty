@@ -170,6 +170,10 @@ styles = {
 		maxWidth: '1024px',
 		margin: '0 auto',
 		minHeight: '600px',
+		clear: 'both',
+	},
+	headerText: {
+		float: 'left',
 	},
 	headerCall: {
 		backgroundColor: 'white',
@@ -224,7 +228,4 @@ styles = {
 		position: 'relative',
 		top: '0.2em',
 	},
-	headerText: {
-		float: 'left',
-	}
 };

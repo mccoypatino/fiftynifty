@@ -5,17 +5,14 @@ import { Spinner } from '@blueprintjs/core';
 import Radium from 'radium';
 import fetch from 'isomorphic-fetch';
 import { Representative } from 'components';
-import { getUser } from './actions';
+import { getUser, requestCall } from './actions';
 import { UserNode } from './UserNode';
 
 let styles;
 
-// This key is publicly available, but in the future we may want to hide it with our own private thing
-const SUNLIGHT_FOUNDATION_KEY='55a27bdc46b947c4b63b791b7cf6fa2f';
-
 // Shamelessly stolen from the call-congress code
 const CONGRESS_API_URL = `https://congress.api.sunlightfoundation.com/legislators/locate?apikey=${
-    SUNLIGHT_FOUNDATION_KEY}`;
+    process.env.SUNLIGHT_FOUNDATION_KEY}`;
 
 export const User = React.createClass({
 	propTypes: {
@@ -59,6 +56,10 @@ export const User = React.createClass({
 		return userCalls.concat(...childrensCalls);
 	},
 
+	callFunction: function(number) {
+		this.props.dispatch(requestCall(number, this.props.params.userId));
+	},
+
 	render() {
 		const user = this.props.userData.user || {};
 		const children = user.children || [];
@@ -94,7 +95,7 @@ export const User = React.createClass({
 
 						{this.state.reps.map((rep, index)=> {
 							return (
-								<Representative key={`rep-${index}`} repData={rep}/>
+								<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
 							);
 						})}
 					</div>
