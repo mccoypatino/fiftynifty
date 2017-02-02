@@ -5,6 +5,7 @@ import { Spinner } from '@blueprintjs/core';
 import Radium from 'radium';
 import fetch from 'isomorphic-fetch';
 import { Representative } from 'components';
+import { ProgressMap } from 'components';
 import { getUser } from './actions';
 import { UserNode } from './UserNode';
 
@@ -38,7 +39,7 @@ export const User = React.createClass({
 			if (zipcode) {
 				return fetch(`${CONGRESS_API_URL}&zip=${zipcode}`)
 				.then((response)=> {
-					if (!response.ok) { 
+					if (!response.ok) {
 						return response.json().then(err => { throw err; });
 					}
 					return response.json();
@@ -49,21 +50,25 @@ export const User = React.createClass({
 			}
 		});
 	},
-	
-	returnCalls: function(user) {
+
+	returnCalls: function(user, distance) {
 		const children = user.children || [];
 		const userCalls = user.calls || [];
-		const childrensCalls = children.map((child)=> {
-			return this.returnCalls(child);
+		const callsWithDist = userCalls.map((call)=>{
+			call.distance = distance;
+			return call;
 		});
-		return userCalls.concat(...childrensCalls);
+		const childrensCalls = children.map((child)=> {
+			return this.returnCalls(child, distance+1);
+		});
+		return callsWithDist.concat(...childrensCalls);
 	},
 
 	render() {
 		const user = this.props.userData.user || {};
 		const children = user.children || [];
-		const allCalls = this.returnCalls(user);
-		
+		const flatCalls = this.returnCalls(user, 0);
+
 		return (
 			<div style={styles.container}>
 				{this.props.userData.loading &&
@@ -77,13 +82,16 @@ export const User = React.createClass({
 						<p>Map and progress of your network displayed here</p>
 						<p>Call: (508) 659-9127</p>
 						<h5>Calls made</h5>
-						{allCalls.map((call)=> {
+						{flatCalls.map((call)=> {
 							return (
 								<div key={`call${call.id}`}>
-									{call.state} · {call.callerId} · {call.zip}
+									{call.state} · {call.callerId} · {call.zip} · {call.distance}
 								</div>
 							);
 						})}
+					</div>
+					<div style={styles.section}>
+						<ProgressMap callsData={flatCalls}/>
 					</div>
 
 					<div style={styles.section}>
@@ -111,9 +119,9 @@ export const User = React.createClass({
 							return <UserNode key={node.id} node={node} />;
 						})}
 					</div>
-					
+
 				</div>
-				
+
 			</div>
 		);
 	}
@@ -146,5 +154,5 @@ styles = {
 	sectionTitle: {
 		fontSize: '2em',
 	},
-		
+
 };
