@@ -6,6 +6,7 @@ import Radium from 'radium';
 import fetch from 'isomorphic-fetch';
 import { Representative } from 'components';
 import { ProgressMap } from 'components';
+import { NetworkGraph } from 'components';
 import { getUser } from './actions';
 import { UserNode } from './UserNode';
 
@@ -64,10 +65,31 @@ export const User = React.createClass({
 		return callsWithDist.concat(...childrensCalls);
 	},
 
+    getScore: function(flatCalls) {
+        let score = 0;
+        const start = 256;
+        flatCalls.forEach((call)=>{
+        	score+=start/(Math.pow(2, call.distance))
+			}
+		);
+        return score;
+    },
+
+	countStates: function(flatCalls) {
+		let states = [];
+		flatCalls.forEach((call)=>{
+			if (states.indexOf(call.state)==-1){
+				states.push(call.state);
+			}
+		})
+		return states.length;
+	},
+
 	render() {
 		const user = this.props.userData.user || {};
 		const children = user.children || [];
 		const flatCalls = this.returnCalls(user, 0);
+		const score = this.getScore(flatCalls);
 
 		return (
 			<div style={styles.container}>
@@ -92,6 +114,8 @@ export const User = React.createClass({
 					</div>
 					<div style={styles.section}>
 						<ProgressMap callsData={flatCalls}/>
+						<p> Your Score: {score}</p>
+						<p> You have covered {this.countStates(flatCalls)} out of the 50 states</p>
 					</div>
 
 					<div style={styles.section}>
@@ -118,7 +142,9 @@ export const User = React.createClass({
 						{children.map((node)=> {
 							return <UserNode key={node.id} node={node} />;
 						})}
+						<NetworkGraph rootNode={user}/>
 					</div>
+
 
 				</div>
 

@@ -1,10 +1,8 @@
 // Taken from https://github.com/caspg/simple-data-table-map
 
 import * as d3 from 'd3';
-import topojson from 'topojson';
 import Datamap from 'datamaps/dist/datamaps.usa.min';
 import React ,  { PropTypes } from 'react';
-import ReactDOM from 'react-dom';
 import statesDefaults from './states-defaults';
 import objectAssign from 'object-assign';
 import Radium from 'radium';
@@ -13,7 +11,7 @@ export const ProgressMap  = React.createClass({
     propTypes: {
         datamap: PropTypes.object,
         regionData: PropTypes.object,
-        callsData: React.PropTypes.array,//.isRequired
+        callsData: PropTypes.array,
     },
 
     linearPalleteScale: function(value){
