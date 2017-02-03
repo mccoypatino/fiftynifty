@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { Spinner } from '@blueprintjs/core';
 import Radium from 'radium';
-import fetch from 'isomorphic-fetch';
+// import fetch from 'isomorphic-fetch';
 import { Representative, AddressInput, ProgressMap, NetworkGraph, TreeGraph } from 'components';
 import { getUser, requestCall, requestLatLong } from './actions';
 import { UserNode } from './UserNode';
@@ -11,8 +11,7 @@ import { UserNode } from './UserNode';
 let styles;
 
 // Shamelessly stolen from the call-congress code
-const CONGRESS_API_URL = `https://congress.api.sunlightfoundation.com/legislators/locate?apikey=${
-    process.env.SUNLIGHT_FOUNDATION_KEY}`;
+// const CONGRESS_API_URL = `https://congress.api.sunlightfoundation.com/legislators/locate?apikey=${process.env.SUNLIGHT_FOUNDATION_KEY}`;
 
 export const User = React.createClass({
 	propTypes: {
@@ -29,22 +28,7 @@ export const User = React.createClass({
 	},
 
 	componentWillMount() {
-		this.props.dispatch(getUser(this.props.params.userId))
-		.then((result)=> {
-			const zipcode = this.props.userData.user.zipcode;
-			if (zipcode) {
-				return fetch(`${CONGRESS_API_URL}&zip=${zipcode}`)
-				.then((response)=> {
-					if (!response.ok) {
-						return response.json().then(err => { throw err; });
-					}
-					return response.json();
-				})
-				.then((repResults)=> {
-					this.setState({ reps: repResults.results });
-				});
-			}
-		});
+		this.props.dispatch(getUser(this.props.params.userId));
 	},
 
 	returnCalls: function(user, distance) {
@@ -84,13 +68,13 @@ export const User = React.createClass({
 	},
 
 	geolocateFunction: function(address, zipcode) {
-		this.props.dispatch(requestLatLong(address, zipcode));
+		this.props.dispatch(requestLatLong(address, zipcode, this.props.params.userId));
 	},
 
 	render() {
 		const user = this.props.userData.user || {};
 		const latLonData = this.props.userData.latLongData || {};
-
+		const reps = user.reps || [];
 		const children = user.children || [];
 		const flatCalls = this.returnCalls(user, 0);
 		const score = this.getScore(flatCalls);
@@ -102,7 +86,12 @@ export const User = React.createClass({
 				}
 				<div style={styles.content}>
 					<div style={styles.title}>{user.name} · {user.zipcode}</div>
-					<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} />
+
+					{true && true &&
+						<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
+					}
+					
+					
 					<div style={styles.section}>
 						<div style={styles.sectionTitle}>Progress</div>
 						<p>Map and progress of your network displayed here</p>
@@ -124,11 +113,11 @@ export const User = React.createClass({
 
 					<div style={styles.section}>
 						<div style={styles.sectionTitle}>Representatives</div>
-						{this.state.reps.length === 0 &&
+						{reps.length === 0 &&
 							<Spinner />
 						}
 
-						{this.state.reps.map((rep, index)=> {
+						{reps.map((rep, index)=> {
 							return (
 								<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
 							);

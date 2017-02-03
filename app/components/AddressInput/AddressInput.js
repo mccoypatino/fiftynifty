@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import Radium from 'radium';
+import { Button } from '@blueprintjs/core';
 
 let styles;
 
@@ -7,6 +8,7 @@ export const AddressInput = React.createClass({
 	propTypes: {
 		zipcode: PropTypes.string,
 		geolocateFunction: PropTypes.func,
+		isLoading: PropTypes.bool,
 	},
 
 	requestAddress: function(evt) {
@@ -25,7 +27,7 @@ export const AddressInput = React.createClass({
 					Please enter your address
 					<input id={'address-input'} type={'text'} className={'pt-input pt-large pt-fill'} placeholder={'Powered by Google Maps'} onChange={this.updateAddress} />
 				</label>
-				<button role={'button'} className={'pt-button pt-intent-primary'} >Address</button>
+				<Button type={'submit'} loading={this.props.isLoading} className={'pt-button pt-intent-primary'} text={'Address'} />
 			</form>
 		);
 	}

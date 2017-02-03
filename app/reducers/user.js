@@ -32,7 +32,6 @@ const defaultState = Immutable.Map({
 
 	latLonLoading: false,
 	latLonError: undefined,
-	latLonData: {},
 
 });
 
@@ -81,19 +80,17 @@ export default function reducer(state = defaultState, action) {
 		return state.merge({
 			latLonLoading: true,
 			latLonError: undefined,
-			latLonData: {},
 		});	
 	case REQUEST_LATLON_SUCCESS:
 		return state.merge({
 			latLonLoading: false,
 			latLonError: undefined,
-			latLonData: action.result
+			user: action.result
 		});
 	case REQUEST_LATLON_FAIL:
 		return state.merge({
 			latLonLoading: false,
 			latLonError: action.error,
-			latLonData: {},
 		});
 
 	default:

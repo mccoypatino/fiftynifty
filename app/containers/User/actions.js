@@ -61,7 +61,7 @@ export function requestCall(congressNumber, userId) {
 	};
 }
 
-export function requestLatLong(address, zipcode) {
+export function requestLatLong(address, zipcode, userId) {
 	return (dispatch) => {
 		dispatch({ type: REQUEST_LATLON_LOAD });
 		return clientFetch('/api/address', {
@@ -73,6 +73,7 @@ export function requestLatLong(address, zipcode) {
 			body: JSON.stringify({
 				address: address,
 				zipcode: zipcode,
+				userId: userId,
 			})
 		})
 		.then((result) => {
