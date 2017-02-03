@@ -9,7 +9,8 @@ export const AddressInput = React.createClass({
 		geolocateFunction: PropTypes.func,
 	},
 
-	requestAddress: function() {
+	requestAddress: function(e) {
+		e.preventDefault();
 		this.props.geolocateFunction(this.state.address, this.props.zipcode);
 	},
 
@@ -24,7 +25,7 @@ export const AddressInput = React.createClass({
 					Please enter your address
 					<input id={'address-input'} type={'text'} className={'pt-input pt-large pt-fill'} placeholder={'Powered by Google Maps'} onChange={this.updateAddress} />
 				</label>
-				<button role={'button'} className={'pt-button pt-intent-primary'} onClick={this.requestAddress}>Address</button>
+				<button role={'button'} className={'pt-button pt-intent-primary'} >Address</button>
 			</form>
 		);
 	}

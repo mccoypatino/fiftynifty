@@ -63,7 +63,11 @@ export const User = React.createClass({
 	geolocateFunction: function(address, zipcode) {
 		this.props.dispatch(requestLatLong(address, zipcode))
 		.then((result) => {
+			console.log('hello');
 			console.log(result);
+		})
+		.catch((error) => {
+			console.log(error);
 		});
 	},
 

@@ -46,7 +46,6 @@ export function requestCall(congressNumber, userId) {
 }
 
 export function requestLatLong(address, zipcode) {
-	console.log('2');
 	return (dispatch) => {
 		return clientFetch('/api/address', {
 			method: 'POST',
@@ -60,6 +59,7 @@ export function requestLatLong(address, zipcode) {
 			})
 		})
 		.then((result) => {
+			console.log('j');
 			console.log(result);
 		})
 		.catch((error) => {
