@@ -28,9 +28,34 @@ export const User = React.createClass({
 	},
 
 	componentWillMount() {
-		this.props.dispatch(getUser(this.props.params.userId));
+		this.loadData(this.props.params.userId);
 	},
 
+	componentWillReceiveProps(nextProps) {
+		if (this.props.params.userId !== nextProps.params.userId) {
+			this.loadData(nextProps.params.userId);
+		}
+	},
+
+	loadData(userId) {
+		this.props.dispatch(getUser(userId))
+		.then((result)=> {
+			const zipcode = this.props.userData.user.zipcode;
+			if (zipcode) {
+				return fetch(`${CONGRESS_API_URL}&zip=${zipcode}`)
+				.then((response)=> {
+					if (!response.ok) {
+						return response.json().then(err => { throw err; });
+					}
+					return response.json();
+				})
+				.then((repResults)=> {
+					this.setState({ reps: repResults.results });
+				});
+			}
+			return null;
+		});
+	},
 	returnCalls: function(user, distance) {
 		const children = user.children || [];
 		const userCalls = user.calls || [];
@@ -156,7 +181,7 @@ export default connect(mapStateToProps)(Radium(User));
 
 styles = {
 	container: {
-		padding: '75px 1em',
+		padding: 'calc(115px + 3em) 1em 3em',
 		maxWidth: '1024px',
 		margin: '0 auto',
 	},

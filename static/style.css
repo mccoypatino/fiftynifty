@@ -10,6 +10,10 @@ a {
 	color: inherit;
 }
 
+a:hover {
+    color: #EB4040;
+}
+
 .react-phone-number-input__phone {
     outline: none;
     border: none;
