@@ -121,13 +121,13 @@ export const User = React.createClass({
 						<p>Map and progress of your network displayed here</p>
 						<p>Call: (508) 659-9127</p>
 						<h5>Calls made</h5>
-						{flatCalls.map((call)=> {
-							return (
-								<div key={`call${call.id}`}>
-									{call.state} · {call.callerId} · {call.zip} · {call.distance}
-								</div>
-							);
-						})}
+						{/*{flatCalls.map((call)=> {*/}
+							{/*return (*/}
+								{/*<div key={`call${call.id}`}>*/}
+									{/*{call.state} · {call.callerId} · {call.zip} · {call.distance}*/}
+								{/*</div>*/}
+							{/*);*/}
+						{/*})}*/}
 					</div>
 					<div style={styles.section}>
 						<ProgressMap callsData={flatCalls} />
@@ -155,11 +155,11 @@ export const User = React.createClass({
 
 					<div style={styles.section}>
 						<div style={styles.sectionTitle}>Your Fifty Nifty Family</div>
-						<p>Child nodes listed and displayed here</p>
-						{children.map((node)=> {
-							return <UserNode key={node.id} node={node} />;
-						})}
-						<TreeGraph data={user} />
+						{/*<p>Child nodes listed and displayed here</p>*/}
+						{/*{children.map((node)=> {*/}
+							{/*return <UserNode key={node.id} node={node} />;*/}
+						{/*})}*/}
+						<TreeGraph data={user}/>
 					</div>
 
 
