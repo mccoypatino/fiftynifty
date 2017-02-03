@@ -38,23 +38,7 @@ export const User = React.createClass({
 	},
 
 	loadData(userId) {
-		this.props.dispatch(getUser(userId))
-		.then((result)=> {
-			const zipcode = this.props.userData.user.zipcode;
-			if (zipcode) {
-				return fetch(`${CONGRESS_API_URL}&zip=${zipcode}`)
-				.then((response)=> {
-					if (!response.ok) {
-						return response.json().then(err => { throw err; });
-					}
-					return response.json();
-				})
-				.then((repResults)=> {
-					this.setState({ reps: repResults.results });
-				});
-			}
-			return null;
-		});
+		this.props.dispatch(getUser(userId));
 	},
 	returnCalls: function(user, distance) {
 		const children = user.children || [];
