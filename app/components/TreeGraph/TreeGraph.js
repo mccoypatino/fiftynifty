@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 
 let d3Tree = {};
 d3Tree.create = function(el, div,  props, state) {
-    d3.select(el).attr("transform", "translate(" + (props.width / 2 ) + "," + (props.height / 2 ) + ")");
+    d3.select(el).attr("transform", "translate(" + (props.width *0.1 ) + "," + (props.height *0.1) + ")");
     this.update(el, div, state);
 };
 
@@ -19,7 +19,7 @@ d3Tree._drawTree = function(el, div, data) {
     let width = div.clientWidth;
     let height = div.clientHeight;
     let tree = d3.tree()
-        .size([width/3,height/2])
+        .size([height*0.8, width*0.8])
         .separation(function(a, b) { return (a.parent == b.parent ? 1 : 2) / a.depth; });
     let root = tree(data);
 
@@ -28,11 +28,17 @@ d3Tree._drawTree = function(el, div, data) {
     link.enter().append("path")
         .attr("class", "link")
         .attr("d", function(d) {
-            return "M" + project(d.x, d.y)
-                + "C" + project(d.x, (d.y + d.parent.y) / 2)
-                + " " + project(d.parent.x, (d.y + d.parent.y) / 2)
-                + " " + project(d.parent.x, d.parent.y);
+            return "M" + d.y + "," + d.x
+                + "C" + (d.y + d.parent.y) / 2 + "," + d.x
+                + " " + (d.y + d.parent.y) / 2 + "," + d.parent.x
+                + " " + d.parent.y + "," + d.parent.x;
         });
+        // .attr("d", function(d) {
+        //     return "M" + project(d.x, d.y)
+        //         + "C" + project(d.x, (d.y + d.parent.y) / 2)
+        //         + " " + project(d.parent.x, (d.y + d.parent.y) / 2)
+        //         + " " + project(d.parent.x, d.parent.y);
+        // });
 
     link.exit().remove();
 
@@ -42,16 +48,17 @@ d3Tree._drawTree = function(el, div, data) {
     let node = g.data(nodes);
     node.enter().append("g")
         .attr("class", function(d) { return "node" + (d.children ? " node--internal" : " node--leaf"); })
-        .attr("transform", function(d) { return "translate(" + project(d.x, d.y) + ")"; });
+        .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+    //.attr("transform", function(d) { return "translate(" + project(d.x, d.y) + ")"; });
 
     node.append("circle")
         .attr("r", function(d){return 12/Math.pow(2,d.depth);});
 
     node.append("text")
         .attr("dy", ".31em")
-        .attr("x", function(d) { return d.x < 180 === !d.children ? 6 : -6; })
-        .style("text-anchor", function(d) { return d.x < 180 === !d.children ? "start" : "end"; })
-        .attr("transform", function(d) { return "rotate(" + (d.x < 180 ? d.x - 90 : d.x + 90) + ")"; })
+        //.attr("x", function(d) { return d.x < 180 === !d.children ? 6 : -6; })
+        //.style("text-anchor", function(d) { return d.x < 180 === !d.children ? "start" : "end"; })
+        //.attr("transform", function(d) { return "rotate(" + (d.x < 180 ? d.x - 90 : d.x + 90) + ")"; })
         .text(function(d) { return d.data.name; });
     node.exit().remove();
 
