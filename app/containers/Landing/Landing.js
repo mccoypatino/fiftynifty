@@ -197,6 +197,7 @@ styles = {
 		fontSize: '2em',
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
 			textAlign: 'center',
+			maxWidth: '100%',
 		},
 	},
 	headerTextBody: {
@@ -204,6 +205,9 @@ styles = {
 		padding: '1em 0em',
 		fontSize: '1.25em',
 		lineHeight: '1.5',
+		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
+			maxWidth: '100%',
+		},
 	},
 	headerCall: {
 		display: 'table-cell',
