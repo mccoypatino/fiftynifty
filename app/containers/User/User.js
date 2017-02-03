@@ -4,8 +4,8 @@ import { Link, browserHistory } from 'react-router';
 import { Spinner } from '@blueprintjs/core';
 import Radium from 'radium';
 import fetch from 'isomorphic-fetch';
-import { Representative } from 'components';
-import { getUser, requestCall } from './actions';
+import { Representative, AddressInput } from 'components';
+import { getUser, requestCall, requestLatLong } from './actions';
 import { UserNode } from './UserNode';
 
 let styles;
@@ -60,6 +60,13 @@ export const User = React.createClass({
 		this.props.dispatch(requestCall(number, this.props.params.userId));
 	},
 
+	geolocateFunction: function(address, zipcode) {
+		this.props.dispatch(requestLatLong(address, zipcode))
+		.then((result) => {
+			console.log(result);
+		});
+	},
+
 	render() {
 		const user = this.props.userData.user || {};
 		const children = user.children || [];
@@ -72,7 +79,7 @@ export const User = React.createClass({
 				}
 				<div style={styles.content}>
 					<div style={styles.title}>{user.name} · {user.zipcode}</div>
-
+					<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} />
 					<div style={styles.section}>
 						<div style={styles.sectionTitle}>Progress</div>
 						<p>Map and progress of your network displayed here</p>
