@@ -51,7 +51,7 @@ export default connect(mapStateToProps)(Radium(Leaderboard));
 
 styles = {
 	container: {
-		padding: '75px 1em',
+		padding: 'calc(115px + 3em) 1em 3em',
 		maxWidth: '1024px',
 		margin: '0 auto',
 	},
