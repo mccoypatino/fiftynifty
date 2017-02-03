@@ -4,21 +4,15 @@ import { Link, browserHistory } from 'react-router';
 import { Spinner } from '@blueprintjs/core';
 import Radium from 'radium';
 import fetch from 'isomorphic-fetch';
-import { Representative } from 'components';
-import { ProgressMap } from 'components';
-import { NetworkGraph } from 'components';
-import { getUser } from './actions';
+import { Representative, AddressInput, ProgressMap, NetworkGraph, TreeGraph } from 'components';
+import { getUser, requestCall, requestLatLong } from './actions';
 import { UserNode } from './UserNode';
-import { TreeGraph } from 'components';
 
 let styles;
 
-// This key is publicly available, but in the future we may want to hide it with our own private thing
-const SUNLIGHT_FOUNDATION_KEY='55a27bdc46b947c4b63b791b7cf6fa2f';
-
 // Shamelessly stolen from the call-congress code
 const CONGRESS_API_URL = `https://congress.api.sunlightfoundation.com/legislators/locate?apikey=${
-    SUNLIGHT_FOUNDATION_KEY}`;
+    process.env.SUNLIGHT_FOUNDATION_KEY}`;
 
 export const User = React.createClass({
 	propTypes: {
@@ -86,6 +80,17 @@ export const User = React.createClass({
 		return states.length;
 	},
 
+	callFunction: function(number) {
+		this.props.dispatch(requestCall(number, this.props.params.userId));
+	},
+
+	geolocateFunction: function(address, zipcode) {
+		this.props.dispatch(requestLatLong(address, zipcode))
+		.then((result) => {
+			console.log(result);
+		});
+	},
+
 	render() {
 		const user = this.props.userData.user || {};
 		const children = user.children || [];
@@ -99,7 +104,7 @@ export const User = React.createClass({
 				}
 				<div style={styles.content}>
 					<div style={styles.title}>{user.name} · {user.zipcode}</div>
-
+					<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} />
 					<div style={styles.section}>
 						<div style={styles.sectionTitle}>Progress</div>
 						<p>Map and progress of your network displayed here</p>
@@ -127,7 +132,7 @@ export const User = React.createClass({
 
 						{this.state.reps.map((rep, index)=> {
 							return (
-								<Representative key={`rep-${index}`} repData={rep}/>
+								<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
 							);
 						})}
 					</div>
