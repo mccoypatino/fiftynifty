@@ -98,7 +98,6 @@ export const User = React.createClass({
 
 	render() {
 		const user = this.props.userData.user || {};
-		const latLonData = this.props.userData.latLongData || {};
 		const reps = user.reps || [];
 		const children = user.children || [];
 		const flatCalls = this.returnCalls(user, 0);
