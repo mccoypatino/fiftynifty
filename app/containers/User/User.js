@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { Spinner } from '@blueprintjs/core';
 import Radium from 'radium';
-import fetch from 'isomorphic-fetch';
+// import fetch from 'isomorphic-fetch';
 import { Representative, AddressInput, ProgressMap, NetworkGraph, TreeGraph } from 'components';
 import { getUser, requestCall, requestLatLong } from './actions';
 import { UserNode } from './UserNode';
@@ -11,8 +11,7 @@ import { UserNode } from './UserNode';
 let styles;
 
 // Shamelessly stolen from the call-congress code
-const CONGRESS_API_URL = `https://congress.api.sunlightfoundation.com/legislators/locate?apikey=${
-    process.env.SUNLIGHT_FOUNDATION_KEY}`;
+// const CONGRESS_API_URL = `https://congress.api.sunlightfoundation.com/legislators/locate?apikey=${process.env.SUNLIGHT_FOUNDATION_KEY}`;
 
 export const User = React.createClass({
 	propTypes: {
@@ -29,7 +28,17 @@ export const User = React.createClass({
 	},
 
 	componentWillMount() {
-		this.props.dispatch(getUser(this.props.params.userId))
+		this.loadData(this.props.params.userId);
+	},
+
+	componentWillReceiveProps(nextProps) {
+		if (this.props.params.userId !== nextProps.params.userId) {
+			this.loadData(nextProps.params.userId);
+		}
+	},
+
+	loadData(userId) {
+		this.props.dispatch(getUser(userId))
 		.then((result)=> {
 			const zipcode = this.props.userData.user.zipcode;
 			if (zipcode) {
@@ -44,9 +53,9 @@ export const User = React.createClass({
 					this.setState({ reps: repResults.results });
 				});
 			}
+			return null;
 		});
 	},
-
 	returnCalls: function(user, distance) {
 		const children = user.children || [];
 		const userCalls = user.calls || [];
@@ -64,19 +73,18 @@ export const User = React.createClass({
         let score = 0;
         const start = 256;
         flatCalls.forEach((call)=>{
-        	score+=start/(Math.pow(2, call.distance))
-			}
-		);
+        	score += start / (Math.pow(2, call.distance));
+		});
         return score;
     },
 
 	countStates: function(flatCalls) {
-		let states = [];
+		const states = [];
 		flatCalls.forEach((call)=>{
-			if (states.indexOf(call.state)==-1){
+			if (states.indexOf(call.state) === -1) {
 				states.push(call.state);
 			}
-		})
+		});
 		return states.length;
 	},
 
@@ -85,14 +93,12 @@ export const User = React.createClass({
 	},
 
 	geolocateFunction: function(address, zipcode) {
-		this.props.dispatch(requestLatLong(address, zipcode))
-		.then((result) => {
-			console.log(result);
-		});
+		this.props.dispatch(requestLatLong(address, zipcode, this.props.params.userId));
 	},
 
 	render() {
 		const user = this.props.userData.user || {};
+		const reps = user.reps || [];
 		const children = user.children || [];
 		const flatCalls = this.returnCalls(user, 0);
 		const score = this.getScore(flatCalls);
@@ -104,7 +110,12 @@ export const User = React.createClass({
 				}
 				<div style={styles.content}>
 					<div style={styles.title}>{user.name} · {user.zipcode}</div>
-					<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} />
+
+					{true && true &&
+						<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
+					}
+					
+					
 					<div style={styles.section}>
 						<div style={styles.sectionTitle}>Progress</div>
 						<p>Map and progress of your network displayed here</p>
@@ -119,18 +130,18 @@ export const User = React.createClass({
 						{/*})}*/}
 					</div>
 					<div style={styles.section}>
-						<ProgressMap callsData={flatCalls}/>
+						<ProgressMap callsData={flatCalls} />
 						<p> Your Score: {score}</p>
 						<p> You have covered {this.countStates(flatCalls)} out of the 50 states</p>
 					</div>
 
 					<div style={styles.section}>
 						<div style={styles.sectionTitle}>Representatives</div>
-						{this.state.reps.length === 0 &&
+						{reps.length === 0 &&
 							<Spinner />
 						}
 
-						{this.state.reps.map((rep, index)=> {
+						{reps.map((rep, index)=> {
 							return (
 								<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
 							);
@@ -169,7 +180,7 @@ export default connect(mapStateToProps)(Radium(User));
 
 styles = {
 	container: {
-		padding: '75px 1em',
+		padding: 'calc(115px + 3em) 1em 3em',
 		maxWidth: '1024px',
 		margin: '0 auto',
 	},
