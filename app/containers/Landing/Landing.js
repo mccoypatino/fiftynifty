@@ -44,7 +44,7 @@ export const Landing = React.createClass({
 	formSubmit: function(evt) {
 		evt.preventDefault();
 		const referral = this.props.location.query.ref;
-		console.log('referral is ', referral)
+		console.log('referral is ', referral);
 		this.props.dispatch(postUser(this.state.name, this.state.phone, this.state.zipcode, referral));
 	},
 
@@ -63,6 +63,11 @@ export const Landing = React.createClass({
 					<div style={styles.headerImage} />
 					<div style={styles.headerSplash} />
 					<div style={styles.headerPresentation}>
+						<div style={styles.headerText}>
+							<div>Call your Reps</div>
+							<div>Collect all 50</div>
+							<div>Play for a better Democracy</div>
+						</div>
 						<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
 							Join the Challenge
 							<form onSubmit={this.formSubmit} style={styles.form}>
@@ -90,11 +95,7 @@ export const Landing = React.createClass({
 
 							</form>
 						</div>
-						<div>Call your Reps</div>
-						<div>Collect all 50</div>
-						<div>Play for a better Democracy</div>
 					</div>
-					
 				</div>
 				<div style={styles.section}>
 					<div style={styles.sectionHeader}>How to Play</div>
@@ -169,6 +170,10 @@ styles = {
 		maxWidth: '1024px',
 		margin: '0 auto',
 		minHeight: '600px',
+		clear: 'both',
+	},
+	headerText: {
+		float: 'left',
 	},
 	headerCall: {
 		backgroundColor: 'white',
@@ -222,5 +227,5 @@ styles = {
 		height: '1em',
 		position: 'relative',
 		top: '0.2em',
-	}
+	},
 };
