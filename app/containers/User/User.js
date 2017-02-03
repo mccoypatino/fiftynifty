@@ -64,19 +64,18 @@ export const User = React.createClass({
         let score = 0;
         const start = 256;
         flatCalls.forEach((call)=>{
-        	score+=start/(Math.pow(2, call.distance))
-			}
-		);
+        	score += start / (Math.pow(2, call.distance));
+		});
         return score;
     },
 
 	countStates: function(flatCalls) {
-		let states = [];
+		const states = [];
 		flatCalls.forEach((call)=>{
-			if (states.indexOf(call.state)==-1){
+			if (states.indexOf(call.state) === -1) {
 				states.push(call.state);
 			}
-		})
+		});
 		return states.length;
 	},
 
@@ -85,18 +84,13 @@ export const User = React.createClass({
 	},
 
 	geolocateFunction: function(address, zipcode) {
-		this.props.dispatch(requestLatLong(address, zipcode))
-		.then((result) => {
-			console.log('hello');
-			console.log(result);
-		})
-		.catch((error) => {
-			console.log(error);
-		});
+		this.props.dispatch(requestLatLong(address, zipcode));
 	},
 
 	render() {
 		const user = this.props.userData.user || {};
+		const latLonData = this.props.userData.latLongData || {};
+
 		const children = user.children || [];
 		const flatCalls = this.returnCalls(user, 0);
 		const score = this.getScore(flatCalls);

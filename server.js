@@ -36,7 +36,7 @@ server.use('/dist', express.static(path.resolve(__dirname, 'dist')));
 const httpProxy = require('http-proxy');
 const proxy = httpProxy.createProxyServer({
 	changeOrigin: true,
-	target: 'http://localhost:9876' || process.env.API_URL, 
+	target: process.env.API_URL || 'http://localhost:9876', 
 	// Warning: Localhost is prioritized on the server
 });
 

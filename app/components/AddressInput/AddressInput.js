@@ -9,8 +9,8 @@ export const AddressInput = React.createClass({
 		geolocateFunction: PropTypes.func,
 	},
 
-	requestAddress: function(e) {
-		e.preventDefault();
+	requestAddress: function(evt) {
+		evt.preventDefault();
 		this.props.geolocateFunction(this.state.address, this.props.zipcode);
 	},
 
@@ -34,4 +34,5 @@ export const AddressInput = React.createClass({
 export default Radium(AddressInput);
 
 styles = {
+
 };
