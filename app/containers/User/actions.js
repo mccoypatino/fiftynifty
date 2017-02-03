@@ -8,6 +8,14 @@ export const GET_USER_LOAD = 'user/GET_USER_LOAD';
 export const GET_USER_SUCCESS = 'user/GET_USER_SUCCESS';
 export const GET_USER_FAIL = 'user/GET_USER_FAIL';
 
+export const REQUEST_CALL_LOAD = 'user/REQUEST_CALL_LOAD';
+export const REQUEST_CALL_SUCCESS = 'user/REQUEST_CALL_SUCCESS';
+export const REQUEST_CALL_FAIL = 'user/REQUEST_CALL_FAIL';
+
+export const REQUEST_LATLON_LOAD = 'user/REQUEST_LATLON_LOAD';
+export const REQUEST_LATLON_SUCCESS = 'user/REQUEST_LATLON_SUCCESS';
+export const REQUEST_LATLON_FAIL = 'user/REQUEST_LATLON_FAIL';
+
 /*--------*/
 // Define Action creators
 //
@@ -31,6 +39,7 @@ export function getUser(userId) {
 
 export function requestCall(congressNumber, userId) {
 	return (dispatch) => {
+		dispatch({ type: REQUEST_CALL_LOAD });
 		return clientFetch('/api/callfromserver', {
 			method: 'POST',
 			headers: {
@@ -41,13 +50,20 @@ export function requestCall(congressNumber, userId) {
 				congressNumber: congressNumber,
 				userId: userId,
 			})
+		})
+		.then((result) => {
+			dispatch({ type: REQUEST_CALL_SUCCESS, result });
+		})
+		.catch((error) => {
+			console.log(error);
+			dispatch({ type: REQUEST_CALL_FAIL, error });
 		});
-	}; // Do then and catch
+	};
 }
 
-export function requestLatLong(address, zipcode) {
-	console.log('2');
+export function requestLatLong(address, zipcode, userId) {
 	return (dispatch) => {
+		dispatch({ type: REQUEST_LATLON_LOAD });
 		return clientFetch('/api/address', {
 			method: 'POST',
 			headers: {
@@ -57,13 +73,16 @@ export function requestLatLong(address, zipcode) {
 			body: JSON.stringify({
 				address: address,
 				zipcode: zipcode,
+				userId: userId,
 			})
 		})
 		.then((result) => {
+			dispatch({ type: REQUEST_LATLON_SUCCESS, result });
 			console.log(result);
 		})
 		.catch((error) => {
 			console.log(error);
+			dispatch({ type: REQUEST_LATLON_FAIL, error });
 		});
 	};
 }

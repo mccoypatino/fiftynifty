@@ -8,6 +8,15 @@ import {
 	GET_USER_LOAD,
 	GET_USER_SUCCESS,
 	GET_USER_FAIL,
+
+	REQUEST_CALL_LOAD,
+	REQUEST_CALL_SUCCESS,
+	REQUEST_CALL_FAIL,
+
+	REQUEST_LATLON_LOAD,
+	REQUEST_LATLON_SUCCESS,
+	REQUEST_LATLON_FAIL,
+
 } from 'containers/User/actions';
 
 /* ------------------- */
@@ -17,6 +26,13 @@ const defaultState = Immutable.Map({
 	user: {},
 	loading: false,
 	error: undefined,
+
+	callLoading: false,
+	callError: undefined,
+
+	latLonLoading: false,
+	latLonError: undefined,
+
 });
 
 /* ----------------------------------------- */
@@ -41,7 +57,40 @@ export default function reducer(state = defaultState, action) {
 		return state.merge({
 			loading: false,
 			error: action.error,
-			user: null,
+			user: {},
+		});
+
+	case REQUEST_CALL_LOAD:
+		return state.merge({
+			callLoading: true,
+			callError: undefined,
+		});	
+	case REQUEST_CALL_SUCCESS:
+		return state.merge({
+			callLoading: false,
+			callError: undefined,
+		});
+	case REQUEST_CALL_FAIL:
+		return state.merge({
+			callLoading: false,
+			callError: action.error,
+		});
+
+	case REQUEST_LATLON_LOAD:
+		return state.merge({
+			latLonLoading: true,
+			latLonError: undefined,
+		});	
+	case REQUEST_LATLON_SUCCESS:
+		return state.merge({
+			latLonLoading: false,
+			latLonError: undefined,
+			user: action.result
+		});
+	case REQUEST_LATLON_FAIL:
+		return state.merge({
+			latLonLoading: false,
+			latLonError: action.error,
 		});
 
 	default:
