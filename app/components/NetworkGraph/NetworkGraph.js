@@ -12,10 +12,10 @@ var color = d3.scaleOrdinal(d3.schemeCategory20);
 
 var simulation = d3.forceSimulation()
 
+
+
     .force("link", d3.forceLink().id(function(d) { return d.id; }))
-    .force("charge", function(d) {
-        return d._children ? -d.size / 100 : d.children ? -100 : -30;
-    });
+    .force("charge", d3.forceManyBody());
     //.force("center", d3.forceCenter(width / 2, height / 2));
 // var width = 960;
 // var height = 500;

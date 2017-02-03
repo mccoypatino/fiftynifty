@@ -9,6 +9,7 @@ import { ProgressMap } from 'components';
 import { NetworkGraph } from 'components';
 import { getUser } from './actions';
 import { UserNode } from './UserNode';
+import { TreeGraph } from 'components';
 
 let styles;
 
@@ -142,7 +143,7 @@ export const User = React.createClass({
 						{children.map((node)=> {
 							return <UserNode key={node.id} node={node} />;
 						})}
-						<NetworkGraph rootNode={user}/>
+						<TreeGraph data={user}/>
 					</div>
 
 
