@@ -106,7 +106,7 @@ export const User = React.createClass({
 						})}
 					</div>
 					<div style={styles.section}>
-						<ProgressMap callsData={flatCalls}/>
+						<ProgressMap callsData={flatCalls} />
 						<p> Your Score: {score}</p>
 						<p> You have covered {this.countStates(flatCalls)} out of the 50 states</p>
 					</div>
@@ -135,7 +135,7 @@ export const User = React.createClass({
 						{children.map((node)=> {
 							return <UserNode key={node.id} node={node} />;
 						})}
-						<TreeGraph data={user}/>
+						<TreeGraph data={user} />
 					</div>
 
 
