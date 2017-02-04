@@ -19,6 +19,8 @@ export const Leaderboard = React.createClass({
 		this.props.dispatch(getLeaderboard());
 	},
 
+
+    // Consider moving the next 3 functions to a "utils" file
     returnCalls: function(user, distance) {
         const children = user.children || [];
         const userCalls = user.calls || [];
@@ -157,7 +159,7 @@ styles = {
         return {
             width: (100-percent)+'%',
             height:'2em',
-            background: '#922332',//'#EDEDED',
+            background: '#922332',
             opacity:'0.95',
             position: 'absolute',
             right: '0px',
@@ -183,20 +185,19 @@ styles = {
         padding: '0.5em'
     },
     statesCount: {
-        // float:'left',
         marginLeft: '0.2em',
         display: 'inline-block',
-        color:'#EDEDED',//'#BF0A30',
+        color:'#EDEDED',
         fontSize:'1em',
         fontWeight: '600'
     },
     leaderRow: {
-        background: '#922332',//'#EDEDED',
+        background: '#922332',
         borderBottom: '3px solid #FEFEFE',
     },
     outerBar: {
 	    width:'80%',
-        height:'2em', //'#dddddd',
+        height:'2em',
         display: 'inline-block',
         textAlign:'center',
         background:'#002868',
