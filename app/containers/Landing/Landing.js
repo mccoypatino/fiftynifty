@@ -64,13 +64,22 @@ export const Landing = React.createClass({
 					<div style={styles.headerSplash} />
 					<div style={styles.headerPresentation}>
 						<div style={styles.headerTextBlock}>
-							<div style={styles.headerText}>Call your Reps!</div>
-							<div style={styles.headerText}>Collect 50 States!</div>
+							{/*<div style={styles.headerText}>Call your Reps!</div>*/}
+							{/*<div style={styles.headerText}>Collect 50 States!</div>*/}
 							<div style={styles.headerText}>Play for a better Democracy!</div>
-							<p style={styles.headerTextBody}>Constituent calls matter to congresspeople. Tell them who you are and that you are a voter. Tell them why you are calling and ask to be informed of their response by phone, web or email. Keep in mind that the staffer you are talking to is the congressman’s window into public - better than their polls and as good as a cash contribution.</p>
+							<p style={styles.headerTextBody}>Our President’s Executive order halting some legal immigrants is a call to action. We want to call Congresspeople throughout the country to tell them out opinion.  Real phone call matter, so we are starting the fiftynifty challenge to see if you can use your network to get 50 people in 50 states to make a call.  The network that gets the most calls wins, but we all win when we call for an effective democracy.
+								<button type="button" className="pt-button pt-minimal pt-icon-add .modifier" >Click To Learn More</button> </p>
+							<div style={{width:'100%', textAlign: 'center'}}>
+								<div style={styles.learnMoreButton}>
+								<a href="#howToPlay"><Button
+									text={'How To Play'}
+									className={'pt-intent-primary pt-fill pt-large'}/>
+								</a>
+								</div>
+							</div>
 						</div>
 						<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
-							
+							<div style={styles.inputHeader}> Join The Challenge </div>
 							<form onSubmit={this.formSubmit} style={styles.form}>
 								<label htmlFor={'name-input'} style={styles.inputLabel}>
 									Name
@@ -104,26 +113,43 @@ export const Landing = React.createClass({
 					</div>
 				</div>
 				<div style={styles.section}>
-					<div style={styles.sectionHeader}>How to Play</div>
-					<p>Constituent calls matter to congresspeople (click here to learn more).  Tell them who you are and that you are a voter.  Tell them why you are calling (sample below, or hover for a popup of samples) and ask to be informed of their response by phone, web or email.  Keep in mind that the staffer you are talking to is the congressman’s window into public — better than their polls and as good as a cash contribution.</p>
-
-					<p>Teachable moment [or perhaps civics lesson]:  If you ever thought that your vote didn’t matter because you knew your choice won or lost anyway, here’s why you still should vote:  it forces them to take you seriously now.  No one ignores a voter not matter who they voted for. They didn’t teach this in civics class, but it’s yet another reason to cast a ballot.</p>
+					<div style={styles.sectionHeader} id="howToPlay">How to Play</div>
+					<div style={styles.iconsTable}>
+						<div style={styles.howToPlaySection}>
+							<span className="pt-icon-large pt-icon-manually-entered-data"></span>
+						<div>
+							Join the challange by
+							filling in your details. This
+							way we can tell you who
+							your local senators are.
+						</div>
+						</div>
+						<div style={styles.howToPlaySection}>
+							<span className="pt-icon-large pt-icon-phone"></span>
+							<div>
+								Call your local senator
+								and talk to them about
+								the political issues you
+								have.
+							</div>
+						</div>
+					</div>
+					<div style={styles.iconsTable}>
+						<div style={styles.howToPlaySection}>
+							<span className="pt-icon-large pt-icon-graph"></span>
+						<div>
+							Share the link with your friends in other states, when someone in you network does the same, you get the points.
+						</div>
+						</div>
+						<div style={styles.howToPlaySection}>
+							<span className="pt-icon-large pt-icon-globe"></span>
+							<div>
+								When you get someone from all 50 states make a call, you win!
+							</div>
+						</div>
+					</div>
+					</div>
 				</div>
-
-				<div style={styles.section}>
-					<div style={styles.sectionHeader}>Sites for Inspiration</div>
-					<div><a href={'https://democracy.io/#/'}>https://democracy.io/#/</a></div>
-					<div><a href="https://vote.gov/">https://vote.gov/</a></div>
-					<div><a href="https://votinginfoproject.org/">https://votinginfoproject.org/</a></div>
-					<div><a href="https://dribbble.com/shots/713806-Political-Site">https://dribbble.com/shots/713806-Political-Site</a></div>
-					<div><a href="https://dribbble.com/shots/2227088-Home">https://dribbble.com/shots/2227088-Home</a></div>
-					<div><a href="https://dribbble.com/shots/1121048-Democracy-Great-for-politics-bad-for-design">https://dribbble.com/shots/1121048-Democracy-Great-for-politics-bad-for-design</a></div>
-					<div><a href="https://www.data.gov/impact/">https://www.data.gov/impact/</a></div>
-
-				</div>
-				
-				
-			</div>
 		);
 	}
 });
@@ -168,10 +194,10 @@ styles = {
 		zIndex: 1,
 	},
 	headerPresentation: {
-		// backgroundColor: 'red',
+		//backgroundColor: '#cb0027',
 		position: 'relative',
 		zIndex: 2,
-		padding: 'calc(115px + 3em) 1em 3em',
+		padding: 'calc(115px + 1em) 1em 3em',
 		maxWidth: '1024px',
 		margin: '0 auto',
 		width: '100%',
@@ -187,16 +213,17 @@ styles = {
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
 			display: 'block',
 			width: '100%',
-			padding: '1em',
+			padding: '0.5em',
 		},
 	},
 	headerText: {
 		maxWidth: '500px',
 		fontWeight: 'bold',
-		color: '#EB4040',
+		color: '#cb0027',
 		fontSize: '2em',
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
 			textAlign: 'center',
+			maxWidth: '100%',
 		},
 	},
 	headerTextBody: {
@@ -204,6 +231,9 @@ styles = {
 		padding: '1em 0em',
 		fontSize: '1.25em',
 		lineHeight: '1.5',
+		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
+			maxWidth: '100%',
+		},
 	},
 	headerCall: {
 		display: 'table-cell',
@@ -222,6 +252,12 @@ styles = {
 		// margin: '0 auto',
 		// float: 'right',
 	},
+    inputHeader: {
+        fontSize: '1.4em',
+        display: 'block',
+        marginBottom: '1em',
+		textAlign: 'center'
+    },
 	inputLabel: {
 		fontSize: '1.25em',
 		display: 'block',
@@ -229,6 +265,13 @@ styles = {
 	},
 	button: {
 		verticalAlign: 'bottom',
+	},
+	learnMoreButton: {
+		width:'40%',
+        display: 'table-cell',
+        textDecoration: 'none',
+        textAlign: 'center',
+        padding: '0.5em 1em',
 	},
 	section: {
 		padding: '2em 1em',
@@ -243,6 +286,8 @@ styles = {
 		fontSize: '2em',
 		fontWeight: '600',
 		marginBottom: '1.5em',
+		textAlign:'center',
+		//color:'white'
 	},
 	smallInformation: {
 		fontSize: '0.75em',
@@ -260,4 +305,15 @@ styles = {
 		position: 'relative',
 		top: '0.2em',
 	},
+	iconsTable: {
+		display:'table',
+		width:'100%',
+		textAlign:'center'
+	},
+    howToPlaySection: {
+		display:'table-cell',
+		width:'40%,',
+		textAlign:'center',
+		padding: '1em'
+	}
 };

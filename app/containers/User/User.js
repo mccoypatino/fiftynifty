@@ -6,6 +6,7 @@ import Radium from 'radium';
 // import fetch from 'isomorphic-fetch';
 import { Representative, AddressInput, ProgressMap, NetworkGraph, TreeGraph } from 'components';
 import { getUser, requestCall, requestLatLong } from './actions';
+import { Invite } from './Invite';
 import { UserNode } from './UserNode';
 
 let styles;
@@ -38,23 +39,7 @@ export const User = React.createClass({
 	},
 
 	loadData(userId) {
-		this.props.dispatch(getUser(userId))
-		.then((result)=> {
-			const zipcode = this.props.userData.user.zipcode;
-			if (zipcode) {
-				return fetch(`${CONGRESS_API_URL}&zip=${zipcode}`)
-				.then((response)=> {
-					if (!response.ok) {
-						return response.json().then(err => { throw err; });
-					}
-					return response.json();
-				})
-				.then((repResults)=> {
-					this.setState({ reps: repResults.results });
-				});
-			}
-			return null;
-		});
+		this.props.dispatch(getUser(userId));
 	},
 	returnCalls: function(user, distance) {
 		const children = user.children || [];
@@ -98,11 +83,11 @@ export const User = React.createClass({
 
 	render() {
 		const user = this.props.userData.user || {};
-		const latLonData = this.props.userData.latLongData || {};
 		const reps = user.reps || [];
 		const children = user.children || [];
 		const flatCalls = this.returnCalls(user, 0);
 		const score = this.getScore(flatCalls);
+		const shareUrl = "http://fiftynifty.org/?ref="+user.id;//When we get nicer urls, adda "getUrl" function
 
 		return (
 			<div style={styles.container}>
@@ -115,20 +100,31 @@ export const User = React.createClass({
 					{true && true &&
 						<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
 					}
+
+					<div style={styles.section}>
+						<div style={styles.sectionTitle}>Representatives</div>
+                        {reps.length === 0 &&
+						<Spinner />
+                        }
+
+                        {reps.map((rep, index)=> {
+                            return (
+								<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
+                            );
+                        })}
+
+						<p>Call: (508) 659-9127</p>
+					</div>
+
+					<div style={styles.section}>
+						<div style={styles.sectionTitle}>Invite</div>
+						<Invite url={shareUrl}/>
+					</div>
 					
 					
 					<div style={styles.section}>
 						<div style={styles.sectionTitle}>Progress</div>
 						<p>Map and progress of your network displayed here</p>
-						<p>Call: (508) 659-9127</p>
-						<h5>Calls made</h5>
-						{flatCalls.map((call)=> {
-							return (
-								<div key={`call${call.id}`}>
-									{call.state} · {call.callerId} · {call.zip} · {call.distance}
-								</div>
-							);
-						})}
 					</div>
 					<div style={styles.section}>
 						<ProgressMap callsData={flatCalls} />
@@ -137,30 +133,8 @@ export const User = React.createClass({
 					</div>
 
 					<div style={styles.section}>
-						<div style={styles.sectionTitle}>Representatives</div>
-						{reps.length === 0 &&
-							<Spinner />
-						}
-
-						{reps.map((rep, index)=> {
-							return (
-								<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
-							);
-						})}
-					</div>
-
-					<div style={styles.section}>
-						<div style={styles.sectionTitle}>Invite</div>
-						<p>Invite people to join your network by joining Fifty Nifty with this link: <Link to={`/?ref=${user.id}`}>fiftynifty.org/?ref={user.id}</Link></p>
-					</div>
-
-					<div style={styles.section}>
 						<div style={styles.sectionTitle}>Your Fifty Nifty Family</div>
-						<p>Child nodes listed and displayed here</p>
-						{children.map((node)=> {
-							return <UserNode key={node.id} node={node} />;
-						})}
-						<TreeGraph data={user} />
+						<TreeGraph data={user}/>
 					</div>
 
 
