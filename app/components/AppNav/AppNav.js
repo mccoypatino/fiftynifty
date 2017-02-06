@@ -22,7 +22,7 @@ export const AppNav = React.createClass({
 		const user = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
 		const location = this.props.location || {};
 		const pathname = location.pathname;
-		const isLight = pathname !== '/';
+		const isLight = pathname !== '/leaderboard' && pathname !== '/';
 		return (
 			<nav style={styles.navStyle(isLight)}>
 				<div style={styles.navContent}>
@@ -67,7 +67,7 @@ styles = {
 		padding: '0em 1em',
 		maxWidth: '1024px',
 		margin: '0 auto',
-		borderBottom: '1px solid rgba(0, 0, 0, 0.25)',
+		//borderBottom: '1px solid rgba(0, 0, 0, 0.25)',
 		textAlign: 'center',
 		// backgroundColor: '#F29696',
 	},

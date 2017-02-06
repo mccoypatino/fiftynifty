@@ -18,7 +18,7 @@ export const ProgressMap  = React.createClass({
 		const dataValues = this.props.callsData.map(function(data) { return data.value });
 		const minVal = 0;
 		const maxVal = 5; // Set maximum val for score
-		return d3.scaleLinear().domain([minVal, maxVal]).range(["#EFEFFF", "#02386F"])(value);
+		return d3.scaleLinear().domain([minVal, maxVal]).range(["#EFEFFF", "#42006F"])(value);
 	},
 
 	reducedData: function(){
@@ -54,7 +54,8 @@ export const ProgressMap  = React.createClass({
 			data: this.reducedData(),
 			geographyConfig: {
 				borderWidth: 0.5,
-				highlightFillColor: '#ffc5bb',
+				highlightFillColor: '#8b8b8b',
+                highlightBorderColor: 'rgba(45, 45, 45, 0.3)',
 				popupTemplate: function(geography, data) {
 					if (data && data.value) {
 						return '<div class="hoverinfo"><strong>' + geography.properties.name + ', ' + data.value + '</strong></div>';

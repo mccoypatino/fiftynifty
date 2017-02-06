@@ -9,14 +9,12 @@ var color = d3.scaleOrdinal(d3.schemeCategory20);
 // var tree = d3.tree()
 //     .size([360, 500])
 //     .separation(function(a, b) { return (a.parent == b.parent ? 1 : 2) / a.depth; });
-
+let width = 600;
+let height = 600;
 var simulation = d3.forceSimulation()
-
-
-
     .force("link", d3.forceLink().id(function(d) { return d.id; }))
-    .force("charge", d3.forceManyBody());
-    //.force("center", d3.forceCenter(width / 2, height / 2));
+    .force("charge", d3.forceManyBody())
+    .force("center", d3.forceCenter(width / 2, height / 2));
 // var width = 960;
 // var height = 500;
 // var force = d3.layout.force()
@@ -127,7 +125,7 @@ var Graph = React.createClass({
 
     render() {
         return (
-            <svg width={'100%'} ref='svg'>
+            <svg width={'100%'} height={600} ref='svg'>
                 <g ref='graph' />
             </svg>
         );

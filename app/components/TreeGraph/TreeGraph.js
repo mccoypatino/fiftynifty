@@ -3,141 +3,107 @@ import React ,  { PropTypes } from 'react';
 import Radium from 'radium';
 import ReactDOM from 'react-dom'
 
-let d3Tree = {};
-let color = d3.scaleOrdinal(d3.schemeCategory10)
-d3Tree.create = function(el, div,  props, state) {
-	let svg = d3.select(el).attr("transform", "translate(" + (props.width *0.1 ) + "," + (props.height *0.1) + ")");
-	this.update(el, div, state);
-};
+export const TreeGraph = React.createClass({
 
-d3Tree.update = function(el, div ,state) {
-	this._drawTree(el, div, state.data);
-};
+	diagonal : function(d) {
+        return "M" + d.source.x + "," + d.source.y
+            + "C" + (d.source.x + d.target.x) / 2 + "," + d.source.y
+            + " " + (d.source.x + d.target.x) / 2 + "," + d.target.y
+            + " " + d.target.x + "," + d.target.y;
+    },
 
-d3Tree._drawTree = function(el, div, data) {
-
-	let svg = d3.select(el);
-	let width = div.clientWidth*0.8;
-	let height = div.clientHeight*0.8;
-    let treeData = d3.hierarchy(data);
-	let tree = d3.tree()
-		.size([height, width])
-		.separation(function(a, b) { return (a.parent == b.parent ? 1 : 2) / a.depth; });
-	let root = tree(treeData);
-    root.x = height / 2;
-    root.y = 0;
-    root.data = data;
-
-	let p = svg.selectAll('path.link');
-	let link = p.data(root.descendants().slice(1));
-	link.enter().append("path")
-		.attr("class", "link")
-		.attr("d", function(d) {return diagonal(d, d.parent);
-		});
-	link.exit().remove();
-
-
-	let nodes = root.descendants();
-	let g = svg.selectAll('.node');
-	let node = g.data(nodes);
-    let nodeEl = node.enter().append("g")
-		.attr("class", function(d) { return "node" + (d.children ? " node--internal" : " node--leaf"); })
-		.attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
-	nodeEl.append("circle")
-		.attr("r", function(d){return 30/Math.pow(2,d.depth);}) // set circle size by user stroke
-		.attr("fill", function(d) {
-			return(d.data.zipcode? color(parseInt(d.data.zipcode.substring(0,1))): "#888888")})
-		.attr("stroke", function(d){return !d.data.id? "black": "none"})
-    	.attr("stroke-width", function(d){return !d.data.id? 2: 0})
-    nodeEl.append("a")
-		.attr("dy", ".31em")
-        .attr("xlink:href", function(d) {return d.data.id? '/'+d.data.id: '#'})
-		.append("text")
-		.text(function(d) { return d.data.name; })
-		.append("svg:title")
-        .text(function(d) { return 'name:'+d.data.name+', zipcode:'+d.data.zipcode;});
-	node.exit().remove();
-
-
-};
-
-function diagonal(s, d) {
-
-    let path = `M ${s.y} ${s.x}
-            C ${(s.y + d.y) / 2} ${s.x},
-              ${(s.y + d.y) / 2} ${d.x},
-              ${d.y} ${d.x}`
-
-    return path
-}
-
-class TreeChart extends React.Component {
-
-	componentDidMount() {
-		var el = ReactDOM.findDOMNode(this.refs.chart);
-		var div = ReactDOM.findDOMNode(this);
-		d3Tree.create(el, div, {
-			width: div.clientWidth,
-			height: div.clientHeight,
-		}, this.getChartState());
-	}
-
-	componentDidUpdate() {
-		var el = ReactDOM.findDOMNode(this.refs.chart);
-		var div = ReactDOM.findDOMNode(this)
-		d3Tree.update(el,div, this.getChartState());
-	}
-
-	getChartState() {
-		return {
-			data: this.props.data
-		};
-	}
-
-	render() {
-		return (
-			<div className="TreeChart">
-				<svg width="100%" height="60%">
-					<g ref="chart"></g>
-				</svg>
-			</div>
-		);
-	}
-}
-
-export const  TreeGraph = React.createClass({
-	propTypes: {
-		data: PropTypes.object
+	nameToInitials: function(name) {
+        return name? name.split(' ').map((word)=>{return word[0]}).join(''): '';
 	},
 
-	render() {
-		const css = `
+    showToolTip: function(evt){
+	    if (this.tooltip) {
+            this.tooltip.setAttributeNS(null, "x", evt.clientX - 8);
+            this.tooltip.setAttributeNS(null, "y", evt.clientY - 5);
+            this.tooltip.setAttributeNS(null, "visibility", "visible");
+        }
+    },
+    hideToolTip: function() {
+        if (this.tooltip) {
+            this.tooltip.setAttribute(null, "visibility", "hidden")
+        }
 
+    },
+
+    componentWillMount() {
+        this.tooltip =ReactDOM.findDOMNode(this.refs.tooltip);
+    },
+
+    render() {
+        const css = `
 					.node text {
-					font: 10px sans-serif;
+					font: 5pt sans-serif;
 				}
-
-
 					.node--internal text {
 					text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
 				}
-
 					.link {
 					fill: none;
-					stroke: #555;
-					stroke-opacity: 0.4;
+					stroke: #E0E0E0;
+					stroke-opacity: 1;
 					stroke-width: 1.5px;
 				}
 				`;
-		return(
-			<div>
+        const { data } = this.props;
+
+        const treeData = d3.hierarchy(data);
+        const containerWidth = 600;
+        const containerHeight = treeData.height*50;
+        const treeLayout = d3.tree()
+            .size([containerWidth-50, containerHeight-50]);
+        const root = treeLayout(treeData);
+        const nodesList = this.nodesList = root.descendants();
+        const linksList = this.linksList = root.links();
+
+		/* render the nodes */
+        const nodes = nodesList.map(node => {
+            // get color by state
+            const randColor = Math.random()*360;
+            return (
+                node.data.id &&
+				<g key={node.data.id} className="node"
+				   transform={`translate(${node.x}, ${node.y})`}>
+					<circle r="6" style={{fill:`hsl(${randColor},50%, 80%)`, stroke:'grey', strokeWidth:'0.5px'}}
+                        onMouseMove={this.showToolTip(event)} onMouseOut={this.hideToolTip()} />
+                    <a href={`/${node.data.id}`}>
+                        <text y="2pt" textAnchor="middle">{this.nameToInitials(node.data.name)}</text>
+                    </a>
+                    <title>{node.data.name} {node.data.state}</title>
+				</g>
+            );
+        });
+
+		/* render the links */
+        const links = linksList.map(link => {
+            return (
+				<path key={`${link.source.data.id}-${link.target.data.id}`} className="link"
+					  d={this.diagonal(link)} />
+            );
+        });
+
+        return (
+			<div className="tree-container">
 				<style>
-					{css}
+                    {css}
 				</style>
-			<TreeChart data={this.props.data} />
+
+				<svg height={containerHeight} width='100%'>
+                <g transform={'translate(10,10)'}>
+                        {links}
+                        {nodes}
+                </g>
+                    {/*<text className="tooltip" id="tooltip"*/}
+                          {/*x="0" y="0" visibility="hidden" ref="tooltip">Tooltip</text>*/}
+				</svg>
 			</div>
-		);
-	}
+        );
+    }
+
 });
 
 export default Radium (TreeGraph);
