@@ -8,6 +8,7 @@ import {
 	POST_USER_LOAD,
 	POST_USER_SUCCESS,
 	POST_USER_FAIL,
+	GET_USER_SUCCESS,
 } from 'containers/Landing/actions';
 
 /* ------------------- */
@@ -17,6 +18,7 @@ const defaultState = Immutable.Map({
 	signupResult: {},
 	signupLoading: false,
 	signupError: undefined,
+	referralDetails: undefined,
 });
 
 /* ----------------------------------------- */
@@ -43,8 +45,13 @@ export default function reducer(state = defaultState, action) {
 			signupError: action.error,
 			signupResult: null,
 		});
+	case GET_USER_SUCCESS:
+		return state.merge({
+            referralDetails: action.result
+		});
 
 	default:
 		return ensureImmutable(state);
 	}
+
 }

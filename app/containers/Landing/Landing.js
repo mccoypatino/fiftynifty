@@ -4,7 +4,8 @@ import { Link, browserHistory } from 'react-router';
 import { Button } from '@blueprintjs/core';
 import Radium from 'radium';
 import Phone from 'react-phone-number-input';
-import { postUser } from './actions';
+import { postUser, getReferralDetails } from './actions';
+import { HowToPlay } from './HowToPLay';
 
 let styles;
 
@@ -48,6 +49,16 @@ export const Landing = React.createClass({
 		this.props.dispatch(postUser(this.state.name, this.state.phone, this.state.zipcode, referral));
 	},
 
+    componentWillMount() {
+        this.loadData(this.props.location.query.ref);
+    },
+
+    loadData(userId) {
+		if (userId) {
+            this.props.dispatch(getReferralDetails(userId));
+        }
+    },
+
 	render() {
 
 /* 
@@ -57,6 +68,7 @@ export const Landing = React.createClass({
 	  <div style={styles.headerImage} />
 	  <div style={styles.headerSplash} /> ?
 */
+        const refUser = this.props.landingData.referralDetails;
 		return (
 			<div style={styles.container}>
 				<div style={styles.header}>
@@ -79,7 +91,8 @@ export const Landing = React.createClass({
 							</div>
 						</div>
 						<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
-							<div style={styles.inputHeader}> Join The Challenge </div>
+							{ refUser && <div style={styles.inputHeader}>{refUser.name} Invited You!</div>}
+							<div style={styles.inputHeader}> Join The Challenge</div>
 							<form onSubmit={this.formSubmit} style={styles.form}>
 								<label htmlFor={'name-input'} style={styles.inputLabel}>
 									Name
@@ -112,43 +125,7 @@ export const Landing = React.createClass({
 						</div>
 					</div>
 				</div>
-				<div style={styles.section}>
-					<div style={styles.sectionHeader} id="howToPlay">How to Play</div>
-					<div style={styles.iconsTable}>
-						<div style={styles.howToPlaySection}>
-							<span className="pt-icon-large pt-icon-manually-entered-data"></span>
-						<div>
-							Join the challange by
-							filling in your details. This
-							way we can tell you who
-							your local senators are.
-						</div>
-						</div>
-						<div style={styles.howToPlaySection}>
-							<span className="pt-icon-large pt-icon-phone"></span>
-							<div>
-								Call your local senator
-								and talk to them about
-								the political issues you
-								have.
-							</div>
-						</div>
-					</div>
-					<div style={styles.iconsTable}>
-						<div style={styles.howToPlaySection}>
-							<span className="pt-icon-large pt-icon-graph"></span>
-						<div>
-							Share the link with your friends in other states, when someone in you network does the same, you get the points.
-						</div>
-						</div>
-						<div style={styles.howToPlaySection}>
-							<span className="pt-icon-large pt-icon-globe"></span>
-							<div>
-								When you get someone from all 50 states make a call, you win!
-							</div>
-						</div>
-					</div>
-					</div>
+				<HowToPlay/>
 				</div>
 		);
 	}
