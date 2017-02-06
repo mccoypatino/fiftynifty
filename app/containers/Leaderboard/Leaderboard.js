@@ -71,24 +71,23 @@ export const Leaderboard = React.createClass({
         const leaders = this.props.leaderboardData.leaders || [];
         const flatLeaders = this.flattenLeaders(leaders).sort(function (a, b) {
             return cmp(a.statesCount, b.statesCount) || cmp(a.score, b.score)
-        }).reverse().slice(0, 20);
+        }).reverse().slice(0, 5);
 		return (
-			<div style={styles.container}>
-				<div style={styles.content}>
-					<div style={styles.title}>Leaders</div>
-				</div>
-
-				{this.props.leaderboardData.loading &&
-					<Spinner />
-				}
-				<div width={'100%'}>
-				{flatLeaders.map((user)=>{
-				    return(
-					<Leader key={user.user.id} leader={user}/>)
-				})}
-                </div>
-
-			</div>
+		    <div>
+		    <div style={styles.flagImage}/>
+                <div style={styles.flagSplash}/>
+                    <div style={styles.container}>
+                        <div style={styles.content}>
+                            {this.props.leaderboardData.loading &&
+                            <Spinner />
+                            }
+                            {flatLeaders.map((user)=>{
+                                return(
+                                    <Leader key={user.user.id} leader={user}/>)
+                                })}
+                        </div>
+                    </div>
+            </div>
 		);
 	}
 });
@@ -115,25 +114,14 @@ export const Leader = React.createClass({
         return(
             <div style={styles.leaderRow}>
                 <div style={styles.section}>
-                <Link style={styles.leaderName} to={`/${user.user.id}`}>{user.user.name}</Link>
-                </div>
-                <div style={styles.statesBar}>
-                    <div style={styles.outerBar}>
-                        <div style={styles.progressbar(percent)}></div>
-                        <table width={'100%'} height={'100%'}>
-                            <tbody>
-                            <tr style={{textAlign:'center'}}>
-                        {[...Array(10).keys()].map((i)=>
-                            <td key={i}>< span style={styles.star} className={'pt-icon-standard pt-icon-star'} /></td>)
-                        }
-                            </tr>
-                            </tbody>
-                        </table>
+                    <Link style={styles.leaderName} to={`/${user.user.id}`}>{user.user.name}</Link>
+                    <div style={styles.statesBar}>
+                        <div style={styles.outerBar}>
+                            <div style={styles.progressbar(percent)}></div>
+                        </div>
+                        <div style={styles.statesCount}>{user.statesCount} / 50</div>
                     </div>
-                    <div style={styles.statesCount}>{user.statesCount} / 50</div>
-                </div>
-                <div style={styles.section}>
-                <div style={styles.score}>Score: {Math.floor(user.score)}</div>
+                    <div style={styles.score}>{Math.floor(user.score)} Points</div>
                 </div>
             </div>
         )
@@ -158,9 +146,9 @@ styles = {
     progressbar: function(percent) {
         return {
             width: (100-percent)+'%',
-            height:'2em',
-            background: '#922332',
-            opacity:'0.95',
+            height:'1em',
+            background: '#f7f5f3',
+            opacity:'1',
             position: 'absolute',
             right: '0px',
             transition:'width 2s'
@@ -168,13 +156,21 @@ styles = {
         };
     },
 	container: {
-		padding: 'calc(115px + 3em) 1em 3em',
+		padding: 'calc(115px + 2em) 2em 3em',
 		maxWidth: '1024px',
 		margin: '0 auto',
+        zIndex: 2,
+        position: 'relative',
+        display:'block'
 	},
 	content: {
-		padding: '2em 0em',
+		padding: '0.1em',
 	},
+    section: {
+        padding:'1em',
+        color:'#00296a',
+        opacity:'1'
+    },
 	title: {
 		fontSize: '2.5em',
 		fontWeight: '200',
@@ -182,25 +178,29 @@ styles = {
     statesBar: {
 	    width: '100%',
         maxWidth:'100%',
-        padding: '0.5em'
+        paddingTop: '1em'
     },
     statesCount: {
-        marginLeft: '0.2em',
+        marginRight: '1em',
         display: 'inline-block',
-        color:'#EDEDED',
+        color:'#00296a',
         fontSize:'1em',
-        fontWeight: '600'
+        fontWeight: '600',
+        float:'right'
+
     },
     leaderRow: {
-        background: '#922332',
-        borderBottom: '3px solid #FEFEFE',
+        background: '#dce4ef',
+        borderBottom: '3px solid rgba(8, 48, 74, 0.5)',
+        opacity:'0.8',
     },
     outerBar: {
-	    width:'80%',
-        height:'2em',
+	    width:'85%',
+        height:'1em',
         display: 'inline-block',
         textAlign:'center',
-        background:'#002868',
+        color:'#ff510f',
+        background: 'linear-gradient(to right, #fdb81e, #ff510f)',
         position: 'relative',
         verticalAlign: 'middle'
 	},
@@ -216,19 +216,37 @@ styles = {
         top: '50%',
     },
     leaderName: {
+        fontWeight:'300',
+        fontSize:'1em',
         fontWeight: 'bold',
-        fontSize:'1.3em',
-        color:'white'
     },
     score:{
         display: 'block',
-        fontSize:'1.1em',
-        fontWeight:'bold',
-        color:'white'
+        fontSize:'0.9em',
+        fontWeight:'light',
+        paddingTop: '1em'
     },
-    section: {
-        padding: '0.75em',
+    flagImage: {
+        backgroundImage: 'url("/static/american-flag.jpg")',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center center',
+        backgroundSize: 'cover',
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        zIndex: 1,
+        top: 0,
+        left: 0,
+    },
+    flagSplash: {
+        position: 'absolute',
+        backgroundColor: '#1c435a',
+        opacity: 0.9,
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: 1,
     },
 
-		
 };
