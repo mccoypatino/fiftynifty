@@ -46,7 +46,8 @@ export const Invite = React.createClass({
                 <div style={styles.network}>
                     <FacebookShareButton
                         url={shareUrl}
-                        title={title}>
+                        title={'Join the Fifty Nifty challenge, mobilize your network, friends don’t let friends stay silent.'}
+                        text={'This is a social phone tree that I am joining.  Let’s call our congressmen and speak out.  If we reach 50 states, we win.'}>
                         <FacebookIcon
                             size={56}
                             round />
@@ -55,7 +56,7 @@ export const Invite = React.createClass({
                 <div style={styles.network}>
                     <TwitterShareButton
                         url={shareUrl}
-                        title={title}>
+                        title={'Join the Fifty Nifty challenge, mobilize your network, friends don’t let friends stay silent.'}>
                         <TwitterIcon
                             size={56}
                             round />

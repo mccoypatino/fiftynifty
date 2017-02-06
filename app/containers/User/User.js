@@ -7,7 +7,9 @@ import Radium from 'radium';
 import { Representative, AddressInput, ProgressMap, NetworkGraph, TreeGraph } from 'components';
 import { getUser, requestCall, requestLatLong } from './actions';
 import { Invite } from './Invite';
+import {getScore, countStates} from '../../Utilities/UserUtils'
 import { UserNode } from './UserNode';
+import {PieChart, Pie, Cell,Legend, Tooltip} from 'Recharts';
 
 let styles;
 
@@ -54,25 +56,6 @@ export const User = React.createClass({
 		return callsWithDist.concat(...childrensCalls);
 	},
 
-    getScore: function(flatCalls) {
-        let score = 0;
-        const start = 256;
-        flatCalls.forEach((call)=>{
-        	score += start / (Math.pow(2, call.distance));
-		});
-        return score;
-    },
-
-	countStates: function(flatCalls) {
-		const states = [];
-		flatCalls.forEach((call)=>{
-			if (states.indexOf(call.state) === -1) {
-				states.push(call.state);
-			}
-		});
-		return states.length;
-	},
-
 	callFunction: function(number) {
 		this.props.dispatch(requestCall(number, this.props.params.userId));
 	},
@@ -86,8 +69,11 @@ export const User = React.createClass({
 		const reps = user.reps || [];
 		const children = user.children || [];
 		const flatCalls = this.returnCalls(user, 0);
-		const score = this.getScore(flatCalls);
+		const score = getScore(user);
 		const shareUrl = "http://fiftynifty.org/?ref="+user.id;//When we get nicer urls, adda "getUrl" function
+        const statesCount = countStates(user);
+        const chartData = [{name: 'SatesDone', value: statesCount}, {name: 'not Done', value: 50-statesCount}];
+        const COLORS = ['#cb0027', 'rgba(0,0,0,0)'];
 
 		return (
 			<div style={styles.container}>
@@ -119,21 +105,32 @@ export const User = React.createClass({
 					<div style={styles.section}>
 						<Invite url={shareUrl}/>
 					</div>
-					
-					
 					<div style={styles.section}>
 						<div style={styles.sectionTitle}>Progress</div>
-						<p>Map and progress of your network displayed here</p>
 					</div>
 					<div style={styles.section}>
+						<div style={styles.centered}>
+						<span style={{textAlign:'center'}}> Your Score: <span style={styles.score}> {score}</span></span>
+						<div style={{display:'inline-block', verticalAlign: 'middle', paddingLeft:'2em'}}>
+						<PieChart height={200} width={200}>
+							<Pie data={chartData} innerRadius={70} outerRadius={100} fill="#82ca9d">
+                            {
+                                chartData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)
+							}</Pie>
+							<text x={100} y={100} textAnchor="middle" dominantBaseline="middle">
+								{statesCount} / 50 states
+							</text>
+						</PieChart>
+						</div>
+						</div>
 						<ProgressMap callsData={flatCalls} user={user} />
-						<p> Your Score: {score}</p>
-						<p> You have covered {this.countStates(flatCalls)} out of the 50 states</p>
 					</div>
 
+					<div style={styles.centered}>
 					<div style={styles.section}>
 						<div style={styles.sectionTitle}>Your Fifty Nifty Family</div>
 						<TreeGraph data={user}/>
+					</div>
 					</div>
 
 
@@ -171,5 +168,14 @@ styles = {
 	sectionTitle: {
 		fontSize: '2em',
 	},
+	score:{
+		fontSize:'3em',
+		textAlign:'center',
+		fontWeight:'bold',
+		paddingLeft:'0.5em'
+	},
+	centered: {
+		textAlign:'center',
+	}
 
 };
