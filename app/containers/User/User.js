@@ -81,14 +81,15 @@ export const User = React.createClass({
 					<Spinner />
 				}
 				<div style={styles.content}>
-					<div style={styles.title}>{user.name} · {user.zipcode}</div>
+					<div style={styles.title}>{user.name}</div>
 
-					{true && true &&
-						<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
-					}
+					{/*{true && true &&*/}
+						{/*<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />*/}
+					{/*}*/}
+					<div style={styles.repsWrapper}>
 
-					<div style={styles.section}>
-						<div style={styles.sectionTitle}>Representatives</div>
+					<div style={styles.repsBox} className={"pt-elevation-3"}>
+						<div style={styles.sectionTitle}>Your Representatives</div>
                         {reps.length === 0 &&
 						<Spinner />
                         }
@@ -99,8 +100,11 @@ export const User = React.createClass({
                             );
                         })}
 
-						<p>Call: (508) 659-9127</p>
+
 					</div>
+					</div>
+					<p style={styles.orCall}>Or you can call (508) 659-9127 </p>
+
 
 					<div style={styles.section}>
 						<Invite url={shareUrl}/>
@@ -125,9 +129,8 @@ export const User = React.createClass({
 						</div>
 						<ProgressMap callsData={flatCalls} user={user} />
 					</div>
-
-					<div style={styles.centered}>
 					<div style={styles.section}>
+					<div style={styles.familySection}>
 						<div style={styles.sectionTitle}>Your Fifty Nifty Family</div>
 						<TreeGraph data={user}/>
 					</div>
@@ -151,22 +154,28 @@ export default connect(mapStateToProps)(Radium(User));
 
 styles = {
 	container: {
-		padding: 'calc(115px + 3em) 1em 3em',
+		padding: 'calc(115px + 0.2em) 1em 3em',
 		maxWidth: '1024px',
 		margin: '0 auto',
 	},
 	content: {
-		padding: '2em 0em',
+		padding: '1em 0em',
 	},
 	title: {
 		fontSize: '2.5em',
 		fontWeight: '200',
+		textAlign: 'center',
+		paddingBottom:'1em',
 	},
 	section: {
 		padding: '2em 0em',
 	},
 	sectionTitle: {
-		fontSize: '2em',
+        fontSize: '1.9em',
+        textAlign:'center',
+        letterSpacing:'0.1em',
+        paddingBottom:'1em',
+        fontWeight: '200',
 	},
 	score:{
 		fontSize:'3em',
@@ -176,6 +185,33 @@ styles = {
 	},
 	centered: {
 		textAlign:'center',
+	},
+    repsSectionTitle: {
+        fontSize: '1.9em',
+		textAlign:'center',
+        letterSpacing:'0.1em',
+		paddingBottom:'1em',
+    },
+    repsWrapper: {
+        margin: 'auto',
+		width: '80%',
+		maxWidth:'350px',
+		backgroundColor:'#da022e'
+	},
+	repsBox: {
+		textAlign: 'left',
+		color:'white',
+		padding:'1em',
+        fontWeight: '200',
+	},
+	orCall: {
+		textAlign:'center',
+		color:'white',
+		padding:'1em',
+	},
+	familySection:{
+		textAlign:'center',
+		paddingTop:'1em',
 	}
 
 };

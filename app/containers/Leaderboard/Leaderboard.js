@@ -156,7 +156,10 @@ styles = {
         color:'#00296a',
         fontSize:'1em',
         fontWeight: '600',
-        float:'right'
+        float:'right',
+        '@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
+            maxWidth: '100%',
+        }
 
     },
     leaderRow: {

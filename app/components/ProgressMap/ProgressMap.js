@@ -47,7 +47,7 @@ export const ProgressMap  = React.createClass({
 				}
 			});
 			Object.keys(statesCount).forEach((state)=> {
-				statesCount[state].fillColor = this.linearPalleteScale(statesCount[state].colorValue);
+				statesCount[state].fillColor = '#fdb81e'; //this.linearPalleteScale(statesCount[state].colorValue);
 			});
 
 		}
@@ -117,7 +117,8 @@ export const ProgressMap  = React.createClass({
 			width: '100%'
 		};
 		const buttonText = this.state.showCallsFlow? "Hide": "Show";
-		const button = <button onClick={this.toggleCallsFlow}>{buttonText} Calls Flow</button>;
+		const button = (<div style={{textAlign:'center'}}>
+			<button type={"button"} className={"pt-button"} onClick={this.toggleCallsFlow}>{buttonText} Calls Flow</button></div>)
 		return (
 			<div>
 			<div ref="container" style={style}></div>

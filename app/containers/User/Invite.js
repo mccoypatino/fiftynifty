@@ -49,7 +49,7 @@ export const Invite = React.createClass({
                         title={'Join the Fifty Nifty challenge, mobilize your network, friends don’t let friends stay silent.'}
                         text={'This is a social phone tree that I am joining.  Let’s call our congressmen and speak out.  If we reach 50 states, we win.'}>
                         <FacebookIcon
-                            size={56}
+                            size={40}
                             round />
                     </FacebookShareButton>
                 </div>
@@ -58,7 +58,7 @@ export const Invite = React.createClass({
                         url={shareUrl}
                         title={'Join the Fifty Nifty challenge, mobilize your network, friends don’t let friends stay silent.'}>
                         <TwitterIcon
-                            size={56}
+                            size={40}
                             round />
                     </TwitterShareButton>
                 </div>
@@ -67,7 +67,7 @@ export const Invite = React.createClass({
                     <GooglePlusShareButton
                         url={shareUrl}>
                         <GooglePlusIcon
-                            size={56}
+                            size={40}
                             round />
                     </GooglePlusShareButton>
                 </div>
@@ -94,13 +94,16 @@ styles = {
     inviteSection: {
         textAlign: 'center',
         color:'white',
-        opacity:'1'
+        opacity:'1',
+        padding: '2em'
     },
     inviteHeader: {
-        fontSize:'2em',
-        paddingBottom:'0.5em',
-        fontWeight:'bold',
-        color:"#ffc15e"
+        color:"#ffc15e",
+        fontSize: '1.9em',
+        textAlign:'center',
+        letterSpacing:'0.1em',
+        paddingBottom:'1em',
+        fontWeight: '200',
     },
     inviteLink: {
         fontWeight:'bold',

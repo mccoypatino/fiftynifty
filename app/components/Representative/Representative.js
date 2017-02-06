@@ -30,8 +30,8 @@ export const Representative = React.createClass({
 		const repData = this.props.repData || {};
 		return (
 			<div style={styles.container}>
-				<h4>{repData.first_name} {repData.last_name}</h4>
-				<p>{repData.chamber === 'senate' ? 'Senator ' : 'Representative '} for {repData.chamber === 'senate' ? repData.state : `district ${repData.district} in ${repData.state}`}</p>
+				<div style={styles.repName}>{repData.first_name} {repData.last_name}</div>
+				<p style={styles.repText}>{repData.chamber === 'senate' ? 'Senator ' : 'Representative '} for {repData.chamber === 'senate' ? repData.state : `district ${repData.district} in ${repData.state}`}</p>
 				<button role={'button'} className={'pt-button'} onClick={this.toggleCallDialog}>Call</button>
 				<Dialog isOpen={this.state.callDialogOpen} onClose={this.toggleCallDialog} title={`Call your ${repData.chamber === 'senate' ? 'Senator' : 'Representative'}`} style={styles.dialogBox}>
 					<div className="pt-dialog-body">
@@ -58,10 +58,19 @@ export default Radium(Representative);
 styles = {
 	container: {
 		margin: '1em 1em 2em',
+
 	},
 	dialogBox: {
 		maxWidth: '100%',
 		top: '10%',
+	},
+    repName: {
+        color:'white',
+		fontSize:'1.3em',
+		letterSpacing:'0.02em',
+	},
+    repText: {
+        letterSpacing:'0.02em',
 	},
 	
 };
