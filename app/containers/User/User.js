@@ -97,17 +97,17 @@ export const User = React.createClass({
 				<div style={styles.content}>
 					<div style={styles.title}>{user.name} · {user.zipcode}</div>
 
-					{true && true &&
-						<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
-					}
-
 					<div style={styles.section}>
 						<div style={styles.sectionTitle}>Representatives</div>
                         {reps.length === 0 &&
 						<Spinner />
                         }
 
-                        {reps.map((rep, index)=> {
+                        {reps.length > 3 &&
+						<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
+                        }
+
+                        {reps.length === 3 && reps.map((rep, index)=> {
                             return (
 								<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
                             );

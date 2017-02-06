@@ -29,7 +29,12 @@ export const Landing = React.createClass({
 		const nextLoading = nextProps.landingData.signupLoading;
 		const nextError = nextProps.landingData.signupLoading;
 		const nextResult = nextProps.landingData.signupResult;
-		if (lastLoading && !nextLoading && !nextError && nextResult.id) {
+		// If the phone number is already in use
+		if (undefined != nextProps.landingData.signupError) {
+			if (nextProps.landingData.signupError === 'Phone number already used') {
+				// TBD
+			};
+		} else if (lastLoading && !nextLoading && !nextError && nextResult.id) {
 			localStorage.setItem('userData', JSON.stringify(nextResult));
 			browserHistory.push(`/${nextResult.id}`);
 		}
