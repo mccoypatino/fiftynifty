@@ -103,9 +103,14 @@ export const Leader = React.createClass({
         };
     },
     componentDidMount() {
-        setTimeout(()=>this.setState({
+        this.loadTimeout = setTimeout(()=>this.setState({
             didRender:true
         }),0);
+    },
+
+    componentWillUnmount () {
+        this.loadTimeout && clearInterval(this.loadTimeout);
+        this.loadTimeout = false;
     },
 
     render() {

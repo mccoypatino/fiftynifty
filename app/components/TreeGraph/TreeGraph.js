@@ -13,45 +13,67 @@ export const TreeGraph = React.createClass({
     },
 
 	nameToInitials: function(name) {
-        return name? name.split(' ').map((word)=>{return word[0]}).join('. '): '';
+        return name? name.split(' ').map((word)=>{return word[0]}).join(''): '';
 	},
+
+    showToolTip: function(evt){
+	    if (this.tooltip) {
+            this.tooltip.setAttributeNS(null, "x", evt.clientX - 8);
+            this.tooltip.setAttributeNS(null, "y", evt.clientY - 5);
+            this.tooltip.setAttributeNS(null, "visibility", "visible");
+        }
+    },
+    hideToolTip: function() {
+        if (this.tooltip) {
+            this.tooltip.setAttribute(null, "visibility", "hidden")
+        }
+
+    },
+
+    componentWillMount() {
+        this.tooltip =ReactDOM.findDOMNode(this.refs.tooltip);
+    },
 
     render() {
         const css = `
 					.node text {
-					font: 10px sans-serif;
+					font: 5pt sans-serif;
 				}
 					.node--internal text {
 					text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
 				}
 					.link {
 					fill: none;
-					stroke: #555;
-					stroke-opacity: 0.4;
+					stroke: #E0E0E0;
+					stroke-opacity: 1;
 					stroke-width: 1.5px;
 				}
 				`;
-		/* get the pedigree tree data */
         const { data } = this.props;
-        const containerWidth = 600;
-        const containerHeight = 600;
 
-		/* still use d3.js to calculate the tree layout and position of nodes, links */
         const treeData = d3.hierarchy(data);
+        const containerWidth = 600;
+        const containerHeight = treeData.height*50;
         const treeLayout = d3.tree()
-            .size([containerWidth, containerHeight]);
+            .size([containerWidth-50, containerHeight-50]);
         const root = treeLayout(treeData);
-        const nodesList = root.descendants();//treeLayout.nodes(root).reverse();
-        const linksList = root.links();
+        const nodesList = this.nodesList = root.descendants();
+        const linksList = this.linksList = root.links();
 
 		/* render the nodes */
         const nodes = nodesList.map(node => {
+            // get color by state
+            const randColor = Math.random()*360;
             return (
                 node.data.id &&
 				<g key={node.data.id} className="node"
 				   transform={`translate(${node.x}, ${node.y})`}>
-					<circle r="15" style={{fill:'pink'}} />
-					<text textAnchor="middle">{this.nameToInitials(node.data.name)}</text>
+					<circle r="6" style={{fill:`hsl(${randColor},50%, 80%)`, stroke:'grey', strokeWidth:'0.5px'}}
+                        onMouseMove={this.showToolTip(event)} onMouseOut={this.hideToolTip()} />
+                    <a href={`/${node.data.id}`}>
+                        <text y="2pt" textAnchor="middle">{this.nameToInitials(node.data.name)}</text>
+                    </a>
+                    <title>{node.data.name} {node.data.state}</title>
 				</g>
             );
         });
@@ -70,11 +92,13 @@ export const TreeGraph = React.createClass({
                     {css}
 				</style>
 
-				<svg height="1000" width={containerWidth}>
-					<g>
+				<svg height={containerHeight} width='100%'>
+                <g transform={'translate(10,10)'}>
                         {links}
                         {nodes}
-					</g>
+                </g>
+                    {/*<text className="tooltip" id="tooltip"*/}
+                          {/*x="0" y="0" visibility="hidden" ref="tooltip">Tooltip</text>*/}
 				</svg>
 			</div>
         );
