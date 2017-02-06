@@ -157,9 +157,8 @@ styles = {
         fontSize:'1em',
         fontWeight: '600',
         float:'right',
-        '@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
-            maxWidth: '100%',
-        }
+        width:'75px',
+        textAlign: 'right',
 
     },
     leaderRow: {
@@ -168,7 +167,7 @@ styles = {
         opacity:'0.8',
     },
     outerBar: {
-	    width:'85%',
+	    width:'calc(100% - 90px)',
         height:'1em',
         display: 'inline-block',
         textAlign:'center',
