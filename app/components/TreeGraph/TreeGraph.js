@@ -2,6 +2,10 @@ import * as d3 from 'd3';
 import React ,  { PropTypes } from 'react';
 import Radium from 'radium';
 import ReactDOM from 'react-dom'
+import Dimensions from 'react-dimensions'
+import statesDefaults from 'components/ProgressMap/states-defaults';
+import chroma from 'chroma-js';
+import { getScore } from '../../Utilities/UserUtils';
 
 export const TreeGraph = React.createClass({
 
@@ -33,6 +37,7 @@ export const TreeGraph = React.createClass({
     componentWillMount() {
         this.tooltip =ReactDOM.findDOMNode(this.refs.tooltip);
     },
+    colorMap :chroma.scale(['#d0b45b', '#22908c', '#C497E7' ]).domain([0,50]),
 
     render() {
         const css = `
@@ -52,7 +57,7 @@ export const TreeGraph = React.createClass({
         const { data } = this.props;
 
         const treeData = d3.hierarchy(data);
-        const containerWidth = 600;
+        const containerWidth=this.props.containerWidth;
         const containerHeight = treeData.height*50;
         const treeLayout = d3.tree()
             .size([containerWidth-50, containerHeight-50]);
@@ -63,12 +68,12 @@ export const TreeGraph = React.createClass({
 		/* render the nodes */
         const nodes = nodesList.map(node => {
             // get color by state
-            const randColor = Math.random()*360;
+            const fillColor = this.colorMap( Object.keys(statesDefaults).indexOf(node.data.state)).hex();
             return (
                 node.data.id &&
 				<g key={node.data.id} className="node"
 				   transform={`translate(${node.x}, ${node.y})`}>
-					<circle r="6" style={{fill:`hsl(${randColor},50%, 80%)`, stroke:'grey', strokeWidth:'0.5px'}}
+					<circle r="6" style={{fill:`${fillColor}`, stroke:'grey', strokeWidth:'0.5px'}}
                         onMouseMove={this.showToolTip(event)} onMouseOut={this.hideToolTip()} />
                     <a href={`/${node.data.id}`}>
                         <text y="2pt" textAnchor="middle">{this.nameToInitials(node.data.name)}</text>
@@ -106,4 +111,5 @@ export const TreeGraph = React.createClass({
 
 });
 
+module.exports = Dimensions()(TreeGraph);
 export default Radium (TreeGraph);

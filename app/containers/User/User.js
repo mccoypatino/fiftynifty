@@ -117,7 +117,6 @@ export const User = React.createClass({
 					</div>
 
 					<div style={styles.section}>
-						<div style={styles.sectionTitle}>Invite</div>
 						<Invite url={shareUrl}/>
 					</div>
 					
@@ -127,7 +126,7 @@ export const User = React.createClass({
 						<p>Map and progress of your network displayed here</p>
 					</div>
 					<div style={styles.section}>
-						<ProgressMap callsData={flatCalls} />
+						<ProgressMap callsData={flatCalls} user={user} />
 						<p> Your Score: {score}</p>
 						<p> You have covered {this.countStates(flatCalls)} out of the 50 states</p>
 					</div>
