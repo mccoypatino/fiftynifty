@@ -88,17 +88,19 @@ styles = {
         opacity:'1'
     },
     sectionBackground: {
-        backgroundColor:'#003c58',
-        opacity: '0.8',
+        backgroundColor:"#003c58",
     },
     inviteSection: {
         textAlign: 'center',
         color:'white',
         opacity:'1',
-        padding: '2em'
+        padding: '2em',
+        fontWeight:'lighter',
+        width:'80%',
+        margin:'auto',
     },
     inviteHeader: {
-        color:"#ffc15e",
+        color:"#fff",
         fontSize: '1.9em',
         textAlign:'center',
         letterSpacing:'0.1em',

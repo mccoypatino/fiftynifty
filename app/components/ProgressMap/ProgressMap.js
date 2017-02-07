@@ -22,13 +22,6 @@ export const ProgressMap  = React.createClass({
         this.setState({showCallsFlow:!this.state.showCallsFlow});
 	},
 
-	linearPalleteScale: function(value){
-		const dataValues = this.props.callsData.map(function(data) { return data.value });
-		const minVal = 0;
-		const maxVal =2; // Set maximum val for score
-		return d3.scaleLinear().domain([minVal, maxVal]).range(["#EFEFFF", "#42006F"])(value);
-	},
-
 	reducedData: function(){
 		let statesCount = {};
 		if (this.props.callsData.length>0) {
@@ -99,7 +92,7 @@ export const ProgressMap  = React.createClass({
 		const arcs = this.state.showCallsFlow? getStatesArcs(this.props.user).map((arc)=>{
                 arc.options = {
                     strokeWidth: 0.5,
-                    strokeColor: 'rgba(0, 0, 0, 0.4)',
+                    strokeColor: 'rgba(50,50,50, 0.9)',
                 }
                 return arc;
             }) : []
@@ -117,8 +110,10 @@ export const ProgressMap  = React.createClass({
 			width: '100%'
 		};
 		const buttonText = this.state.showCallsFlow? "Hide": "Show";
+		const className = this.state.showCallsFlow? "pt-button pt-minimal pt-icon-remove pt-intent-warning" :
+			"pt-button pt-minimal pt-icon-add pt-intent-warning";
 		const button = (<div style={{textAlign:'center'}}>
-			<button type={"button"} className={"pt-button"} onClick={this.toggleCallsFlow}>{buttonText} Calls Flow</button></div>)
+			<button type={"button"} className={className} onClick={this.toggleCallsFlow}>{buttonText} Calls Flow</button></div>)
 		return (
 			<div>
 			<div ref="container" style={style}></div>

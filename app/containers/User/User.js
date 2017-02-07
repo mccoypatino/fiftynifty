@@ -76,69 +76,79 @@ export const User = React.createClass({
         const COLORS = ['#cb0027', 'rgba(0,0,0,0)'];
 
 		return (
-			<div style={styles.container}>
-				{this.props.userData.loading &&
-					<Spinner />
-				}
-				<div style={styles.content}>
-					<div style={styles.title}>{user.name}</div>
+			<div>
+				<div style={styles.repsBackground}>
+					<div style={styles.repsBackgroundSplash}>
+						<div style={styles.container}>
+                            {this.props.userData.loading &&
+								<div style={styles.centered}>
+									<Spinner />
+								</div>
+                            }
+							<div style={styles.content}>
+								<div style={styles.title}>{user.name}</div>
 
-					{/*{true && true &&*/}
-						{/*<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />*/}
-					{/*}*/}
-					<div style={styles.repsWrapper}>
+                                {/*{true && true &&*/}
+                                {/*<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />*/}
+                                {/*}*/}
+								<div style={styles.repsWrapper}>
 
-					<div style={styles.repsBox} className={"pt-elevation-3"}>
-						<div style={styles.sectionTitle}>Your Representatives</div>
-                        {reps.length === 0 &&
-						<Spinner />
-                        }
+									<div style={styles.repsBox} className={"pt-elevation-3"}>
+										<div style={styles.sectionTitle}>Your Representatives</div>
+                                        {reps.length === 0 &&
+										<div style={styles.centered}>
+											<Spinner />
+										</div>
+                                        }
 
-                        {reps.map((rep, index)=> {
-                            return (
-								<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
-                            );
-                        })}
-
-
-					</div>
-					</div>
-					<p style={styles.orCall}>Or you can call (508) 659-9127 </p>
+                                        {reps.map((rep, index)=> {
+                                            return (
+												<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
+                                            );
+                                        })}
 
 
-					<div style={styles.section}>
-						<Invite url={shareUrl}/>
-					</div>
-					<div style={styles.section}>
-						<div style={styles.sectionTitle}>Progress</div>
-					</div>
-					<div style={styles.section}>
-						<div style={styles.centered}>
-						<span style={{textAlign:'center'}}> Your Score: <span style={styles.score}> {score}</span></span>
-						<div style={{display:'inline-block', verticalAlign: 'middle', paddingLeft:'2em'}}>
-						<PieChart height={200} width={200}>
-							<Pie data={chartData} innerRadius={70} outerRadius={100} fill="#82ca9d">
-                            {
-                                chartData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)
-							}</Pie>
-							<text x={100} y={100} textAnchor="middle" dominantBaseline="middle">
-								{statesCount} / 50 states
-							</text>
-						</PieChart>
+									</div>
+								</div>
+								<p style={styles.orCall}>Or you can call (508) 659-9127 </p>
+							</div>
 						</div>
-						</div>
-						<ProgressMap callsData={flatCalls} user={user} />
 					</div>
-					<div style={styles.section}>
-					<div style={styles.familySection}>
-						<div style={styles.sectionTitle}>Your Fifty Nifty Family</div>
-						<TreeGraph data={user}/>
-					</div>
-					</div>
-
-
 				</div>
 
+				<Invite url={shareUrl}/>
+
+				<div style = {styles.repsBackground}>
+					<div style = {styles.repsBackgroundSplash}>
+						<div style={styles.progressSection}>
+							<div style={styles.sectionTitle}>Your Progress</div>
+							<div style={styles.scoreStats}>
+								<span style={{textAlign:'center', fontWeight:'lighter'}}> Your Score: <span style={styles.score}> {score}</span></span>
+								<div style={{display:'inline-block', verticalAlign: 'middle', paddingLeft:'2em', paddingTop:'1em'}}>
+									<PieChart height={200} width={200}>
+										<Pie data={chartData} innerRadius={70} outerRadius={100} fill="#82ca9d" stroke="none">
+                                            {
+                                                chartData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)
+                                            }</Pie>
+										<text x={100} y={100} textAnchor="middle" dominantBaseline="middle"
+											  fill="white" fontWeight="lighter">
+                                            {statesCount} / 50 states
+										</text>
+									</PieChart>
+								</div>
+							</div>
+							<ProgressMap callsData={flatCalls} user={user} />
+						</div>
+					</div>
+				</div>
+				<div style={styles.graphBackground}>
+					<div style={styles.section}>
+						<div style={styles.familySection}>
+							<div style={styles.sectionTitle}>Your Fifty Nifty Family</div>
+							<TreeGraph data={user}/>
+						</div>
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -154,34 +164,38 @@ export default connect(mapStateToProps)(Radium(User));
 
 styles = {
 	container: {
-		padding: 'calc(115px + 0.2em) 1em 3em',
-		maxWidth: '1024px',
+		padding: 'calc(115px + 0.2em) 0em 3em',
+		//maxWidth: '1024px',
 		margin: '0 auto',
+		opacity:'1',
 	},
 	content: {
 		padding: '1em 0em',
 	},
 	title: {
-		fontSize: '2.5em',
-		fontWeight: '200',
+		fontSize: '2em',
+		fontWeight: 'lighter',
 		textAlign: 'center',
 		paddingBottom:'1em',
+		color:'white',
+        letterSpacing:'0.1em',
 	},
 	section: {
 		padding: '2em 0em',
 	},
 	sectionTitle: {
-        fontSize: '1.9em',
+        fontSize: '1.8em',
         textAlign:'center',
         letterSpacing:'0.1em',
-        paddingBottom:'1em',
-        fontWeight: '200',
+        padding:'0.8em 0',
+        fontWeight: 'lighter',
+		color:'white',
 	},
 	score:{
 		fontSize:'3em',
 		textAlign:'center',
 		fontWeight:'bold',
-		paddingLeft:'0.5em'
+		paddingLeft:'0.2em'
 	},
 	centered: {
 		textAlign:'center',
@@ -192,26 +206,55 @@ styles = {
         letterSpacing:'0.1em',
 		paddingBottom:'1em',
     },
+	progressBackground: {
+        background:"linear-gradient(rgba(28, 67, 90, 0.8),rgba(28, 67, 90, 0.8)), url('static/crowd.jpg') no-repeat center center",
+        backgroundSize:'cover',
+	},
+    graphBackground: {
+        backgroundColor:"#003d59",
+    },
+    repsBackground: {
+        backgroundImage: 'url("/static/protest.jpg")',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center center',
+        backgroundSize: 'cover',
+        top: 0,
+        left: 0,
+    },
+	repsBackgroundSplash: {
+        background: 'linear-gradient(rgba(0,60,88, 0.8),rgba(0,60,88, 0.8))',//'#1c435a',
+
+	},
     repsWrapper: {
         margin: 'auto',
 		width: '80%',
 		maxWidth:'350px',
-		backgroundColor:'#da022e'
+		backgroundColor:'#da022e',
+		opacity:'0.95',
+        fontWeight: 'lighter',
 	},
 	repsBox: {
 		textAlign: 'left',
 		color:'white',
 		padding:'1em',
-        fontWeight: '200',
+        //fontWeight: '200',
 	},
 	orCall: {
 		textAlign:'center',
 		color:'white',
 		padding:'1em',
+		fontWeight:'lighter',
 	},
 	familySection:{
 		textAlign:'center',
 		paddingTop:'1em',
+	},
+    progressSection:{
+		padding:'2em 0',
+		color:'white',
+	},
+	scoreStats:{
+		textAlign:'center',
+		paddingTop:'2em',
 	}
-
 };

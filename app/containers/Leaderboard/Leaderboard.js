@@ -44,7 +44,9 @@ export const Leaderboard = React.createClass({
                     <div style={styles.container}>
                         <div style={styles.content}>
                             {this.props.leaderboardData.loading &&
-                            <Spinner />
+                            <div style={styles.centered}>
+                                <Spinner />
+                            </div>
                             }
                             {flatLeaders.map((user)=>{
                                 return(
@@ -220,5 +222,8 @@ styles = {
         height: '100%',
         zIndex: 1,
     },
+    centered: {
+        textAlign:'center',
+    }
 
 };

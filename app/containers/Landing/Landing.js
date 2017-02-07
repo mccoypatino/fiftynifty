@@ -81,13 +81,14 @@ export const Landing = React.createClass({
 							<div style={styles.headerText}>Collect 50 States!</div>
 							<div style={styles.headerText}>Play for a better Democracy!</div>
 							</div>
-							<p style={styles.headerTextBody}>Our President’s Executive order halting some legal immigrants is a call to action. We want to call Congresspeople throughout the country to tell them out opinion.  Real phone call matter, so we are starting the fiftynifty challenge to see if you can use your network to get 50 people in 50 states to make a call.  The network that gets the most calls wins, but we all win when we call for an effective democracy.
-								<button style={styles.headerTextBody} type="button" className="pt-button pt-minimal pt-icon-add .modifier" >Click To Learn More</button> </p>
+							<p style={styles.headerTextBody}>Our President’s Executive order halting some legal immigrants is a call to action. We want to call Congresspeople throughout the country to tell them out opinion.  Real phone call matter, so we are starting the fiftynifty challenge to see if you can use your network to get 50 people in 50 states to make a call.  The network that gets the most calls wins, but we all win when we call for an effective democracy.</p>
 							<div style={{width:'100%', textAlign: 'center'}}>
-								<div style={styles.learnMoreButton}>
+								<div >
 								<a href="#howToPlay"><Button
-									text={'How To Play'}
-									className={'pt-intent-primary pt-fill pt-large'}/>
+									role={"button"}
+									className={'pt-fill pt-button pt-minimal'}/>
+									<div>How to Play</div>
+									<div className={"pt-icon-chevron-down"}></div>
 								</a>
 								</div>
 							</div>
@@ -108,14 +109,6 @@ export const Landing = React.createClass({
 								<label htmlFor={'phone-input'} style={styles.inputLabel}>
 									Phone number (to connect you to your reps)
 									<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'781-975-5555'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} />
-									{/*<div style={styles.smallInformation}> 
-										<img alt="lock" src={'/static/lock.png'} style={styles.lockImage} />
-										<div style={styles.smallInformationText}> We will never, ever, share it with anyone; and no human will be able to read it. </div>
-									</div>
-									<div style={styles.smallInformation}> 
-										<img alt="lock" src={'/static/notification.png'} style={styles.lockImage} />
-										<div style={styles.smallInformationText}> We may send you notifications about your progress. No spam, ever. </div>
-									</div>*/}
 								</label>
 								<Button 
 									loading={this.props.landingData.signupLoading} 
@@ -151,7 +144,7 @@ styles = {
 		position: 'relative',		
 	},
 	headerImage: {
-		backgroundImage: 'url("/static/header.jpg")',
+		backgroundImage: 'url("/static/protest.jpg")',
 		backgroundRepeat: 'no-repeat',
 		backgroundPosition: 'center center',
 		backgroundSize: 'cover',
@@ -166,8 +159,8 @@ styles = {
 		position: 'absolute',
 		// backgroundColor: 'rgba(19, 24, 187, 0.7)',
 		// backgroundImage: 'url("/static/denim.png")',
-		backgroundColor: '#1c435a',
-		opacity: 0.9,
+		backgroundColor: '#003D59',
+		opacity: 0.8,
 		top: 0,
 		left: 0,
 		width: '100%',
@@ -297,6 +290,6 @@ styles = {
 		display:'table-cell',
 		width:'40%,',
 		textAlign:'center',
-		padding: '1em'
+		padding: '1em',
 	}
 };

@@ -37,7 +37,7 @@ export const TreeGraph = React.createClass({
     componentWillMount() {
         this.tooltip =ReactDOM.findDOMNode(this.refs.tooltip);
     },
-    colorMap :chroma.scale(['#d0b45b', '#22908c', '#C497E7' ]).domain([0,50]),
+    colorMap :chroma.scale('Spectral').colors(50),//chroma.scale(['#d0b45b', '#22908c', '#C497E7' ]).domain([0,50]),
 
     render() {
         const css = `
@@ -68,12 +68,12 @@ export const TreeGraph = React.createClass({
 		/* render the nodes */
         const nodes = nodesList.map(node => {
             // get color by state
-            const fillColor = this.colorMap( Object.keys(statesDefaults).indexOf(node.data.state)).hex();
+            const fillColor = this.colorMap[Object.keys(statesDefaults).indexOf(node.data.state)];//.hex();
             return (
                 node.data.id &&
 				<g key={node.data.id} className="node"
 				   transform={`translate(${node.x}, ${node.y})`}>
-					<circle r="6" style={{fill:`${fillColor}`, stroke:'grey', strokeWidth:'0.5px'}}
+					<circle r="7" style={{fill:`${fillColor}`, stroke:'none'}}
                         onMouseMove={this.showToolTip(event)} onMouseOut={this.hideToolTip()} />
                     <a href={`/${node.data.id}`}>
                         <text y="2pt" textAnchor="middle">{this.nameToInitials(node.data.name)}</text>
@@ -98,7 +98,7 @@ export const TreeGraph = React.createClass({
 				</style>
 
 				<svg height={containerHeight} width='100%'>
-                <g transform={'translate(10,10)'}>
+                <g transform={'translate(25,25)'}>
                         {links}
                         {nodes}
                 </g>

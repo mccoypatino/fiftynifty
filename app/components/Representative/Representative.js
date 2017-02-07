@@ -67,7 +67,7 @@ styles = {
     repName: {
         color:'white',
 		fontSize:'1.3em',
-		letterSpacing:'0.02em',
+		//letterSpacing:'0.1em',
 	},
     repText: {
         letterSpacing:'0.02em',

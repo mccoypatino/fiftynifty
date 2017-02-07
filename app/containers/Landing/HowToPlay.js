@@ -7,6 +7,7 @@ export const HowToPlay  = React.createClass({
     render() {
         return(
         <div style={styles.section}>
+            <div style={styles.content}>
             <div style={styles.sectionHeader} id="howToPlay">How to Play</div>
             <div style={styles.iconsTable}>
                 <div style={styles.howToPlaySection}>
@@ -42,7 +43,9 @@ export const HowToPlay  = React.createClass({
                     </div>
                 </div>
             </div>
-        </div>)
+            <p style={styles.learnMore}><button style={{color:'white'}} type="button" className="pt-button pt-minimal pt-icon-add" >Learn More</button></p>
+            </div>
+            </div>)
     }
 });
 
@@ -51,16 +54,19 @@ export default Radium(HowToPlay);
 
 styles = {
     section: {
+        backgroundColor:"#003d59",
         padding: '2em 1em',
-        maxWidth: '1024px',
         margin: '0 auto',
+        backgroundSize:'cover',
+        fontWeight: 'lighter',
     },
     sectionHeader: {
         fontSize: '2em',
-        fontWeight: '600',
+        fontWeight: 'lighter',
         marginBottom: '1.5em',
         textAlign:'center',
-        //color:'white'
+        color:'white',
+        letterSpacing:'0.1em',
     },
     iconsTable: {
         display:'table',
@@ -71,6 +77,16 @@ styles = {
         display:'table-cell',
         width:'40%',
         textAlign:'center',
-        padding: '1em'
-    }
+        padding: '1em',
+        color:'white',
+    },
+    learnMore: {
+        textAlign:'center',
+        color:'white',
+        padding:'1em',
+    },
+    content:{
+        maxWidth:'800px',
+        margin: '0 auto',
+    },
 };

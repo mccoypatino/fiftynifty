@@ -22,9 +22,8 @@ export const AppNav = React.createClass({
 		const user = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
 		const location = this.props.location || {};
 		const pathname = location.pathname;
-		const isLight = pathname !== '/leaderboard' && pathname !== '/';
 		return (
-			<nav style={styles.navStyle(isLight)}>
+			<nav style={styles.navStyle}>
 				<div style={styles.navContent}>
 					<div style={{ display: 'inline-block' }}>
 						<Link to={'/'} style={styles.logo}>Fifty Nifty</Link>
@@ -32,10 +31,10 @@ export const AppNav = React.createClass({
 						<div style={styles.linkWrapper}>
 							<Link to={'/leaderboard'} style={styles.link}>Leaderboard</Link>
 							{!!user.id &&
-								<Link to={`/${user.id}`} style={styles.link}>Your Profile</Link>	
+								<Link to={`/${user.id}`} style={styles.link}>Your Profile</Link>
 							}
 							{!user.id &&
-								<Link to={'/login'} style={styles.link}>Login</Link>	
+								<Link to={'/login'} style={styles.link}>Login</Link>
 							}	
 						</div>
 					</div>
@@ -52,19 +51,17 @@ export const AppNav = React.createClass({
 export default Radium(AppNav);
 
 styles = {
-	navStyle: (isLight)=> {
-		return {
+	navStyle: {
 			minHeight: '75px',
 			// lineHeight: '75px',
 			// boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.5)',
 			position: 'absolute',
 			zIndex: '3',
 			width: '100%',
-			color: isLight ? 'inherit' : 'white',
-		};
+			color: 'white',
 	},
 	navContent: {
-		padding: '0em 1em',
+		padding: '1em 1em',
 		maxWidth: '1024px',
 		margin: '0 auto',
 		//borderBottom: '1px solid rgba(0, 0, 0, 0.25)',
