@@ -38,9 +38,8 @@ export const Leaderboard = React.createClass({
             return cmp(a.statesCount, b.statesCount) || cmp(a.score, b.score)
         }).reverse().slice(0, 10);
 		return (
-		    <div>
-		    <div style={styles.flagImage}/>
-                <div style={styles.flagSplash}/>
+		    <div style={styles.flagImage}>
+                <div style={styles.flagSplash}>
                     <div style={styles.container}>
                         <div style={styles.content}>
                             {this.props.leaderboardData.loading &&
@@ -54,6 +53,7 @@ export const Leaderboard = React.createClass({
                                 })}
                         </div>
                     </div>
+                </div>
             </div>
 		);
 	}
@@ -202,27 +202,15 @@ styles = {
     },
     flagImage: {
         backgroundImage: 'url("/static/american-flag.jpg")',
-        backgroundRepeat: 'no-repeat',
+        backgroundRepeat: 'repeat',
         backgroundPosition: 'center center',
         backgroundSize: 'cover',
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        minHeight: '100%',
-        zIndex: 1,
-        top: 0,
-        left: 0,
+        minHeight:'100%',
     },
     flagSplash: {
-        position: 'absolute',
         backgroundColor: '#1c435a',
         opacity: 0.9,
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        minHeight: '100%',
-        zIndex: 1,
+        minHeight:'100%',
     },
     centered: {
         textAlign:'center',

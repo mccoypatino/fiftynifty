@@ -90,7 +90,7 @@ export const User = React.createClass({
 							</div>
                             }
 							<div style={styles.content}>
-								<div style={styles.title}>{user.name}</div>
+								<div style={styles.title}>{user.name}, {user.state}</div>
 
                                 {/*{true && true &&*/}
                                 {/*<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />*/}
@@ -133,7 +133,7 @@ export const User = React.createClass({
 						<div style={styles.progressSection}>
 							<div style={styles.sectionTitle}>{presentName} Progress</div>
 							<div style={styles.scoreStats}>
-								<span style={{textAlign:'center', fontWeight:'lighter'}}> Your Score: <span style={styles.score}> {score}</span></span>
+								<span style={{textAlign:'center', fontWeight:'lighter'}}> Score: <span style={styles.score}> {Math.floor(score)}</span></span>
 								<div style={{display:'inline-block', verticalAlign: 'middle', paddingLeft:'2em', paddingTop:'1em'}}>
 									<PieChart height={200} width={200}>
 										<Pie data={chartData} innerRadius={70} outerRadius={100} fill="#82ca9d" stroke="none">
