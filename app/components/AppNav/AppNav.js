@@ -29,13 +29,13 @@ export const AppNav = React.createClass({
 						<Link to={'/'} style={styles.logo}>Fifty Nifty</Link>
 						
 						<div style={styles.linkWrapper}>
+                            {!!user.id &&
+							<Link to={`/${user.id}`} style={styles.link}>Your Profile</Link>
+                            }
+                            {!user.id &&
+							<Link to={'/login'} style={styles.link}>Login</Link>
+                            }
 							<Link to={'/leaderboard'} style={styles.link}>Leaderboard</Link>
-							{!!user.id &&
-								<Link to={`/${user.id}`} style={styles.link}>Your Profile</Link>
-							}
-							{!user.id &&
-								<Link to={'/login'} style={styles.link}>Login</Link>
-							}	
 						</div>
 					</div>
 					

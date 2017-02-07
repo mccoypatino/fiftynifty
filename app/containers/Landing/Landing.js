@@ -144,7 +144,7 @@ styles = {
 		position: 'relative',		
 	},
 	headerImage: {
-		backgroundImage: 'url("/static/protest.jpg")',
+		backgroundImage: 'url("/static/hands.jpg")',
 		backgroundRepeat: 'no-repeat',
 		backgroundPosition: 'center center',
 		backgroundSize: 'cover',
@@ -205,6 +205,7 @@ styles = {
 		padding: '1em 1em',
 		fontSize: '1em',
 		lineHeight: '1.5',
+		textAlign:'justify',
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
 			maxWidth: '100%',
 		},

@@ -53,6 +53,13 @@ export const TreeGraph = React.createClass({
 					stroke-opacity: 1;
 					stroke-width: 1.5px;
 				}
+				    .addFriendsText {
+				    
+				    color: white;
+				    padding: 0.5em 2em;
+				    
+				    }
+				    
 				`;
         const { data } = this.props;
 
@@ -95,7 +102,7 @@ export const TreeGraph = React.createClass({
 				<style>
                     {css}
 				</style>
-                    <div style={{color:'white'}}>
+                    <div className={"addFriendsText"}>
                     Add you friends by sending them invites!  you get points for any call they make!
                     </div>
 

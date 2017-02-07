@@ -166,15 +166,14 @@ styles = {
     leaderRow: {
         background: '#dce4ef',
         borderBottom: '3px solid rgba(8, 48, 74, 0.5)',
-        opacity:'0.8',
+        opacity:'1',
     },
     outerBar: {
 	    width:'calc(100% - 90px)',
         height:'1em',
         display: 'inline-block',
         textAlign:'center',
-        color:'#ff510f',
-        background: 'linear-gradient(to right, #fdb81e, #ff510f)',
+        background: 'linear-gradient(to right, #ff6f70, #cf1e34)',
         position: 'relative',
         verticalAlign: 'middle'
 	},
