@@ -93,9 +93,10 @@ export const ProgressMap  = React.createClass({
                 arc.options = {
                     strokeWidth: 0.5,
                     strokeColor: 'rgba(50,50,50, 0.9)',
-                }
+                };
                 return arc;
-            }) : []
+            }) : [];
+		console.log(arcs);
 		this.datamap.arc(arcs);
 	},
 
