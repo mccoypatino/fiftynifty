@@ -2,10 +2,8 @@ import * as d3 from 'd3';
 import React ,  { PropTypes } from 'react';
 import Radium from 'radium';
 import ReactDOM from 'react-dom'
-import Dimensions from 'react-dimensions'
 import statesDefaults from 'components/ProgressMap/states-defaults';
 import chroma from 'chroma-js';
-import { getScore } from '../../Utilities/UserUtils';
 
 export const TreeGraph = React.createClass({
 
@@ -33,13 +31,17 @@ export const TreeGraph = React.createClass({
         }
 
     },
-
+    componentDidMount() {
+      const width = ReactDOM.findDOMNode(this.refs.treeContainer).clientWidth;
+      this.setState({treeWidth: width});
+    },
     componentWillMount() {
         this.tooltip =ReactDOM.findDOMNode(this.refs.tooltip);
     },
-    colorMap :chroma.scale(['#d0b45b', '#22908c', '#C497E7' ]).domain([0,50]),
+    colorMap :chroma.scale('Spectral').colors(50),
 
     render() {
+        const containerWidth  = this.state.treeWidth? this.state.treeWidth : 0;
         const css = `
 					.node text {
 					font: 5pt sans-serif;
@@ -53,11 +55,17 @@ export const TreeGraph = React.createClass({
 					stroke-opacity: 1;
 					stroke-width: 1.5px;
 				}
+				    .addFriendsText {
+				    
+				    color: white;
+				    padding: 0.5em 2em;
+				    
+				    }
+				    
 				`;
         const { data } = this.props;
 
         const treeData = d3.hierarchy(data);
-        const containerWidth=this.props.containerWidth;
         const containerHeight = treeData.height*50;
         const treeLayout = d3.tree()
             .size([containerWidth-50, containerHeight-50]);
@@ -68,12 +76,12 @@ export const TreeGraph = React.createClass({
 		/* render the nodes */
         const nodes = nodesList.map(node => {
             // get color by state
-            const fillColor = this.colorMap( Object.keys(statesDefaults).indexOf(node.data.state)).hex();
+            const fillColor = this.colorMap[Object.keys(statesDefaults).indexOf(node.data.state)];
             return (
                 node.data.id &&
 				<g key={node.data.id} className="node"
 				   transform={`translate(${node.x}, ${node.y})`}>
-					<circle r="6" style={{fill:`${fillColor}`, stroke:'grey', strokeWidth:'0.5px'}}
+					<circle r="7" style={{fill:`${fillColor}`, stroke:'none'}}
                         onMouseMove={this.showToolTip(event)} onMouseOut={this.hideToolTip()} />
                     <a href={`/${node.data.id}`}>
                         <text y="2pt" textAnchor="middle">{this.nameToInitials(node.data.name)}</text>
@@ -90,15 +98,17 @@ export const TreeGraph = React.createClass({
 					  d={this.diagonal(link)} />
             );
         });
-
         return (
-			<div className="tree-container">
+			<div ref="treeContainer" height={containerHeight} width={"100%"}>
 				<style>
                     {css}
 				</style>
+                    <div className={"addFriendsText"}>
+                    Add you friends by sending them invites!  you get points for any call they make!
+                    </div>
 
 				<svg height={containerHeight} width='100%'>
-                <g transform={'translate(10,10)'}>
+                <g transform={'translate(25,25)'}>
                         {links}
                         {nodes}
                 </g>
@@ -111,5 +121,4 @@ export const TreeGraph = React.createClass({
 
 });
 
-module.exports = Dimensions()(TreeGraph);
 export default Radium (TreeGraph);

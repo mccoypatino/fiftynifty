@@ -7,6 +7,7 @@
 export const POST_USER_LOAD = 'user/POST_USER_LOAD';
 export const POST_USER_SUCCESS = 'user/POST_USER_SUCCESS';
 export const POST_USER_FAIL = 'user/POST_USER_FAIL';
+
 export const GET_USER_LOAD = 'username/GET_USER_LOAD';
 export const GET_USER_SUCCESS = 'username/GET_USER_SUCCESS';
 export const GET_USER_FAIL = 'username/GET_USER_FAIL';

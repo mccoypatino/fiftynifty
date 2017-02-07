@@ -5,7 +5,7 @@ import { Button } from '@blueprintjs/core';
 import Radium from 'radium';
 import Phone from 'react-phone-number-input';
 import { postUser, getReferralDetails } from './actions';
-import { HowToPlay } from './HowToPLay';
+import { HowToPlay } from './HowToPlay';
 
 let styles;
 
@@ -22,13 +22,14 @@ export const Landing = React.createClass({
 			name: '',
 			phone: '',
 			zipcode: '',
+			error: undefined,
 		};
 	},
 
 	componentWillReceiveProps(nextProps) {
 		const lastLoading = this.props.landingData.signupLoading;
 		const nextLoading = nextProps.landingData.signupLoading;
-		const nextError = nextProps.landingData.signupLoading;
+		const nextError = nextProps.landingData.signupError;
 		const nextResult = nextProps.landingData.signupResult;
 		// If the phone number is already in use
 		if (undefined != nextProps.landingData.signupError) {
@@ -50,19 +51,23 @@ export const Landing = React.createClass({
 	formSubmit: function(evt) {
 		evt.preventDefault();
 		const referral = this.props.location.query.ref;
-		console.log('referral is ', referral);
-		this.props.dispatch(postUser(this.state.name, this.state.phone, this.state.zipcode, referral));
+		if (!this.state.name) { return this.setState({ error: 'Name required' }); }
+		if (!this.state.zipcode) { return this.setState({ error: 'Zipcode required' }); }
+		if (this.state.zipcode.length !== 5) { return this.setState({ error: 'Zipcode must be 5 digits' }); }
+		if (!this.state.phone) { return this.setState({ error: 'Phone Number required' }); }
+		this.setState({ error: undefined });
+		return this.props.dispatch(postUser(this.state.name, this.state.phone, this.state.zipcode, referral));
 	},
 
-    componentWillMount() {
-        this.loadData(this.props.location.query.ref);
-    },
+	componentWillMount() {
+		this.loadData(this.props.location.query.ref);
+	},
 
-    loadData(userId) {
+	loadData(userId) {
 		if (userId) {
-            this.props.dispatch(getReferralDetails(userId));
-        }
-    },
+			this.props.dispatch(getReferralDetails(userId));
+		}
+	},
 
 	render() {
 
@@ -73,7 +78,8 @@ export const Landing = React.createClass({
 	  <div style={styles.headerImage} />
 	  <div style={styles.headerSplash} /> ?
 */
-        const refUser = this.props.landingData.referralDetails;
+		const refUser = this.props.landingData.referralDetails;
+		const error = this.state.error || this.props.landingData.signupError;
 		return (
 			<div style={styles.container}>
 				<div style={styles.header}>
@@ -81,20 +87,24 @@ export const Landing = React.createClass({
 					<div style={styles.headerSplash} />
 					<div style={styles.headerPresentation}>
 						<div style={styles.headerTextBlock}>
-							{/*<div style={styles.headerText}>Call your Reps!</div>*/}
-							{/*<div style={styles.headerText}>Collect 50 States!</div>*/}
+							<div style={styles.section}>
+							<div style={styles.headerText}>Call your Reps!</div>
+							<div style={styles.headerText}>Collect 50 States!</div>
 							<div style={styles.headerText}>Play for a better Democracy!</div>
-							<p style={styles.headerTextBody}>Our President’s Executive order halting some legal immigrants is a call to action. We want to call Congresspeople throughout the country to tell them out opinion.  Real phone call matter, so we are starting the fiftynifty challenge to see if you can use your network to get 50 people in 50 states to make a call.  The network that gets the most calls wins, but we all win when we call for an effective democracy.
-								<button type="button" className="pt-button pt-minimal pt-icon-add .modifier" >Click To Learn More</button> </p>
-							<div style={{width:'100%', textAlign: 'center'}}>
-								<div style={styles.learnMoreButton}>
+							</div>
+							<p style={styles.headerTextBody}>Our President’s Executive order halting some legal immigrants is a call to action. We want to call Congresspeople throughout the country to tell them out opinion.  Real phone call matter, so we are starting the fiftynifty challenge to see if you can use your network to get 50 people in 50 states to make a call.  The network that gets the most calls wins, but we all win when we call for an effective democracy.</p>
+							<div style={{width: '100%', textAlign: 'center'}}>
+								<div >
 								<a href="#howToPlay"><Button
-									text={'How To Play'}
-									className={'pt-intent-primary pt-fill pt-large'}/>
+									role={"button"}
+									className={'pt-fill pt-button pt-minimal'}/>
+									<div>How to Play</div>
+									<div className={"pt-icon-chevron-down"}></div>
 								</a>
 								</div>
 							</div>
 						</div>
+						<div style={{padding: '1.6em'}}>
 						<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
 							{ refUser && <div style={styles.inputHeader}>{refUser.name} Invited You!</div>}
 							<div style={styles.inputHeader}> Join The Challenge</div>
@@ -110,14 +120,6 @@ export const Landing = React.createClass({
 								<label htmlFor={'phone-input'} style={styles.inputLabel}>
 									Phone number (to connect you to your reps)
 									<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'781-975-5555'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} />
-									{/*<div style={styles.smallInformation}> 
-										<img alt="lock" src={'/static/lock.png'} style={styles.lockImage} />
-										<div style={styles.smallInformationText}> We will never, ever, share it with anyone; and no human will be able to read it. </div>
-									</div>
-									<div style={styles.smallInformation}> 
-										<img alt="lock" src={'/static/notification.png'} style={styles.lockImage} />
-										<div style={styles.smallInformationText}> We may send you notifications about your progress. No spam, ever. </div>
-									</div>*/}
 								</label>
 								<Button 
 									loading={this.props.landingData.signupLoading} 
@@ -125,8 +127,10 @@ export const Landing = React.createClass({
 									text={'Join the Challenge'} 
 									className={'pt-intent-primary pt-fill pt-large'} 
 									onClick={this.formSubmit} />
+								<div style={styles.error}>{error}</div>
 
 							</form>
+						</div>
 						</div>
 					</div>
 				</div>
@@ -152,7 +156,7 @@ styles = {
 		position: 'relative',		
 	},
 	headerImage: {
-		backgroundImage: 'url("/static/header.jpg")',
+		backgroundImage: 'url("/static/hands.jpg")',
 		backgroundRepeat: 'no-repeat',
 		backgroundPosition: 'center center',
 		backgroundSize: 'cover',
@@ -167,8 +171,8 @@ styles = {
 		position: 'absolute',
 		// backgroundColor: 'rgba(19, 24, 187, 0.7)',
 		// backgroundImage: 'url("/static/denim.png")',
-		backgroundColor: '#1c435a',
-		opacity: 0.9,
+		backgroundColor: '#003D59',
+		opacity: 0.8,
 		top: 0,
 		left: 0,
 		width: '100%',
@@ -202,7 +206,7 @@ styles = {
 		maxWidth: '500px',
 		fontWeight: 'bold',
 		color: '#cb0027',
-		fontSize: '2em',
+		fontSize: '1.8em',
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
 			textAlign: 'center',
 			maxWidth: '100%',
@@ -210,12 +214,15 @@ styles = {
 	},
 	headerTextBody: {
 		maxWidth: '500px',
-		padding: '1em 0em',
-		fontSize: '1.25em',
+		padding: '1em 1em',
+		fontSize: '1em',
 		lineHeight: '1.5',
+		textAlign: 'justify',
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
 			maxWidth: '100%',
 		},
+		fontWeight: '200',
+		color: 'white',
 	},
 	headerCall: {
 		display: 'table-cell',
@@ -234,12 +241,12 @@ styles = {
 		// margin: '0 auto',
 		// float: 'right',
 	},
-    inputHeader: {
-        fontSize: '1.4em',
-        display: 'block',
-        marginBottom: '1em',
+	inputHeader: {
+		fontSize: '1.4em',
+		display: 'block',
+		marginBottom: '1em',
 		textAlign: 'center'
-    },
+	},
 	inputLabel: {
 		fontSize: '1.25em',
 		display: 'block',
@@ -249,11 +256,11 @@ styles = {
 		verticalAlign: 'bottom',
 	},
 	learnMoreButton: {
-		width:'40%',
-        display: 'table-cell',
-        textDecoration: 'none',
-        textAlign: 'center',
-        padding: '0.5em 1em',
+		width: '40%',
+		display: 'table-cell',
+		textDecoration: 'none',
+		textAlign: 'center',
+		padding: '0.5em 1em',
 	},
 	section: {
 		padding: '2em 1em',
@@ -268,8 +275,8 @@ styles = {
 		fontSize: '2em',
 		fontWeight: '600',
 		marginBottom: '1.5em',
-		textAlign:'center',
-		//color:'white'
+		textAlign: 'center',
+		//color: 'white'
 	},
 	smallInformation: {
 		fontSize: '0.75em',
@@ -288,14 +295,19 @@ styles = {
 		top: '0.2em',
 	},
 	iconsTable: {
-		display:'table',
-		width:'100%',
-		textAlign:'center'
+		display: 'table',
+		width: '100%',
+		textAlign: 'center'
 	},
-    howToPlaySection: {
-		display:'table-cell',
-		width:'40%,',
-		textAlign:'center',
-		padding: '1em'
-	}
+	howToPlaySection: {
+		display: 'table-cell',
+		width: '40%,',
+		textAlign: 'center',
+		padding: '1em',
+	},
+	error: { 
+		color: 'rgb(203, 0, 39)',
+		fontSize: '1.25em',
+		paddingTop: '.5em',
+	},
 };

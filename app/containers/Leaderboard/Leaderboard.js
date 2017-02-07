@@ -36,15 +36,16 @@ export const Leaderboard = React.createClass({
         const leaders = this.props.leaderboardData.leaders || [];
         const flatLeaders = this.flattenLeaders(leaders).sort(function (a, b) {
             return cmp(a.statesCount, b.statesCount) || cmp(a.score, b.score)
-        }).reverse().slice(0, 5);
+        }).reverse().slice(0, 10);
 		return (
-		    <div>
-		    <div style={styles.flagImage}/>
-                <div style={styles.flagSplash}/>
+		    <div style={styles.flagImage}>
+                <div style={styles.flagSplash}>
                     <div style={styles.container}>
                         <div style={styles.content}>
                             {this.props.leaderboardData.loading &&
-                            <Spinner />
+                            <div style={styles.centered}>
+                                <Spinner />
+                            </div>
                             }
                             {flatLeaders.map((user)=>{
                                 return(
@@ -52,6 +53,7 @@ export const Leaderboard = React.createClass({
                                 })}
                         </div>
                     </div>
+                </div>
             </div>
 		);
 	}
@@ -156,21 +158,22 @@ styles = {
         color:'#00296a',
         fontSize:'1em',
         fontWeight: '600',
-        float:'right'
+        float:'right',
+        width:'75px',
+        textAlign: 'right',
 
     },
     leaderRow: {
         background: '#dce4ef',
         borderBottom: '3px solid rgba(8, 48, 74, 0.5)',
-        opacity:'0.8',
+        opacity:'1',
     },
     outerBar: {
-	    width:'85%',
+	    width:'calc(100% - 90px)',
         height:'1em',
         display: 'inline-block',
         textAlign:'center',
-        color:'#ff510f',
-        background: 'linear-gradient(to right, #fdb81e, #ff510f)',
+        background: 'linear-gradient(to right, #ff6f70, #cf1e34)',
         position: 'relative',
         verticalAlign: 'middle'
 	},
@@ -198,25 +201,18 @@ styles = {
     },
     flagImage: {
         backgroundImage: 'url("/static/american-flag.jpg")',
-        backgroundRepeat: 'no-repeat',
+        backgroundRepeat: 'repeat',
         backgroundPosition: 'center center',
         backgroundSize: 'cover',
-        position: 'absolute',
-        width: '100%',
-        height: '100%',
-        zIndex: 1,
-        top: 0,
-        left: 0,
+        minHeight:'100%',
     },
     flagSplash: {
-        position: 'absolute',
         backgroundColor: '#1c435a',
         opacity: 0.9,
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        zIndex: 1,
+        minHeight:'100%',
     },
+    centered: {
+        textAlign:'center',
+    }
 
 };

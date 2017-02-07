@@ -25,20 +25,20 @@ export const App = React.createClass({
 				<Helmet 
 					title="Fifty Nifty"  
 					meta={[
-						{ name: 'description', content: 'A simple tool testing' },
-						{ property: 'og:title', content: 'Fifty Nifty Test' },
+						{ name: 'description', content: 'Play for a better Democracy' },
+						{ property: 'og:title', content: 'Fifty Nifty' },
 						{ property: 'og:type', content: 'website' },
-						{ property: 'og:description', content: 'A simple tool testing Fifty Nifty v3' },
-						{ property: 'og:url', content: 'https://www.listoflinks.co/' },
-						{ property: 'og:image', content: 'https://www.listoflinks.co/static/logo_large.png' },
-						{ property: 'og:image:url', content: 'https://www.listoflinks.co/static/logo_large.png' },
+						{ property: 'og:description', content: 'Play for a better Democracy' },
+						{ property: 'og:url', content: 'https://www.fiftynifty.org/' },
+						{ property: 'og:image', content: 'https://www.fiftynifty.org/static/american-flag.jpg' },
+						{ property: 'og:image:url', content: 'https://www.fiftynifty.org/static/american-flag.jpg' },
 						{ property: 'og:image:width', content: '500' },
 						{ name: 'twitter:card', content: 'summary' },
-						{ name: 'twitter:site', content: '@listoflinks' },
-						{ name: 'twitter:title', content: 'List of Links' },
-						{ name: 'twitter:description', content: 'A simple tool testing Fifty Nifty v3' },
-						{ name: 'twitter:image', content: 'https://www.listoflinks.co/static/logo_large.png' },
-						{ name: 'twitter:image:alt', content: 'Logo for List of Links' }
+						{ name: 'twitter:site', content: '@isTravis' },
+						{ name: 'twitter:title', content: 'Fifty Nifty' },
+						{ name: 'twitter:description', content: 'Play for a better Democracy' },
+						{ name: 'twitter:image', content: 'https://www.fiftynifty.org/static/american-flag.jpg' },
+						{ name: 'twitter:image:alt', content: 'Fifty Nifty' }
 					]} 
 				/> 
 				<AppNav location={this.props.location} params={this.props.params} />
