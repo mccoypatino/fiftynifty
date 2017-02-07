@@ -1,3 +1,14 @@
-/**
- * Created by jasrub on 2/7/17.
- */
+import React from 'react';
+
+export const LearnMore = React.createClass({
+
+    render() {
+        return (
+            <div>
+                Learn more text here
+            </div>
+        );
+    }
+});
+
+export default LearnMore;

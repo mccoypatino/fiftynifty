@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route } from 'react-router';
-import { App, Landing, Leaderboard, Login, NoMatch, User } from 'containers';
+import { App, Landing, Leaderboard, Login, NoMatch, User, LearnMore } from 'containers';
 
 export default (
 	<Route component={App}>
@@ -8,6 +8,7 @@ export default (
 		<Route path="/leaderboard" component={Leaderboard} />
 		<Route path="/login" component={Login} />
 		<Route path="/:userId" component={User} />
+		<Route path="/more" component={LearnMore} />
 
 		<Route path="*" component={NoMatch} />
 	</Route>

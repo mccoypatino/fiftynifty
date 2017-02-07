@@ -37,7 +37,7 @@ export const TreeGraph = React.createClass({
     componentWillMount() {
         this.tooltip =ReactDOM.findDOMNode(this.refs.tooltip);
     },
-    colorMap :chroma.scale('Spectral').colors(50),//chroma.scale(['#d0b45b', '#22908c', '#C497E7' ]).domain([0,50]),
+    colorMap :chroma.scale('Spectral').colors(50),
 
     render() {
         const css = `
@@ -68,7 +68,8 @@ export const TreeGraph = React.createClass({
 		/* render the nodes */
         const nodes = nodesList.map(node => {
             // get color by state
-            const fillColor = this.colorMap[Object.keys(statesDefaults).indexOf(node.data.state)];//.hex();
+            const fillColor = this.colorMap[Object.keys(statesDefaults).indexOf(node.data.state)];
+            //console.log(fillColor);
             return (
                 node.data.id &&
 				<g key={node.data.id} className="node"

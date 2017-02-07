@@ -11,7 +11,7 @@ export const HowToPlay  = React.createClass({
             <div style={styles.sectionHeader} id="howToPlay">How to Play</div>
             <div style={styles.iconsTable}>
                 <div style={styles.howToPlaySection}>
-                    <span className="pt-icon-large pt-icon-manually-entered-data"></span>
+                    <img src={"static/Icon1.png"}/>
                     <div>
                         Join the challange by
                         filling in your details. This
@@ -20,7 +20,7 @@ export const HowToPlay  = React.createClass({
                     </div>
                 </div>
                 <div style={styles.howToPlaySection}>
-                    <span className="pt-icon-large pt-icon-phone"></span>
+                    <img src={"static/Icon2.png"}/>
                     <div>
                         Call your local senator
                         and talk to them about
@@ -31,13 +31,13 @@ export const HowToPlay  = React.createClass({
             </div>
             <div style={styles.iconsTable}>
                 <div style={styles.howToPlaySection}>
-                    <span className="pt-icon-large pt-icon-graph"></span>
+                    <img src={"static/Icon3.png"}/>
                     <div>
                         Share the link with your friends in other states, when someone in you network does the same, you get the points.
                     </div>
                 </div>
                 <div style={styles.howToPlaySection}>
-                    <span className="pt-icon-large pt-icon-globe"></span>
+                    <img src={"static/Icon4.png"}/>
                     <div>
                         When you get someone from all 50 states make a call, you win!
                     </div>
