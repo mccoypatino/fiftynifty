@@ -71,24 +71,24 @@ export const User = React.createClass({
 		const flatCalls = this.returnCalls(user, 0);
 		const score = getScore(user);
 		const shareUrl = "http://fiftynifty.org/?ref="+user.id;//When we get nicer urls, adda "getUrl" function
-        const statesCount = countStates(user);
-        const chartData = [{name: 'SatesDone', value: statesCount}, {name: 'not Done', value: 50-statesCount}];
-        const COLORS = ['#cb0027', 'rgba(0,0,0,0)'];
-        const localUserData = localStorage.getItem('userData');
-        const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
-        const isLocalUser = localUser.id===user.id;
-        const presentName = isLocalUser? 'Your' : user.name+"'s";
+		const statesCount = countStates(user);
+		const chartData = [{name: 'SatesDone', value: statesCount}, {name: 'not Done', value: 50-statesCount}];
+		const COLORS = ['#cb0027', 'rgba(0,0,0,0)'];
+		const localUserData = localStorage.getItem('userData');
+		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
+		const isLocalUser = localUser.id===user.id;
+		const presentName = isLocalUser? 'Your' : user.name+"'s";
 
 		return (
 			<div>
 				<div style={styles.repsBackground}>
 					<div style={styles.repsBackgroundSplash}>
 						<div style={styles.container}>
-                            {this.props.userData.loading &&
-							<div style={styles.centered}>
-								<Spinner />
-							</div>
-                            }
+							{this.props.userData.loading &&
+								<div style={styles.centered}>
+									<Spinner />
+								</div>
+							}
 							<div style={styles.content}>
 								<div style={styles.title}>{user.name}, {user.state}</div>
 
@@ -96,43 +96,34 @@ export const User = React.createClass({
 									{ islocalUser && 
 										<div style={styles.repsBox} className={"pt-elevation-3"}>
 											<div style={styles.sectionTitle}>Representatives</div>
-					                        {reps.length === 0 &&
+											{reps.length === 0 &&
 											<Spinner />
-					                        }
+											}
 
-					                        {reps.length > 3 &&
+											{reps.length > 3 &&
 											<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
-					                        }
+											}
 
-					                        {reps.length === 3 && reps.map((rep, index)=> {
-					                            return (
+											{reps.length === 3 && reps.map((rep, index)=> {
+												return (
 													<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
-					                            );
-					                        })}
+												);
+											})}
 
 											<p>Call: (508) 659-9127</p>
 										</div>
 									}
-                                        {reps.map((rep, index) => {
-                                            return (
-												<Representative key={`rep-${index}`} repData={rep}
-																callFunction={this.callFunction}/>
-                                            );
-                                        })}
 
-
-									</div>
 								</div>
 								<p style={styles.orCall}>Or you can call (508) 659-9127 </p>
-									</div>}
 							</div>
 						</div>
 					</div>
 				</div>
 
-                {isLocalUser &&
-				<Invite url={shareUrl}/>
-                }
+				{isLocalUser &&
+					<Invite url={shareUrl} />
+				}
 
 				<div style = {styles.repsBackground}>
 					<div style = {styles.repsBackgroundSplash}>
@@ -142,16 +133,14 @@ export const User = React.createClass({
 								<span style={{textAlign:'center', fontWeight:'lighter'}}> Score: <span style={styles.score}> {Math.floor(score)}</span></span>
 								<div style={{display:'inline-block', verticalAlign: 'middle', paddingLeft:'2em', paddingTop:'1em'}}>
 									<PieChart height={200} width={200}>
-										<Pie isAnimationActive={false} data={chartData} innerRadius={70} outerRadius={100} fill="rgba(102, 102, 102, 0.7)"
-											 stroke="none">
-										</Pie>
+										<Pie isAnimationActive={false} data={chartData} innerRadius={70} outerRadius={100} fill="rgba(102, 102, 102, 0.7)" stroke="none" />
 										<Pie data={chartData} innerRadius={70} outerRadius={100} fill="#82ca9d" stroke="none">
-                                            {
-                                                chartData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)
-                                            }</Pie>
-										<text x={100} y={100} textAnchor="middle" dominantBaseline="middle"
-											  fill="white" fontWeight="lighter">
-                                            {statesCount} / 50 states
+											{
+												chartData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)
+											}
+										</Pie>
+										<text x={100} y={100} textAnchor="middle" dominantBaseline="middle" fill="white" fontWeight="lighter">
+											{statesCount} / 50 states
 										</text>
 									</PieChart>
 								</div>
@@ -164,7 +153,7 @@ export const User = React.createClass({
 					<div style={styles.section}>
 						<div style={styles.familySection}>
 							<div style={styles.sectionTitle}>{presentName} Fifty Nifty Family</div>
-							<TreeGraph data={user}/>
+							<TreeGraph data={user} />
 						</div>
 					</div>
 				</div>
@@ -197,17 +186,17 @@ styles = {
 		textAlign: 'center',
 		paddingBottom:'1em',
 		color:'white',
-        letterSpacing:'0.1em',
+		letterSpacing:'0.1em',
 	},
 	section: {
 		padding: '2em 0em',
 	},
 	sectionTitle: {
-        fontSize: '1.8em',
-        textAlign:'center',
-        letterSpacing:'0.1em',
-        padding:'0.8em 0',
-        fontWeight: 'lighter',
+		fontSize: '1.8em',
+		textAlign:'center',
+		letterSpacing:'0.1em',
+		padding:'0.8em 0',
+		fontWeight: 'lighter',
 		color:'white',
 	},
 	score:{
@@ -219,44 +208,44 @@ styles = {
 	centered: {
 		textAlign:'center',
 	},
-    repsSectionTitle: {
-        fontSize: '1.9em',
+	repsSectionTitle: {
+		fontSize: '1.9em',
 		textAlign:'center',
-        letterSpacing:'0.1em',
+		letterSpacing:'0.1em',
 		paddingBottom:'1em',
-    },
-	progressBackground: {
-        background:"linear-gradient(rgba(28, 67, 90, 0.8),rgba(28, 67, 90, 0.8)), url('static/crowd.jpg') no-repeat center center",
-        backgroundSize:'cover',
 	},
-    graphBackground: {
-        backgroundColor:"#003d59",
-    },
-    repsBackground: {
-        backgroundImage: 'url("/static/protest.jpg")',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center center',
-        backgroundSize: 'cover',
-        top: 0,
-        left: 0,
-    },
+	progressBackground: {
+		background:"linear-gradient(rgba(28, 67, 90, 0.8),rgba(28, 67, 90, 0.8)), url('static/crowd.jpg') no-repeat center center",
+		backgroundSize:'cover',
+	},
+	graphBackground: {
+		backgroundColor:"#003d59",
+	},
+	repsBackground: {
+		backgroundImage: 'url("/static/protest.jpg")',
+		backgroundRepeat: 'no-repeat',
+		backgroundPosition: 'center center',
+		backgroundSize: 'cover',
+		top: 0,
+		left: 0,
+	},
 	repsBackgroundSplash: {
-        background: 'linear-gradient(rgba(0,60,88, 0.8),rgba(0,60,88, 0.8))',//'#1c435a',
+		background: 'linear-gradient(rgba(0,60,88, 0.8),rgba(0,60,88, 0.8))',//'#1c435a',
 
 	},
-    repsWrapper: {
-        margin: 'auto',
+	repsWrapper: {
+		margin: 'auto',
 		width: '80%',
 		maxWidth:'350px',
 		backgroundColor:'#da022e',
 		opacity:'0.95',
-        fontWeight: 'lighter',
+		fontWeight: 'lighter',
 	},
 	repsBox: {
 		textAlign: 'left',
 		color:'white',
 		padding:'1em',
-        //fontWeight: '200',
+		//fontWeight: '200',
 	},
 	orCall: {
 		textAlign:'center',
@@ -268,7 +257,7 @@ styles = {
 		textAlign:'center',
 		paddingTop:'1em',
 	},
-    progressSection:{
+	progressSection:{
 		padding:'2em 0',
 		color:'white',
 	},

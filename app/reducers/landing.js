@@ -8,6 +8,7 @@ import {
 	POST_USER_LOAD,
 	POST_USER_SUCCESS,
 	POST_USER_FAIL,
+
 	GET_USER_SUCCESS,
 } from 'containers/Landing/actions';
 
@@ -47,7 +48,7 @@ export default function reducer(state = defaultState, action) {
 		});
 	case GET_USER_SUCCESS:
 		return state.merge({
-            referralDetails: action.result
+			referralDetails: action.result
 		});
 
 	default:
