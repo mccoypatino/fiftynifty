@@ -36,7 +36,7 @@ export const Leaderboard = React.createClass({
         const leaders = this.props.leaderboardData.leaders || [];
         const flatLeaders = this.flattenLeaders(leaders).sort(function (a, b) {
             return cmp(a.statesCount, b.statesCount) || cmp(a.score, b.score)
-        }).reverse().slice(0, 5);
+        }).reverse().slice(0, 10);
 		return (
 		    <div>
 		    <div style={styles.flagImage}/>
