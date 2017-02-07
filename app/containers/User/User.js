@@ -74,6 +74,10 @@ export const User = React.createClass({
         const statesCount = countStates(user);
         const chartData = [{name: 'SatesDone', value: statesCount}, {name: 'not Done', value: 50-statesCount}];
         const COLORS = ['#cb0027', 'rgba(0,0,0,0)'];
+        const localUserData = localStorage.getItem('userData');
+        const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
+        const isLocalUser = localUser.id===user.id;
+        const presentName = isLocalUser? 'Your' : user.name+"'s";
 
 		return (
 			<div>
@@ -81,9 +85,9 @@ export const User = React.createClass({
 					<div style={styles.repsBackgroundSplash}>
 						<div style={styles.container}>
                             {this.props.userData.loading &&
-								<div style={styles.centered}>
-									<Spinner />
-								</div>
+							<div style={styles.centered}>
+								<Spinner />
+							</div>
                             }
 							<div style={styles.content}>
 								<div style={styles.title}>{user.name}</div>
@@ -91,6 +95,8 @@ export const User = React.createClass({
                                 {/*{true && true &&*/}
                                 {/*<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />*/}
                                 {/*}*/}
+								{isLocalUser &&
+									<div>
 								<div style={styles.repsWrapper}>
 
 									<div style={styles.repsBox} className={"pt-elevation-3"}>
@@ -101,9 +107,10 @@ export const User = React.createClass({
 										</div>
                                         }
 
-                                        {reps.map((rep, index)=> {
+                                        {reps.map((rep, index) => {
                                             return (
-												<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
+												<Representative key={`rep-${index}`} repData={rep}
+																callFunction={this.callFunction}/>
                                             );
                                         })}
 
@@ -111,17 +118,20 @@ export const User = React.createClass({
 									</div>
 								</div>
 								<p style={styles.orCall}>Or you can call (508) 659-9127 </p>
+									</div>}
 							</div>
 						</div>
 					</div>
 				</div>
 
+                {isLocalUser &&
 				<Invite url={shareUrl}/>
+                }
 
 				<div style = {styles.repsBackground}>
 					<div style = {styles.repsBackgroundSplash}>
 						<div style={styles.progressSection}>
-							<div style={styles.sectionTitle}>Your Progress</div>
+							<div style={styles.sectionTitle}>{presentName} Progress</div>
 							<div style={styles.scoreStats}>
 								<span style={{textAlign:'center', fontWeight:'lighter'}}> Your Score: <span style={styles.score}> {score}</span></span>
 								<div style={{display:'inline-block', verticalAlign: 'middle', paddingLeft:'2em', paddingTop:'1em'}}>
@@ -144,7 +154,7 @@ export const User = React.createClass({
 				<div style={styles.graphBackground}>
 					<div style={styles.section}>
 						<div style={styles.familySection}>
-							<div style={styles.sectionTitle}>Your Fifty Nifty Family</div>
+							<div style={styles.sectionTitle}>{presentName} Fifty Nifty Family</div>
 							<TreeGraph data={user}/>
 						</div>
 					</div>

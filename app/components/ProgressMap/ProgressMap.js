@@ -96,7 +96,6 @@ export const ProgressMap  = React.createClass({
                 };
                 return arc;
             }) : [];
-		console.log(arcs);
 		this.datamap.arc(arcs);
 	},
 

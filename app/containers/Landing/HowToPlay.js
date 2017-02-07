@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import Radium from 'radium';
+import { Link } from 'react-router';
 
 let styles;
 
@@ -43,7 +44,9 @@ export const HowToPlay  = React.createClass({
                     </div>
                 </div>
             </div>
+                <Link to={'/more'}>
             <p style={styles.learnMore}><button style={{color:'white'}} type="button" className="pt-button pt-minimal pt-icon-add" >Learn More</button></p>
+                </Link>
             </div>
             </div>)
     }
