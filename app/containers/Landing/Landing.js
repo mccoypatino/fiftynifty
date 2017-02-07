@@ -4,7 +4,8 @@ import { Link, browserHistory } from 'react-router';
 import { Button } from '@blueprintjs/core';
 import Radium from 'radium';
 import Phone from 'react-phone-number-input';
-import { postUser } from './actions';
+import { postUser, getReferralDetails } from './actions';
+import { HowToPlay } from './HowToPlay';
 
 let styles;
 
@@ -48,6 +49,16 @@ export const Landing = React.createClass({
 		this.props.dispatch(postUser(this.state.name, this.state.phone, this.state.zipcode, referral));
 	},
 
+    componentWillMount() {
+        this.loadData(this.props.location.query.ref);
+    },
+
+    loadData(userId) {
+		if (userId) {
+            this.props.dispatch(getReferralDetails(userId));
+        }
+    },
+
 	render() {
 
 /* 
@@ -57,6 +68,7 @@ export const Landing = React.createClass({
 	  <div style={styles.headerImage} />
 	  <div style={styles.headerSplash} /> ?
 */
+        const refUser = this.props.landingData.referralDetails;
 		return (
 			<div style={styles.container}>
 				<div style={styles.header}>
@@ -64,22 +76,27 @@ export const Landing = React.createClass({
 					<div style={styles.headerSplash} />
 					<div style={styles.headerPresentation}>
 						<div style={styles.headerTextBlock}>
-							{/*<div style={styles.headerText}>Call your Reps!</div>*/}
-							{/*<div style={styles.headerText}>Collect 50 States!</div>*/}
+							<div style={styles.section}>
+							<div style={styles.headerText}>Call your Reps!</div>
+							<div style={styles.headerText}>Collect 50 States!</div>
 							<div style={styles.headerText}>Play for a better Democracy!</div>
-							<p style={styles.headerTextBody}>Our President’s Executive order halting some legal immigrants is a call to action. We want to call Congresspeople throughout the country to tell them out opinion.  Real phone call matter, so we are starting the fiftynifty challenge to see if you can use your network to get 50 people in 50 states to make a call.  The network that gets the most calls wins, but we all win when we call for an effective democracy.
-								<button type="button" className="pt-button pt-minimal pt-icon-add .modifier" >Click To Learn More</button> </p>
+							</div>
+							<p style={styles.headerTextBody}>Our President’s Executive order halting some legal immigrants is a call to action. We want to call Congresspeople throughout the country to tell them out opinion.  Real phone call matter, so we are starting the fiftynifty challenge to see if you can use your network to get 50 people in 50 states to make a call.  The network that gets the most calls wins, but we all win when we call for an effective democracy.</p>
 							<div style={{width:'100%', textAlign: 'center'}}>
-								<div style={styles.learnMoreButton}>
+								<div >
 								<a href="#howToPlay"><Button
-									text={'How To Play'}
-									className={'pt-intent-primary pt-fill pt-large'}/>
+									role={"button"}
+									className={'pt-fill pt-button pt-minimal'}/>
+									<div>How to Play</div>
+									<div className={"pt-icon-chevron-down"}></div>
 								</a>
 								</div>
 							</div>
 						</div>
+						<div style={{padding:'1.6em'}}>
 						<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
-							<div style={styles.inputHeader}> Join The Challenge </div>
+							{ refUser && <div style={styles.inputHeader}>{refUser.name} Invited You!</div>}
+							<div style={styles.inputHeader}> Join The Challenge</div>
 							<form onSubmit={this.formSubmit} style={styles.form}>
 								<label htmlFor={'name-input'} style={styles.inputLabel}>
 									Name
@@ -92,14 +109,6 @@ export const Landing = React.createClass({
 								<label htmlFor={'phone-input'} style={styles.inputLabel}>
 									Phone number (to connect you to your reps)
 									<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'781-975-5555'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} />
-									{/*<div style={styles.smallInformation}> 
-										<img alt="lock" src={'/static/lock.png'} style={styles.lockImage} />
-										<div style={styles.smallInformationText}> We will never, ever, share it with anyone; and no human will be able to read it. </div>
-									</div>
-									<div style={styles.smallInformation}> 
-										<img alt="lock" src={'/static/notification.png'} style={styles.lockImage} />
-										<div style={styles.smallInformationText}> We may send you notifications about your progress. No spam, ever. </div>
-									</div>*/}
 								</label>
 								<Button 
 									loading={this.props.landingData.signupLoading} 
@@ -110,45 +119,10 @@ export const Landing = React.createClass({
 
 							</form>
 						</div>
+						</div>
 					</div>
 				</div>
-				<div style={styles.section}>
-					<div style={styles.sectionHeader} id="howToPlay">How to Play</div>
-					<div style={styles.iconsTable}>
-						<div style={styles.howToPlaySection}>
-							<span className="pt-icon-large pt-icon-manually-entered-data"></span>
-						<div>
-							Join the challange by
-							filling in your details. This
-							way we can tell you who
-							your local senators are.
-						</div>
-						</div>
-						<div style={styles.howToPlaySection}>
-							<span className="pt-icon-large pt-icon-phone"></span>
-							<div>
-								Call your local senator
-								and talk to them about
-								the political issues you
-								have.
-							</div>
-						</div>
-					</div>
-					<div style={styles.iconsTable}>
-						<div style={styles.howToPlaySection}>
-							<span className="pt-icon-large pt-icon-graph"></span>
-						<div>
-							Share the link with your friends in other states, when someone in you network does the same, you get the points.
-						</div>
-						</div>
-						<div style={styles.howToPlaySection}>
-							<span className="pt-icon-large pt-icon-globe"></span>
-							<div>
-								When you get someone from all 50 states make a call, you win!
-							</div>
-						</div>
-					</div>
-					</div>
+				<HowToPlay/>
 				</div>
 		);
 	}
@@ -170,7 +144,7 @@ styles = {
 		position: 'relative',		
 	},
 	headerImage: {
-		backgroundImage: 'url("/static/header.jpg")',
+		backgroundImage: 'url("/static/protest.jpg")',
 		backgroundRepeat: 'no-repeat',
 		backgroundPosition: 'center center',
 		backgroundSize: 'cover',
@@ -185,8 +159,8 @@ styles = {
 		position: 'absolute',
 		// backgroundColor: 'rgba(19, 24, 187, 0.7)',
 		// backgroundImage: 'url("/static/denim.png")',
-		backgroundColor: '#1c435a',
-		opacity: 0.9,
+		backgroundColor: '#003D59',
+		opacity: 0.8,
 		top: 0,
 		left: 0,
 		width: '100%',
@@ -220,7 +194,7 @@ styles = {
 		maxWidth: '500px',
 		fontWeight: 'bold',
 		color: '#cb0027',
-		fontSize: '2em',
+		fontSize: '1.8em',
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
 			textAlign: 'center',
 			maxWidth: '100%',
@@ -228,12 +202,14 @@ styles = {
 	},
 	headerTextBody: {
 		maxWidth: '500px',
-		padding: '1em 0em',
-		fontSize: '1.25em',
+		padding: '1em 1em',
+		fontSize: '1em',
 		lineHeight: '1.5',
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
 			maxWidth: '100%',
 		},
+		fontWeight:'200',
+		color:'white',
 	},
 	headerCall: {
 		display: 'table-cell',
@@ -314,6 +290,6 @@ styles = {
 		display:'table-cell',
 		width:'40%,',
 		textAlign:'center',
-		padding: '1em'
+		padding: '1em',
 	}
 };

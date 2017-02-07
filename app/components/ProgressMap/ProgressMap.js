@@ -6,19 +6,20 @@ import React, { PropTypes } from 'react';
 import statesDefaults from './states-defaults';
 import objectAssign from 'object-assign';
 import Radium from 'radium';
+import {getStatesArcs} from '../../Utilities/UserUtils'
 
 export const ProgressMap  = React.createClass({
 	propTypes: {
-		datamap: PropTypes.object,
-		regionData: PropTypes.object,
 		callsData: PropTypes.array,
+		user:PropTypes.object,
 	},
 
-	linearPalleteScale: function(value){
-		const dataValues = this.props.callsData.map(function(data) { return data.value });
-		const minVal = 0;
-		const maxVal = 5; // Set maximum val for score
-		return d3.scaleLinear().domain([minVal, maxVal]).range(["#EFEFFF", "#42006F"])(value);
+    getInitialState() {
+        return {showCallsFlow: false};
+    },
+
+	toggleCallsFlow:function() {
+        this.setState({showCallsFlow:!this.state.showCallsFlow});
 	},
 
 	reducedData: function(){
@@ -39,7 +40,7 @@ export const ProgressMap  = React.createClass({
 				}
 			});
 			Object.keys(statesCount).forEach((state)=> {
-				statesCount[state].fillColor = this.linearPalleteScale(statesCount[state].colorValue);
+				statesCount[state].fillColor = '#fdb81e'; //this.linearPalleteScale(statesCount[state].colorValue);
 			});
 
 		}
@@ -88,6 +89,14 @@ export const ProgressMap  = React.createClass({
 
 	componentDidUpdate: function(){
 		this.datamap.updateChoropleth(this.reducedData());
+		const arcs = this.state.showCallsFlow? getStatesArcs(this.props.user).map((arc)=>{
+                arc.options = {
+                    strokeWidth: 0.5,
+                    strokeColor: 'rgba(50,50,50, 0.9)',
+                }
+                return arc;
+            }) : []
+		this.datamap.arc(arcs);
 	},
 
 	componentWillUnmount: function(){
@@ -100,8 +109,17 @@ export const ProgressMap  = React.createClass({
 			position: 'relative',
 			width: '100%'
 		};
+		const buttonText = this.state.showCallsFlow? "Hide": "Show";
+		const className = this.state.showCallsFlow? "pt-button pt-minimal pt-icon-remove pt-intent-warning" :
+			"pt-button pt-minimal pt-icon-add pt-intent-warning";
+		const button = (<div style={{textAlign:'center'}}>
+			<button type={"button"} className={className} onClick={this.toggleCallsFlow}>{buttonText} Calls Flow</button></div>)
 		return (
+			<div>
 			<div ref="container" style={style}></div>
+				{button}
+			</div>
+
 		);
 	}
 });

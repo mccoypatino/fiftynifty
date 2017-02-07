@@ -4,6 +4,7 @@ import { Link, browserHistory } from 'react-router';
 import { Button, Spinner } from '@blueprintjs/core';
 import Radium from 'radium';
 import { getLeaderboard } from './actions';
+import {getScore, getStates} from '../../Utilities/UserUtils';
 
 let styles;
 
@@ -19,47 +20,11 @@ export const Leaderboard = React.createClass({
 		this.props.dispatch(getLeaderboard());
 	},
 
-
-    // Consider moving the next 3 functions to a "utils" file
-    returnCalls: function(user, distance) {
-        const children = user.children || [];
-        const userCalls = user.calls || [];
-        const callsWithDist = userCalls.map((call)=>{
-            call.distance = distance;
-            return call;
-        });
-        const childrensCalls = children.map((child)=> {
-            return this.returnCalls(child, distance+1);
-        });
-        return callsWithDist.concat(...childrensCalls);
-    },
-
-    getScore: function(flatCalls) {
-        let score = 0;
-        const start = 256;
-        flatCalls.forEach((call)=>{
-                score+=start/(Math.pow(2, call.distance))
-            }
-        );
-        return score;
-    },
-
-    getStates: function(flatCalls) {
-        const states = [];
-        flatCalls.forEach((call)=>{
-            if (states.indexOf(call.state)==-1){
-                states.push(call.state);
-            }
-        })
-        return states;
-    },
-
 	flattenLeaders: function(users) {
 		const result = [];
 		users.forEach((user)=>{
-			let flatCalls = this.returnCalls(user, 0);
-			let userStates = this.getStates(flatCalls)
-            result.push({'user':user, 'states':userStates, 'statesCount': userStates.length, 'score':this.getScore(flatCalls) });
+			let userStates = getStates(user);
+            result.push({'user':user, 'states':userStates, 'statesCount': userStates.length, 'score':getScore(user) });
             if (user.children) {
                 result.concat(this.flattenLeaders(user.children));
             }
@@ -79,7 +44,9 @@ export const Leaderboard = React.createClass({
                     <div style={styles.container}>
                         <div style={styles.content}>
                             {this.props.leaderboardData.loading &&
-                            <Spinner />
+                            <div style={styles.centered}>
+                                <Spinner />
+                            </div>
                             }
                             {flatLeaders.map((user)=>{
                                 return(
@@ -115,7 +82,7 @@ export const Leader = React.createClass({
 
     render() {
         const user = this.props.leader;
-        const percent = this.state.didRender? (user.statesCount/50.0)*100: 0;
+        const percent = this.state.didRender? (Math.min(user.statesCount, 50)/50.0 )*100: 0;
         return(
             <div style={styles.leaderRow}>
                 <div style={styles.section}>
@@ -124,7 +91,7 @@ export const Leader = React.createClass({
                         <div style={styles.outerBar}>
                             <div style={styles.progressbar(percent)}></div>
                         </div>
-                        <div style={styles.statesCount}>{user.statesCount} / 50</div>
+                        <div style={styles.statesCount}>{Math.min(user.statesCount, 50)} / 50</div>
                     </div>
                     <div style={styles.score}>{Math.floor(user.score)} Points</div>
                 </div>
@@ -191,7 +158,9 @@ styles = {
         color:'#00296a',
         fontSize:'1em',
         fontWeight: '600',
-        float:'right'
+        float:'right',
+        width:'75px',
+        textAlign: 'right',
 
     },
     leaderRow: {
@@ -200,7 +169,7 @@ styles = {
         opacity:'0.8',
     },
     outerBar: {
-	    width:'85%',
+	    width:'calc(100% - 90px)',
         height:'1em',
         display: 'inline-block',
         textAlign:'center',
@@ -253,5 +222,8 @@ styles = {
         height: '100%',
         zIndex: 1,
     },
+    centered: {
+        textAlign:'center',
+    }
 
 };

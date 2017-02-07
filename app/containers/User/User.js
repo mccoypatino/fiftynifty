@@ -7,7 +7,9 @@ import Radium from 'radium';
 import { Representative, AddressInput, ProgressMap, NetworkGraph, TreeGraph } from 'components';
 import { getUser, requestCall, requestLatLong } from './actions';
 import { Invite } from './Invite';
+import {getScore, countStates} from '../../Utilities/UserUtils'
 import { UserNode } from './UserNode';
+import {PieChart, Pie, Cell,Legend, Tooltip} from 'recharts';
 
 let styles;
 
@@ -54,25 +56,6 @@ export const User = React.createClass({
 		return callsWithDist.concat(...childrensCalls);
 	},
 
-    getScore: function(flatCalls) {
-        let score = 0;
-        const start = 256;
-        flatCalls.forEach((call)=>{
-        	score += start / (Math.pow(2, call.distance));
-		});
-        return score;
-    },
-
-	countStates: function(flatCalls) {
-		const states = [];
-		flatCalls.forEach((call)=>{
-			if (states.indexOf(call.state) === -1) {
-				states.push(call.state);
-			}
-		});
-		return states.length;
-	},
-
 	callFunction: function(number) {
 		this.props.dispatch(requestCall(number, this.props.params.userId));
 	},
@@ -86,60 +69,86 @@ export const User = React.createClass({
 		const reps = user.reps || [];
 		const children = user.children || [];
 		const flatCalls = this.returnCalls(user, 0);
-		const score = this.getScore(flatCalls);
+		const score = getScore(user);
 		const shareUrl = "http://fiftynifty.org/?ref="+user.id;//When we get nicer urls, adda "getUrl" function
+        const statesCount = countStates(user);
+        const chartData = [{name: 'SatesDone', value: statesCount}, {name: 'not Done', value: 50-statesCount}];
+        const COLORS = ['#cb0027', 'rgba(0,0,0,0)'];
 
 		return (
-			<div style={styles.container}>
-				{this.props.userData.loading &&
-					<Spinner />
-				}
-				<div style={styles.content}>
-					<div style={styles.title}>{user.name} · {user.zipcode}</div>
+			<div>
+				<div style={styles.repsBackground}>
+					<div style={styles.repsBackgroundSplash}>
+						<div style={styles.container}>
+                            {this.props.userData.loading &&
+								<div style={styles.centered}>
+									<Spinner />
+								</div>
+                            }
+							<div style={styles.content}>
+								<div style={styles.title}>{user.name}</div>
 
-					{true && true &&
-						<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
-					}
+                                {/*{true && true &&*/}
+                                {/*<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />*/}
+                                {/*}*/}
+								<div style={styles.repsWrapper}>
 
-					<div style={styles.section}>
-						<div style={styles.sectionTitle}>Representatives</div>
-                        {reps.length === 0 &&
-						<Spinner />
-                        }
+									<div style={styles.repsBox} className={"pt-elevation-3"}>
+										<div style={styles.sectionTitle}>Your Representatives</div>
+                                        {reps.length === 0 &&
+										<div style={styles.centered}>
+											<Spinner />
+										</div>
+                                        }
 
-                        {reps.map((rep, index)=> {
-                            return (
-								<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
-                            );
-                        })}
+                                        {reps.map((rep, index)=> {
+                                            return (
+												<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
+                                            );
+                                        })}
 
-						<p>Call: (508) 659-9127</p>
+
+									</div>
+								</div>
+								<p style={styles.orCall}>Or you can call (508) 659-9127 </p>
+							</div>
+						</div>
 					</div>
-
-					<div style={styles.section}>
-						<div style={styles.sectionTitle}>Invite</div>
-						<Invite url={shareUrl}/>
-					</div>
-					
-					
-					<div style={styles.section}>
-						<div style={styles.sectionTitle}>Progress</div>
-						<p>Map and progress of your network displayed here</p>
-					</div>
-					<div style={styles.section}>
-						<ProgressMap callsData={flatCalls} />
-						<p> Your Score: {score}</p>
-						<p> You have covered {this.countStates(flatCalls)} out of the 50 states</p>
-					</div>
-
-					<div style={styles.section}>
-						<div style={styles.sectionTitle}>Your Fifty Nifty Family</div>
-						<TreeGraph data={user}/>
-					</div>
-
-
 				</div>
 
+				<Invite url={shareUrl}/>
+
+				<div style = {styles.repsBackground}>
+					<div style = {styles.repsBackgroundSplash}>
+						<div style={styles.progressSection}>
+							<div style={styles.sectionTitle}>Your Progress</div>
+							<div style={styles.scoreStats}>
+								<span style={{textAlign:'center', fontWeight:'lighter'}}> Your Score: <span style={styles.score}> {score}</span></span>
+								<div style={{display:'inline-block', verticalAlign: 'middle', paddingLeft:'2em', paddingTop:'1em'}}>
+									<PieChart height={200} width={200}>
+										<Pie data={chartData} innerRadius={70} outerRadius={100} fill="#82ca9d" stroke="none">
+                                            {
+                                                chartData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)
+                                            }</Pie>
+										<text x={100} y={100} textAnchor="middle" dominantBaseline="middle"
+											  fill="white" fontWeight="lighter">
+                                            {statesCount} / 50 states
+										</text>
+									</PieChart>
+								</div>
+							</div>
+							<ProgressMap callsData={flatCalls} user={user} />
+						</div>
+					</div>
+				</div>
+				<div style={styles.graphBackground}>
+					<div style={styles.section}>
+						<div style={styles.familySection}>
+							<div style={styles.sectionTitle}>Your Fifty Nifty Family</div>
+							<TreeGraph data={user}/>
+						</div>
+					</div>
+				</div>
 			</div>
 		);
 	}
@@ -155,22 +164,97 @@ export default connect(mapStateToProps)(Radium(User));
 
 styles = {
 	container: {
-		padding: 'calc(115px + 3em) 1em 3em',
-		maxWidth: '1024px',
+		padding: 'calc(115px + 0.2em) 0em 3em',
+		//maxWidth: '1024px',
 		margin: '0 auto',
+		opacity:'1',
 	},
 	content: {
-		padding: '2em 0em',
+		padding: '1em 0em',
 	},
 	title: {
-		fontSize: '2.5em',
-		fontWeight: '200',
+		fontSize: '2em',
+		fontWeight: 'lighter',
+		textAlign: 'center',
+		paddingBottom:'1em',
+		color:'white',
+        letterSpacing:'0.1em',
 	},
 	section: {
 		padding: '2em 0em',
 	},
 	sectionTitle: {
-		fontSize: '2em',
+        fontSize: '1.8em',
+        textAlign:'center',
+        letterSpacing:'0.1em',
+        padding:'0.8em 0',
+        fontWeight: 'lighter',
+		color:'white',
 	},
+	score:{
+		fontSize:'3em',
+		textAlign:'center',
+		fontWeight:'bold',
+		paddingLeft:'0.2em'
+	},
+	centered: {
+		textAlign:'center',
+	},
+    repsSectionTitle: {
+        fontSize: '1.9em',
+		textAlign:'center',
+        letterSpacing:'0.1em',
+		paddingBottom:'1em',
+    },
+	progressBackground: {
+        background:"linear-gradient(rgba(28, 67, 90, 0.8),rgba(28, 67, 90, 0.8)), url('static/crowd.jpg') no-repeat center center",
+        backgroundSize:'cover',
+	},
+    graphBackground: {
+        backgroundColor:"#003d59",
+    },
+    repsBackground: {
+        backgroundImage: 'url("/static/protest.jpg")',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center center',
+        backgroundSize: 'cover',
+        top: 0,
+        left: 0,
+    },
+	repsBackgroundSplash: {
+        background: 'linear-gradient(rgba(0,60,88, 0.8),rgba(0,60,88, 0.8))',//'#1c435a',
 
+	},
+    repsWrapper: {
+        margin: 'auto',
+		width: '80%',
+		maxWidth:'350px',
+		backgroundColor:'#da022e',
+		opacity:'0.95',
+        fontWeight: 'lighter',
+	},
+	repsBox: {
+		textAlign: 'left',
+		color:'white',
+		padding:'1em',
+        //fontWeight: '200',
+	},
+	orCall: {
+		textAlign:'center',
+		color:'white',
+		padding:'1em',
+		fontWeight:'lighter',
+	},
+	familySection:{
+		textAlign:'center',
+		paddingTop:'1em',
+	},
+    progressSection:{
+		padding:'2em 0',
+		color:'white',
+	},
+	scoreStats:{
+		textAlign:'center',
+		paddingTop:'2em',
+	}
 };
