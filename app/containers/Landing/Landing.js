@@ -144,7 +144,7 @@ styles = {
 		position: 'relative',		
 	},
 	headerImage: {
-		backgroundImage: 'url("/static/washington.jpg")',
+		backgroundImage: 'url("/static/hands.jpg")',
 		backgroundRepeat: 'no-repeat',
 		backgroundPosition: 'center center',
 		backgroundSize: 'cover',
