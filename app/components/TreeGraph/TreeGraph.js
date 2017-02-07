@@ -66,7 +66,6 @@ export const TreeGraph = React.createClass({
         const { data } = this.props;
 
         const treeData = d3.hierarchy(data);
-        //const containerWidth = treeWidth;//this.props.containerWidth;
         const containerHeight = treeData.height*50;
         const treeLayout = d3.tree()
             .size([containerWidth-50, containerHeight-50]);
@@ -122,5 +121,4 @@ export const TreeGraph = React.createClass({
 
 });
 
-// module.exports = Dimensions()(TreeGraph);
 export default Radium (TreeGraph);
