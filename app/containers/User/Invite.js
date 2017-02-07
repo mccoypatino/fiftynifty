@@ -110,6 +110,10 @@ styles = {
     inviteLink: {
         fontWeight:'bold',
         fontSize:'1.2em',
+        WebkitUserSelect: 'text',  /* Chrome all / Safari all */
+        MozUserSelect: 'text',     /* Firefox all */
+        MsUserSelect: 'text',      /* IE 10+ */
+        UserSelect: 'text'          /* Likely future */
 
     },
     copyButton: {
