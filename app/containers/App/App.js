@@ -30,14 +30,14 @@ export const App = React.createClass({
 						{ property: 'og:type', content: 'website' },
 						{ property: 'og:description', content: 'Play for a better Democracy' },
 						{ property: 'og:url', content: 'https://www.fiftynifty.org/' },
-						{ property: 'og:image', content: 'https://www.fiftynifty.org/static/american-flag.png' },
-						{ property: 'og:image:url', content: 'https://www.fiftynifty.org/static/american-flag.png' },
+						{ property: 'og:image', content: 'https://www.fiftynifty.org/static/american-flag.jpg' },
+						{ property: 'og:image:url', content: 'https://www.fiftynifty.org/static/american-flag.jpg' },
 						{ property: 'og:image:width', content: '500' },
 						{ name: 'twitter:card', content: 'summary' },
 						{ name: 'twitter:site', content: '@isTravis' },
 						{ name: 'twitter:title', content: 'Fifty Nifty' },
 						{ name: 'twitter:description', content: 'Play for a better Democracy' },
-						{ name: 'twitter:image', content: 'https://www.fiftynifty.org/static/american-flag.png' },
+						{ name: 'twitter:image', content: 'https://www.fiftynifty.org/static/american-flag.jpg' },
 						{ name: 'twitter:image:alt', content: 'Fifty Nifty' }
 					]} 
 				/> 
