@@ -2,10 +2,8 @@ import * as d3 from 'd3';
 import React ,  { PropTypes } from 'react';
 import Radium from 'radium';
 import ReactDOM from 'react-dom'
-import Dimensions from 'react-dimensions'
 import statesDefaults from 'components/ProgressMap/states-defaults';
 import chroma from 'chroma-js';
-import { getScore } from '../../Utilities/UserUtils';
 
 export const TreeGraph = React.createClass({
 
@@ -33,13 +31,17 @@ export const TreeGraph = React.createClass({
         }
 
     },
-
+    componentDidMount() {
+      const width = ReactDOM.findDOMNode(this.refs.treeContainer).clientWidth;
+      this.setState({treeWidth: width});
+    },
     componentWillMount() {
         this.tooltip =ReactDOM.findDOMNode(this.refs.tooltip);
     },
     colorMap :chroma.scale('Spectral').colors(50),
 
     render() {
+        const containerWidth  = this.state.treeWidth? this.state.treeWidth : 0;
         const css = `
 					.node text {
 					font: 5pt sans-serif;
@@ -64,7 +66,7 @@ export const TreeGraph = React.createClass({
         const { data } = this.props;
 
         const treeData = d3.hierarchy(data);
-        const containerWidth=this.props.containerWidth;
+        //const containerWidth = treeWidth;//this.props.containerWidth;
         const containerHeight = treeData.height*50;
         const treeLayout = d3.tree()
             .size([containerWidth-50, containerHeight-50]);
@@ -98,7 +100,7 @@ export const TreeGraph = React.createClass({
             );
         });
         return (
-			<div className="tree-container">
+			<div ref="treeContainer" height={containerHeight} width={"100%"}>
 				<style>
                     {css}
 				</style>
@@ -120,5 +122,5 @@ export const TreeGraph = React.createClass({
 
 });
 
-module.exports = Dimensions()(TreeGraph);
+// module.exports = Dimensions()(TreeGraph);
 export default Radium (TreeGraph);
