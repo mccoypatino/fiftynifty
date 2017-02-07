@@ -22,13 +22,14 @@ export const Landing = React.createClass({
 			name: '',
 			phone: '',
 			zipcode: '',
+			error: undefined,
 		};
 	},
 
 	componentWillReceiveProps(nextProps) {
 		const lastLoading = this.props.landingData.signupLoading;
 		const nextLoading = nextProps.landingData.signupLoading;
-		const nextError = nextProps.landingData.signupLoading;
+		const nextError = nextProps.landingData.signupError;
 		const nextResult = nextProps.landingData.signupResult;
 		if (lastLoading && !nextLoading && !nextError && nextResult.id) {
 			localStorage.setItem('userData', JSON.stringify(nextResult));
@@ -45,19 +46,23 @@ export const Landing = React.createClass({
 	formSubmit: function(evt) {
 		evt.preventDefault();
 		const referral = this.props.location.query.ref;
-		console.log('referral is ', referral);
-		this.props.dispatch(postUser(this.state.name, this.state.phone, this.state.zipcode, referral));
+		if (!this.state.name) { return this.setState({ error: 'Name required' }); }
+		if (!this.state.zipcode) { return this.setState({ error: 'Zipcode required' }); }
+		if (this.state.zipcode.length !== 5) { return this.setState({ error: 'Zipcode must be 5 digits' }); }
+		if (!this.state.phone) { return this.setState({ error: 'Phone Number required' }); }
+		this.setState({ error: undefined });
+		return this.props.dispatch(postUser(this.state.name, this.state.phone, this.state.zipcode, referral));
 	},
 
-    componentWillMount() {
-        this.loadData(this.props.location.query.ref);
-    },
+	componentWillMount() {
+		this.loadData(this.props.location.query.ref);
+	},
 
-    loadData(userId) {
+	loadData(userId) {
 		if (userId) {
-            this.props.dispatch(getReferralDetails(userId));
-        }
-    },
+			this.props.dispatch(getReferralDetails(userId));
+		}
+	},
 
 	render() {
 
@@ -68,7 +73,8 @@ export const Landing = React.createClass({
 	  <div style={styles.headerImage} />
 	  <div style={styles.headerSplash} /> ?
 */
-        const refUser = this.props.landingData.referralDetails;
+		const refUser = this.props.landingData.referralDetails;
+		const error = this.state.error || this.props.landingData.signupError;
 		return (
 			<div style={styles.container}>
 				<div style={styles.header}>
@@ -82,7 +88,7 @@ export const Landing = React.createClass({
 							<div style={styles.headerText}>Play for a better Democracy!</div>
 							</div>
 							<p style={styles.headerTextBody}>Our President’s Executive order halting some legal immigrants is a call to action. We want to call Congresspeople throughout the country to tell them out opinion.  Real phone call matter, so we are starting the fiftynifty challenge to see if you can use your network to get 50 people in 50 states to make a call.  The network that gets the most calls wins, but we all win when we call for an effective democracy.</p>
-							<div style={{width:'100%', textAlign: 'center'}}>
+							<div style={{width: '100%', textAlign: 'center'}}>
 								<div >
 								<a href="#howToPlay"><Button
 									role={"button"}
@@ -93,7 +99,7 @@ export const Landing = React.createClass({
 								</div>
 							</div>
 						</div>
-						<div style={{padding:'1.6em'}}>
+						<div style={{padding: '1.6em'}}>
 						<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
 							{ refUser && <div style={styles.inputHeader}>{refUser.name} Invited You!</div>}
 							<div style={styles.inputHeader}> Join The Challenge</div>
@@ -116,6 +122,7 @@ export const Landing = React.createClass({
 									text={'Join the Challenge'} 
 									className={'pt-intent-primary pt-fill pt-large'} 
 									onClick={this.formSubmit} />
+								<div style={styles.error}>{error}</div>
 
 							</form>
 						</div>
@@ -205,12 +212,12 @@ styles = {
 		padding: '1em 1em',
 		fontSize: '1em',
 		lineHeight: '1.5',
-		textAlign:'justify',
+		textAlign: 'justify',
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
 			maxWidth: '100%',
 		},
-		fontWeight:'200',
-		color:'white',
+		fontWeight: '200',
+		color: 'white',
 	},
 	headerCall: {
 		display: 'table-cell',
@@ -229,12 +236,12 @@ styles = {
 		// margin: '0 auto',
 		// float: 'right',
 	},
-    inputHeader: {
-        fontSize: '1.4em',
-        display: 'block',
-        marginBottom: '1em',
+	inputHeader: {
+		fontSize: '1.4em',
+		display: 'block',
+		marginBottom: '1em',
 		textAlign: 'center'
-    },
+	},
 	inputLabel: {
 		fontSize: '1.25em',
 		display: 'block',
@@ -244,11 +251,11 @@ styles = {
 		verticalAlign: 'bottom',
 	},
 	learnMoreButton: {
-		width:'40%',
-        display: 'table-cell',
-        textDecoration: 'none',
-        textAlign: 'center',
-        padding: '0.5em 1em',
+		width: '40%',
+		display: 'table-cell',
+		textDecoration: 'none',
+		textAlign: 'center',
+		padding: '0.5em 1em',
 	},
 	section: {
 		padding: '2em 1em',
@@ -263,8 +270,8 @@ styles = {
 		fontSize: '2em',
 		fontWeight: '600',
 		marginBottom: '1.5em',
-		textAlign:'center',
-		//color:'white'
+		textAlign: 'center',
+		//color: 'white'
 	},
 	smallInformation: {
 		fontSize: '0.75em',
@@ -283,14 +290,19 @@ styles = {
 		top: '0.2em',
 	},
 	iconsTable: {
-		display:'table',
-		width:'100%',
-		textAlign:'center'
+		display: 'table',
+		width: '100%',
+		textAlign: 'center'
 	},
-    howToPlaySection: {
-		display:'table-cell',
-		width:'40%,',
-		textAlign:'center',
+	howToPlaySection: {
+		display: 'table-cell',
+		width: '40%,',
+		textAlign: 'center',
 		padding: '1em',
-	}
+	},
+	error: { 
+		color: 'rgb(203, 0, 39)',
+		fontSize: '1.25em',
+		paddingTop: '.5em',
+	},
 };
