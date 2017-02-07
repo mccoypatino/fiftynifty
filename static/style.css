@@ -7,13 +7,6 @@ body {
 	display: block;
 }
 
-a {
-	color: inherit;
-}
-
-a:hover {
-    color: #EB4040;
-}
 
 .react-phone-number-input__phone {
     outline: none;
@@ -41,4 +34,20 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
   margin: 0; 
+}
+
+button, div, p {
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */
+}
+
+a {
+    color: inherit;
+
+}
+
+a:hover {
+    color: #EB4040;
 }
