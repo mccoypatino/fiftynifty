@@ -94,7 +94,7 @@ export const Landing = React.createClass({
 									role={"button"}
 									className={'pt-fill pt-button pt-minimal'}/>
 									<div>How to Play</div>
-									<div className={"pt-icon-chevron-down"}></div>
+									<span style={{ display: 'block' }} className={"pt-icon-standard pt-icon-chevron-down"} />
 								</a>
 								</div>
 							</div>
