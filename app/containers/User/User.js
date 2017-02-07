@@ -9,7 +9,7 @@ import { getUser, requestCall, requestLatLong } from './actions';
 import { Invite } from './Invite';
 import {getScore, countStates} from '../../Utilities/UserUtils'
 import { UserNode } from './UserNode';
-import {PieChart, Pie, Cell,Legend, Tooltip} from 'Recharts';
+import {PieChart, Pie, Cell,Legend, Tooltip} from 'recharts';
 
 let styles;
 

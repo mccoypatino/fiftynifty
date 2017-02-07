@@ -5,7 +5,7 @@ import { Button } from '@blueprintjs/core';
 import Radium from 'radium';
 import Phone from 'react-phone-number-input';
 import { postUser, getReferralDetails } from './actions';
-import { HowToPlay } from './HowToPLay';
+import { HowToPlay } from './HowToPlay';
 
 let styles;
 
