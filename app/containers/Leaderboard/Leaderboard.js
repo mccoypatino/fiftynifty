@@ -133,7 +133,7 @@ styles = {
 		margin: '0 auto',
         zIndex: 2,
         position: 'relative',
-        display:'block'
+        display:'block',
 	},
 	content: {
 		padding: '0.1em',
@@ -204,12 +204,12 @@ styles = {
         backgroundRepeat: 'repeat',
         backgroundPosition: 'center center',
         backgroundSize: 'cover',
-        minHeight:'100%',
+        minHeight:'100vh',
     },
     flagSplash: {
         backgroundColor: '#1c435a',
         opacity: 0.9,
-        minHeight:'100%',
+        minHeight:'100vh',
     },
     centered: {
         textAlign:'center',
