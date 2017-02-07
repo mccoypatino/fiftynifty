@@ -26,6 +26,10 @@ export const Landing = React.createClass({
 		};
 	},
 
+	componentWillMount() {
+		this.loadData(this.props.location.query.ref);
+	},
+
 	componentWillReceiveProps(nextProps) {
 		const lastLoading = this.props.landingData.signupLoading;
 		const nextLoading = nextProps.landingData.signupLoading;
@@ -54,10 +58,6 @@ export const Landing = React.createClass({
 		return this.props.dispatch(postUser(this.state.name, this.state.phone, this.state.zipcode, referral));
 	},
 
-	componentWillMount() {
-		this.loadData(this.props.location.query.ref);
-	},
-
 	loadData(userId) {
 		if (userId) {
 			this.props.dispatch(getReferralDetails(userId));
@@ -65,10 +65,9 @@ export const Landing = React.createClass({
 	},
 
 	render() {
-
 /* 
 	Still to do: 
-	* Form verification
+	* Form verification [done]
 	* Re-insert 
 	  <div style={styles.headerImage} />
 	  <div style={styles.headerSplash} /> ?
