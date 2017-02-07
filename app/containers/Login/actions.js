@@ -4,9 +4,12 @@
 // All action types are defined as constants. Do not manually pass action
 // types as strings in action creators
 /*--------*/
-export const GET_USER_LOAD = 'user/GET_USER_LOAD';
-export const GET_USER_SUCCESS = 'user/GET_USER_SUCCESS';
-export const GET_USER_FAIL = 'user/GET_USER_FAIL';
+export const CREATE_VERIFICATION_LOAD = 'user/CREATE_VERIFICATION_LOAD';
+export const CREATE_VERIFICATION_SUCCESS = 'user/CREATE_VERIFICATION_SUCCESS';
+export const CREATE_VERIFICATION_FAIL = 'user/CREATE_VERIFICATION_FAIL';
+export const CHECK_VERIFICATION_LOAD = 'user/CHECK_VERIFICATION_LOAD';
+export const CHECK_VERIFICATION_SUCCESS = 'user/CHECK_VERIFICATION_SUCCESS';
+export const CHECK_VERIFICATION_FAIL = 'user/CHECK_VERIFICATION_FAIL';
 
 /*--------*/
 // Define Action creators
@@ -15,42 +18,39 @@ export const GET_USER_FAIL = 'user/GET_USER_FAIL';
 // action objects (e.g. {type:example, payload:data} ) within dispatch()
 // function calls
 /*--------*/
-export function getLogin(address, zipcode) {
-	console.log('2');
+
+export function createVerificationCode(phone) {
 	return (dispatch) => {
-		return clientFetch('/api/address', {
-			method: 'POST',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				address: address,
-				zipcode: zipcode,
+		dispatch({ type: CREATE_VERIFICATION_LOAD });
+		return clientFetch((`/api/twofactor/${phone}`))
+			.then(() => {
+				dispatch({ type: CREATE_VERIFICATION_SUCCESS });
 			})
-		})
-		.then((result) => {
-			console.log(result);
-		})
-		.catch((error) => {
-			console.log(error);
-		});
+			.catch((error) => {
+				dispatch({ type: CREATE_VERIFICATION_FAIL, error });
+			});
 	};
 }
 
-export function requestLogin(congressNumber, userId) {
+export function checkVerificationCode(phone, code) {
 	return (dispatch) => {
-		return clientFetch('/api/callfromserver', {
+		dispatch({ type: CHECK_VERIFICATION_LOAD });
+		return clientFetch('/api/twofactor', {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
-				congressNumber: congressNumber,
-				userId: userId,
+				phone: phone,
+				code: code,
 			})
+		})
+		.then((result) => {
+			dispatch({ type: CHECK_VERIFICATION_SUCCESS, result });
+		})
+		.catch((error) => {
+			dispatch({ type: CHECK_VERIFICATION_FAIL, error });
 		});
-	}; // Do then and catch
+	};
 }
-

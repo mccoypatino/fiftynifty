@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import landing from './landing';
 import leaderboard from './leaderboard';
 import user from './user';
+import login from './login';
 
 export function ensureImmutable(state) {
 	// For some reason the @@INIT action is receiving a state variable that is a regular object.
@@ -21,4 +22,5 @@ export default combineReducers({
 	landing,
 	leaderboard,
 	user,
+	login,
 });
