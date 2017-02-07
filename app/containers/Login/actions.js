@@ -46,8 +46,8 @@ export function checkVerificationCode(phone, code) {
 				code: code,
 			})
 		})
-		.then(() => {
-			dispatch({ type: CHECK_VERIFICATION_SUCCESS });
+		.then((result) => {
+			dispatch({ type: CHECK_VERIFICATION_SUCCESS, result });
 		})
 		.catch((error) => {
 			dispatch({ type: CHECK_VERIFICATION_FAIL, error });

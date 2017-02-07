@@ -8,6 +8,7 @@ import {
 	CREATE_VERIFICATION_LOAD,
 	CREATE_VERIFICATION_SUCCESS,
 	CREATE_VERIFICATION_FAIL,
+
 	CHECK_VERIFICATION_LOAD,
 	CHECK_VERIFICATION_SUCCESS,
 	CHECK_VERIFICATION_FAIL,
@@ -20,7 +21,8 @@ const defaultState = Immutable.Map({
 	codeCreationSuccess: undefined,
 	codeCreationLoading: false,
 	codeCreationError: undefined,
-	verificationSuccess: undefined,
+
+	verificationResult: undefined,
 	verificationLoading: false,
 	verificationError: undefined,
 });
@@ -51,19 +53,17 @@ export default function reducer(state = defaultState, action) {
 		});	
 	case CHECK_VERIFICATION_LOAD:
 		return state.merge({
-			verificationSuccess: undefined,
 			verificationLoading: true,
 			verificationError: undefined,
 		});	
 	case CHECK_VERIFICATION_SUCCESS:
 		return state.merge({
-			verificationSuccess: true,
+			verificationResult: action.result,
 			verificationLoading: false,
 			verificationError: undefined,
 		});	
 	case CHECK_VERIFICATION_FAIL:
 		return state.merge({
-			verificationSuccess: false,
 			verificationLoading: false,
 			verificationError: action.error,
 		});	

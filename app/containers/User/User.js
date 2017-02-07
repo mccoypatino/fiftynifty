@@ -63,11 +63,15 @@ export const User = React.createClass({
 	geolocateFunction: function(address, zipcode) {
 		this.props.dispatch(requestLatLong(address, zipcode, this.props.params.userId));
 	},
+	logout: function() {
+		localStorage.removeItem('userData');
+		window.location.reload();
+	},
 
 	render() {
 		const user = this.props.userData.user || {};
 		const reps = user.reps || [];
-		const children = user.children || [];
+		// const children = user.children || [];
 		const flatCalls = this.returnCalls(user, 0);
 		const score = getScore(user);
 		const shareUrl = "http://fiftynifty.org/?ref="+user.id;//When we get nicer urls, adda "getUrl" function
@@ -76,8 +80,8 @@ export const User = React.createClass({
 		const COLORS = ['#cb0027', 'rgba(0,0,0,0)'];
 		const localUserData = localStorage.getItem('userData');
 		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
-		const isLocalUser = localUser.id===user.id;
-		const presentName = isLocalUser? 'Your' : user.name+"'s";
+		const isLocalUser = localUser.id && localUser.id === user.id;
+		const presentName = isLocalUser ? 'Your' : user.name + "'s";
 
 		return (
 			<div>
@@ -90,10 +94,14 @@ export const User = React.createClass({
 								</div>
 							}
 							<div style={styles.content}>
+								{isLocalUser && 
+									<button className={'pt-button'} onClick={this.logout}>Logout</button>
+								}
+								
 								<div style={styles.title}>{user.name}, {user.state}</div>
 
 								<div style={styles.section}>
-									{ islocalUser && 
+									{ isLocalUser && 
 										<div style={styles.repsBox} className={"pt-elevation-3"}>
 											<div style={styles.sectionTitle}>Representatives</div>
 											{reps.length === 0 &&

@@ -18,18 +18,25 @@ export const Login = React.createClass({
 
 	getInitialState() {
 		return {
-			codeCreationSuccess: undefined,
-			codeCreationLoading: false,
-			codeCreationError: undefined,
-			verificationError: undefined,
-		}
+			phone: '',
+			code: '',
+		};
 	},
  
-	componentWillMount(){
-		console.log(this.props.location.query);
-	},
+	// componentWillMount() {
+	// 	console.log(this.props.location.query);
+	// },
 
 	componentWillReceiveProps(nextProps) {
+		const lastLoading = this.props.loginData.verificationLoading;
+		const nextLoading = nextProps.loginData.verificationLoading;
+		const nextError = nextProps.loginData.verificationError;
+		const nextResult = nextProps.loginData.verificationResult;
+		// If the phone number is already in use
+		if (lastLoading && !nextLoading && !nextError && nextResult.id) {
+			localStorage.setItem('userData', JSON.stringify(nextResult));
+			browserHistory.push(`/${nextResult.id}`);
+		}
 	},
 
 	updateCode: function(evt) {
@@ -75,9 +82,10 @@ export const Login = React.createClass({
 					}
 					<Button 
 						type={'submit'} style={styles.button} 
-						text={ codeCreationSuccess ? 'Verify the code' : 'Generate the code' } 
+						text={codeCreationSuccess ? 'Verify the code' : 'Generate the code'} 
 						className={'pt-intent-primary pt-fill pt-large'} 
-						onClick={this.formSubmit} />
+						onClick={this.formSubmit} 
+						loading={this.props.loginData.codeCreationLoading || this.props.loginData.verificationLoading} />
 				</form>
 
 			</div>
