@@ -10,7 +10,7 @@ import configureStore from './configureStore';
 import fetch from 'isomorphic-fetch';
 
 const store = configureStore();
-// ga.initialize('UA-85097FF6-1');
+ga.initialize('UA-91586776-1');
 
 if (/PhantomJS/.test(window.navigator.userAgent)) { require('es6-promise').polyfill(); }
 
