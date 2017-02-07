@@ -136,6 +136,9 @@ export const User = React.createClass({
 								<span style={{textAlign:'center', fontWeight:'lighter'}}> Score: <span style={styles.score}> {Math.floor(score)}</span></span>
 								<div style={{display:'inline-block', verticalAlign: 'middle', paddingLeft:'2em', paddingTop:'1em'}}>
 									<PieChart height={200} width={200}>
+										<Pie isAnimationActive={false} data={chartData} innerRadius={70} outerRadius={100} fill="rgba(102, 102, 102, 0.7)"
+											 stroke="none">
+										</Pie>
 										<Pie data={chartData} innerRadius={70} outerRadius={100} fill="#82ca9d" stroke="none">
                                             {
                                                 chartData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)
