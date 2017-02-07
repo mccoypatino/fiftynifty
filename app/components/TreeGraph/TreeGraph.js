@@ -69,7 +69,6 @@ export const TreeGraph = React.createClass({
         const nodes = nodesList.map(node => {
             // get color by state
             const fillColor = this.colorMap[Object.keys(statesDefaults).indexOf(node.data.state)];
-            console.log(fillColor);
             return (
                 node.data.id &&
 				<g key={node.data.id} className="node"
@@ -91,12 +90,14 @@ export const TreeGraph = React.createClass({
 					  d={this.diagonal(link)} />
             );
         });
-
         return (
 			<div className="tree-container">
 				<style>
                     {css}
 				</style>
+                    <div style={{color:'white'}}>
+                    Add you friends by sending them invites!  you get points for any call they make!
+                    </div>
 
 				<svg height={containerHeight} width='100%'>
                 <g transform={'translate(25,25)'}>

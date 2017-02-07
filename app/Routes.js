@@ -7,8 +7,8 @@ export default (
 		<Route path="/" component={Landing} />
 		<Route path="/leaderboard" component={Leaderboard} />
 		<Route path="/login" component={Login} />
-		<Route path="/:userId" component={User} />
 		<Route path="/more" component={LearnMore} />
+		<Route path="/:userId" component={User} />
 
 		<Route path="*" component={NoMatch} />
 	</Route>
