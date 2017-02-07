@@ -69,7 +69,7 @@ export const TreeGraph = React.createClass({
         const nodes = nodesList.map(node => {
             // get color by state
             const fillColor = this.colorMap[Object.keys(statesDefaults).indexOf(node.data.state)];
-            //console.log(fillColor);
+            console.log(fillColor);
             return (
                 node.data.id &&
 				<g key={node.data.id} className="node"
