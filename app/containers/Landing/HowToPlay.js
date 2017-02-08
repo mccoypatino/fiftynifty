@@ -14,7 +14,7 @@ export const HowToPlay  = React.createClass({
                 <div style={styles.howToPlaySection}>
                     <img src={"static/Icon1.png"}/>
                     <div>
-                        Join the challange by
+                        Join the challenge by
                         filling in your details. This
                         way we can tell you who
                         your local senators are.
