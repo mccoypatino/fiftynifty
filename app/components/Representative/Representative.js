@@ -33,7 +33,7 @@ export const Representative = React.createClass({
 			<div style={styles.container}>
 				<div style={styles.repName}>{repData.first_name} {repData.last_name}</div>
 				<p style={styles.repText}>{repData.chamber === 'senate' ? 'Senator ' : 'Representative '} for {repData.chamber === 'senate' ? repData.state : `district ${repData.district} in ${repData.state}`}</p>
-				<button role={'button'} className={'pt-button'} onClick={this.toggleCallDialog}>Call</button>
+				<button role={'button'} style={styles.button} className={'pt-button  pt-minimal'} onClick={this.toggleCallDialog}>Call</button>
 				<Dialog isOpen={this.state.callDialogOpen} onClose={this.toggleCallDialog} title={`Call your ${repData.chamber === 'senate' ? 'Senator' : 'Representative'}`} style={styles.dialogBox}>
 					<div className="pt-dialog-body">
 						<h4>
@@ -44,7 +44,9 @@ export const Representative = React.createClass({
 						<p>{repData.chamber === 'senate' ? 'Senator ' : 'Representative '} for {repData.chamber === 'senate' ? repData.state : `district ${repData.district} in ${repData.state}`}</p>
 
 						<h6>What do I say?</h6>
-						<p>Descriptions and content here</p>
+						<p>Tell them your name and that you are a constituent,</p>
+						<p>then your message.</p><p> You might ask to be told their position.</p>
+						<p>It’s easy, they want to hear from you.</p>
 
 
 					</div>
@@ -74,5 +76,11 @@ styles = {
     repText: {
         letterSpacing:'0.02em',
 	},
+    button:{
+        color:'white',
+        fontWeight: 'lighter',
+        backgroundColor: '#003d59',
+        letterSpacing:'0.1em',
+    },
 	
 };

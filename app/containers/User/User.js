@@ -10,6 +10,7 @@ import { Invite } from './Invite';
 import {getScore, countStates} from '../../Utilities/UserUtils'
 import { UserNode } from './UserNode';
 import {PieChart, Pie, Cell,Legend, Tooltip} from 'recharts';
+import { Dialog } from '@blueprintjs/core';
 
 let styles;
 
@@ -27,8 +28,13 @@ export const User = React.createClass({
 	getInitialState() {
 		return {
 			reps: [],
+            callDialogOpen: false,
 		};
 	},
+
+    toggleCallDialog: function() {
+        this.setState({ callDialogOpen: !this.state.callDialogOpen });
+    },
 
 	componentWillMount() {
 		this.loadData(this.props.params.userId);
@@ -106,6 +112,16 @@ export const User = React.createClass({
 
 											<div style={styles.repsBox} className={"pt-elevation-3"}>
 												<div style={styles.sectionTitle}>Your Representatives</div>
+													<div style={styles.centered}>
+														<button role={'button'} style={styles.button} className={'pt-button pt-minimal'} onClick={this.toggleCallDialog}>What do I say on the call?</button>
+														<Dialog isOpen={this.state.callDialogOpen} onClose={this.toggleCallDialog} title={'What do I say?'} style={styles.dialogBox}>
+															<div className="pt-dialog-body">
+																<p>Tell them your name and that you are a constituent,</p>
+																<p>then your message.</p><p> You might ask to be told their position.</p>
+																	<p>It’s easy, they want to hear from you.</p>
+															</div>
+														</Dialog>
+													</div>
 
 													{reps.length === 0 &&
 														<div style={styles.centered}>
@@ -126,7 +142,7 @@ export const User = React.createClass({
 
 											</div>
 
-										<p style={styles.orCall}>Or you can call (508) 659-9127 </p>
+										<p style={styles.orCall}>Or you can call <a style={styles.link} href="tel:508-659-9127">(508) 659-9127</a>  and we'll connect you</p>
                                         {isLocalUser &&
 										<div style={styles.centered}>
 											<button type="button" className={'pt-button pt-minimal pt-icon-log-out pt-intent-danger'}
@@ -295,5 +311,14 @@ styles = {
 	scoreStats:{
 		textAlign:'center',
 		paddingTop:'2em',
+	},
+    button:{
+		color:'white',
+        fontWeight: 'lighter',
+        backgroundColor: '#003d59',
+        letterSpacing:'0.1em',
+	},
+	link:{
+		color:'#da022e',
 	}
 };

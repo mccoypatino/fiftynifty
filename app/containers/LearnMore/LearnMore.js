@@ -20,7 +20,7 @@ export const LearnMore = React.createClass({
                         </p>
                         <p>There is a leaderboard so you can track how you are doing.  We will send you a progress text each morning if you like.  You can also see how much of the country your chain is covering.
                         </p>
-                        <p>This is an experiment started by the Viral Communications Group at the MIT Media Lab.  We are operating the challenge and posting the scores.  Our goal is to inspire as many people as possible to take an active role in government by mobilizing their social network.  The prize is bragging rights and a head start on the next challenge.  MIT and the Media Lab have no position on the issues we present or those you choose to express to you congresspeople.
+                        <p>This is an experiment started by the Viral Communications Group at the MIT Media Lab.  We are operating the challenge and posting the scores.  Our goal is to inspire as many people as possible to take an active role in government by mobilizing their social network.  The prize is bragging rights and a head start on the next challenge.  MIT and the Media Lab have no position on the issues we present or those you choose to express to your congresspeople.
                         </p>
                         <div>
                             <Link to={"/"}><button className={"pt-button pt-intent-primary pt-fill"}>Join The Game</button></Link>
@@ -30,7 +30,7 @@ export const LearnMore = React.createClass({
                             <p>To play, sign up above, make calls, and pass the note to friends by sending the link in email, via facebook, or tweet it to your followers.  Check your profile to tell us whether you would like progress notifications.  We presented an issue that we hope you care about, but you are encouraged to say whatever you like.</p>
                             <p>
                                 You sign up with a name that you'd like your friends to see, and a zip code and a phone number.  If we can't figure out who your rep is, we'll ask for an address.  Click the button and we'll make the call to connect you.  That's how we keep score. This is an MIT Media Lab research program being done by Andrew Lippman in the Viral Communications Group to understand the propagation of social activities through social networks.  Your participation is voluntary and there is no compensation for joining.  We will not use any personally identifiable information in our research.  Anything you enter will be encrypted before storage.  We ask that you use a name or nickname so that people you invite can see who it came from.  We also use your name so you can track the progress of your network on the map. You have the option of supressing that information.  We will never present results of our research in a way that allows you to be identified and we will destroy any personal information at the conclusion of the challenge.</p><em>
-                                <p>We welcome you feedback: <a href={'mailto:fiftynifty@media.mit.edu'} style={styles.link}>Contact us at fiftynifty@media.mit.edu</a>
+                                <p>We welcome your feedback: <a href={'mailto:fiftynifty@media.mit.edu'} style={styles.link}>Contact us at fiftynifty@media.mit.edu</a>
                                 </p>
                             </em></small>
 
