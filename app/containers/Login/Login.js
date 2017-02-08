@@ -88,6 +88,15 @@ export const Login = React.createClass({
 						onClick={this.formSubmit} 
 						loading={this.props.loginData.codeCreationLoading || this.props.loginData.verificationLoading} />
 				</form>
+
+				<div style={styles.section}>
+					<div style={styles.title}>Not Registered Yet?</div>
+					<Link to={"/"}><Button style={styles.button}
+										   className={'pt-button pt-intent-primary pt-fill pt-large'}
+										   text={'Click Here to Join The Game'}
+					/>
+					</Link>
+				</div>
 			</div>
 			</div>
 		);
@@ -103,6 +112,9 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps)(Radium(Login));
 
 styles = {
+	section:{
+		padding: '1em',
+	},
     title: {
         fontSize: '2em',
         fontWeight: 'lighter',
