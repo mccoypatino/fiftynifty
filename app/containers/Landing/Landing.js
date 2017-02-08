@@ -85,10 +85,10 @@ export const Landing = React.createClass({
 					<div style={styles.headerSplash} />
 					<div style={styles.headerPresentation}>
 						<div style={styles.headerTextBlock}>
-							<div style={styles.section}>
-							<div style={styles.headerText}>Call your Reps!</div>
-							<div style={styles.headerText}>Collect 50 States!</div>
-							<div style={styles.headerText}>Play for a better Democracy!</div>
+							<div style={styles.section} className={'tk-mrs-eaves-roman-small-caps'}>
+								<div style={styles.headerText}>Call your Reps!</div>
+								<div style={styles.headerText}>Collect 50 States!</div>
+								<div style={styles.headerText}>Play for a better Democracy!</div>
 							</div>
 							<p style={styles.headerTextBody}>Our President’s Executive order halting some legal immigrants is a call to action. We want to call Congresspeople throughout the country to tell them out opinion.  Real phone call matter, so we are starting the fiftynifty challenge to see if you can use your network to get 50 people in 50 states to make a call.  The network that gets the most calls wins, but we all win when we call for an effective democracy.</p>
 							<div style={{width: '100%', textAlign: 'center'}}>
@@ -222,7 +222,9 @@ styles = {
 	},
 	headerText: {
 		maxWidth: '500px',
-		fontWeight: 'bold',
+		fontStyle: 'normal',
+		fontWeight: '400',
+		fontFamily: '"mrs-eaves-roman-small-caps", sans-serif',
 		color: '#cb0027',
 		fontSize: '1.8em',
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
