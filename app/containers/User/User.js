@@ -56,8 +56,8 @@ export const User = React.createClass({
 		return callsWithDist.concat(...childrensCalls);
 	},
 
-	callFunction: function(number) {
-		this.props.dispatch(requestCall(number, this.props.params.userId));
+	callFunction: function(number, name) {
+		this.props.dispatch(requestCall(number, this.props.params.userId, name));
 	},
 
 	geolocateFunction: function(address, zipcode) {

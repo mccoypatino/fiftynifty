@@ -49,7 +49,7 @@ export function requestCall(congressNumber, userId, name) {
 			body: JSON.stringify({
 				congressNumber: congressNumber,
 				userId: userId,
-				name: name,
+				name: encodeURI(name),
 			})
 		})
 		.then((result) => {
