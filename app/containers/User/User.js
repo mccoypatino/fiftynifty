@@ -99,14 +99,7 @@ export const User = React.createClass({
 
 								<div style={styles.title}>
 									<span>{user.name}, {user.state} </span>
-									{isLocalUser && 
-										<button className={'pt-button'} onClick={this.logout}>Logout</button>
-									}
 								</div>
-
-								{/*{true && true &&*/}
-								{/*<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />*/}
-								{/*}*/}
 								{isLocalUser &&
 									<div>
 										<div style={styles.repsWrapper}>
@@ -134,6 +127,12 @@ export const User = React.createClass({
 											</div>
 
 										<p style={styles.orCall}>Or you can call (508) 659-9127 </p>
+                                        {isLocalUser &&
+										<div style={styles.centered}>
+											<button type="button" className={'pt-button pt-minimal pt-icon-log-out pt-intent-danger'}
+													onClick={this.logout}>Logout</button>
+										</div>
+                                        }
 
 									</div>
 								}
@@ -146,7 +145,7 @@ export const User = React.createClass({
 					<Invite url={shareUrl} />
 				}
 
-				<div style = {styles.repsBackground}>
+				<div style = {styles.progressBackground}>
 					<div style = {styles.repsBackgroundSplash}>
 						<div style={styles.progressSection}>
 							<div style={styles.sectionTitle}>{presentName} Progress</div>
@@ -246,13 +245,21 @@ styles = {
 		backgroundColor:"#003d59",
 	},
 	repsBackground: {
-		backgroundImage: 'url("/static/protest.jpg")',
+		backgroundImage: 'url("/static/header.jpg")',
 		backgroundRepeat: 'no-repeat',
 		backgroundPosition: 'center center',
 		backgroundSize: 'cover',
 		top: 0,
 		left: 0,
 	},
+    progressBackground: {
+        backgroundImage: 'url("/static/protest.jpg")',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center center',
+        backgroundSize: 'cover',
+        top: 0,
+        left: 0,
+    },
 	repsBackgroundSplash: {
 		background: 'linear-gradient(rgba(0,60,88, 0.8),rgba(0,60,88, 0.8))',//'#1c435a',
 
