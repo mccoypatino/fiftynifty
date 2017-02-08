@@ -43,7 +43,7 @@ export const App = React.createClass({
 					]} 
 					script={[
 						{ src: "https://use.typekit.net/pwe2pin.js", type: "text/javascript" },
-						{ type: 'text/javascript', innerHTML: `try{Typekit.load({ async: true });}catch(e){}` }
+						{ type: 'text/javascript', innerHTML: `try{Typekit.load({ async: false });}catch(e){}` }
 					]}
 				/> 
 				<Typekit kitId="pwe2pin" />
