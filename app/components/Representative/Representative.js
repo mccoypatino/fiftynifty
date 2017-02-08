@@ -32,7 +32,7 @@ export const Representative = React.createClass({
 		return (
 			<div style={styles.container}>
 				<div style={styles.repName}>{repData.first_name} {repData.last_name}</div>
-				<p style={styles.repText}>{repData.cchamber === 'senate' ? 'Senator ' : 'Representative '} for {repData.chamber === 'senate' ? repData.state : `district ${repData.district} in ${repData.state}`}</p>
+				<p style={styles.repText}>{repData.chamber === 'senate' ? 'Senator ' : 'Representative '} for {repData.chamber === 'senate' ? repData.state : `district ${repData.district} in ${repData.state}`}</p>
 				<button role={'button'} className={'pt-button'} onClick={this.toggleCallDialog}>Call</button>
 				<Dialog isOpen={this.state.callDialogOpen} onClose={this.toggleCallDialog} title={`Call your ${repData.chamber === 'senate' ? 'Senator' : 'Representative'}`} style={styles.dialogBox}>
 					<div className="pt-dialog-body">
