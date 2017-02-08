@@ -6,6 +6,7 @@ import Radium from 'radium';
 import Phone from 'react-phone-number-input';
 import { postUser, getReferralDetails } from './actions';
 import { HowToPlay } from './HowToPlay';
+import { Invite } from '../User/Invite';
 
 let styles;
 
@@ -75,6 +76,8 @@ export const Landing = React.createClass({
 */
 		const refUser = this.props.landingData.referralDetails;
 		const error = this.state.error || this.props.landingData.signupError;
+        const localUserData = localStorage.getItem('userData');
+        const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
 		return (
 			<div style={styles.container}>
 				<div style={styles.header}>
@@ -100,32 +103,52 @@ export const Landing = React.createClass({
 							</div>
 						</div>
 						<div style={{padding: '1.6em'}}>
-						<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
-							{ refUser && <div style={styles.inputHeader}>{refUser.name} Invited You!</div>}
-							<div style={styles.inputHeader}> Join The Challenge</div>
-							<form onSubmit={this.formSubmit} style={styles.form}>
-								<label htmlFor={'name-input'} style={styles.inputLabel}>
-									Name
-									<input id={'name-input'} className={'pt-input pt-large pt-fill'} placeholder={'Nicknames are okay'} value={this.state.name} onChange={(evt)=> this.setState({ name: evt.target.value })} />
-								</label>
-								<label htmlFor={'zip-input'} style={styles.inputLabel}>
-									Zipcode (where you vote)
-									<input id={'zip-input'} type={'number'} className={'pt-input pt-large pt-fill'} placeholder={'Where are you registered?'} value={this.state.zipcode} onChange={this.updateZipcode} />
-								</label>
-								<label htmlFor={'phone-input'} style={styles.inputLabel}>
-									Phone number (to connect you to your reps)
-									<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'781-975-5555'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} />
-								</label>
-								<Button 
-									loading={this.props.landingData.signupLoading} 
-									type={'submit'} style={styles.button} 
-									text={'Join the Challenge'} 
-									className={'pt-intent-primary pt-fill pt-large'} 
-									onClick={this.formSubmit} />
-								<div style={styles.error}>{error}</div>
+                            {!localUser.id &&
+							<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
+                                { refUser && <div style={styles.inputHeader}>{refUser.name} Invited You!</div>}
+								<div style={styles.inputHeader}> Join The Challenge</div>
+								<form onSubmit={this.formSubmit} style={styles.form}>
+									<label htmlFor={'name-input'} style={styles.inputLabel}>
+										Name
+										<input id={'name-input'} className={'pt-input pt-large pt-fill'}
+											   placeholder={'Nicknames are okay'} value={this.state.name}
+											   onChange={(evt) => this.setState({name: evt.target.value})}/>
+									</label>
+									<label htmlFor={'zip-input'} style={styles.inputLabel}>
+										Zipcode (where you vote)
+										<input id={'zip-input'} type={'number'} className={'pt-input pt-large pt-fill'}
+											   placeholder={'Where are you registered?'} value={this.state.zipcode}
+											   onChange={this.updateZipcode}/>
+									</label>
+									<label htmlFor={'phone-input'} style={styles.inputLabel}>
+										Phone number (to connect you to your reps)
+										<Phone country={'US'} className={'pt-input pt-large pt-fill'}
+											   placeholder={'781-975-5555'} value={this.state.phone}
+											   onChange={phone => this.setState({phone: phone})}/>
+									</label>
+									<Button
+										loading={this.props.landingData.signupLoading}
+										type={'submit'} style={styles.button}
+										text={'Join the Challenge'}
+										className={'pt-intent-primary pt-fill pt-large'}
+										onClick={this.formSubmit}/>
+									<div style={styles.error}>{error}</div>
 
-							</form>
-						</div>
+								</form>
+							</div>
+                            }
+							{!!localUser.id &&
+							<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
+								<div style={{paddingBottom:'1em'}}>
+									<Link to={`/${localUser.id}`} >
+										<Button style={styles.button}
+												text={'Call Your Representatives'}
+												className={'pt-intent-danger pt-fill pt-large'}/>
+									</Link>
+								</div>
+								<Invite url={`http://fiftynifty.org/?ref=${localUser.id}`}/>
+							</div>
+							}
 						</div>
 					</div>
 				</div>
