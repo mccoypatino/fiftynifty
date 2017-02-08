@@ -317,6 +317,8 @@ styles = {
         fontWeight: 'lighter',
         backgroundColor: '#003d59',
         letterSpacing:'0.1em',
+        boxShadow:'0 2px #001C2B',
+
 	},
 	link:{
 		color:'#da022e',
