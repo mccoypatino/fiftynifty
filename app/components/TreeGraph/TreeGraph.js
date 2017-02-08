@@ -66,7 +66,7 @@ export const TreeGraph = React.createClass({
         const { data } = this.props;
 
         const treeData = d3.hierarchy(data);
-        const containerHeight = treeData.height*50;
+        const containerHeight = (treeData.height+1)*50;
         const treeLayout = d3.tree()
             .size([containerWidth-50, containerHeight-50]);
         const root = treeLayout(treeData);
