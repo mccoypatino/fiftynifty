@@ -57,14 +57,15 @@ export const Login = React.createClass({
 		const codeCreationSuccess = this.props.loginData.codeCreationSuccess;
 		const verificationError = this.props.loginData.verificationError;
 		return (
+			<div style={styles.login}>
 			<div style={styles.container}>
-				<h1>Login</h1>
+				<div style={styles.title}>Login</div>
 				<form onSubmit={this.formSubmit} style={styles.form}>
 					{
 						!codeCreationSuccess &&
 						<label htmlFor={'phone-input'} style={styles.inputLabel}>
 							Phone number? { codeCreationError && 
-								<div className={'pt-tag pt-minimal pt-intent-danger'} text>An error occured: { codeCreationError }</div>
+								<div className={'pt-tag pt-minimal pt-intent-danger'}>An error occured: { codeCreationError }</div>
 							}
 							<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'781-975-5555'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} />
 						</label>
@@ -74,7 +75,7 @@ export const Login = React.createClass({
 						codeCreationSuccess &&
 						<label htmlFor={'code-input'} style={styles.inputLabel}>
 							Code for { this.state.phone }? { verificationError && 
-								<div className={'pt-tag pt-minimal pt-intent-danger'} text>An error occured: { verificationError }</div>
+								<div className={'pt-tag pt-minimal pt-intent-danger'}>An error occured: { verificationError }</div>
 							}
 							<input id={'code-input'} type={'number'} className={'pt-input pt-large pt-fill'} placeholder={'6-digit code e.g. 568082'} value={this.state.code} onChange={this.updateCode} />
 						</label>
@@ -82,12 +83,21 @@ export const Login = React.createClass({
 					}
 					<Button 
 						type={'submit'} style={styles.button} 
-						text={codeCreationSuccess ? 'Verify the code' : 'Generate the code'} 
+						text={codeCreationSuccess ? 'Verify the code' : 'Generate login code'}
 						className={'pt-intent-primary pt-fill pt-large'} 
 						onClick={this.formSubmit} 
 						loading={this.props.loginData.codeCreationLoading || this.props.loginData.verificationLoading} />
 				</form>
 
+				<div style={styles.section}>
+					<div style={styles.title}>Not Registered Yet?</div>
+					<Link to={"/"}><Button style={styles.button}
+										   className={'pt-button pt-intent-primary pt-fill pt-large'}
+										   text={'Click Here to Join The Game'}
+					/>
+					</Link>
+				</div>
+			</div>
 			</div>
 		);
 	}
@@ -102,6 +112,23 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps)(Radium(Login));
 
 styles = {
+	section:{
+		padding: '1em',
+	},
+    title: {
+        fontSize: '2em',
+        fontWeight: 'lighter',
+        textAlign: 'center',
+        paddingBottom:'1em',
+        color:'white',
+        letterSpacing:'0.1em',
+    },
+	login: {
+        backgroundColor: '#003d59',
+        color:'white',
+		fontWeight:'lighter',
+		minHeight:'95vh',
+	},
 	container: {
 		padding: 'calc(115px + 3em) 1em 3em',
 		maxWidth: '1024px',

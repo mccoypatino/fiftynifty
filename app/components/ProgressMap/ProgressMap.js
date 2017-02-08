@@ -109,6 +109,11 @@ export const ProgressMap  = React.createClass({
 			position: 'relative',
 			width: '100%'
 		};
+		const arcs = getStatesArcs(this.props.user).map((arc)=>{
+            arc.options = {
+                strokeWidth: 0.5,
+                strokeColor: 'rgba(50,50,50, 0.9)',
+            };});
 		const buttonText = this.state.showCallsFlow? "Hide": "Show";
 		const className = this.state.showCallsFlow? "pt-button pt-minimal pt-icon-remove pt-intent-warning" :
 			"pt-button pt-minimal pt-icon-add pt-intent-warning";
@@ -117,7 +122,7 @@ export const ProgressMap  = React.createClass({
 		return (
 			<div>
 			<div ref="container" style={style}></div>
-				{button}
+				{arcs.length>0 && button}
 			</div>
 
 		);

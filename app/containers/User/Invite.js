@@ -40,7 +40,7 @@ export const Invite = React.createClass({
                 <p style={styles.inviteLink}><a href={shareUrl}>{shareUrl}</a></p>
                 <CopyToClipboard style={styles.copyButton} text={shareUrl}
                                  onCopy={() => this.setState({copied: true})}>
-                    <a role="button" className="pt-button pt-minimal"><span className="pt-icon-clipboard"/> Copy to clipboard</a>
+                    <a role="button" className="pt-button pt-minimal"><span className="pt-icon-standard pt-icon-clipboard"/> Copy to clipboard</a>
                 </CopyToClipboard>
                 <div>
                 <div style={styles.network}>

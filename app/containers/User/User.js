@@ -74,9 +74,9 @@ export const User = React.createClass({
 		// const children = user.children || [];
 		const flatCalls = this.returnCalls(user, 0);
 		const score = getScore(user);
-		const shareUrl = "http://fiftynifty.org/?ref="+user.id;//When we get nicer urls, adda "getUrl" function
+		const shareUrl = 'http://fiftynifty.org/?ref=' + user.id; //When we get nicer urls, adda "getUrl" function
 		const statesCount = countStates(user);
-		const chartData = [{name: 'SatesDone', value: statesCount}, {name: 'not Done', value: 50-statesCount}];
+		const chartData = [{ name: 'SatesDone', value: statesCount }, { name: 'not Done', value: 50 - statesCount }];
 		const COLORS = ['#cb0027', 'rgba(0,0,0,0)'];
 		const localUserData = localStorage.getItem('userData');
 		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
@@ -94,36 +94,48 @@ export const User = React.createClass({
 								</div>
 							}
 							<div style={styles.content}>
-								{isLocalUser && 
-									<button className={'pt-button'} onClick={this.logout}>Logout</button>
-								}
+
 								
-								<div style={styles.title}>{user.name}, {user.state}</div>
 
-								<div style={styles.section}>
-									{ isLocalUser && 
-										<div style={styles.repsBox} className={"pt-elevation-3"}>
-											<div style={styles.sectionTitle}>Representatives</div>
-											{reps.length === 0 &&
-											<Spinner />
-											}
-
-											{reps.length > 3 &&
-											<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
-											}
-
-											{reps.length === 3 && reps.map((rep, index)=> {
-												return (
-													<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
-												);
-											})}
-
-											<p>Call: (508) 659-9127</p>
-										</div>
-									}
-
+								<div style={styles.title}>
+									<span>{user.name}, {user.state} </span>
 								</div>
-								<p style={styles.orCall}>Or you can call (508) 659-9127 </p>
+								{isLocalUser &&
+									<div>
+										<div style={styles.repsWrapper}>
+
+											<div style={styles.repsBox} className={"pt-elevation-3"}>
+												<div style={styles.sectionTitle}>Your Representatives</div>
+
+													{reps.length === 0 &&
+														<div style={styles.centered}>
+															<Spinner />
+														</div>
+													}
+
+													{reps.length > 3 &&
+														<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
+													}
+
+													{reps.length === 3 && reps.map((rep, index)=> {
+														return (
+															<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
+														);
+													})}
+												</div>
+
+											</div>
+
+										<p style={styles.orCall}>Or you can call (508) 659-9127 </p>
+                                        {isLocalUser &&
+										<div style={styles.centered}>
+											<button type="button" className={'pt-button pt-minimal pt-icon-log-out pt-intent-danger'}
+													onClick={this.logout}>Logout</button>
+										</div>
+                                        }
+
+									</div>
+								}
 							</div>
 						</div>
 					</div>
@@ -133,7 +145,7 @@ export const User = React.createClass({
 					<Invite url={shareUrl} />
 				}
 
-				<div style = {styles.repsBackground}>
+				<div style = {styles.progressBackground}>
 					<div style = {styles.repsBackgroundSplash}>
 						<div style={styles.progressSection}>
 							<div style={styles.sectionTitle}>{presentName} Progress</div>
@@ -141,13 +153,15 @@ export const User = React.createClass({
 								<span style={{textAlign:'center', fontWeight:'lighter'}}> Score: <span style={styles.score}> {Math.floor(score)}</span></span>
 								<div style={{display:'inline-block', verticalAlign: 'middle', paddingLeft:'2em', paddingTop:'1em'}}>
 									<PieChart height={200} width={200}>
-										<Pie isAnimationActive={false} data={chartData} innerRadius={70} outerRadius={100} fill="rgba(102, 102, 102, 0.7)" stroke="none" />
+										<Pie isAnimationActive={false} data={chartData} innerRadius={70} outerRadius={100} fill="rgba(102, 102, 102, 0.7)"
+											 stroke="none">
+										</Pie>
 										<Pie data={chartData} innerRadius={70} outerRadius={100} fill="#82ca9d" stroke="none">
 											{
 												chartData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)
-											}
-										</Pie>
-										<text x={100} y={100} textAnchor="middle" dominantBaseline="middle" fill="white" fontWeight="lighter">
+											}</Pie>
+										<text x={100} y={100} textAnchor="middle" dominantBaseline="middle"
+											  fill="white" fontWeight="lighter">
 											{statesCount} / 50 states
 										</text>
 									</PieChart>
@@ -166,6 +180,7 @@ export const User = React.createClass({
 					</div>
 				</div>
 			</div>
+
 		);
 	}
 });
@@ -230,13 +245,21 @@ styles = {
 		backgroundColor:"#003d59",
 	},
 	repsBackground: {
-		backgroundImage: 'url("/static/protest.jpg")',
+		backgroundImage: 'url("/static/header.jpg")',
 		backgroundRepeat: 'no-repeat',
 		backgroundPosition: 'center center',
 		backgroundSize: 'cover',
 		top: 0,
 		left: 0,
 	},
+    progressBackground: {
+        backgroundImage: 'url("/static/protest.jpg")',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center center',
+        backgroundSize: 'cover',
+        top: 0,
+        left: 0,
+    },
 	repsBackgroundSplash: {
 		background: 'linear-gradient(rgba(0,60,88, 0.8),rgba(0,60,88, 0.8))',//'#1c435a',
 
