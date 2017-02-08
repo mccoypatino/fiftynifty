@@ -37,7 +37,7 @@ export function getUser(userId) {
 	};
 }
 
-export function requestCall(congressNumber, userId) {
+export function requestCall(congressNumber, userId, name) {
 	return (dispatch) => {
 		dispatch({ type: REQUEST_CALL_LOAD });
 		return clientFetch('/api/callfromserver', {
@@ -49,6 +49,7 @@ export function requestCall(congressNumber, userId) {
 			body: JSON.stringify({
 				congressNumber: congressNumber,
 				userId: userId,
+				name: encodeURI(name),
 			})
 		})
 		.then((result) => {
