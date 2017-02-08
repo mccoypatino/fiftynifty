@@ -36,8 +36,9 @@ export const Representative = React.createClass({
 				<Dialog isOpen={this.state.callDialogOpen} onClose={this.toggleCallDialog} title={`Call your ${repData.chamber === 'senate' ? 'Senator' : 'Representative'}`} style={styles.dialogBox}>
 					<div className="pt-dialog-body">
 						<h4>
+
 							{repData.first_name} {repData.last_name}
-							<button role={'button'} className={'pt-button pt-intent-primary'} onClick={this.callNumber}>Click to Connect</button>
+							<span style={{padding:'1em'}}> <button role={'button'} className={'pt-button pt-intent-primary'} onClick={this.callNumber}>Click to Connect</button></span>
 						</h4>
 						<p>{repData.chamber === 'senate' ? 'Senator ' : 'Representative '} for {repData.chamber === 'senate' ? repData.state : `district ${repData.district} in ${repData.state}`}</p>
 

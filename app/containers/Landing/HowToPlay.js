@@ -34,13 +34,13 @@ export const HowToPlay  = React.createClass({
                 <div style={styles.howToPlaySection}>
                     <img src={"static/Icon3.png"}/>
                     <div>
-                        Share the link with your friends in other states, when someone in you network does the same, you get the points.
+                        Share the link with your friends in other states, when someone in your network does the same, you get the points.
                     </div>
                 </div>
                 <div style={styles.howToPlaySection}>
                     <img src={"static/Icon4.png"}/>
                     <div>
-                        When you get someone from all 50 states make a call, you win!
+                        When you get someone from all 50 states to make a call, you win!
                     </div>
                 </div>
             </div>
