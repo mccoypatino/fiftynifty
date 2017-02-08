@@ -83,7 +83,7 @@ export const Login = React.createClass({
 					}
 					<Button 
 						type={'submit'} style={styles.button} 
-						text={codeCreationSuccess ? 'Verify the code' : 'Generate login code'}
+						text={codeCreationSuccess ? 'Verify the code' : 'Text Me a Verification Code'}
 						className={'pt-intent-primary pt-fill pt-large'} 
 						onClick={this.formSubmit} 
 						loading={this.props.loginData.codeCreationLoading || this.props.loginData.verificationLoading} />
