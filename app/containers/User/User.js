@@ -142,7 +142,7 @@ export const User = React.createClass({
 
 											</div>
 
-										<p style={styles.orCall}>Or you can call <a style={styles.link} href="tel:508-659-9127">(508) 659-9127</a>  and we'll connect you</p>
+										{/*<p style={styles.orCall}>Or you can call <a style={styles.link} href="tel:508-659-9127">(508) 659-9127</a>  and we'll connect you</p>*/}
                                         {isLocalUser &&
 										<div style={styles.centered}>
 											<button type="button" className={'pt-button pt-minimal pt-icon-log-out pt-intent-danger'}
