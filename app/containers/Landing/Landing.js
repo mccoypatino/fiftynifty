@@ -90,7 +90,7 @@ export const Landing = React.createClass({
 							<div style={styles.headerText}>Collect 50 States!</div>
 							<div style={styles.headerText}>Play for a better Democracy!</div>
 							</div>
-							<p style={styles.headerTextBody}>Our President’s Executive order halting some legal immigrants is a call to action. We want to call Congresspeople throughout the country to tell them out opinion.  Real phone call matter, so we are starting the fiftynifty challenge to see if you can use your network to get 50 people in 50 states to make a call.  The network that gets the most calls wins, but we all win when we call for an effective democracy.</p>
+							<p style={styles.headerTextBody}>Our President’s Executive order halting some legal immigrants is a call to action. We want to call Congresspeople throughout the country to tell them our opinion.  Real phone call matter, so we are starting the Fifty Nifty challenge to see if you can use your network to get 50 people in 50 states to make a call.  The network that gets the most calls wins, but we all win when we call for an effective democracy.</p>
 							<div style={{width: '100%', textAlign: 'center'}}>
 								<div >
 								<a href="#howToPlay"><Button
@@ -104,8 +104,8 @@ export const Landing = React.createClass({
 						</div>
 						<div style={{padding: '1.6em'}}>
                             {!localUser.id &&
-							<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
-                                { refUser && <div style={styles.inputHeader}>{refUser.name} Invited You!</div>}
+							<div id="join" style={styles.headerCall} className={'pt-card pt-elevation-3'}>
+								{ refUser && <div style={{textAlign:'center'}}><div style={styles.headerText}>{refUser.name} Invited You!</div></div>}
 								<div style={styles.inputHeader}> Join The Challenge</div>
 								<form onSubmit={this.formSubmit} style={styles.form}>
 									<label htmlFor={'name-input'} style={styles.inputLabel}>
@@ -152,7 +152,7 @@ export const Landing = React.createClass({
 						</div>
 					</div>
 				</div>
-				<HowToPlay/>
+				<HowToPlay localUser={localUser}/>
 				</div>
 		);
 	}

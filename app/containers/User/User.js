@@ -114,10 +114,15 @@ export const User = React.createClass({
 												<div style={styles.sectionTitle}>Your Representatives</div>
 													<div style={styles.centered}>
 														<button role={'button'} style={styles.button} className={'pt-button pt-minimal'} onClick={this.toggleCallDialog}>How to call?</button>
-														<Dialog isOpen={this.state.callDialogOpen} onClose={this.toggleCallDialog} title={'What do I say?'} style={styles.dialogBox}>
+														<Dialog isOpen={this.state.callDialogOpen} onClose={this.toggleCallDialog} title={'How To Call'} style={styles.dialogBox}>
 															<div className="pt-dialog-body">
-																<div>When you click on the "call" button under a representative name, we'll call you and connect you to that rep.</div>
-																<div style={{paddingTop:'1em'}}>Tell them your name and that you are a constituent,
+																<div>When you press call, we will dial your representative and call you back automatically.
+																	Answer the call and you will be directly connected.
+																	Don’t worry about the actual number you see, it is our dialer.
+																</div>
+																<div style={{paddingTop:'1em'}}>
+																	<h4>What Do I Say?</h4>
+																	Tell them your name and that you are a constituent,
 																then your message. You might ask to be told their position.
 																	It’s easy, they want to hear from you.</div>
 															</div>
