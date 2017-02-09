@@ -322,5 +322,6 @@ styles = {
 	},
 	link:{
 		color:'#da022e',
+		fontWeight:'bold',
 	}
 };

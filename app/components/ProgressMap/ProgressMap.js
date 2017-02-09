@@ -8,6 +8,29 @@ import objectAssign from 'object-assign';
 import Radium from 'radium';
 import {getStatesArcs} from '../../Utilities/UserUtils'
 
+const map = function (val, in_min, in_max, out_min, out_max) {
+    return (val - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+};
+
+export const ShowButton  = React.createClass({
+    propTypes: {
+        show: PropTypes.bool,
+        text:PropTypes.string,
+		onClick:PropTypes.func,
+    },
+
+    render() {
+        const buttonText = this.props.show? "Hide": "Show";
+        const className = this.props.show? "pt-button pt-minimal pt-icon-remove pt-intent-warning" :
+            "pt-button pt-minimal pt-icon-add pt-intent-warning";
+        const button = (<div style={{textAlign:'center'}}>
+			<button type={"button"} className={className} onClick={this.props.onClick}>{buttonText} {this.props.text}</button></div>);
+        return button
+	}
+
+});
+
+
 export const ProgressMap  = React.createClass({
 	propTypes: {
 		callsData: PropTypes.array,
@@ -15,12 +38,19 @@ export const ProgressMap  = React.createClass({
 	},
 
     getInitialState() {
-        return {showCallsFlow: false};
+        return {
+        	showCallsFlow: false,
+            showCallsCount: false,
+        };
     },
 
 	toggleCallsFlow:function() {
         this.setState({showCallsFlow:!this.state.showCallsFlow});
 	},
+
+    toggleCallsCount:function() {
+        this.setState({showCallsCount:!this.state.showCallsCount});
+    },
 
 	reducedData: function(){
 		let statesCount = {};
@@ -47,12 +77,64 @@ export const ProgressMap  = React.createClass({
 		return objectAssign({}, statesDefaults, statesCount);
 	},
 
+	bubblesData: function() {
+        let bubblesData = [];
+        let statesCount = {};
+        let maxVal = 1;
+        if (this.props.callsData.length>0) {
+            this.props.callsData.forEach((call)=>
+            {
+                if (statesCount[call.state]) {
+                    statesCount[call.state].colorValue+=(1/Math.pow(2,call.distance));
+                    statesCount[call.state].value+=1;
+                    maxVal = Math.max(maxVal, statesCount[call.state].value);
+                }
+                else {
+                    statesCount[call.state] = {
+                        'code': call.state,
+                        'colorValue': (1 / Math.pow(2, call.distance)),
+                        'value': 1
+                    };
+                }
+            });
+            Object.keys(statesCount).forEach((state)=> {
+            	const r = map(statesCount[state].value, 0, maxVal, 0, 40);
+                bubblesData.push({centered: state,  radius:r, value:statesCount[state].value}); //this.linearPalleteScale(statesCount[state].colorValue);
+            });
+
+        }
+        return bubblesData;
+	},
+
 	renderMap: function(){
 		return new Datamap({
 			element: this.refs.container,
 			scope: 'usa',
 			responsive: true,
 			data: this.reducedData(),
+            arcConfig: {
+                strokeColor: '#898989',
+                strokeWidth: 1,
+                arcSharpness: 1,
+                animationSpeed: 2000,
+            },
+            bubblesConfig: {
+                fillOpacity: 0.3,
+                borderColor: '#444',
+                borderWidth: 0.5,
+                popupOnHover: true,
+                highlightOnHover: true,
+                highlightFillColor: '#295a6d',
+                highlightBorderColor: 'rgba(250, 15, 160, 0.2)',
+                highlightBorderWidth: 2,
+                highlightBorderOpacity: 1,
+                highlightFillOpacity: 0.85,
+                popupTemplate: function(geography, data) {
+                    if (data && data.value) {
+                        return '<div class="hoverinfo"><strong>' + geography.centered + ', ' + data.value + '</strong></div>';
+                    }
+                },
+            },
 			geographyConfig: {
 				borderWidth: 0.5,
 				highlightFillColor: '#8b8b8b',
@@ -89,14 +171,6 @@ export const ProgressMap  = React.createClass({
 
 	componentDidUpdate: function(){
 		this.datamap.updateChoropleth(this.reducedData());
-		const arcs = this.state.showCallsFlow? getStatesArcs(this.props.user).map((arc)=>{
-                arc.options = {
-                    strokeWidth: 0.5,
-                    strokeColor: 'rgba(50,50,50, 0.9)',
-                };
-                return arc;
-            }) : [];
-		this.datamap.arc(arcs);
 	},
 
 	componentWillUnmount: function(){
@@ -109,20 +183,21 @@ export const ProgressMap  = React.createClass({
 			position: 'relative',
 			width: '100%'
 		};
-		const arcs = getStatesArcs(this.props.user).map((arc)=>{
-            arc.options = {
-                strokeWidth: 0.5,
-                strokeColor: 'rgba(50,50,50, 0.9)',
-            };});
-		const buttonText = this.state.showCallsFlow? "Hide": "Show";
-		const className = this.state.showCallsFlow? "pt-button pt-minimal pt-icon-remove pt-intent-warning" :
-			"pt-button pt-minimal pt-icon-add pt-intent-warning";
-		const button = (<div style={{textAlign:'center'}}>
-			<button type={"button"} className={className} onClick={this.toggleCallsFlow}>{buttonText} Calls Flow</button></div>)
+		const arcsCount = getStatesArcs(this.props.user).length;
+		const bubblesCount = this.bubblesData().length;
+
+        const arcs = this.state.showCallsFlow? getStatesArcs(this.props.user) : [];
+        const bubbles = this.state.showCallsCount? this.bubblesData():  [];
+        if (this.datamap) {
+            this.datamap.arc(arcs);
+            this.datamap.bubbles(bubbles);
+		}
+
 		return (
 			<div>
 			<div ref="container" style={style}></div>
-				{arcs.length>0 && button}
+				{arcsCount>0 && <ShowButton show={this.state.showCallsFlow} text="Invites Flow" onClick={this.toggleCallsFlow}/>}
+				{bubblesCount>0 && <ShowButton show={this.state.showCallsCount} text="Calls Count" onClick={this.toggleCallsCount}/>}
 			</div>
 
 		);
