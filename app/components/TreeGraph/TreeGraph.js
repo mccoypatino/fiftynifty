@@ -43,12 +43,6 @@ export const TreeGraph = React.createClass({
     render() {
         const containerWidth  = this.state.treeWidth? this.state.treeWidth : 0;
         const css = `
-					.node text {
-					font: 5pt sans-serif;
-				}
-					.node--internal text {
-					text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
-				}
 					.link {
 					fill: none;
 					stroke: #E0E0E0;
@@ -84,7 +78,7 @@ export const TreeGraph = React.createClass({
 					<circle r="7" style={{fill:`${fillColor}`, stroke:'none'}}
                         onMouseMove={this.showToolTip(event)} onMouseOut={this.hideToolTip()} />
                     <a href={`/${node.data.id}`}>
-                        <text y="2pt" textAnchor="middle">{this.nameToInitials(node.data.name)}</text>
+                        <text y="2pt" fontSize="6pt" fontFamily="sans-serif" textAnchor="middle">{this.nameToInitials(node.data.name)}</text>
                     </a>
                     <title>{node.data.name} {node.data.state}</title>
 				</g>
@@ -95,7 +89,7 @@ export const TreeGraph = React.createClass({
         const links = linksList.map(link => {
             return (
 				<path key={`${link.source.data.id}-${link.target.data.id}`} className="link"
-					  d={this.diagonal(link)} />
+					  d={this.diagonal(link)} fill="none" stroke="#E0E0E0" strokeOpacity="1" strokeWidth="1.5px"/>
             );
         });
         return (

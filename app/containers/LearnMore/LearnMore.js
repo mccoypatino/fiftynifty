@@ -25,8 +25,17 @@ export const LearnMore = React.createClass({
                         <div>
                             <Link to={"/"}><button className={"pt-button pt-intent-primary pt-fill"}>Join The Game</button></Link>
                         </div>
+                        <div>
+                            As you invite more friends to the game - your network will grow will look similar to this:
+                            <div style={{width:'100%', textAlign:'center'}}><img style={{width:'90%'}} src={'static/network.png'}/></div>
+                        </div>
+                        <div>
+                            And as your friends make calls and invite more friends, your progress map will start looking like this:
+                        <div style={{width:'100%', textAlign:'center'}}><img style={{width:'90%'}} src={'static/map.png'}/></div>
 
-                        <small><p> Hints and a guide</p>
+                        </div>
+
+                        <small><p style={styles.title}> Hints and a guide</p>
                             <p>To play, sign up above, make calls, and pass the note to friends by sending the link in email, via facebook, or tweet it to your followers.  Check your profile to tell us whether you would like progress notifications.  We presented an issue that we hope you care about, but you are encouraged to say whatever you like.</p>
                             <p>
                                 You sign up with a name that you'd like your friends to see, and a zip code and a phone number.  If we can't figure out who your rep is, we'll ask for an address.  Click the button and we'll make the call to connect you.  That's how we keep score. This is an MIT Media Lab research program being done by Andrew Lippman in the Viral Communications Group to understand the propagation of social activities through social networks.  Your participation is voluntary and there is no compensation for joining.  We will not use any personally identifiable information in our research.  Anything you enter will be encrypted before storage.  We ask that you use a name or nickname so that people you invite can see who it came from.  We also use your name so you can track the progress of your network on the map. You have the option of supressing that information.  We will never present results of our research in a way that allows you to be identified and we will destroy any personal information at the conclusion of the challenge.</p><em>
@@ -48,6 +57,56 @@ export const LearnMore = React.createClass({
                             {/*Add Red Balloon challenge note*/}
 
                         <p>Remember the challenge! 50 calls in 50 states. Multiplied by all of us.</p>
+                    </div>
+                    <div>
+                        <Link to={"/"}><button className={"pt-button pt-intent-primary pt-fill"}>Join Now</button></Link>
+                    </div>
+                    <div>
+                        <h3 style={styles.title}>  Closing the Borders </h3>
+                        <p> The new Exectuive Order has thrown us into turmoil.
+                            Whether you agree with the order, are confused by it,
+                            or are think our government ought to be more thoughtful in its actions,
+                            now is the time to make your opinion known by <i> calling your congressman!</i></p>
+
+                            <p>We think the order is bad policy and bad democracy.
+                                Guests and immigrants make America strong, increase the economy more than trade deals,
+                                and do not take American jobs.
+                                Neither do immigrants from the seven proscribed countries
+                                <a style={styles.link} href="https://www.nytimes.com/2017/02/07/business/economy/restricting-immigration-would-make-america-smaller-not-greater.html?ribbon-ad-idx=2&rref=business&module=Ribbon&version=origin&region=Header&action=click&contentCollection=Business%20Day&pgtype=article"> terrorize us.</a>
+                            </p>
+                            <p>Appeals courts judges so far agree with us that it is illegal.
+                                The president has some authority to place emergency restrictions,
+                                but there is no emergency, and he cannot circumvent the rest of the constitution's
+                                prohibitions on religious discrimination or due process.
+                                No doubt this will end up in the Supreme Court but we hope that
+                                your action on this issue will stop it before then.
+                                None of us want an ill-conceived, hastily-drawn memo to
+                                become a Supreme Court matter. Far better that they make measured
+                                opinions on grown-up issues.
+                            </p>
+
+                            <p>Many of us in academia are especially impacted directly by this.
+                                International faculty and students make up a significant proportion
+                                of the academic community and once on a university campus, we are all equals.
+                                Us universities have an obligation to America that is deeply felt.
+                                And they also have an <a  style={styles.link} href="http://news.mit.edu/2017/letter-community-update-regarding-executive-order-0130"> obligation
+                                to the world. </a>
+                            </p>
+
+                                <p>CEO's who support Trump question the wisdom of this order.
+                                    Henry Ford stood for upward mobility, according to the
+                                    <a  style={styles.link} href="http://money.cnn.com/2017/01/30/technology/mit-cmu-presidents-immigration-ban/"> current Ford CEO.</a>  Even if you support the president and agree with his stated goal to keep us safe,
+                                    you might wish to tell your congressmen and women that you want to give Trump a chance,
+                                    but you want him to act more responsibly.</p>
+                                <p>No matter what you think, now is the time to mobilize your network to make a phone call.
+                                    You should also consider that even if you think you vote means nothing, your call means a lot.
+                                    Representatives know that an active caller is a potential voter, and they count all votes.
+                                    And all calls.  There are only a few ways to
+                                    make democracy work:  voting is the broadest and most important one.
+                                    But calling is more specific and more immediate.
+                                    They can't poll or ask you about every issue, but you <em>can</em>
+                                    tell them how you feel about the important ones.</p>
+
                     </div>
                     <div>
                         <Link to={"/"}><button className={"pt-button pt-intent-primary pt-fill"}>Join Now</button></Link>
