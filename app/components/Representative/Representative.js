@@ -46,7 +46,7 @@ export const Representative = React.createClass({
 						<p>Tell them your name and that you are a constituent,</p>
 						<p>then your message.</p><p> You might ask to be told their position.</p>
 						<p>It’s easy, they want to hear from you.</p>
-						<p><div><b>We’ll call your Congressperson and call you back.  Answer the phone to be connected</b></div></p>
+						<div><b>We’ll call your Congressperson and call you back.  Answer the phone to be connected</b></div>
 
 
 					</div>
