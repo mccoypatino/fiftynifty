@@ -5,6 +5,11 @@ import { Link } from 'react-router';
 let styles;
 
 export const HowToPlay  = React.createClass({
+
+    propTypes: {
+        localUser: PropTypes.object,
+    },
+
     render() {
         return(
         <div style={styles.section}>
@@ -12,7 +17,7 @@ export const HowToPlay  = React.createClass({
             <div style={styles.sectionHeader} id="howToPlay">How to Play</div>
             <div style={styles.iconsTable}>
                 <div style={styles.howToPlaySection}>
-                    <img src={"static/Icon1.png"}/>
+                    <a href="#join"><img src={"static/Icon1.png"}/></a>
                     <div>
                         Join the challenge by
                         filling in your details. This
@@ -21,24 +26,24 @@ export const HowToPlay  = React.createClass({
                     </div>
                 </div>
                 <div style={styles.howToPlaySection}>
-                    <img src={"static/Icon2.png"}/>
+                    {this.props.localUser.id && <Link to={`/${this.props.localUser.id}`}><img src={"static/Icon2.png"}/></Link>}
+                    {!this.props.localUser.id && <a href="#join"><img src={"static/Icon2.png"}/></a>}
                     <div>
-                        Call your local senator
-                        and talk to them about
-                        the political issues you
-                        have.
+                        Call your Representative or Senator and talk
+                        to them about an issue you choose.
                     </div>
                 </div>
             </div>
             <div style={styles.iconsTable}>
                 <div style={styles.howToPlaySection}>
-                    <img src={"static/Icon3.png"}/>
+                    {this.props.localUser.id && <Link to={`/${this.props.localUser.id}`}><img src={"static/Icon3.png"}/></Link>}
+                    {!this.props.localUser.id && <a href="#join"><img src={"static/Icon3.png"}/></a>}
                     <div>
                         Share the link with your friends in other states, when someone in your network does the same, you get the points.
                     </div>
                 </div>
                 <div style={styles.howToPlaySection}>
-                    <img src={"static/Icon4.png"}/>
+                    <Link to={"/leaderboard"}><img src={"static/Icon4.png"}/></Link>
                     <div>
                         When you get someone from all 50 states to make a call, you win!
                     </div>

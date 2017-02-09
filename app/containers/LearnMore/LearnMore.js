@@ -64,49 +64,30 @@ export const LearnMore = React.createClass({
                     <div>
                         <h3 style={styles.title}>  Closing the Borders </h3>
                         <p> The new Exectuive Order has thrown us into turmoil.
-                            Whether you agree with the order, are confused by it,
-                            or are think our government ought to be more thoughtful in its actions,
-                            now is the time to make your opinion known by <i> calling your congressman!</i></p>
+                            Whether you agree with the order, are confused by it, or are think our government
+                            ought to be more thoughtful in its actions, now is the time to make your opinion known by
+                            <i> calling your congressman!</i></p>
 
-                            <p>We think the order is bad policy and bad democracy.
-                                Guests and immigrants make America strong, increase the economy more than trade deals,
-                                and do not take American jobs.
+                            <p>Many think the order is bad policy and bad democracy.
+                                They feel that guests and immigrants make America strong,
+                                increase the economy more than trade deals, and do not take American jobs.
                                 Neither do immigrants from the seven proscribed countries
-                                <a style={styles.link} href="https://www.nytimes.com/2017/02/07/business/economy/restricting-immigration-would-make-america-smaller-not-greater.html?ribbon-ad-idx=2&rref=business&module=Ribbon&version=origin&region=Header&action=click&contentCollection=Business%20Day&pgtype=article"> terrorize us.</a>
-                            </p>
-                            <p>Appeals courts judges so far agree with us that it is illegal.
-                                The president has some authority to place emergency restrictions,
-                                but there is no emergency, and he cannot circumvent the rest of the constitution's
-                                prohibitions on religious discrimination or due process.
-                                No doubt this will end up in the Supreme Court but we hope that
-                                your action on this issue will stop it before then.
-                                None of us want an ill-conceived, hastily-drawn memo to
-                                become a Supreme Court matter. Far better that they make measured
-                                opinions on grown-up issues.
-                            </p>
+                                <a style={styles.link} href="https://www.nytimes.com/2017/02/07/business/economy/restricting-immigration-would-make-america-smaller-not-greater.html?ribbon-ad-idx=2&rref=business&module=Ribbon&version=origin&region=Header&action=click&contentCollection=Business%20Day&pgtype=article"> terrorize us.</a> </p>
+                            <p>Many others support the ban in the interests of keeping the country safe.
+                                President Trump is following through on the promise he made during the campaign.
+                                Many voted for him based on his promises.</p>
 
-                            <p>Many of us in academia are especially impacted directly by this.
-                                International faculty and students make up a significant proportion
-                                of the academic community and once on a university campus, we are all equals.
-                                Us universities have an obligation to America that is deeply felt.
-                                And they also have an <a  style={styles.link} href="http://news.mit.edu/2017/letter-community-update-regarding-executive-order-0130"> obligation
-                                to the world. </a>
-                            </p>
 
-                                <p>CEO's who support Trump question the wisdom of this order.
-                                    Henry Ford stood for upward mobility, according to the
-                                    <a  style={styles.link} href="http://money.cnn.com/2017/01/30/technology/mit-cmu-presidents-immigration-ban/"> current Ford CEO.</a>  Even if you support the president and agree with his stated goal to keep us safe,
-                                    you might wish to tell your congressmen and women that you want to give Trump a chance,
-                                    but you want him to act more responsibly.</p>
-                                <p>No matter what you think, now is the time to mobilize your network to make a phone call.
-                                    You should also consider that even if you think you vote means nothing, your call means a lot.
-                                    Representatives know that an active caller is a potential voter, and they count all votes.
-                                    And all calls.  There are only a few ways to
-                                    make democracy work:  voting is the broadest and most important one.
-                                    But calling is more specific and more immediate.
-                                    They can't poll or ask you about every issue, but you <em>can</em>
-                                    tell them how you feel about the important ones.</p>
-
+                            <p>Yet others want to support the President but think that he acted rashly and might have been more circumspect
+                                were his full cabinet in place to temper and fine tune his actions.</p>
+                            <p>No matter what you think, now is the time to mobilize your network to make a phone call.
+                                You should also consider that even if you think you vote means nothing, your call means a lot.
+                                Representatives know that an active caller is a potential voter, and they count all votes.
+                                And all calls.  There are only a few ways to
+                                make democracy work:  voting is the broadest and most important one.
+                                But calling is more specific and more immediate.
+                                They can't poll or ask you about every issue, but you <em>can</em> t
+                                ell them how you feel about the important ones.</p>
                     </div>
                     <div>
                         <Link to={"/"}><button className={"pt-button pt-intent-primary pt-fill"}>Join Now</button></Link>
