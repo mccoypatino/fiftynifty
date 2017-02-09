@@ -113,12 +113,13 @@ export const User = React.createClass({
 											<div style={styles.repsBox} className={"pt-elevation-3"}>
 												<div style={styles.sectionTitle}>Your Representatives</div>
 													<div style={styles.centered}>
-														<button role={'button'} style={styles.button} className={'pt-button pt-minimal'} onClick={this.toggleCallDialog}>What do I say on the call?</button>
+														<button role={'button'} style={styles.button} className={'pt-button pt-minimal'} onClick={this.toggleCallDialog}>How to call?</button>
 														<Dialog isOpen={this.state.callDialogOpen} onClose={this.toggleCallDialog} title={'What do I say?'} style={styles.dialogBox}>
 															<div className="pt-dialog-body">
-																<p>Tell them your name and that you are a constituent,</p>
-																<p>then your message.</p><p> You might ask to be told their position.</p>
-																	<p>It’s easy, they want to hear from you.</p>
+																<div>When you click on the "call" button under a representative name, we'll call you and connect you to that rep.</div>
+																<div style={{paddingTop:'1em'}}>Tell them your name and that you are a constituent,
+																then your message. You might ask to be told their position.
+																	It’s easy, they want to hear from you.</div>
 															</div>
 														</Dialog>
 													</div>
@@ -323,5 +324,9 @@ styles = {
 	link:{
 		color:'#da022e',
 		fontWeight:'bold',
-	}
+	},
+    dialogBox: {
+        maxWidth: '100%',
+        top: '10%',
+    },
 };
