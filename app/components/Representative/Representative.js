@@ -42,11 +42,11 @@ export const Representative = React.createClass({
 							<span style={{padding:'1em'}}> <button role={'button'} className={'pt-button pt-intent-primary'} onClick={this.callNumber}>Click to Connect</button></span>
 						</h4>
 						<p>{repData.chamber === 'senate' ? 'Senator ' : 'Representative '} for {repData.chamber === 'senate' ? repData.state : `district ${repData.district} in ${repData.state}`}</p>
-
 						<h6>What do I say?</h6>
 						<p>Tell them your name and that you are a constituent,</p>
 						<p>then your message.</p><p> You might ask to be told their position.</p>
 						<p>It’s easy, they want to hear from you.</p>
+						<div><b>We’ll call your Congressperson and call you back.  Answer the phone to be connected</b></div>
 
 
 					</div>

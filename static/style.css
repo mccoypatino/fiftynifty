@@ -41,7 +41,7 @@ input[type=number]::-webkit-outer-spin-button {
     color: black;
 }
 
-button, div, p {
+button {
     -webkit-user-select: none;  /* Chrome all / Safari all */
     -moz-user-select: none;     /* Firefox all */
     -ms-user-select: none;      /* IE 10+ */
@@ -50,6 +50,7 @@ button, div, p {
 
 a {
     color: inherit;
+    cursor: pointer;
 
 }
 

@@ -7,6 +7,8 @@ import Phone from 'react-phone-number-input';
 import { postUser, getReferralDetails } from './actions';
 import { HowToPlay } from './HowToPlay';
 import { Invite } from '../User/Invite';
+import Scrollchor from 'react-scrollchor';
+import MediaQuery from 'react-responsive';
 
 let styles;
 
@@ -78,6 +80,66 @@ export const Landing = React.createClass({
 		const error = this.state.error || this.props.landingData.signupError;
         const localUserData = localStorage.getItem('userData');
         const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
+        const inviteForm = (
+			<div style={{padding: '1.6em'}}>
+				<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
+					<div style={{paddingBottom:'1em'}}>
+						<Link to={`/${localUser.id}`} >
+							<Button style={styles.button}
+									text={'Call Your Representatives'}
+									className={'pt-intent-danger pt-fill pt-large'}/>
+						</Link>
+					</div>
+					<Invite url={`http://fiftynifty.org/?ref=${localUser.id}`}/>
+				</div>
+			</div>
+		);
+        const refText = refUser && <div style={{textAlign:'center'}}><div style={styles.headerText}>{refUser.name} Invited You</div></div>
+        const joinForm = (
+			<div style={{padding: '1.6em'}}>
+				<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
+                    { refText }
+					<div style={styles.inputHeader}> Join The Challenge</div>
+					<form onSubmit={this.formSubmit} style={styles.form}>
+						<label htmlFor={'name-input'} style={styles.inputLabel}>
+							Name
+							<input id={'name-input'} className={'pt-input pt-large pt-fill'}
+								   placeholder={'Nicknames are okay'} value={this.state.name}
+								   onChange={(evt) => this.setState({name: evt.target.value})}/>
+						</label>
+						<label htmlFor={'zip-input'} style={styles.inputLabel}>
+							Zipcode (where you vote)
+							<input id={'zip-input'} type={'number'} className={'pt-input pt-large pt-fill'}
+								   placeholder={'Where are you registered?'} value={this.state.zipcode}
+								   onChange={this.updateZipcode}/>
+						</label>
+						<label htmlFor={'phone-input'} style={styles.inputLabel}>
+							Phone number (to connect you to your reps)
+							<Phone country={'US'} className={'pt-input pt-large pt-fill'}
+								   placeholder={'781-975-5555'} value={this.state.phone}
+								   onChange={phone => this.setState({phone: phone})}/>
+						</label>
+						<Button
+							loading={this.props.landingData.signupLoading}
+							type={'submit'} style={styles.button}
+							text={'Join the Challenge'}
+							className={'pt-intent-primary pt-fill pt-large'}
+							onClick={this.formSubmit}/>
+						<div style={styles.error}>{error}</div>
+					</form>
+				</div>
+			</div>
+        );
+        const joinNowButton = (
+			<div style={{width: '100%', textAlign: 'center'}}>
+				<div >
+					<Scrollchor to="#join"><Button
+						role={"button"}
+						className={'pt-fill pt-button pt-intent-primary'}>Join Now</Button>
+					</Scrollchor>
+				</div>
+			</div>
+		);
 		return (
 			<div style={styles.container}>
 				<div style={styles.header}>
@@ -90,69 +152,26 @@ export const Landing = React.createClass({
 								<div style={styles.headerText}>Collect 50 States!</div>
 								<div style={styles.headerText}>Play for a better Democracy!</div>
 							</div>
-							<p style={styles.headerTextBody}>Our President’s Executive order halting some legal immigrants is a call to action. We want to call Congresspeople throughout the country to tell them out opinion.  Real phone call matter, so we are starting the fiftynifty challenge to see if you can use your network to get 50 people in 50 states to make a call.  The network that gets the most calls wins, but we all win when we call for an effective democracy.</p>
-							<div style={{width: '100%', textAlign: 'center'}}>
-								<div >
-								<a href="#howToPlay"><Button
-									role={"button"}
-									className={'pt-fill pt-button pt-minimal'}/>
-									<div>How to Play</div>
-									<span style={{ display: 'block' }} className={"pt-icon-standard pt-icon-chevron-down"} />
-								</a>
-								</div>
-							</div>
+							<p style={styles.headerTextBody}>Our President’s Executive order halting some legal immigrants has created a lot of discussion both from people who are for and those against the order. We want to call Congresspeople throughout the country to tell them our opinion. Real phone call matter, so we are starting the Fifty Nifty challenge to see if you can use your network to get 50 people in 50 states to make a call. The network that gets the most calls wins, but we all win when we call for an effective democracy. Read on to see how to win and hints about what to say.</p>
 						</div>
-						<div style={{padding: '1.6em'}}>
-                            {!localUser.id &&
-							<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
-                                { refUser && <div style={styles.inputHeader}>{refUser.name} Invited You!</div>}
-								<div style={styles.inputHeader}> Join The Challenge</div>
-								<form onSubmit={this.formSubmit} style={styles.form}>
-									<label htmlFor={'name-input'} style={styles.inputLabel}>
-										Name
-										<input id={'name-input'} className={'pt-input pt-large pt-fill'}
-											   placeholder={'Nicknames are okay'} value={this.state.name}
-											   onChange={(evt) => this.setState({name: evt.target.value})}/>
-									</label>
-									<label htmlFor={'zip-input'} style={styles.inputLabel}>
-										Zipcode (where you vote)
-										<input id={'zip-input'} type={'number'} className={'pt-input pt-large pt-fill'}
-											   placeholder={'Where are you registered?'} value={this.state.zipcode}
-											   onChange={this.updateZipcode}/>
-									</label>
-									<label htmlFor={'phone-input'} style={styles.inputLabel}>
-										Phone number (to connect you to your reps)
-										<Phone country={'US'} className={'pt-input pt-large pt-fill'}
-											   placeholder={'781-975-5555'} value={this.state.phone}
-											   onChange={phone => this.setState({phone: phone})}/>
-									</label>
-									<Button
-										loading={this.props.landingData.signupLoading}
-										type={'submit'} style={styles.button}
-										text={'Join the Challenge'}
-										className={'pt-intent-primary pt-fill pt-large'}
-										onClick={this.formSubmit}/>
-									<div style={styles.error}>{error}</div>
+						<MediaQuery query='(max-width: 767px)'>
+							{!localUser.id && refText}
+                            {!localUser.id && joinNowButton}
+						</MediaQuery>
+                        {!!localUser.id && inviteForm}
+						<MediaQuery query='(min-width: 767px)'>
+                            {!localUser.id && joinForm}
+						</MediaQuery>
 
-								</form>
-							</div>
-                            }
-							{!!localUser.id &&
-							<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
-								<div style={{paddingBottom:'1em'}}>
-									<Link to={`/${localUser.id}`} >
-										<Button style={styles.button}
-												text={'Call Your Representatives'}
-												className={'pt-intent-danger pt-fill pt-large'}/>
-									</Link>
-								</div>
-								<Invite url={`http://fiftynifty.org/?ref=${localUser.id}`}/>
-							</div>
-							}
-						</div>
 					</div>
 				</div>
-				<HowToPlay/>
+				<HowToPlay localUser={localUser}/>
+
+				<MediaQuery query='(max-width: 767px)'>
+					<div id="join" style={styles.joinMobileBackground}>
+                        {!localUser.id && joinForm}
+					</div>
+				</MediaQuery>
 				</div>
 		);
 	}
@@ -168,7 +187,7 @@ export default connect(mapStateToProps)(Radium(Landing));
 
 styles = {
 	container: {
-
+		maxWidth:'100vw',
 	},
 	header: {
 		position: 'relative',		
@@ -326,5 +345,13 @@ styles = {
 		color: 'rgb(203, 0, 39)',
 		fontSize: '1.25em',
 		paddingTop: '.5em',
+	},
+	joinMobileBackground:{
+        backgroundImage: 'url("/static/hands.jpg")',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center center',
+        backgroundSize: 'cover',
+		maxWidth: '100%',
+        boxShadow: 'inset 0 0 0 100vw rgba(0,61,89,.6)',
 	},
 };

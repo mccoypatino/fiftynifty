@@ -4,7 +4,7 @@ import { Link, browserHistory } from 'react-router';
 import { Spinner } from '@blueprintjs/core';
 import Radium from 'radium';
 // import fetch from 'isomorphic-fetch';
-import { Representative, AddressInput, ProgressMap, NetworkGraph, TreeGraph } from 'components';
+import { Representative, AddressInput, ProgressMap, TreeGraph } from 'components';
 import { getUser, requestCall, requestLatLong } from './actions';
 import { Invite } from './Invite';
 import {getScore, countStates} from '../../Utilities/UserUtils'
@@ -113,12 +113,18 @@ export const User = React.createClass({
 											<div style={styles.repsBox} className={"pt-elevation-3"}>
 												<div style={styles.sectionTitle}>Your Representatives</div>
 													<div style={styles.centered}>
-														<button role={'button'} style={styles.button} className={'pt-button pt-minimal'} onClick={this.toggleCallDialog}>What do I say on the call?</button>
-														<Dialog isOpen={this.state.callDialogOpen} onClose={this.toggleCallDialog} title={'What do I say?'} style={styles.dialogBox}>
+														<button role={'button'} style={styles.button} className={'pt-button pt-minimal'} onClick={this.toggleCallDialog}>How to call?</button>
+														<Dialog isOpen={this.state.callDialogOpen} onClose={this.toggleCallDialog} title={'How To Call'} style={styles.dialogBox}>
 															<div className="pt-dialog-body">
-																<p>Tell them your name and that you are a constituent,</p>
-																<p>then your message.</p><p> You might ask to be told their position.</p>
-																	<p>It’s easy, they want to hear from you.</p>
+																<div>When you press call, we will dial your representative and call you back automatically.
+																	Answer the call and you will be directly connected.
+																	Don’t worry about the actual number you see, it is our dialer.
+																</div>
+																<div style={{paddingTop:'1em'}}>
+																	<h4>What Do I Say?</h4>
+																	Tell them your name and that you are a constituent,
+																then your message. You might ask to be told their position.
+																	It’s easy, they want to hear from you.</div>
 															</div>
 														</Dialog>
 													</div>
@@ -142,7 +148,7 @@ export const User = React.createClass({
 
 											</div>
 
-										<p style={styles.orCall}>Or you can call <a style={styles.link} href="tel:508-659-9127">(508) 659-9127</a>  and we'll connect you</p>
+										{/*<p style={styles.orCall}>Or you can call <a style={styles.link} href="tel:508-659-9127">(508) 659-9127</a>  and we'll connect you</p>*/}
                                         {isLocalUser &&
 										<div style={styles.centered}>
 											<button type="button" className={'pt-button pt-minimal pt-icon-log-out pt-intent-danger'}
@@ -322,5 +328,10 @@ styles = {
 	},
 	link:{
 		color:'#da022e',
-	}
+		fontWeight:'bold',
+	},
+    dialogBox: {
+        maxWidth: '100%',
+        top: '10%',
+    },
 };
