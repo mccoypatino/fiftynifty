@@ -79,7 +79,7 @@ styles = {
 		textAlign: 'center',
 
 		'@media (min-width: 635px)': {
-			width: '572px',
+			width: '500px',
 			height: '63px',
 		},
 
@@ -108,6 +108,7 @@ styles = {
 		textDecoration: 'none',
 		textAlign: 'center',
 		padding: '1em 0em',
+		width: '25%',
 	},
 	// rightContent: {
 	// 	float: 'right',
