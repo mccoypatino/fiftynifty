@@ -38,7 +38,7 @@ export const App = React.createClass({
 						{ name: 'twitter:title', content: 'Fifty Nifty' },
 						{ name: 'twitter:description', content: 'Play for a better Democracy' },
 						{ name: 'twitter:image', content: 'https://www.fiftynifty.org/static/american-flag.jpg' },
-						{ name: 'twitter:image:alt', content: 'Fifty Nifty' }
+						{ name: 'twitter:image:alt', content: 'Fifty Nifty' },
 					]} 
 				/> 
 				<AppNav location={this.props.location} params={this.props.params} />
