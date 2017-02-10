@@ -14,9 +14,23 @@ ga.initialize('UA-91586776-1');
 
 if (/PhantomJS/.test(window.navigator.userAgent)) { require('es6-promise').polyfill(); }
 
-function logPageView() {
+function onRouteUpdate() {
+	// Log Page View
 	ga.set({ page: window.location.pathname });
 	ga.pageview(window.location.pathname);
+
+	// Smooth scroll if needed
+	const { hash } = window.location;
+	if (hash !== '') {
+		// Push onto callback queue so it runs after the DOM is updated,
+		// this is required when navigating from a different page so that
+		// the element is rendered on the page before trying to getElementById.
+		setTimeout(() => {
+			const id = hash.replace('#', '');
+			const element = document.getElementById(id);
+			if (element) element.scrollIntoView();
+		}, 0);
+	}
 }
 
 global.clientFetch = function(route, opts) {
@@ -37,7 +51,7 @@ ReactDOM.render(
 		<Router 
 			history={browserHistory} 
 			routes={routes} 
-			onUpdate={logPageView} 
+			onUpdate={onRouteUpdate} 
 			render={applyRouterMiddleware(useScroll((prevRouterProps, nextRouterProps) => {
 				// Don't scroll if only the query is changing.
 				if (prevRouterProps && prevRouterProps.location.pathname === nextRouterProps.location.pathname) {
