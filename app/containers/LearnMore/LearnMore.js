@@ -81,7 +81,7 @@ export const LearnMore = React.createClass({
 
                         <h3 style={styles.title}> Hints and a guide</h3>
                         <p>To play, sign up, make calls, and pass the ball to friends by sending them the invitation link.  You should tell them what to expect when they follow the link, and suggest that they do it on their phone.  We have presented an issue we think is important, but you are welcome to encourage your friends to call about <em>any</em> issue they care about.</p>
-                        <p>When you hit the call button on your phone, we will call your congressperson and ring you right back.  You will see an incoming call from a number you won't recognize.  That's just us making the connection.  We do this to keep score by knowing that you really did make the call.  If you prefer, there is a number at the bottom of the page that you can dial instead.  This will connect you to <em>WHO???</em></p>
+                        <p>When you hit the call button on your phone, we will call your congressperson and ring you right back.  You will see an incoming call from a number you won't recognize.  That's just us making the connection.  We do this to keep score by knowing that you really did make the call. </p>
                         <p>When you get through, tell your Congressperson your name, that you are a consituent, and that you want to tell them your opinion on an issue.  They may ask for your address to verify that you live in their district or state.  You can tell them that you are a voter, and you can ask for them to get back to you about the issue.</p>
 
                     </div>

@@ -4,7 +4,7 @@ import { Link, browserHistory } from 'react-router';
 import { Spinner } from '@blueprintjs/core';
 import Radium from 'radium';
 // import fetch from 'isomorphic-fetch';
-import { Representative, AddressInput, ProgressMap, NetworkGraph, TreeGraph } from 'components';
+import { Representative, AddressInput, ProgressMap, TreeGraph } from 'components';
 import { getUser, requestCall, requestLatLong } from './actions';
 import { Invite } from './Invite';
 import {getScore, countStates} from '../../Utilities/UserUtils'

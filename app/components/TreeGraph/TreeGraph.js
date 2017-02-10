@@ -98,7 +98,7 @@ export const TreeGraph = React.createClass({
                     {css}
 				</style>
                     <div className={"addFriendsText"}>
-                    Add you friends by sending them invites!  you get points for any call they make!
+                    Add your friends by sending them invites!  you get points for any call they make!
                     </div>
 
 				<svg height={containerHeight} width='100%'>
