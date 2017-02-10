@@ -51,7 +51,7 @@ export const HowToPlay  = React.createClass({
                     </div>
                 </div>
             </div>
-                <Link to={'/more'}>
+                <Link to={'/about'}>
             <p style={styles.learnMore}><button style={{color:'white'}} type="button" className="pt-button pt-minimal pt-icon-add" >Learn More</button></p>
                 </Link>
             </div>

@@ -46,7 +46,7 @@ export const AppNav = React.createClass({
 							<Link to={'/login'} style={styles.link(pathname==='/login')}>Login</Link>
                             }
 							<Link to={'/leaderboard'} style={styles.link(pathname==='/leaderboard')}>Leaderboard</Link>
-							<Link to={'/more'} style={styles.link(pathname==='/more')}>About</Link>
+							<Link to={'/about'} style={styles.link(pathname==='/about')}>About</Link>
 						</div>
 					</div>
 					
