@@ -148,6 +148,7 @@ export const Landing = React.createClass({
 							<Phone country={'US'} className={'pt-input pt-large pt-fill'}
 								   placeholder={'781-975-5555'} value={this.state.phone}
 								   onChange={phone => this.setState({phone: phone})}/>
+							<div style={styles.inputSubtext}><span style={{ verticalAlign: 'middle', fontSize: '0.85em', opacity: 0.7 }} className={'pt-icon-standard pt-icon-lock'} /> Encrypted. We never sell or share your number.</div>
 						</label>
 						<Button
 							loading={this.props.landingData.signupLoading}
@@ -344,6 +345,11 @@ styles = {
 		fontSize: '1.25em',
 		display: 'block',
 		marginBottom: '1em',
+	},
+	inputSubtext: {
+		fontSize: '0.85em',
+		opacity: 0.7,
+		paddingTop: '0.25em',
 	},
 	button: {
 		verticalAlign: 'bottom',
