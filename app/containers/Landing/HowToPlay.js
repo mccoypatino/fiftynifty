@@ -10,6 +10,7 @@ export const HowToPlay  = React.createClass({
 		localUser: PropTypes.object,
 	},
 
+<<<<<<< HEAD
 	render() {
 		const localUserId = this.props.localUser.id;
 		return (
@@ -53,13 +54,14 @@ export const HowToPlay  = React.createClass({
 					</div>
 				</Link>
 
-				<Link to={'/more'}>
+				<Link to={'/about'}>
 					<p style={styles.learnMore}><button style={{color:'white'}} type="button" className="pt-button pt-minimal pt-icon-add" >Learn More</button></p>
 				</Link>
 				</div>
 			</div>
 		)
 	}
+
 });
 
 export default Radium(HowToPlay);

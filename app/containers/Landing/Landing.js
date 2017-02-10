@@ -113,7 +113,6 @@ export const Landing = React.createClass({
         const inviteForm = (
 			<div style={{padding: '1.6em'}}>
 				<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
-					<Link to={`/${localUser.id}`}> <div style={styles.welcomeLine}>Welcome {localUser.name}! Your score is {localUserScore}</div></Link>
 					<div style={{paddingBottom:'1em'}}>
 						<Link to={`/${localUser.id}`} >
 							<Button style={styles.button}
@@ -184,6 +183,7 @@ export const Landing = React.createClass({
 								<div style={styles.headerText}>Play for a better Democracy!</div>
 							</div>
 							<p style={styles.headerTextBody}>Our President’s Executive order halting some legal immigrants has created a lot of discussion both from people who are for and those against the order. We want to call Congresspeople throughout the country to tell them our opinion. Real phone call matter, so we are starting the Fifty Nifty challenge to see if you can use your network to get 50 people in 50 states to make a call. The network that gets the most calls wins, but we all win when we call for an effective democracy. Read on to see how to win and hints about what to say.</p>
+							{localUser.id && <Link to={`/${localUser.id}`}> <div style={styles.welcomeLine}>Welcome {localUser.name}, Your score is {localUserScore}</div></Link>}
 						</div>
 						<MediaQuery query='(max-width: 767px)'>
 							{!localUser.id && refText}
@@ -295,7 +295,7 @@ styles = {
 	headerText: {
 		maxWidth: '500px',
 		// color: '#cb0027',
-		color: '#ff4752',
+		color: '#da0f18',
 		fontSize: '1.8em',
         fontFamily: 'mrs-eaves-roman-small-caps, sans-serif',
         fontWeight: 'bold',
@@ -419,6 +419,9 @@ styles = {
 		textAlign:'center',
 		padding:'1em',
 		fontWeight:'bold',
-        color: '#cb0027',
+        color: '#da0f18',
+		background: 'rgba( 255, 255, 255, 0.6)',
+		borderRadius: '5px',
+		letterSpacing:'0.05em',
 	}
 };
