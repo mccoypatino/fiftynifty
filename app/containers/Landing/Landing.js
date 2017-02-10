@@ -222,9 +222,6 @@ styles = {
 	},
 	headerText: {
 		maxWidth: '500px',
-		fontFamily: 'mrs-eaves-roman-small-caps, sans-serif',
-		fontStyle: 'normal',
-		fontWeight: '400',
 		color: '#cb0027',
 		fontSize: '1.8em',
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
