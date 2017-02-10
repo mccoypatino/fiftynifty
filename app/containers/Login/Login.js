@@ -39,14 +39,21 @@ export const Login = React.createClass({
 		}
 	},
 
+
+
 	updateCode: function(evt) {
 		this.setState({ code: evt.target.value });
+	},
+
+	createVerificationCodeByPhone: function(evt) {
+		evt.preventDefault();
+		this.props.dispatch(createVerificationCode(this.state.phone, 'call'));
 	},
 
 	formSubmit: function (evt) {
 		evt.preventDefault();
 		if (!this.props.loginData.codeCreationSuccess) {
-			this.props.dispatch(createVerificationCode(this.state.phone));
+			this.props.dispatch(createVerificationCode(this.state.phone, 'text'));
 		} else {
 			this.props.dispatch(checkVerificationCode(this.state.phone, this.state.code))
 		}
@@ -62,31 +69,47 @@ export const Login = React.createClass({
 				<div style={styles.title}>Login</div>
 				<form onSubmit={this.formSubmit} style={styles.form}>
 					{
-						!codeCreationSuccess &&
-						<label htmlFor={'phone-input'} style={styles.inputLabel}>
-							Phone number? { codeCreationError && 
-								<div className={'pt-tag pt-minimal pt-intent-danger'}>An error occured: { codeCreationError }</div>
-							}
-							<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'781-975-5555'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} />
-						</label>
-					}
-
-					{
 						codeCreationSuccess &&
 						<label htmlFor={'code-input'} style={styles.inputLabel}>
 							Code for { this.state.phone }? { verificationError && 
 								<div className={'pt-tag pt-minimal pt-intent-danger'}>An error occured: { verificationError }</div>
 							}
 							<input id={'code-input'} type={'number'} className={'pt-input pt-large pt-fill'} placeholder={'6-digit code e.g. 568082'} value={this.state.code} onChange={this.updateCode} />
+							<Button 
+								type={'submit'} style={styles.button} 
+								text={'Verify the code'}
+								className={'pt-intent-primary pt-fill pt-large'} 
+								onClick={this.formSubmit} 
+								loading={this.props.loginData.codeCreationLoading} />
 						</label>
 
 					}
-					<Button 
-						type={'submit'} style={styles.button} 
-						text={codeCreationSuccess ? 'Verify the code' : 'Text Me a Verification Code'}
-						className={'pt-intent-primary pt-fill pt-large'} 
-						onClick={this.formSubmit} 
-						loading={this.props.loginData.codeCreationLoading || this.props.loginData.verificationLoading} />
+					
+					<label htmlFor={'phone-input'} style={styles.inputLabel}>
+						{ codeCreationSuccess ? 
+							<div className={'label-phone-input'}> Send another verification code? </div> 
+							: <div className={'label-phone-input'}> Phone number? </div> 
+						}
+						{ codeCreationError && 
+							<div className={'pt-tag pt-minimal pt-intent-danger'}>An error occured: { codeCreationError }</div>
+						}
+						<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'781-975-5555'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} />
+					</label>
+
+					<div className={'verificationButtons'}>
+						<Button 
+							type={'submit'} style={styles.button} 
+							text={'Text Me a Verification Code'}
+							className={'pt-intent-primary pt-fill pt-large'} 
+							onClick={this.formSubmit} 
+							loading={this.props.loginData.verificationLoading} />
+						<Button 
+							style={styles.button} 
+							text={'Call me with a verification Code'}
+							className={'pt-intent-primary pt-fill pt-large'} 
+							onClick={this.createVerificationCodeByPhone} 
+							loading={this.props.loginData.verificationLoading} />
+					</div>	
 				</form>
 
 				<div style={styles.section}>
