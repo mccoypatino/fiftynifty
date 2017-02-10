@@ -29,6 +29,7 @@ export const AppNav = React.createClass({
 						<Link to={'/'} style={styles.logo}>Fifty Nifty</Link>
 						
 						<div style={styles.linkWrapper}>
+							<Link to={'/'} style={styles.link}>Home</Link>
                             {!!user.id &&
 							<Link to={`/${user.id}`} style={styles.link}>Your Profile</Link>
                             }
@@ -36,6 +37,7 @@ export const AppNav = React.createClass({
 							<Link to={'/login'} style={styles.link}>Login</Link>
                             }
 							<Link to={'/leaderboard'} style={styles.link}>Leaderboard</Link>
+							<Link to={'/more'} style={styles.link}>About</Link>
 						</div>
 					</div>
 					
