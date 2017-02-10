@@ -79,7 +79,7 @@ styles = {
 		textAlign: 'center',
 
 		'@media (min-width: 635px)': {
-			width: '572px',
+			width: '500px',
 			height: '63px',
 		},
 
