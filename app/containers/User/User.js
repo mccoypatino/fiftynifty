@@ -89,76 +89,92 @@ export const User = React.createClass({
 		const isLocalUser = localUser.id && localUser.id === user.id;
 		const presentName = isLocalUser ? 'Your' : user.name + "'s";
 
+		const isStoredUser = String(localUser.id) === this.props.params.userId;
 		return (
 			<div>
 				<div style={styles.repsBackground}>
 					<div style={styles.repsBackgroundSplash}>
 						<div style={styles.container}>
-							{this.props.userData.loading &&
-								<div style={styles.centered}>
-									<Spinner />
-								</div>
-							}
-							<div style={styles.content}>
 
+							{this.props.userData.error &&
+								<div style={{ margin: '2em auto', maxWidth: '300px', backgroundColor: 'rgba(138, 155, 168, 0.8)' }} className={'pt-callout'}>
+									<h5>Error Loading User</h5>
+									Apologies - we can't find this user in our database. 
+									{isStoredUser &&
+										<div>
+											<button type="button" className={'pt-button pt-minimal pt-icon-log-out pt-intent-danger'} onClick={this.logout}>Logout</button>
+										</div>	
+									}
+								</div>
 								
+							}
+							{!this.props.userData.error &&
+								<div style={styles.content}>
+									<div style={styles.title}>
+										<span style={this.props.userData.loading ? { opacity: 0 } : {}}>
+											{user.name}, {user.state} 
+										</span>
 
-								<div style={styles.title}>
-									<span>{user.name}, {user.state} </span>
-								</div>
-								{isLocalUser &&
-									<div>
-										<div style={styles.repsWrapper}>
+										{this.props.userData.loading &&
+											<div style={[styles.loader]}>
+												<Spinner />
+											</div>
+										}
+									</div>
+									{isLocalUser &&
+										<div>
+											<div style={styles.repsWrapper}>
 
-											<div style={styles.repsBox} className={"pt-elevation-3"}>
-												<div style={styles.sectionTitle}>Your Representatives</div>
-													<div style={styles.centered}>
-														<button role={'button'} style={styles.button} className={'pt-button pt-minimal'} onClick={this.toggleCallDialog}>How to call?</button>
-														<Dialog isOpen={this.state.callDialogOpen} onClose={this.toggleCallDialog} title={'How To Call'} style={styles.dialogBox}>
-															<div className="pt-dialog-body">
-																<div>When you press call, we will dial your representative and call you back automatically.
-																	Answer the call and you will be directly connected.
-																	Don’t worry about the actual number you see, it is our dialer.
+												<div style={styles.repsBox} className={"pt-elevation-3"}>
+													<div style={styles.sectionTitle}>Your Representatives</div>
+														<div style={styles.centered}>
+															<button role={'button'} style={styles.button} className={'pt-button pt-minimal'} onClick={this.toggleCallDialog}>How to call?</button>
+															<Dialog isOpen={this.state.callDialogOpen} onClose={this.toggleCallDialog} title={'How To Call'} style={styles.dialogBox}>
+																<div className="pt-dialog-body">
+																	<div>When you press call, we will dial your representative and call you back automatically.
+																		Answer the call and you will be directly connected.
+																		Don’t worry about the actual number you see, it is our dialer.
+																	</div>
+																	<div style={{paddingTop:'1em'}}>
+																		<h4>What Do I Say?</h4>
+																		Tell them your name and that you are a constituent,
+																	then your message. You might ask to be told their position.
+																		It’s easy, they want to hear from you.</div>
 																</div>
-																<div style={{paddingTop:'1em'}}>
-																	<h4>What Do I Say?</h4>
-																	Tell them your name and that you are a constituent,
-																then your message. You might ask to be told their position.
-																	It’s easy, they want to hear from you.</div>
+															</Dialog>
+														</div>
+
+														{reps.length === 0 &&
+															<div style={styles.centered}>
+																<Spinner />
 															</div>
-														</Dialog>
+														}
+
+														{reps.length > 3 &&
+															<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
+														}
+
+														{reps.length === 3 && reps.map((rep, index)=> {
+															return (
+																<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
+															);
+														})}
 													</div>
 
-													{reps.length === 0 &&
-														<div style={styles.centered}>
-															<Spinner />
-														</div>
-													}
-
-													{reps.length > 3 &&
-														<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
-													}
-
-													{reps.length === 3 && reps.map((rep, index)=> {
-														return (
-															<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
-														);
-													})}
 												</div>
 
-											</div>
+											{/*<p style={styles.orCall}>Or you can call <a style={styles.link} href="tel:508-659-9127">(508) 659-9127</a>  and we'll connect you</p>*/}
+	                                        {isLocalUser &&
+												<div style={styles.centered}>
+													<button type="button" className={'pt-button pt-minimal pt-icon-log-out pt-intent-danger'} onClick={this.logout}>Logout</button>
+												</div>
+	                                        }
 
-										{/*<p style={styles.orCall}>Or you can call <a style={styles.link} href="tel:508-659-9127">(508) 659-9127</a>  and we'll connect you</p>*/}
-                                        {isLocalUser &&
-										<div style={styles.centered}>
-											<button type="button" className={'pt-button pt-minimal pt-icon-log-out pt-intent-danger'}
-													onClick={this.logout}>Logout</button>
 										</div>
-                                        }
-
-									</div>
-								}
-							</div>
+									}
+								</div>
+							}
+							
 						</div>
 					</div>
 				</div>
@@ -170,7 +186,13 @@ export const User = React.createClass({
 				<div id="progress" style = {styles.progressBackground}>
 					<div style = {styles.repsBackgroundSplash}>
 						<div style={styles.progressSection}>
-							<div style={styles.sectionTitle}>{presentName} Progress</div>
+
+							<div style={styles.sectionTitle}>
+								<span style={(this.props.userData.loading || this.props.userData.error) ? { opacity: 0 } : {}}>
+									{presentName} Progress
+								</span>
+							</div>
+
 							<div style={styles.scoreStats}>
 								<span style={{textAlign:'center', fontWeight:'lighter'}}> Score: <span style={styles.score}> {Math.floor(score)}</span></span>
 								<div style={{display:'inline-block', verticalAlign: 'middle', paddingLeft:'2em', paddingTop:'1em'}}>
@@ -193,14 +215,17 @@ export const User = React.createClass({
 						</div>
 					</div>
 				</div>
-				<div style={styles.graphBackground}>
-					<div style={styles.section}>
-						<div style={styles.familySection}>
-							<div style={styles.sectionTitle}>{presentName} Fifty Nifty Family</div>
-							<TreeGraph data={user} />
+
+				{!this.props.userData.loading && !this.props.userData.error &&
+					<div style={styles.graphBackground}>
+						<div style={styles.section}>
+							<div style={styles.familySection}>
+								<div style={styles.sectionTitle}>{presentName} Fifty Nifty Family</div>
+								<TreeGraph data={user} />
+							</div>
 						</div>
 					</div>
-				</div>
+				}
 			</div>
 
 		);
@@ -232,6 +257,12 @@ styles = {
 		paddingBottom:'1em',
 		color:'white',
 		letterSpacing:'0.1em',
+		position: 'relative',
+	},
+	loader: {
+		textAlign: 'center',
+		position: 'absolute',
+		width: '100%',
 	},
 	section: {
 		padding: '2em 0em',
