@@ -294,7 +294,8 @@ styles = {
 	},
 	headerText: {
 		maxWidth: '500px',
-		color: '#cb0027',
+		// color: '#cb0027',
+		color: '#ff4752',
 		fontSize: '1.8em',
         fontFamily: 'mrs-eaves-roman-small-caps, sans-serif',
         fontWeight: 'bold',

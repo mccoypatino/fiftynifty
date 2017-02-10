@@ -15,6 +15,22 @@ body {
 	opacity: 1;
 }
 
+.header-logo {
+	background-image: url("/static/logo/LogoBlueOnWhiteOnRed.png"),
+}
+.header-logo:hover {
+	background-image: url("/static/logo/LogoBlueOnBrightWhiteOnRed.png"),
+}
+
+@media (min-resolution: 192dpi) { // Retina display
+	.header-logo {
+		background-image: url("/static/logo/LogoBlueOnWhiteOnRed@2x.png"),
+	}
+	.header-logo:hover {
+		background-image: url("/static/logo/LogoBlueOnBrightWhiteOnRed@2x.png"),
+	}
+}
+
 .react-phone-number-input__phone {
 	outline: none;
 	border: none;
