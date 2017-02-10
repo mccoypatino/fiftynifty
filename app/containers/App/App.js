@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import { StyleRoot } from 'radium';
 import Helmet from 'react-helmet';
 import { AppNav, AppFooter } from 'components';
-import Typekit from 'react-typekit';
 
 require('../../../static/blueprint.scss');
 require('../../../static/style.css');
@@ -41,12 +40,7 @@ export const App = React.createClass({
 						{ name: 'twitter:image', content: 'https://www.fiftynifty.org/static/american-flag.jpg' },
 						{ name: 'twitter:image:alt', content: 'Fifty Nifty' },
 					]} 
-					script={[
-						{ src: "https://use.typekit.net/pwe2pin.js", type: "text/javascript" },
-						{ type: 'text/javascript', innerHTML: `try{Typekit.load({ async: false });}catch(e){}` }
-					]}
 				/> 
-				<Typekit kitId="pwe2pin" />
 				<AppNav location={this.props.location} params={this.props.params} />
 				<div style={{ minHeight: '600px' }}>{this.props.children}</div>
 				<AppFooter />

@@ -85,7 +85,7 @@ export const Landing = React.createClass({
 					<div style={styles.headerSplash} />
 					<div style={styles.headerPresentation}>
 						<div style={styles.headerTextBlock}>
-							<div style={styles.section} className={'tk-mrs-eaves-roman-small-caps'}>
+							<div style={styles.section}>
 								<div style={styles.headerText}>Call your Reps!</div>
 								<div style={styles.headerText}>Collect 50 States!</div>
 								<div style={styles.headerText}>Play for a better Democracy!</div>
@@ -222,9 +222,9 @@ styles = {
 	},
 	headerText: {
 		maxWidth: '500px',
+		fontFamily: 'mrs-eaves-roman-small-caps, sans-serif',
 		fontStyle: 'normal',
 		fontWeight: '400',
-		fontFamily: '"mrs-eaves-roman-small-caps", sans-serif',
 		color: '#cb0027',
 		fontSize: '1.8em',
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
