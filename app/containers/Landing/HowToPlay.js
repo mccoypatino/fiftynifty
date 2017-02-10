@@ -10,7 +10,6 @@ export const HowToPlay  = React.createClass({
 		localUser: PropTypes.object,
 	},
 
-<<<<<<< HEAD
 	render() {
 		const localUserId = this.props.localUser.id;
 		return (

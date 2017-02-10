@@ -191,12 +191,12 @@ export const User = React.createClass({
 
 									}
 
-<div style={styles.userInfo}>
-									<div>Joined on {joinDate}</div>
-                                    {parent && <div>Invited by <Link style={styles.link} to={`/${parent.id}`}>{parent.name}</Link></div>}
-									<div>Made {callsCount} {callsCount==1? 'call' : 'calls'}</div>
-									<div>Network made {flatCalls? flatCalls.length: '0'} Calls</div>
-								</div>
+									<div style={styles.userInfo}>
+										<div style={styles.userInfoItem}><b>Joined:</b> {joinDate}</div>
+	                                    {parent && <div style={styles.userInfoItem}><b>Invited by:</b> <Link style={styles.link} to={`/${parent.id}`}>{parent.name}</Link></div>}
+										<div style={styles.userInfoItem}><b>Calls Made:</b>  {callsCount} {callsCount==1? 'call' : 'calls'}</div>
+										<div style={styles.userInfoItem}><b>Calls by Family:</b>  {flatCalls ? flatCalls.length: '0'} Calls</div>
+									</div>
 								</div>
 							}
 						
@@ -400,6 +400,10 @@ styles = {
         maxWidth:'350px',
 		lineHeight:'1.5em',
 		padding: '1em',
-	}
+	},
+	userInfoItem: {
+		display: 'inline-block', 
+		paddingRight: '2em',
+	},
 
 };
