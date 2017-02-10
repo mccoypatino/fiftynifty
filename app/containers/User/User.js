@@ -191,11 +191,13 @@ export const User = React.createClass({
 
 									}
 
-									<div style={styles.userInfo}>
-										<div style={styles.userInfoItem}><b>Joined:</b> {joinDate}</div>
-	                                    {parent && <div style={styles.userInfoItem}><b>Invited by:</b> <Link style={styles.link} to={`/${parent.id}`}>{parent.name}</Link></div>}
-										<div style={styles.userInfoItem}><b>Calls Made:</b>  {callsCount} {callsCount==1? 'call' : 'calls'}</div>
-										<div style={styles.userInfoItem}><b>Calls by Family:</b>  {flatCalls ? flatCalls.length: '0'} Calls</div>
+									<div style={styles.userInfoWrapper}>
+										<div style={styles.userInfo}>
+											<div style={styles.userInfoItem}><b>Joined:</b> {joinDate}</div>
+											{parent && <div style={styles.userInfoItem}><b>Invited by:</b> <Link style={styles.link} to={`/${parent.id}`}>{parent.name}</Link></div>}
+											<div style={styles.userInfoItem}><b>Calls Made:</b>  {callsCount}</div>
+											<div style={styles.userInfoItem}><b>Calls by Family:</b>  {flatCalls ? flatCalls.length: '0'}</div>
+										</div>
 									</div>
 								</div>
 							}
@@ -279,7 +281,7 @@ styles = {
 		fontSize: '2em',
 		fontWeight: 'lighter',
 		textAlign: 'center',
-		paddingBottom:'1em',
+		padding: '1em 0em',
 		color:'white',
 		letterSpacing:'0.1em',
 		position: 'relative',
@@ -390,20 +392,22 @@ styles = {
         maxWidth: '100%',
         top: '10%',
     },
+    userInfoWrapper: {
+    	textAlign: 'center',
+    },
 	userInfo: {
 		color:'#000',
 		textAlign:'center',
 		background:'rgba(255, 255, 255, 0.6)',
 		borderRadius:'5px',
         margin: 'auto',
-        width: '80%',
-        maxWidth:'350px',
+        display: 'inline-block',
 		lineHeight:'1.5em',
 		padding: '1em',
 	},
 	userInfoItem: {
 		display: 'inline-block', 
-		paddingRight: '2em',
+		padding: '0em 1em',
 	},
 
 };
