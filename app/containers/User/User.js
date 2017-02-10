@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { Spinner } from '@blueprintjs/core';
 import Radium from 'radium';
+import dateFormat from 'dateformat';
 // import fetch from 'isomorphic-fetch';
 import { Representative, AddressInput, ProgressMap, TreeGraph } from 'components';
 import { getUser, requestCall, requestLatLong } from './actions';
@@ -74,6 +75,19 @@ export const User = React.createClass({
 		window.location = '/';
 	},
 
+	getParent: function(user) {
+		const userLevel  = user.hierarchyLevel;
+		if (user.ancestors) {
+            const parent = user.ancestors.filter((ancestor) => {
+                if (ancestor.hierarchyLevel === (userLevel - 1)) {
+                    return ancestor;
+                }
+            });
+            return parent.length>0? parent[0] : false;
+        }
+        return false;
+    },
+
 	render() {
 		const user = this.props.userData.user || {};
 		const reps = user.reps || [];
@@ -88,6 +102,9 @@ export const User = React.createClass({
 		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
 		const isLocalUser = localUser.id && localUser.id === user.id;
 		const presentName = isLocalUser ? 'Your' : user.name + "'s";
+		const joinDate = user.createdAt? dateFormat(new Date(user.createdAt), "mmmm dS, yyyy"): "";
+		const parent = this.getParent(user);
+		const callsCount = user.calls? user.calls.length: 0;
 
 		return (
 			<div>
@@ -155,9 +172,15 @@ export const User = React.createClass({
 													onClick={this.logout}>Logout</button>
 										</div>
                                         }
-
 									</div>
 								}
+								<div style={styles.userInfo}>
+									<div>Joined on {joinDate}</div>
+                                    {parent && <div>Invited by <Link style={styles.link} to={`/${parent.id}`}>{parent.name}</Link></div>}
+									<div>Made {callsCount} {callsCount==1? 'call' : 'calls'}</div>
+									<div>Network made {flatCalls? flatCalls.length: '0'} Calls</div>
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -334,4 +357,16 @@ styles = {
         maxWidth: '100%',
         top: '10%',
     },
+	userInfo: {
+		color:'#000',
+		textAlign:'center',
+		background:'rgba(255, 255, 255, 0.6)',
+		borderRadius:'5px',
+        margin: 'auto',
+        width: '80%',
+        maxWidth:'350px',
+		lineHeight:'1.5em',
+		padding: '1em',
+	}
+
 };
