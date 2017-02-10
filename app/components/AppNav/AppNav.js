@@ -31,15 +31,15 @@ export const AppNav = React.createClass({
 						</Link>
 						
 						<div style={styles.linkWrapper}>
-							<Link to={'/'} style={styles.link}>Home</Link>
+							<Link to={'/'} style={styles.link(pathname==='/')}>Home</Link>
                             {!!user.id &&
-							<Link to={`/${user.id}`} style={styles.link}>Your Profile</Link>
+							<Link to={`/${user.id}`} style={styles.link(pathname===`/${user.id}`)}>Your Profile</Link>
                             }
                             {!user.id &&
-							<Link to={'/login'} style={styles.link}>Login</Link>
+							<Link to={'/login'} style={styles.link(pathname==='/login')}>Login</Link>
                             }
-							<Link to={'/leaderboard'} style={styles.link}>Leaderboard</Link>
-							<Link to={'/more'} style={styles.link}>About</Link>
+							<Link to={'/leaderboard'} style={styles.link(pathname==='/leaderboard')}>Leaderboard</Link>
+							<Link to={'/more'} style={styles.link(pathname==='/more')}>About</Link>
 						</div>
 					</div>
 					
@@ -103,11 +103,14 @@ styles = {
 		display: 'table',
 		width: '100%',
 	},
-	link: {
-		display: 'table-cell',
-		textDecoration: 'none',
-		textAlign: 'center',
-		padding: '1em 0em',
+	link: function(isCurr){
+		return {
+            display: 'table-cell',
+            textDecoration: 'none',
+            textAlign: 'center',
+            padding: '1em 0em',
+			color: isCurr?'#848484' : 'white',
+        }
 	},
 	// rightContent: {
 	// 	float: 'right',
