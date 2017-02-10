@@ -71,7 +71,7 @@ export const User = React.createClass({
 	},
 	logout: function() {
 		localStorage.removeItem('userData');
-		window.location.reload();
+		window.location = '/';
 	},
 
 	render() {
