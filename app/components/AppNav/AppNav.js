@@ -100,7 +100,7 @@ styles = {
 		
 	},
 	linkWrapper: {
-		display: 'none',
+		display: 'table',
 		width: '100%',
 	},
 	link: {
