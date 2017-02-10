@@ -28,7 +28,7 @@ export const AppNav = React.createClass({
 					<div style={{ display: 'inline-block' }}>
 						<div className={'show-child-on-hover'} style={styles.logoWrapper}>
 							<Link to={'/'}>
-								<div style={styles.logo}></div>
+								<div style={styles.logo} className={'header-logo'} />
 							</Link>
 
 							<div style={styles.songWrapper} className={'hidden-child'}>
@@ -102,28 +102,15 @@ styles = {
 		height: '9.9vw',
 		backgroundSize: '100%',
 		textAlign: 'center',
-
+		backgroundRepeat: 'no-repeat',
 		'@media (min-width: 635px)': {
 			width: '500px',
 			height: '63px',
 		},
-
-		backgroundRepeat: 'no-repeat',
-		
-		'@media (min-resolution: 192dpi) ': // Retina display
-		{ 	
-			backgroundImage: 'url("../static/logo/LogoBlueOnWhiteOnRed@2x.png")',
-			':hover' : {
-				backgroundImage: 'url("../static/logo/LogoBlueOnBrightWhiteOnRed@2x.png")',
-			}
-		},
-
-		backgroundImage: 'url("../static/logo/LogoBlueOnWhiteOnRed.png")',
-		':hover' : {
-			backgroundImage: 'url("../static/logo/LogoBlueOnBrightWhiteOnRed.png")',
-		},
-		
+		// See styles.css for image use
+		// Need to set images there so they pre-load correctly.
 	},
+	
 	linkWrapper: {
 		display: 'table',
 		width: '100%',
