@@ -26,9 +26,16 @@ export const AppNav = React.createClass({
 			<nav style={styles.navStyle}>
 				<div style={styles.navContent}>
 					<div style={{ display: 'inline-block' }}>
-						<Link to={'/'}>
-							<div style={styles.logo}></div>
-						</Link>
+						<div className={'show-child-on-hover'} style={styles.logoWrapper}>
+							<Link to={'/'}>
+								<div style={styles.logo}></div>
+							</Link>
+
+							<div style={styles.songWrapper} className={'hidden-child'}>
+								<Link to={'/song'} className={'pt-button pt-minimal pt-icon-music'} style={styles.songIcon}/>
+							</div>
+						</div>
+						
 						
 						<div style={styles.linkWrapper}>
 							<Link to={'/'} style={styles.link(pathname==='/')}>Home</Link>
@@ -72,6 +79,24 @@ styles = {
 		textAlign: 'center',
 		// backgroundColor: '#F29696',
 	},
+	logoWrapper: {
+		position: 'relative',
+	},
+	songWrapper: {
+		position: 'absolute',
+		right: '-70px',
+		top: '0px',
+		padding: '7px 15px',
+		
+	},
+	songIcon: {
+		border: '2px solid rgba(255, 255, 255, 0.5)',
+		padding: '10px',
+		borderRadius: '40px',
+		height: '40px',
+		color: 'rgba(255, 255, 255, 0.75)',
+		lineHeight: '0px',
+	},
 	logo: { // Relation : 800/88, so 100/11
 		width: '90vw',
 		height: '9.9vw',
@@ -79,7 +104,7 @@ styles = {
 		textAlign: 'center',
 
 		'@media (min-width: 635px)': {
-			width: '572px',
+			width: '500px',
 			height: '63px',
 		},
 
@@ -108,6 +133,7 @@ styles = {
             display: 'table-cell',
             textDecoration: 'none',
             textAlign: 'center',
+            width: '25%',
             padding: '1em 0em',
 			color: isCurr?'#848484' : 'white',
         }

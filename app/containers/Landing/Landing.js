@@ -74,7 +74,7 @@ export const Landing = React.createClass({
 		if (this.state.zipcode.length !== 5) { return this.setState({ error: 'Zipcode must be 5 digits' }); }
 		if (!this.state.phone) { return this.setState({ error: 'Phone Number required' }); }
 		this.setState({ error: undefined });
-		return this.props.dispatch(postUser(this.state.name, this.state.phone, this.state.zipcode, referral));
+		return this.props.dispatch(postUser(this.state.name, this.state.phone, this.state.zipcode, referral, window.variant));
 	},
 
 	authenticationSubmit: function(evt) {
@@ -109,10 +109,11 @@ export const Landing = React.createClass({
         const localUserData = localStorage.getItem('userData');
         const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
         const localUserScore = localUser? getScore(localUser): 0;
+
         const inviteForm = (
 			<div style={{padding: '1.6em'}}>
 				<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
-					<Link to={`/${localUser.id}/#progress`}> <div style={styles.welcomeLine}>Welcome {localUser.name}! Your score is {localUserScore}</div></Link>
+					<Link to={`/${localUser.id}`}> <div style={styles.welcomeLine}>Welcome {localUser.name}! Your score is {localUserScore}</div></Link>
 					<div style={{paddingBottom:'1em'}}>
 						<Link to={`/${localUser.id}`} >
 							<Button style={styles.button}
