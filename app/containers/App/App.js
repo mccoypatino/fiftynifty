@@ -17,6 +17,7 @@ export const App = React.createClass({
 	componentWillMount() {
 		const FocusStyleManager = require('@blueprintjs/core').FocusStyleManager;
 		FocusStyleManager.onlyShowFocusOnTabs();
+		window.variant = Math.ceil(Math.random() * 100);
 	},
 
 	render() {

@@ -73,7 +73,7 @@ export const Landing = React.createClass({
 		if (this.state.zipcode.length !== 5) { return this.setState({ error: 'Zipcode must be 5 digits' }); }
 		if (!this.state.phone) { return this.setState({ error: 'Phone Number required' }); }
 		this.setState({ error: undefined });
-		return this.props.dispatch(postUser(this.state.name, this.state.phone, this.state.zipcode, referral));
+		return this.props.dispatch(postUser(this.state.name, this.state.phone, this.state.zipcode, referral, window.variant));
 	},
 
 	authenticationSubmit: function(evt) {
@@ -107,6 +107,7 @@ export const Landing = React.createClass({
 		const authError = this.state.error || this.props.landingData.authenticationError;
         const localUserData = localStorage.getItem('userData');
         const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
+        const variant = localUser.variant || window.variant;
         const inviteForm = (
 			<div style={{padding: '1.6em'}}>
 				<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>

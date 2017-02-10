@@ -47,7 +47,7 @@ export function postUserAuthentication(phone, signupCode) {
 	};
 }
 
-export function postUser(name, phone, zipcode, parentId) {
+export function postUser(name, phone, zipcode, parentId, variant) {
 	return (dispatch) => {
 		dispatch({ type: POST_USER_LOAD });
 		return clientFetch('/api/user', {
@@ -61,6 +61,7 @@ export function postUser(name, phone, zipcode, parentId) {
 				phone: phone,
 				zipcode: zipcode,
 				parentId: parentId,
+				variant: variant,
 			})
 		})
 		.then((result) => {
