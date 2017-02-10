@@ -292,7 +292,10 @@ styles = {
 		maxWidth: '500px',
 		color: '#cb0027',
 		fontSize: '1.8em',
-		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
+        fontFamily: 'mrs-eaves-roman-small-caps, sans-serif',
+        fontWeight: 'bold',
+
+    '@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
 			textAlign: 'center',
 			maxWidth: '100%',
 		},
