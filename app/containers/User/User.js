@@ -167,7 +167,7 @@ export const User = React.createClass({
 					<Invite url={shareUrl} />
 				}
 
-				<div style = {styles.progressBackground}>
+				<div id="progress" style = {styles.progressBackground}>
 					<div style = {styles.repsBackgroundSplash}>
 						<div style={styles.progressSection}>
 							<div style={styles.sectionTitle}>{presentName} Progress</div>

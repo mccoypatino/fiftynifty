@@ -10,6 +10,7 @@ import { Invite } from '../User/Invite';
 import Scrollchor from 'react-scrollchor';
 import MediaQuery from 'react-responsive';
 import { Dialog } from '@blueprintjs/core';
+import {getScore} from '../../Utilities/UserUtils'
 
 let styles;
 
@@ -107,9 +108,11 @@ export const Landing = React.createClass({
 		const authError = this.state.error || this.props.landingData.authenticationError;
         const localUserData = localStorage.getItem('userData');
         const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
+        const localUserScore = localUser? getScore(localUser): 0;
         const inviteForm = (
 			<div style={{padding: '1.6em'}}>
 				<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
+					<Link to={`/${localUser.id}/#progress`}> <div style={styles.welcomeLine}>Welcome {localUser.name}! Your score is {localUserScore}</div></Link>
 					<div style={{paddingBottom:'1em'}}>
 						<Link to={`/${localUser.id}`} >
 							<Button style={styles.button}
@@ -410,4 +413,10 @@ styles = {
         maxWidth: '100%',
         top: '10%',
     },
+    welcomeLine: {
+		textAlign:'center',
+		padding:'1em',
+		fontWeight:'bold',
+        color: '#cb0027',
+	}
 };
