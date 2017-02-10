@@ -4,11 +4,12 @@ import { Link, browserHistory } from 'react-router';
 import { Button } from '@blueprintjs/core';
 import Radium from 'radium';
 import Phone from 'react-phone-number-input';
-import { postUser, getReferralDetails } from './actions';
+import { postUser, postUserAuthentication, getReferralDetails } from './actions';
 import { HowToPlay } from './HowToPlay';
 import { Invite } from '../User/Invite';
 import Scrollchor from 'react-scrollchor';
 import MediaQuery from 'react-responsive';
+import { Dialog } from '@blueprintjs/core';
 
 let styles;
 
@@ -26,6 +27,8 @@ export const Landing = React.createClass({
 			phone: '',
 			zipcode: '',
 			error: undefined,
+			signupCode: '',
+			showAuthenticationPanel: false,
 		};
 	},
 
@@ -37,11 +40,22 @@ export const Landing = React.createClass({
 		const lastLoading = this.props.landingData.signupLoading;
 		const nextLoading = nextProps.landingData.signupLoading;
 		const nextError = nextProps.landingData.signupError;
-		const nextResult = nextProps.landingData.signupResult;
+		// const nextResult = nextProps.landingData.signupResult;
 		// If the phone number is already in use
-		if (lastLoading && !nextLoading && !nextError && nextResult.id) {
-			localStorage.setItem('userData', JSON.stringify(nextResult));
-			browserHistory.push(`/${nextResult.id}`);
+		// if (lastLoading && !nextLoading && !nextError && nextResult.id) {
+		if (lastLoading && !nextLoading && !nextError) {
+			this.setState({ showAuthenticationPanel: true });
+			// localStorage.setItem('userData', JSON.stringify(nextResult));
+			// browserHistory.push(`/${nextResult.id}`);
+		}
+
+		const lastAuthLoading = this.props.landingData.authenticationLoading;
+		const nextAuthLoading = nextProps.landingData.authenticationLoading;
+		const nextAuthError = nextProps.landingData.authenticationError;
+		const nextAuthResult = nextProps.landingData.authenticationResult;
+		if (lastAuthLoading && !nextAuthLoading && !nextAuthError && nextAuthResult.id) {
+			localStorage.setItem('userData', JSON.stringify(nextAuthResult));
+			browserHistory.push(`/${nextAuthResult.id}`);
 		}
 	},
 	
@@ -51,7 +65,7 @@ export const Landing = React.createClass({
 		});
 	},
 
-	formSubmit: function(evt) {
+	signupSubmit: function(evt) {
 		evt.preventDefault();
 		const referral = this.props.location.query.ref;
 		if (!this.state.name) { return this.setState({ error: 'Name required' }); }
@@ -60,6 +74,18 @@ export const Landing = React.createClass({
 		if (!this.state.phone) { return this.setState({ error: 'Phone Number required' }); }
 		this.setState({ error: undefined });
 		return this.props.dispatch(postUser(this.state.name, this.state.phone, this.state.zipcode, referral));
+	},
+
+	authenticationSubmit: function(evt) {
+		evt.preventDefault();
+		if (!this.state.signupCode) { return this.setState({ error: 'Signup Code required' }); }
+		
+		this.setState({ error: undefined });
+		return this.props.dispatch(postUserAuthentication(this.state.phone, this.state.signupCode));
+	},
+
+	closeAuthenticationPanel: function() {
+		this.setState({ showAuthenticationPanel: false });
 	},
 
 	loadData(userId) {
@@ -78,6 +104,7 @@ export const Landing = React.createClass({
 */
 		const refUser = this.props.landingData.referralDetails;
 		const error = this.state.error || this.props.landingData.signupError;
+		const authError = this.state.error || this.props.landingData.authenticationError;
         const localUserData = localStorage.getItem('userData');
         const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
         const inviteForm = (
@@ -100,7 +127,7 @@ export const Landing = React.createClass({
 				<div id="join" style={styles.headerCall} className={'pt-card pt-elevation-3'}>
                     { refText }
 					<div style={styles.inputHeader}> Join The Challenge</div>
-					<form onSubmit={this.formSubmit} style={styles.form}>
+					<form onSubmit={this.signupSubmit} style={styles.form}>
 						<label htmlFor={'name-input'} style={styles.inputLabel}>
 							Name
 							<input id={'name-input'} className={'pt-input pt-large pt-fill'}
@@ -124,7 +151,7 @@ export const Landing = React.createClass({
 							type={'submit'} style={styles.button}
 							text={'Join the Challenge'}
 							className={'pt-intent-primary pt-fill pt-large'}
-							onClick={this.formSubmit}/>
+							onClick={this.signupSubmit}/>
 						<div style={styles.error}>{error}</div>
 					</form>
 				</div>
@@ -172,7 +199,29 @@ export const Landing = React.createClass({
                         {!localUser.id && joinForm}
 					</div>
 				</MediaQuery>
-				</div>
+
+				<Dialog isOpen={this.state.showAuthenticationPanel} onClose={this.closeAuthenticationPanel} title={'Authenticate your Phone number'} style={styles.dialogBox}>
+					<div className="pt-dialog-body">
+						<p>We've just sent you a text message with an authentication code. Please enter the numeric code here.</p>
+						<form onSubmit={this.authenticationSubmit} style={styles.form}>
+							<label htmlFor={'code-input'} style={styles.inputLabel}>
+								<input id={'code-input'} className={'pt-input pt-large pt-fill'}
+									   placeholder={'Authentication Code'} value={this.state.signupCode}
+									   onChange={(evt) => this.setState({signupCode: evt.target.value})}/>
+							</label>
+							<Button
+								loading={this.props.landingData.authenticationLoading}
+								type={'submit'} style={styles.button}
+								text={'Submit Authentication Code'}
+								className={'pt-intent-primary pt-fill pt-large'}
+								onClick={this.authenticationSubmit}/>
+							<div style={styles.error}>{authError}</div>
+						</form>
+					</div>
+				</Dialog>
+
+
+			</div>
 		);
 	}
 });
@@ -357,4 +406,8 @@ styles = {
 		maxWidth: '100%',
         boxShadow: 'inset 0 0 0 100vw rgba(0,61,89,.6)',
 	},
+	dialogBox: {
+        maxWidth: '100%',
+        top: '10%',
+    },
 };
