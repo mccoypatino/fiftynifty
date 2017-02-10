@@ -26,9 +26,12 @@ export const AppNav = React.createClass({
 			<nav style={styles.navStyle}>
 				<div style={styles.navContent}>
 					<div style={{ display: 'inline-block' }}>
-						<Link to={'/'} style={styles.logo}>Fifty Nifty</Link>
+						<Link to={'/'}>
+							<div style={styles.logo}></div>
+						</Link>
 						
 						<div style={styles.linkWrapper}>
+							<Link to={'/'} style={styles.link}>Home</Link>
                             {!!user.id &&
 							<Link to={`/${user.id}`} style={styles.link}>Your Profile</Link>
                             }
@@ -36,6 +39,7 @@ export const AppNav = React.createClass({
 							<Link to={'/login'} style={styles.link}>Login</Link>
                             }
 							<Link to={'/leaderboard'} style={styles.link}>Leaderboard</Link>
+							<Link to={'/more'} style={styles.link}>About</Link>
 						</div>
 					</div>
 					
@@ -61,21 +65,39 @@ styles = {
 			color: 'white',
 	},
 	navContent: {
-		padding: '1em 1em',
+		padding: '1.5em 1em 1.5em 1em',
 		maxWidth: '1024px',
 		margin: '0 auto',
 		//borderBottom: '1px solid rgba(0, 0, 0, 0.25)',
 		textAlign: 'center',
 		// backgroundColor: '#F29696',
 	},
-	logo: {
-		fontFamily: 'Bungee Shade',
-		fontSize: '3em',
-		textDecoration: 'none',
-		display: 'inline-block',
-		margin: '0 auto',
-		whiteSpace: 'nowrap',
-		paddingTop: '0.25em',
+	logo: { // Relation : 800/88, so 100/11
+		width: '90vw',
+		height: '9.9vw',
+		backgroundSize: '100%',
+		textAlign: 'center',
+
+		'@media (min-width: 635px)': {
+			width: '572px',
+			height: '63px',
+		},
+
+		backgroundRepeat: 'no-repeat',
+		
+		'@media (min-resolution: 192dpi) ': // Retina display
+		{ 	
+			backgroundImage: 'url("../static/logo/LogoBlueOnWhiteOnRed@2x.png")',
+			':hover' : {
+				backgroundImage: 'url("../static/logo/LogoBlueOnBrightWhiteOnRed@2x.png")',
+			}
+		},
+
+		backgroundImage: 'url("../static/logo/LogoBlueOnWhiteOnRed.png")',
+		':hover' : {
+			backgroundImage: 'url("../static/logo/LogoBlueOnBrightWhiteOnRed.png")',
+		},
+		
 	},
 	linkWrapper: {
 		display: 'table',

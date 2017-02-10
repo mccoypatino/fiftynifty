@@ -124,7 +124,7 @@ export const Landing = React.createClass({
         const refText = refUser && <div style={{textAlign:'center'}}><div style={styles.headerText}>{refUser.name} Invited You</div></div>
         const joinForm = (
 			<div style={{padding: '1.6em'}}>
-				<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
+				<div id="join" style={styles.headerCall} className={'pt-card pt-elevation-3'}>
                     { refText }
 					<div style={styles.inputHeader}> Join The Challenge</div>
 					<form onSubmit={this.signupSubmit} style={styles.form}>
@@ -175,9 +175,9 @@ export const Landing = React.createClass({
 					<div style={styles.headerPresentation}>
 						<div style={styles.headerTextBlock}>
 							<div style={styles.section}>
-							<div style={styles.headerText}>Call your Reps!</div>
-							<div style={styles.headerText}>Collect 50 States!</div>
-							<div style={styles.headerText}>Play for a better Democracy!</div>
+								<div style={styles.headerText}>Call your Reps!</div>
+								<div style={styles.headerText}>Collect 50 States!</div>
+								<div style={styles.headerText}>Play for a better Democracy!</div>
 							</div>
 							<p style={styles.headerTextBody}>Our President’s Executive order halting some legal immigrants has created a lot of discussion both from people who are for and those against the order. We want to call Congresspeople throughout the country to tell them our opinion. Real phone call matter, so we are starting the Fifty Nifty challenge to see if you can use your network to get 50 people in 50 states to make a call. The network that gets the most calls wins, but we all win when we call for an effective democracy. Read on to see how to win and hints about what to say.</p>
 						</div>
@@ -195,7 +195,7 @@ export const Landing = React.createClass({
 				<HowToPlay localUser={localUser}/>
 
 				<MediaQuery query='(max-width: 767px)'>
-					<div id="join" style={styles.joinMobileBackground}>
+					<div style={styles.joinMobileBackground}>
                         {!localUser.id && joinForm}
 					</div>
 				</MediaQuery>
@@ -290,7 +290,6 @@ styles = {
 	},
 	headerText: {
 		maxWidth: '500px',
-		fontWeight: 'bold',
 		color: '#cb0027',
 		fontSize: '1.8em',
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {

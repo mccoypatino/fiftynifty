@@ -33,7 +33,7 @@ export const Invite = React.createClass({
         const title = "Join the Fifty Nifty Game!";
 
         return (
-            <div style={styles.sectionBackground}>
+            <div id="invite" style={styles.sectionBackground}>
             <div style={styles.inviteSection}>
                 <div style={styles.inviteHeader}>Invite</div>
                 <p>Invite people to join your network by joining Fifty Nifty with this link:</p>

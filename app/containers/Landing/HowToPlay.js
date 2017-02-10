@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import Radium from 'radium';
 import { Link } from 'react-router';
-
+import Scrollchor from 'react-scrollchor';
 let styles;
 
 export const HowToPlay  = React.createClass({
@@ -17,7 +17,9 @@ export const HowToPlay  = React.createClass({
             <div style={styles.sectionHeader} id="howToPlay">How to Play</div>
             <div style={styles.iconsTable}>
                 <div style={styles.howToPlaySection}>
-                    <a href="#join"><img src={"static/Icon1.png"}/></a>
+                    {/*this should link to settings on the user page when we have settings*/}
+                    {this.props.localUser.id && <Link to={`/${this.props.localUser.id}`}><img src={"static/Icon1.png"}/></Link>}
+                    {!this.props.localUser.id &&  <Scrollchor to="#join"><img src={"static/Icon1.png"}/></Scrollchor>}
                     <div>
                         Join the challenge by
                         filling in your details. This
@@ -27,7 +29,7 @@ export const HowToPlay  = React.createClass({
                 </div>
                 <div style={styles.howToPlaySection}>
                     {this.props.localUser.id && <Link to={`/${this.props.localUser.id}`}><img src={"static/Icon2.png"}/></Link>}
-                    {!this.props.localUser.id && <a href="#join"><img src={"static/Icon2.png"}/></a>}
+                    {!this.props.localUser.id &&  <Scrollchor to="#join"><img src={"static/Icon2.png"}/></Scrollchor>}
                     <div>
                         Call your Representative or Senator and talk
                         to them about an issue you choose.
@@ -36,8 +38,8 @@ export const HowToPlay  = React.createClass({
             </div>
             <div style={styles.iconsTable}>
                 <div style={styles.howToPlaySection}>
-                    {this.props.localUser.id && <Link to={`/${this.props.localUser.id}`}><img src={"static/Icon3.png"}/></Link>}
-                    {!this.props.localUser.id && <a href="#join"><img src={"static/Icon3.png"}/></a>}
+                    {this.props.localUser.id && <Scrollchor to="#invite"><img src={"static/Icon3.png"}/></Scrollchor>}
+                    {!this.props.localUser.id && <Scrollchor to="#join"><img src={"static/Icon3.png"}/></Scrollchor>}
                     <div>
                         Share the link with your friends in other states, when someone in your network does the same, you get the points.
                     </div>
