@@ -97,7 +97,7 @@ export const Landing = React.createClass({
         const refText = refUser && <div style={{textAlign:'center'}}><div style={styles.headerText}>{refUser.name} Invited You</div></div>
         const joinForm = (
 			<div style={{padding: '1.6em'}}>
-				<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
+				<div id="join" style={styles.headerCall} className={'pt-card pt-elevation-3'}>
                     { refText }
 					<div style={styles.inputHeader}> Join The Challenge</div>
 					<form onSubmit={this.formSubmit} style={styles.form}>
@@ -168,7 +168,7 @@ export const Landing = React.createClass({
 				<HowToPlay localUser={localUser}/>
 
 				<MediaQuery query='(max-width: 767px)'>
-					<div id="join" style={styles.joinMobileBackground}>
+					<div style={styles.joinMobileBackground}>
                         {!localUser.id && joinForm}
 					</div>
 				</MediaQuery>
