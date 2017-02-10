@@ -5,12 +5,12 @@ import { Button } from '@blueprintjs/core';
 import Radium from 'radium';
 import Phone from 'react-phone-number-input';
 import { postUser, postUserAuthentication, getReferralDetails } from './actions';
-import { HowToPlay } from './HowToPlay';
-import { Invite } from '../User/Invite';
+import HowToPlay from './HowToPlay';
+import Invite from '../User/Invite';
 import Scrollchor from 'react-scrollchor';
 import MediaQuery from 'react-responsive';
 import { Dialog } from '@blueprintjs/core';
-import {getScore} from '../../Utilities/UserUtils'
+import { getScore } from '../../Utilities/UserUtils'
 
 let styles;
 
