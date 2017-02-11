@@ -69,6 +69,8 @@ styles = {
 			position: 'absolute',
 			zIndex: '3',
 			width: '100%',
+			maxWidth: '100vw',
+			overflow: 'hidden',
 			color: 'white',
 	},
 	navContent: {

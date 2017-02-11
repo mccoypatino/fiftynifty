@@ -68,7 +68,9 @@ export const Landing = React.createClass({
 
 	signupSubmit: function(evt) {
 		evt.preventDefault();
-		const referral = this.props.location.query.ref;
+		const refUser = this.props.landingData.referralDetails;
+		const referral = refUser.id || this.props.location.query.ref;
+		this.props.landingData.referralDetails
 		if (!this.state.name) { return this.setState({ error: 'Name required' }); }
 		if (!this.state.zipcode) { return this.setState({ error: 'Zipcode required' }); }
 		if (this.state.zipcode.length !== 5) { return this.setState({ error: 'Zipcode must be 5 digits' }); }
@@ -210,7 +212,7 @@ export const Landing = React.createClass({
 						<p>We've just sent you a text message with an authentication code. Please enter the numeric code here.</p>
 						<form onSubmit={this.authenticationSubmit} style={styles.form}>
 							<label htmlFor={'code-input'} style={styles.inputLabel}>
-								<input id={'code-input'} className={'pt-input pt-large pt-fill'}
+								<input id={'code-input'} type={'number'}  className={'pt-input pt-large pt-fill'}
 									   placeholder={'Authentication Code'} value={this.state.signupCode}
 									   onChange={(evt) => this.setState({signupCode: evt.target.value})}/>
 							</label>
