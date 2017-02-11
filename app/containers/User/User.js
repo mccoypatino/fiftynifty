@@ -94,7 +94,7 @@ export const User = React.createClass({
 		// const children = user.children || [];
 		const flatCalls = this.returnCalls(user, 0);
 		const score = getScore(user);
-		const shareUrl = 'http://fiftynifty.org/?ref=' + user.id; //When we get nicer urls, adda "getUrl" function
+		const shareUrl = 'https://fiftynifty.org/?ref=' + user.id; //When we get nicer urls, adda "getUrl" function
 		const statesCount = countStates(user);
 		const chartData = [{ name: 'SatesDone', value: statesCount }, { name: 'not Done', value: 50 - statesCount }];
 		const COLORS = ['#cb0027', 'rgba(0,0,0,0)'];

@@ -122,7 +122,7 @@ export const Landing = React.createClass({
 									className={'pt-intent-danger pt-fill pt-large'}/>
 						</Link>
 					</div>
-					<Invite url={`http://fiftynifty.org/?ref=${localUser.id}`}/>
+					<Invite url={`https://fiftynifty.org/?ref=${localUser.id}`}/>
 				</div>
 			</div>
 		);
