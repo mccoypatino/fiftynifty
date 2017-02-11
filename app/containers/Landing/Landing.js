@@ -68,7 +68,7 @@ export const Landing = React.createClass({
 
 	signupSubmit: function(evt) {
 		evt.preventDefault();
-		const refUser = this.props.landingData.referralDetails;
+		const refUser = this.props.landingData.referralDetails || {};
 		const referral = refUser.id || this.props.location.query.ref;
 		this.props.landingData.referralDetails
 		if (!this.state.name) { return this.setState({ error: 'Name required' }); }
