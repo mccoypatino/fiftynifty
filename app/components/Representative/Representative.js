@@ -24,7 +24,7 @@ export const Representative = React.createClass({
 	callNumber: function() {
 		// const number = this.refs.number.value;
 		const repName = `${this.props.repData.first_name} ${this.props.repData.last_name}`;
-		this.props.callFunction(this.props.repData.phone, repName);
+		this.props.callFunction(this.props.repData.bioguide_id, repName);
 	},
 
 	render() {
