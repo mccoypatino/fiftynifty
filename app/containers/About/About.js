@@ -3,7 +3,7 @@ import { Link, browserHistory } from 'react-router';
 
 let styles;
 
-export const LearnMore = React.createClass({
+export const About = React.createClass({
 
     render() {
         return (
@@ -143,7 +143,7 @@ export const LearnMore = React.createClass({
 });
 
 
-export default LearnMore;
+export default About;
 
 styles = {
     more: {

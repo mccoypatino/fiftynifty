@@ -26,9 +26,16 @@ export const AppNav = React.createClass({
 			<nav style={styles.navStyle}>
 				<div style={styles.navContent}>
 					<div style={{ display: 'inline-block' }}>
-						<Link to={'/'}>
-							<div style={styles.logo}></div>
-						</Link>
+						<div className={'show-child-on-hover'} style={styles.logoWrapper}>
+							<Link to={'/'}>
+								<div style={styles.logo} className={'header-logo'} />
+							</Link>
+
+							<div style={styles.songWrapper} className={'hidden-child'}>
+								<Link to={'/song'} className={'pt-button pt-minimal pt-icon-music'} style={styles.songIcon}/>
+							</div>
+						</div>
+						
 						
 						<div style={styles.linkWrapper}>
 							<Link to={'/'} style={styles.link(pathname==='/')}>Home</Link>
@@ -39,7 +46,7 @@ export const AppNav = React.createClass({
 							<Link to={'/login'} style={styles.link(pathname==='/login')}>Login</Link>
                             }
 							<Link to={'/leaderboard'} style={styles.link(pathname==='/leaderboard')}>Leaderboard</Link>
-							<Link to={'/more'} style={styles.link(pathname==='/more')}>About</Link>
+							<Link to={'/about'} style={styles.link(pathname==='/about')}>About</Link>
 						</div>
 					</div>
 					
@@ -62,6 +69,8 @@ styles = {
 			position: 'absolute',
 			zIndex: '3',
 			width: '100%',
+			maxWidth: '100vw',
+			overflow: 'hidden',
 			color: 'white',
 	},
 	navContent: {
@@ -72,33 +81,38 @@ styles = {
 		textAlign: 'center',
 		// backgroundColor: '#F29696',
 	},
+	logoWrapper: {
+		position: 'relative',
+	},
+	songWrapper: {
+		position: 'absolute',
+		right: '-70px',
+		top: '0px',
+		padding: '7px 15px',
+		
+	},
+	songIcon: {
+		border: '2px solid rgba(255, 255, 255, 0.5)',
+		padding: '10px',
+		borderRadius: '40px',
+		height: '40px',
+		color: 'rgba(255, 255, 255, 0.75)',
+		lineHeight: '0px',
+	},
 	logo: { // Relation : 800/88, so 100/11
 		width: '90vw',
 		height: '9.9vw',
 		backgroundSize: '100%',
 		textAlign: 'center',
-
+		backgroundRepeat: 'no-repeat',
 		'@media (min-width: 635px)': {
 			width: '500px',
 			height: '63px',
 		},
-
-		backgroundRepeat: 'no-repeat',
-		
-		'@media (min-resolution: 192dpi) ': // Retina display
-		{ 	
-			backgroundImage: 'url("../static/logo/LogoBlueOnWhiteOnRed@2x.png")',
-			':hover' : {
-				backgroundImage: 'url("../static/logo/LogoBlueOnBrightWhiteOnRed@2x.png")',
-			}
-		},
-
-		backgroundImage: 'url("../static/logo/LogoBlueOnWhiteOnRed.png")',
-		':hover' : {
-			backgroundImage: 'url("../static/logo/LogoBlueOnBrightWhiteOnRed.png")',
-		},
-		
+		// See styles.css for image use
+		// Need to set images there so they pre-load correctly.
 	},
+	
 	linkWrapper: {
 		display: 'table',
 		width: '100%',
@@ -108,6 +122,7 @@ styles = {
             display: 'table-cell',
             textDecoration: 'none',
             textAlign: 'center',
+            width: '25%',
             padding: '1em 0em',
 			color: isCurr?'#848484' : 'white',
         }

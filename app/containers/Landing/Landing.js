@@ -5,11 +5,12 @@ import { Button } from '@blueprintjs/core';
 import Radium from 'radium';
 import Phone from 'react-phone-number-input';
 import { postUser, postUserAuthentication, getReferralDetails } from './actions';
-import { HowToPlay } from './HowToPlay';
-import { Invite } from '../User/Invite';
+import HowToPlay from './HowToPlay';
+import Invite from '../User/Invite';
 import Scrollchor from 'react-scrollchor';
 import MediaQuery from 'react-responsive';
 import { Dialog } from '@blueprintjs/core';
+import { getScore } from '../../Utilities/UserUtils'
 
 let styles;
 
@@ -67,7 +68,9 @@ export const Landing = React.createClass({
 
 	signupSubmit: function(evt) {
 		evt.preventDefault();
-		const referral = this.props.location.query.ref;
+		const refUser = this.props.landingData.referralDetails || {};
+		const referral = refUser.id || this.props.location.query.ref;
+		this.props.landingData.referralDetails
 		if (!this.state.name) { return this.setState({ error: 'Name required' }); }
 		if (!this.state.zipcode) { return this.setState({ error: 'Zipcode required' }); }
 		if (this.state.zipcode.length !== 5) { return this.setState({ error: 'Zipcode must be 5 digits' }); }
@@ -107,7 +110,8 @@ export const Landing = React.createClass({
 		const authError = this.state.error || this.props.landingData.authenticationError;
         const localUserData = localStorage.getItem('userData');
         const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
-        const variant = localUser.variant || window.variant;
+        const localUserScore = localUser? getScore(localUser): 0;
+
         const inviteForm = (
 			<div style={{padding: '1.6em'}}>
 				<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
@@ -118,7 +122,7 @@ export const Landing = React.createClass({
 									className={'pt-intent-danger pt-fill pt-large'}/>
 						</Link>
 					</div>
-					<Invite url={`http://fiftynifty.org/?ref=${localUser.id}`}/>
+					<Invite url={`https://fiftynifty.org/?ref=${localUser.id}`}/>
 				</div>
 			</div>
 		);
@@ -146,6 +150,7 @@ export const Landing = React.createClass({
 							<Phone country={'US'} className={'pt-input pt-large pt-fill'}
 								   placeholder={'781-975-5555'} value={this.state.phone}
 								   onChange={phone => this.setState({phone: phone})}/>
+							<div style={styles.inputSubtext}><span style={{ verticalAlign: 'middle', fontSize: '0.85em', opacity: 0.7 }} className={'pt-icon-standard pt-icon-lock'} /> Encrypted. We never sell or share your number.</div>
 						</label>
 						<Button
 							loading={this.props.landingData.signupLoading}
@@ -181,6 +186,7 @@ export const Landing = React.createClass({
 								<div style={styles.headerText}>Play for a better Democracy!</div>
 							</div>
 							<p style={styles.headerTextBody}>Our President’s Executive order halting some legal immigrants has created a lot of discussion both from people who are for and those against the order. We want to call Congresspeople throughout the country to tell them our opinion. Real phone call matter, so we are starting the Fifty Nifty challenge to see if you can use your network to get 50 people in 50 states to make a call. The network that gets the most calls wins, but we all win when we call for an effective democracy. Read on to see how to win and hints about what to say.</p>
+							{localUser.id && <Link to={`/${localUser.id}`}> <div style={styles.welcomeLine}>Welcome {localUser.name}, Your score is {localUserScore}</div></Link>}
 						</div>
 						<MediaQuery query='(max-width: 767px)'>
 							{!localUser.id && refText}
@@ -206,7 +212,7 @@ export const Landing = React.createClass({
 						<p>We've just sent you a text message with an authentication code. Please enter the numeric code here.</p>
 						<form onSubmit={this.authenticationSubmit} style={styles.form}>
 							<label htmlFor={'code-input'} style={styles.inputLabel}>
-								<input id={'code-input'} className={'pt-input pt-large pt-fill'}
+								<input id={'code-input'} type={'number'}  className={'pt-input pt-large pt-fill'}
 									   placeholder={'Authentication Code'} value={this.state.signupCode}
 									   onChange={(evt) => this.setState({signupCode: evt.target.value})}/>
 							</label>
@@ -291,7 +297,8 @@ styles = {
 	},
 	headerText: {
 		maxWidth: '500px',
-		color: '#cb0027',
+		// color: '#cb0027',
+		color: '#da0f18',
 		fontSize: '1.8em',
         fontFamily: 'mrs-eaves-roman-small-caps, sans-serif',
         fontWeight: 'bold',
@@ -340,6 +347,11 @@ styles = {
 		fontSize: '1.25em',
 		display: 'block',
 		marginBottom: '1em',
+	},
+	inputSubtext: {
+		fontSize: '0.85em',
+		opacity: 0.7,
+		paddingTop: '0.25em',
 	},
 	button: {
 		verticalAlign: 'bottom',
@@ -411,4 +423,13 @@ styles = {
         maxWidth: '100%',
         top: '10%',
     },
+    welcomeLine: {
+		textAlign:'center',
+		padding:'1em',
+		fontWeight:'bold',
+        color: '#da0f18',
+		background: 'rgba( 255, 255, 255, 0.6)',
+		borderRadius: '5px',
+		letterSpacing:'0.05em',
+	}
 };
