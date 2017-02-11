@@ -16,6 +16,10 @@ export const GET_USER_LOAD = 'username/GET_USER_LOAD';
 export const GET_USER_SUCCESS = 'username/GET_USER_SUCCESS';
 export const GET_USER_FAIL = 'username/GET_USER_FAIL';
 
+export const GET_CALL_LOAD = 'username/GET_CALL_LOAD';
+export const GET_CALL_SUCCESS = 'username/GET_CALL_SUCCESS';
+export const GET_CALL_FAIL = 'username/GET_CALL_FAIL';
+
 /*--------*/
 // Define Action creators
 //
@@ -84,6 +88,20 @@ export function getReferralDetails(userId) {
             .catch((error) => {
                 console.log(error);
                 dispatch({ type: GET_USER_FAIL, error });
+            });
+    };
+}
+
+export function getCallWithVerificationCode(phone) {
+    return (dispatch) => {
+        dispatch({ type: GET_CALL_LOAD });
+        return clientFetch(`/api/callAuthenticate/${phone}`)
+            .then((result) => {
+                dispatch({ type: GET_CALL_SUCCESS, result });
+            })
+            .catch((error) => {
+                console.log(error);
+                dispatch({ type: GET_CALL_FAIL, error });
             });
     };
 }

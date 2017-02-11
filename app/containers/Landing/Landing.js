@@ -4,7 +4,7 @@ import { Link, browserHistory } from 'react-router';
 import { Button } from '@blueprintjs/core';
 import Radium from 'radium';
 import Phone from 'react-phone-number-input';
-import { postUser, postUserAuthentication, getReferralDetails } from './actions';
+import { postUser, postUserAuthentication, getReferralDetails, getCallWithVerificationCode } from './actions';
 import HowToPlay from './HowToPlay';
 import Invite from '../User/Invite';
 import Scrollchor from 'react-scrollchor';
@@ -85,6 +85,11 @@ export const Landing = React.createClass({
 		
 		this.setState({ error: undefined });
 		return this.props.dispatch(postUserAuthentication(this.state.phone, this.state.signupCode));
+	},
+
+	callWithVerificationCode: function(evt) {
+		evt.preventDefault();
+		return this.props.dispatch(getCallWithVerificationCode(this.state.phone));
 	},
 
 	closeAuthenticationPanel: function() {
@@ -223,6 +228,12 @@ export const Landing = React.createClass({
 								className={'pt-intent-primary pt-fill pt-large'}
 								onClick={this.authenticationSubmit}/>
 							<div style={styles.error}>{authError}</div>
+							<Button
+								loading={this.props.landingData.authenticationLoading}
+								type={'submit'} style={styles.button}
+								text={'Landline? Make us call you with a code'}
+								className={'pt-intent-primary pt-fill pt-large'}
+								onClick={this.callWithVerificationCode}/>
 						</form>
 					</div>
 				</Dialog>
