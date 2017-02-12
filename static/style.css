@@ -18,6 +18,13 @@ body {
 .header-logo {
 	background-image: url("/static/logo/LogoBlueOnWhiteOnRed.png"),
 }
+.header-logo:after {
+	content: "";
+	opacity: 0;
+	pointer-events: none;
+	display: block;
+	background-image: url("/static/logo/LogoBlueOnBrightWhiteOnRed.png"),
+}
 .header-logo:hover {
 	background-image: url("/static/logo/LogoBlueOnBrightWhiteOnRed.png"),
 }
@@ -25,6 +32,13 @@ body {
 @media (min-resolution: 192dpi) { // Retina display
 	.header-logo {
 		background-image: url("/static/logo/LogoBlueOnWhiteOnRed@2x.png"),
+	}
+	.header-logo:after {
+		content: "";
+		opacity: 0;
+		pointer-events: none;
+		display: block;
+		background-image: url("/static/logo/LogoBlueOnBrightWhiteOnRed@2x.png"),
 	}
 	.header-logo:hover {
 		background-image: url("/static/logo/LogoBlueOnBrightWhiteOnRed@2x.png"),
