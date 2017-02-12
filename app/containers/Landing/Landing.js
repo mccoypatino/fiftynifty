@@ -190,11 +190,11 @@ export const Landing = React.createClass({
 								<div style={styles.headerText}>Collect 50 States!</div>
 								<div style={styles.headerText}>Play for a better Democracy!</div>
 							</div>
-							{variant <= 50
+							{variant <= 50 &&
 								<p style={styles.headerTextBody}>Our President’s Executive order halting some legal immigrants has created a lot of discussion both from people who are for and those against the order. We want to call Congresspeople throughout the country to tell them our opinion. Live phone calls matter, so we are starting the Fifty Nifty challenge to see if you can use your network to get 50 people in 50 states to make a call. The network that gets the most calls wins, but we all win when we call for an effective democracy. Read on to see how to win and hints about what to say.</p>
 							}
 
-							{variant > 50
+							{variant > 50 && 
 								<p style={styles.headerTextBody}>Real phone calls from real constituents matter to elected officials. The Fifty Nifty Challenge is your chance to build a grassroots social network for action. Your goal is to get 50 people in 50 states to directly tell their congresspeople what they think. The networks that makes the most calls wins and we all win when we call for an effective democracy. It’s a challenge for you and your friends, and a chance to watch the growth of your network. You can call about any issue of importance to you. Read on to see how to win and hints about what to say.</p>
 							}
 							
