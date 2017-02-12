@@ -173,7 +173,7 @@ export const Landing = React.createClass({
 				<div >
 					<Scrollchor to="#join"><Button
 						role={"button"}
-						className={'pt-fill pt-button pt-intent-primary'}>Join Now</Button>
+						className={'pt-fill pt-button pt-intent-primary'}>Join Now!</Button>
 					</Scrollchor>
 				</div>
 			</div>
