@@ -64,8 +64,8 @@ export function requestCall(repId, id) {
 export function requestLatLong(address, zipcode, userId) {
 	return (dispatch) => {
 		dispatch({ type: REQUEST_LATLON_LOAD });
-		return clientFetch('/api/address', {
-			method: 'POST',
+		return clientFetch('/api/user/address', {
+			method: 'PUT',
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json'

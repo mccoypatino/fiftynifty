@@ -81,7 +81,7 @@ export function postUser(name, phone, zipcode, parentId, variant) {
 export function getReferralDetails(userId) {
     return (dispatch) => {
         dispatch({ type: GET_USER_LOAD });
-        return clientFetch(`/api/username?userId=${userId}`)
+        return clientFetch(`/api/user/simple?userId=${userId}`)
             .then((result) => {
                 dispatch({ type: GET_USER_SUCCESS, result });
             })
