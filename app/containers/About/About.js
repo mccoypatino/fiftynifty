@@ -65,7 +65,7 @@ export const About = React.createClass({
                         <p>We welcome your feedback: <a href={'mailto:fiftynifty@media.mit.edu'} style={styles.link}>Contact us at fiftynifty@media.mit.edu</a>
                         </p>
                         <div>
-                            <Link to={"/"}><button className={"pt-button pt-intent-primary pt-fill"}>Join The Game</button></Link>
+                            <Link to={"/"}><button className={"pt-button pt-intent-primary pt-fill pt-large"}>Join The Game</button></Link>
                         </div>
                         <div>
                             As you invite more friends to the game - your network will grow will look similar to this:
@@ -98,17 +98,13 @@ export const About = React.createClass({
 
                         <p>You may think that it's impossible to pass a message to someone in every state.  It's far easier than you think.  Some studies have shown that everyone is only an average of six people away from anyone else.  A psychologist <a href=  "https://en.wikipedia.org/wiki/Six_degrees_of_separation"> tested this in the 1960's by asking people to get a letter to someone they didn't know, by sending it to someone they did.</a> For a while there was a lot of buzz about your &quotBacon Number&quot.  That number told how many people you were away from Kevin Bacon.  It's also called &quotThe Small World Problem&quot.  <em>You can meet the challenge!</em></p>
                         <p>Remember the challenge!  50 calls in 50 states.  Multiplied by all of us.</p>
-
-                        {/*Add Red Balloon challenge note*/}
-
-                        <p>Remember the challenge! 50 calls in 50 states. Multiplied by all of us.</p>
                     </div>
                     <div>
-                        <Link to={"/"}><button className={"pt-button pt-intent-primary pt-fill"}>Join Now</button></Link>
+                        <Link to={"/"}><button className={"pt-button pt-intent-primary pt-fill pt-large"}>Join Now</button></Link>
                     </div>
                     <div>
                         <h3 style={styles.title}>  Closing the Borders </h3>
-                        <p> The new Exectuive Order has thrown us into turmoil.
+                        <p> The new Executive Order has thrown us into turmoil.
                             Whether you agree with the order, are confused by it, or are think our government
                             ought to be more thoughtful in its actions, now is the time to make your opinion known by
                             <i> calling your congressman!</i></p>
@@ -135,7 +131,7 @@ export const About = React.createClass({
                             ell them how you feel about the important ones.</p>
                     </div>
                     <div>
-                        <Link to={"/"}><button className={"pt-button pt-intent-primary pt-fill"}>Join Now</button></Link>
+                        <Link to={"/"}><button className={"pt-button pt-intent-primary pt-fill pt-large"}>Join Now</button></Link>
                     </div>
                 </div>
             </div> );
