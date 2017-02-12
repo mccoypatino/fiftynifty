@@ -191,11 +191,12 @@ export const Landing = React.createClass({
 								<div style={styles.headerText}>Play for a better Democracy!</div>
 							</div>
 							{variant <= 50 &&
-								<p style={styles.headerTextBody}>Our President’s Executive order halting some legal immigrants has created a lot of discussion both from people who are for and those against the order. We want to call Congresspeople throughout the country to tell them our opinion. Live phone calls matter, so we are starting the Fifty Nifty challenge to see if you can use your network to get 50 people in 50 states to make a call. The network that gets the most calls wins, but we all win when we call for an effective democracy. Read on to see how to win and hints about what to say.</p>
+								
+								<p style={styles.headerTextBody}>President Trump’s Executive Order “Protecting the Nation from Foreign Terrorist Entry into the United States” has created a great deal of discussion. For your opinion to have impact, call your Congressional representatives and get your friends to do the same.  Live calls matter, so you are invited to join the FiftyNifty Challenge to build a network of 50 people in 50 states to call Congress directly and multiply their message.  The network with the most calls wins the Challenge, but we all win when we call for an effective democracy.  Read on to see how to win and hints to make your call easy and effective.</p>
 							}
 
 							{variant > 50 && 
-								<p style={styles.headerTextBody}>Real phone calls from real constituents matter to elected officials. The Fifty Nifty Challenge is your chance to build a grassroots social network for action. Your goal is to get 50 people in 50 states to directly tell their congresspeople what they think. The networks that makes the most calls wins and we all win when we call for an effective democracy. It’s a challenge for you and your friends, and a chance to watch the growth of your network. You can call about any issue of importance to you. Read on to see how to win and hints about what to say.</p>
+								<p style={styles.headerTextBody}>Real phone calls from real constituents matter to elected officials. The Fifty Nifty Challenge is your chance to build a grassroots social network for action. Your goal is to get 50 people in 50 states to directly tell their congresspeople what they think. The networks that makes the most calls wins and we all win when we call for an effective democracy. It’s a challenge for you and your friends, and a chance to watch the growth of your network. You can call about any issue of importance to you and we’ll suggest one when you learn more. Read on to see how to win and hints about what to say.</p>
 							}
 							
 							{localUser.id && <Link to={`/${localUser.id}`}> <div style={styles.welcomeLine}>Welcome {localUser.name}, Your score is {localUserScore}</div></Link>}
