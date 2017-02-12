@@ -4,7 +4,7 @@ License and copyright information
 License
 --------
 
-PubPub is licensed under the terms of the GNU General Public License,
+FiftyNifty is licensed under the terms of the GNU General Public License,
 version 2 or later. Derivative works and later versions of the code must be
 free software licensed under the same or a compatible license.
 
