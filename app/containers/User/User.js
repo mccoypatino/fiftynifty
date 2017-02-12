@@ -253,6 +253,16 @@ export const User = React.createClass({
 						</div>
 					</div>
 				}
+
+				{isLocalUser &&
+					<div style={styles.settingsBackground}>
+						<div style={styles.plainContainer}>
+							<div style={styles.sectionTitle}>Settings</div>
+							<p>Mistype your zipcode or name? Email us at <a href={'mailto:fiftynifty@media.mit.edu'}>fiftynifty@media.mit.edu</a> and we can update your profile.</p>
+							<p>Richer profile settings coming soon.</p>
+						</div>
+					</div>
+				}
 			</div>
 
 		);
@@ -274,6 +284,13 @@ styles = {
 		margin: '0 auto',
 		opacity:'1',
 	},
+	plainContainer: {
+		maxWidth: '1024px',
+		margin: '0 auto',
+		padding: '2em 1em',
+		color: '#FFF',
+		textAlign: 'center',
+	},
 	content: {
 		padding: '1em 0em',
 	},
@@ -282,7 +299,7 @@ styles = {
 		fontWeight: 'lighter',
 		textAlign: 'center',
 		padding: '1em 0em',
-		color:'white',
+		color: 'white',
 		letterSpacing:'0.1em',
 		position: 'relative',
 	},
@@ -324,6 +341,9 @@ styles = {
 	},
 	graphBackground: {
 		backgroundColor:"#003d59",
+	},
+	settingsBackground: {
+		backgroundColor: '#0b5577',
 	},
 	repsBackground: {
 		backgroundImage: 'url("/static/header.jpg")',
