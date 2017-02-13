@@ -20,8 +20,6 @@ This will create a `dist/` folder with a minified js bundle which will be used o
 npm run start-prod
 ```
 
-This will build and then run your app with environment set to production, so that the production bundle and `config/production.js` are used.
+## API
 
----
-
-Based on the boilerplate from https://github.com/DominicTobias/universal-react/
+The API used for this frontend is available at [https://github.com/isTravis/fiftynifty-api](https://github.com/isTravis/fiftynifty-api).

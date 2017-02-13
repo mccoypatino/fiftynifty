@@ -55,6 +55,7 @@ export const Landing = React.createClass({
 		const nextAuthError = nextProps.landingData.authenticationError;
 		const nextAuthResult = nextProps.landingData.authenticationResult;
 		if (lastAuthLoading && !nextAuthLoading && !nextAuthError && nextAuthResult.id) {
+			this.setState({ showAuthenticationPanel: false });
 			localStorage.setItem('userData', JSON.stringify(nextAuthResult));
 			browserHistory.push(`/${nextAuthResult.id}`);
 		}
