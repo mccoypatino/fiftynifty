@@ -24,10 +24,10 @@ export const AddressInput = React.createClass({
 		return (
 			<form onSubmit={this.requestAddress}>
 				<label>
-					Please enter your address
+					We couldn't determine who are your representatives. Please enter your address:
 					<input id={'address-input'} type={'text'} className={'pt-input pt-large pt-fill'} placeholder={'Powered by Google Maps'} onChange={this.updateAddress} />
 				</label>
-				<Button type={'submit'} loading={this.props.isLoading} className={'pt-button pt-intent-primary'} text={'Address'} />
+				<Button type={'submit'} loading={this.props.isLoading} className={'pt-button pt-intent-primary'} text={'Submit'} />
 			</form>
 		);
 	}
