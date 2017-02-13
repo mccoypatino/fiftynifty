@@ -55,8 +55,8 @@ export const User = React.createClass({
 		this.props.dispatch(requestCall(repId, this.props.params.userId));
 	},
 
-	geolocateFunction: function(address, zipcode) {
-		this.props.dispatch(requestLatLong(address, zipcode, this.props.params.userId));
+	geolocateFunction: function(address) {
+		this.props.dispatch(requestLatLong(address, this.props.params.userId));
 	},
 	logout: function() {
 		localStorage.removeItem('userData');
@@ -171,7 +171,7 @@ export const User = React.createClass({
 														}
 
 														{reps.length > 3 &&
-														<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
+														<AddressInput geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
 														}
 
 														{reps.length === 3 && reps.map((rep, index)=> {

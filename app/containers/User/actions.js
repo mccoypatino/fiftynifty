@@ -61,7 +61,7 @@ export function requestCall(repId, id) {
 	};
 }
 
-export function requestLatLong(address, zipcode, userId) {
+export function requestLatLong(address, userId) {
 	return (dispatch) => {
 		dispatch({ type: REQUEST_LATLON_LOAD });
 		return clientFetch('/api/user/address', {
@@ -72,7 +72,6 @@ export function requestLatLong(address, zipcode, userId) {
 			},
 			body: JSON.stringify({
 				address: address,
-				zipcode: zipcode,
 				userId: userId,
 			})
 		})

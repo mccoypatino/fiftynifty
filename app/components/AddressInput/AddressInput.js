@@ -6,14 +6,13 @@ let styles;
 
 export const AddressInput = React.createClass({
 	propTypes: {
-		zipcode: PropTypes.string,
 		geolocateFunction: PropTypes.func,
 		isLoading: PropTypes.bool,
 	},
 
 	requestAddress: function(evt) {
 		evt.preventDefault();
-		this.props.geolocateFunction(this.state.address, this.props.zipcode);
+		this.props.geolocateFunction(this.state.address);
 	},
 
 	updateAddress: function(evt) {
