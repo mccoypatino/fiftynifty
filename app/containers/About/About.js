@@ -58,7 +58,7 @@ export const About = React.createClass({
                             invite can see who it came from.
                             We also use your name so you can track the
                             progress of your network on the map. You have the option of
-                            supressing that information.  We will never present results of our
+                            suppressing that information.  We will never present results of our
                             research in a way that allows you to be identified and we will destroy
                             any personal information at the conclusion of the challenge.
                         </p>
