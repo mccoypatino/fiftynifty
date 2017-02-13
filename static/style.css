@@ -29,6 +29,19 @@ body {
 	background-image: url("/static/logo/LogoBlueOnBrightWhiteOnRed.png"),
 }
 
+.about-page {
+	p {
+		font-size: 1.1em;
+		line-height: 1.4;
+		margin-bottom: 2em;
+	}
+	button {
+		margin-bottom: 2em;
+	}
+	img {
+		margin-bottom: 2em;
+	}
+}
 @media (min-resolution: 192dpi) { // Retina display
 	.header-logo {
 		background-image: url("/static/logo/LogoBlueOnWhiteOnRed@2x.png"),

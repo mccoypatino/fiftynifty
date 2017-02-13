@@ -7,7 +7,7 @@ export const About = React.createClass({
 
     render() {
         return (
-            <div style={styles.more}>
+            <div style={styles.more} className={'about-page'}>
                 <div style={styles.container}>
                     <div>
                         <h3 style={styles.title}>  Closing the Borders </h3>
@@ -98,20 +98,15 @@ export const About = React.createClass({
                             sell or reveal your phone number or zipcode. You must be 18 to join the challenge.
 
                         </p>
-                        <p>We welcome your feedback: <a href={'mailto:fiftynifty@media.mit.edu'} style={styles.link}>Contact us at fiftynifty@media.mit.edu</a>
-                        </p>
-                        <div>
-                            <Link to={"/"}><button className={"pt-button pt-intent-primary pt-fill pt-large"}>Join The Game</button></Link>
-                        </div>
-                        <div>
-                            As you invite more friends to the game - your network will grow to look similar to this:
-                            <div style={{width:'100%', textAlign:'center'}}><img style={{width:'90%'}} src={'static/network.png'}/></div>
-                        </div>
-                        <div>
-                            And as your friends make calls and invite more friends, your progress map will start looking like this:
-                            <div style={{width:'100%', textAlign:'center'}}><img style={{width:'90%'}} src={'static/map.png'}/></div>
+                        
+                        <p>We welcome your feedback: <a href={'mailto:fiftynifty@media.mit.edu'} style={styles.link}>Contact us at fiftynifty@media.mit.edu</a></p>
+                        
+                        <Link to={"/"}><button className={"pt-button pt-intent-primary pt-fill pt-large"}>Join The Game</button></Link>
+                        <p>As you invite more friends to the game - your network will grow to look similar to this:</p>
+                        <div style={{width:'100%', textAlign:'center'}}><img style={{width:'90%'}} src={'static/network.png'}/></div>
+                        <p>And as your friends make calls and invite more friends, your progress map will start looking like this:</p>
+                        <div style={{width:'100%', textAlign:'center'}}><img style={{width:'90%'}} src={'static/map.png'}/></div>
 
-                        </div>
                     </div>
                     <div>
 
