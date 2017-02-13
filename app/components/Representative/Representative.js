@@ -14,21 +14,25 @@ export const Representative = React.createClass({
 	getInitialState() {
 		return {
 			callDialogOpen: false,
+			clickedConnect: false,
 		};
 	},
 
 	toggleCallDialog: function() {
-		this.setState({ callDialogOpen: !this.state.callDialogOpen });
+		this.setState({callDialogOpen: !this.state.callDialogOpen, clickedConnect: false });
 	},
 
 	callNumber: function() {
 		// const number = this.refs.number.value;
+        this.setState({clickedConnect: true });
 		const repName = `${this.props.repData.first_name} ${this.props.repData.last_name}`;
 		this.props.callFunction(this.props.repData.bioguide_id, repName);
+
 	},
 
 	render() {
 		const repData = this.props.repData || {};
+		const connectButtonClass = this.state.clickedConnect? 'pt-button pt-active' : 'pt-button pt-intent-primary';
 		return (
 			<div style={styles.container}>
 				<div style={styles.repName}>{repData.first_name} {repData.last_name}</div>
@@ -39,7 +43,7 @@ export const Representative = React.createClass({
 						<h4>
 
 							{repData.first_name} {repData.last_name}
-							<span style={{padding:'1em'}}> <button role={'button'} className={'pt-button pt-intent-primary'} onClick={this.callNumber}>Click to Connect</button></span>
+							<span style={{padding:'1em'}}> <button role={'button'} className={connectButtonClass} onClick={this.callNumber}>{this.state.clickedConnect?'Calling you now...': 'Click to Connect'}</button></span>
 						</h4>
 						<p>{repData.chamber === 'senate' ? 'Senator ' : 'Representative '} for {repData.chamber === 'senate' ? repData.state : `district ${repData.district} in ${repData.state}`}</p>
 						<h6>What do I say?</h6>
