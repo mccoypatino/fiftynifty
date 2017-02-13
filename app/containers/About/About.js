@@ -10,6 +10,40 @@ export const About = React.createClass({
             <div style={styles.more}>
                 <div style={styles.container}>
                     <div>
+                        <h3 style={styles.title}>  Closing the Borders </h3>
+                        <p> The new Executive Order “Protecting the Nation from Foreign Terrorist Entry into the 
+                                       United States” and the aftermath has thrown the country into turmoil.
+                            Whether you agree with the order and the courts’ interpretation of it, are confused by it, 
+                                       or are think our government ought to be more thoughtful in its actions, now is the time to make your 
+                                       opinion known by
+                            <i> calling your congressman! Urge them to take a strong public stand and let the nation know their opinion in no uncertain terms.</i></p>
+
+                        <p>Many think the order is bad policy and bad democracy.
+                            They feel that guests and immigrants make America strong,
+                             increase the economy more than trade deals, and do not take American jobs.
+                             Neither have immigrants from the seven proscribed countries
+                             terrorized us.</p>
+                        <p>Many others support the ban in the interests of keeping the country safe.
+                            President Trump is following through on a promise he made during the campaign.
+                            Many voted for him based on his promises.</p>
+
+
+                        <p>Yet others want to support the President but think that he acted rashly and might have been more circumspect
+                            were his full cabinet in place to temper and fine tune his actions.</p>
+                        <p>No matter what you think, now is the time to mobilize your network to make a phone call.
+                            You should also consider that even if you think you vote means nothing, your call means a lot.
+                            Representatives know that an active caller is a potential voter, and they count all votes.
+                            And all calls.  There are only a few ways to
+                            make democracy work:  voting is the broadest and most important one.
+                            But calling is more specific and more immediate.
+                            They can't poll or ask you about every issue, but you <em>can</em> t
+                            ell them how you feel about the important ones.</p>
+                    </div>
+                    <div>
+                        <Link to={"/"}><button className={"pt-button pt-intent-primary pt-fill pt-large"}>Join Now</button></Link>
+                    </div>
+                    
+                    <div>
                         <h3 style={styles.title}>How to Play and Win</h3>
                         <p>This is a grassroots challenge to get friends to participate in
                             democracy by making calls to congresspeople in all 50 states.
@@ -104,39 +138,6 @@ export const About = React.createClass({
                                        It's also called <a href="https://snap.stanford.edu/class/cs224w-readings/travers69smallworld.pdf">
                                        'The Small World Problem'.</a>  <em>You can meet the challenge!</em></p>
                         <p>Remember the challenge!  50 calls in 50 states.  Multiplied by all of us.</p>
-                    </div>
-                    <div>
-                        <Link to={"/"}><button className={"pt-button pt-intent-primary pt-fill pt-large"}>Join Now</button></Link>
-                    </div>
-                    <div>
-                        <h3 style={styles.title}>  Closing the Borders </h3>
-                        <p> The new Executive Order “Protecting the Nation from Foreign Terrorist Entry into the 
-                                       United States” and the aftermath has thrown the country into turmoil.
-                            Whether you agree with the order and the courts’ interpretation of it, are confused by it, 
-                                       or are think our government ought to be more thoughtful in its actions, now is the time to make your 
-                                       opinion known by
-                            <i> calling your congressman! Urge them to take a strong public stand and let the nation know their opinion in no uncertain terms.</i></p>
-
-                        <p>Many think the order is bad policy and bad democracy.
-                            They feel that guests and immigrants make America strong,
-                             increase the economy more than trade deals, and do not take American jobs.
-                             Neither have immigrants from the seven proscribed countries
-                             terrorized us.</p>
-                        <p>Many others support the ban in the interests of keeping the country safe.
-                            President Trump is following through on a promise he made during the campaign.
-                            Many voted for him based on his promises.</p>
-
-
-                        <p>Yet others want to support the President but think that he acted rashly and might have been more circumspect
-                            were his full cabinet in place to temper and fine tune his actions.</p>
-                        <p>No matter what you think, now is the time to mobilize your network to make a phone call.
-                            You should also consider that even if you think you vote means nothing, your call means a lot.
-                            Representatives know that an active caller is a potential voter, and they count all votes.
-                            And all calls.  There are only a few ways to
-                            make democracy work:  voting is the broadest and most important one.
-                            But calling is more specific and more immediate.
-                            They can't poll or ask you about every issue, but you <em>can</em> t
-                            ell them how you feel about the important ones.</p>
                     </div>
                     <div>
                         <Link to={"/"}><button className={"pt-button pt-intent-primary pt-fill pt-large"}>Join Now</button></Link>
