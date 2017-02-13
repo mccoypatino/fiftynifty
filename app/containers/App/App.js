@@ -20,12 +20,19 @@ export const App = React.createClass({
 		window.variant = Math.ceil(Math.random() * 100);
 	},
 
+	isProduction: function() {
+		const hostname = window.location.hostname;
+		if (hostname === 'www.fiftynifty.org') { return true; }
+		return false;
+	},
+
 	render() {
 		return (
 			<StyleRoot>
 				<Helmet 
 					title="Fifty Nifty"  
 					meta={[
+						{ name: 'ROBOTS', content: this.isProduction() ? 'INDEX, FOLLOW' : 'NOINDEX, NOFOLLOW' },
 						{ name: 'description', content: 'Play for a better Democracy' },
 						{ property: 'og:title', content: 'Fifty Nifty' },
 						{ property: 'og:type', content: 'website' },
