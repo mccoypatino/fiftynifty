@@ -20,16 +20,27 @@ export const Leaderboard = React.createClass({
 		this.props.dispatch(getLeaderboard());
 	},
 
+    flattenUser: function(user) {
+        const result = [];
+        const children = user.children || [];
+        children.forEach((child)=>{
+            let userStates = getStates(child);
+            result.push({'user':child, 'states':userStates, 'statesCount': userStates.length, 'score':getScore(child) });
+        });
+        const childrenUsers = children.map((child)=>{
+            return this.flattenUser(child);
+        });
+        return result.concat(...childrenUsers);
+    },
+
 	flattenLeaders: function(users) {
 		const result = [];
 		users.forEach((user)=>{
 			let userStates = getStates(user);
             result.push({'user':user, 'states':userStates, 'statesCount': userStates.length, 'score':getScore(user) });
-            if (user.children) {
-                result.concat(this.flattenLeaders(user.children));
-            }
-		})
-		return result;
+            result.push.apply(result, this.flattenUser(user))
+		});
+        return result
 	},
 	
 	render() {
