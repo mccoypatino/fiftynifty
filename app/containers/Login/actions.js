@@ -22,7 +22,6 @@ export const CHECK_VERIFICATION_FAIL = 'user/CHECK_VERIFICATION_FAIL';
 export function createVerificationCode(phone, mode) {
 	return (dispatch) => {
 		dispatch({ type: CREATE_VERIFICATION_LOAD });
-		console.log(`/api/twofactor/${phone}/${mode}`);
 		return clientFetch((`/api/twofactor/${phone}/${mode}`))
 			.then(() => {
 				dispatch({ type: CREATE_VERIFICATION_SUCCESS });
