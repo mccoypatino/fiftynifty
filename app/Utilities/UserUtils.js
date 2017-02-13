@@ -1,4 +1,6 @@
 
+const CALL_THRESHOLD = 20;
+
 export function getScore(user) {
     let score = 0;
     const flatCalls = getFlatCalls(user);
@@ -13,13 +15,20 @@ export function getFlatCalls(user) {
     return flatCalls(user, 0)
 }
 
+export function getPersonalCallsCount(user) {
+    if (user.calls) {
+        return user.calls.filter((call)=>call.duration>=CALL_THRESHOLD).length;
+    }
+    return 0;
+}
+
 function flatCalls(user, distance) {
     const children = user.children || [];
     const userCalls = user.calls || [];
     const callsWithDist = userCalls.map((call)=>{
-        call.distance = distance;
-        return call;
-    });
+            call.distance = distance;
+            return call;
+    }).filter((call=>call.duration>=CALL_THRESHOLD));
     const childrensCalls = children.map((child)=> {
         return flatCalls(child, distance+1);
     });
