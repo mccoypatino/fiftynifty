@@ -119,8 +119,8 @@ export const About = React.createClass({
                             They feel that guests and immigrants make America <a style={styles.link} href="https://www.nytimes.com/2017/02/07/business/economy/restricting-immigration-would-make-america-smaller-not-greater.html?ribbon-ad-idx=2&rref=business&module=Ribbon&version=origin&region=Header&action=click&contentCollection=Business%20Day&pgtype=article">
                                        strong,</a>
                             increase the economy more than trade deals, and do not take American jobs.
-                            Neither do immigrants from the seven proscribed countries
-                             terrorize us.</p>
+                            Neither have immigrants from the seven proscribed countries
+                             terrorized us.</p>
                         <p>Many others support the ban in the interests of keeping the country safe.
                             President Trump is following through on a promise he made during the campaign.
                             Many voted for him based on his promises.</p>
