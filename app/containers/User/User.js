@@ -167,8 +167,17 @@ export const User = React.createClass({
 															</div>
 														}
 
+														{reps.length > 0 && reps.length < 3 &&
+															<div>
+																<div>
+																	<div style={styles.section}> Unfortunately, you are not fully represented in congress.</div>
+																	<div>You can still join the game by inviting your friends from other states and encouraging them to call</div>
+																</div>
+															</div>
+														}
+
 														{reps.length > 3 &&
-															<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
+														<AddressInput zipcode={user.zipcode} geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
 														}
 
 														{reps.length === 3 && reps.map((rep, index)=> {
