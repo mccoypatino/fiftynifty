@@ -199,7 +199,7 @@ export const Landing = React.createClass({
 								<p style={styles.headerTextBody}>Real phone calls from real constituents matter to elected officials. The Fifty Nifty Challenge is your chance to build a grassroots social network for action. Your goal is to get 50 people in 50 states to directly tell their congresspeople what they think. The network that makes the most calls wins and we all win when we call for an effective democracy. It’s a challenge for you and your friends, and a chance to watch the growth of your network. You can call about any issue of importance to you and we’ll suggest one when you learn more. Read on to see how to win and hints about what to say.</p>
 							}
 							
-							{localUser.id && <Link to={`/${localUser.id}`}> <div style={styles.welcomeLine}>Welcome {localUser.name}, Your score is {localUserScore}</div></Link>}
+							{localUser.id && <Link to={`/${localUser.id}`}> <div style={styles.welcomeLine}>Welcome {localUser.name}, Click here to see your progress</div></Link>}
 						</div>
 						<MediaQuery query='(max-width: 767px)'>
 							{!localUser.id && refText}
