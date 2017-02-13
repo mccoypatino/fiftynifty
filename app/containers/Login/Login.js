@@ -80,35 +80,35 @@ export const Login = React.createClass({
 								text={'Verify the code'}
 								className={'pt-intent-primary pt-fill pt-large'} 
 								onClick={this.formSubmit} 
-								loading={this.props.loginData.codeCreationLoading} />
+								loading={this.props.loginData.verificationLoading} />
 						</label>
 
 					}
 					
 					<label htmlFor={'phone-input'} style={styles.inputLabel}>
 						{ codeCreationSuccess ? 
-							<div className={'label-phone-input'}> Send another verification code? </div> 
-							: <div className={'label-phone-input'}> Phone number? </div> 
+							<div className={'label-phone-input'}>Send another verification code</div> 
+							: <div className={'label-phone-input'}>Phone number</div> 
 						}
 						{ codeCreationError && 
 							<div className={'pt-tag pt-minimal pt-intent-danger'}>An error occured: { codeCreationError }</div>
 						}
-						<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'781-975-5555'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} />
+						<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'Enter your phone number'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} />
 					</label>
 
-					<div className={'verificationButtons'}>
+					<div className={'verificationButtons pt-button-group pt-fill pt-large'}>
 						<Button 
 							type={'submit'} style={styles.button} 
-							text={'Text Me a Verification Code'}
-							className={'pt-intent-primary pt-fill pt-large'} 
+							text={'Text Me a verification Code'}
+							className={'pt-intent-primary'} 
 							onClick={this.formSubmit} 
-							loading={this.props.loginData.verificationLoading} />
+							loading={this.props.loginData.codeCreationLoading} />
 						<Button 
 							style={styles.button} 
 							text={'Call me with a verification Code'}
-							className={'pt-intent-primary pt-fill pt-large'} 
+							className={'pt-intent-primary'} 
 							onClick={this.createVerificationCodeByPhone} 
-							loading={this.props.loginData.verificationLoading} />
+							loading={this.props.loginData.codeCreationLoading} />
 					</div>	
 				</form>
 
