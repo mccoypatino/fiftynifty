@@ -32,6 +32,7 @@ export const Representative = React.createClass({
 
 	render() {
 		const repData = this.props.repData || {};
+		console.log(repData);
 		const connectButtonClass = this.state.clickedConnect? 'pt-button pt-active' : 'pt-button pt-intent-primary';
 		return (
 			<div style={styles.container}>
