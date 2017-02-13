@@ -113,7 +113,7 @@ export const About = React.createClass({
                             Whether you agree with the order and the courts’ interpretation of it, are confused by it, 
                                        or are think our government ought to be more thoughtful in its actions, now is the time to make your 
                                        opinion known by
-                            <i> calling your congressman!</i></p>
+                            <i> calling your congressman!  Urge them to take a strong public stand and let the nation know their opinion in no uncertain terms.</i></p>
 
                         <p>Many think the order is bad policy and bad democracy.
                             They feel that guests and immigrants make America <a style={styles.link} href="https://www.nytimes.com/2017/02/07/business/economy/restricting-immigration-would-make-america-smaller-not-greater.html?ribbon-ad-idx=2&rref=business&module=Ribbon&version=origin&region=Header&action=click&contentCollection=Business%20Day&pgtype=article">
