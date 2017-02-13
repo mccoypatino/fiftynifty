@@ -40,9 +40,9 @@ export const About = React.createClass({
                             your zip code and your phone number.
                             We'll figure out your Congresspeople.
                             We'll also connect you to them and register your points for the call.
-                            You can call now or later -- its easy:
+                            You can call now or later &ndash its easy:
                             press the "call" button and we'll call you back and patch
-                            you directly to their office.  Just answer the phone to talk.
+                            you directly to their office.  Just answer your phone to talk.
                             Touch <a href="#hints" >here</a> for hints about what to say.</p>
                         <p>
                             This is an MIT Media Lab research experiment being run by
@@ -59,7 +59,7 @@ export const About = React.createClass({
                             We also use your name so you can track the
                             progress of your network on the map. You have the option of
 
-                            supressing that information.  We will never present results of our
+                            suppressing that information.  We will never present results of our
                             research in a way that allows you to be identified and  and we will never 
                             sell or reveal your phone number or zipcode. You must be 18 to join the challenge.
 
@@ -86,7 +86,7 @@ export const About = React.createClass({
                         <p>When you sign up we will text you a verification code on your mobile phone or call you on a land line and read the code to you.  This insures that your number is correct.</p>
 
                         <p>When you hit the call button on your phone, we will call your congressperson and ring you right back.  You will see an incoming call from a number you won't recognize.  That's just us making the connection.  We do this to keep score by verifying that you really did make the call. </p>
-                        <p>When you get through, tell your Congressperson your name, that you are a constituent, and that you want to tell them your opinion on an issue.  Feel free to ask for the congressperson’s opinion.  They may ask for your address to verify that you live in their district or state. You can optionally tell them that you are a voter, and you can ask for them to get back to you about the issue.</p>
+                        <p>When you get through, tell your Congressperson your name, that you are a constituent, and that you want to tell them your opinion on an issue.  Feel free to ask for the congressperson’s opinion and urge them to take a strong public stand.  They may ask for your address to verify that you live in their district or state. You can optionally tell them that you are a voter, and you can ask for them to get back to you about the issue.</p>
 
                     </div>
 
@@ -100,7 +100,9 @@ export const About = React.createClass({
                         </p>
                         <p>Calls work!  And they're easy to do.  We'll help make it even easier.</p>
 
-                        <p>You may think that it's impossible to pass a message to someone in every state.  It's far easier than you think.  Some studies have shown that everyone is only an average of six people away from anyone else.  A psychologist <a href=  "https://en.wikipedia.org/wiki/Six_degrees_of_separation"> tested this in the 1960's </a>by asking people to get a letter to someone they didn't know, by sending it to someone they did. For a while there was a lot of buzz about the &quotBacon Number&quot.  That number told how many people any actor was removed from Kevin Bacon.  It's also called &quotThe Small World Problem&quot.  <em>You can meet the challenge!</em></p>
+                        <p>You may think that it's impossible to pass a message to someone in every state.  It's far easier than you think.  Some studies have shown that everyone is only an average of six people away from anyone else.  A psychologist <a href=  "https://en.wikipedia.org/wiki/Six_degrees_of_separation"> tested this in the 1960's </a>by asking people to get a letter to someone they didn't know, by sending it to someone they did. For a while there was a lot of buzz about the &quotBacon Number&quot.  That number told how many people any actor was removed from Kevin Bacon.  
+                                       It's also called <a href="https://snap.stanford.edu/class/cs224w-readings/travers69smallworld.pdf">
+                                       &quotThe Small World Problem&quot.</a>  <em>You can meet the challenge!</em></p>
                         <p>Remember the challenge!  50 calls in 50 states.  Multiplied by all of us.</p>
                     </div>
                     <div>
@@ -113,11 +115,11 @@ export const About = React.createClass({
                             Whether you agree with the order and the courts’ interpretation of it, are confused by it, 
                                        or are think our government ought to be more thoughtful in its actions, now is the time to make your 
                                        opinion known by
-                            <i> calling your congressman!  Urge them to take a strong public stand and let the nation know their opinion in no uncertain terms.</i></p>
+                            <i> calling your congressman! Urge them to take a strong public stand and let the nation know their opinion in no uncertain terms.</i></p>
 
                         <p>Many think the order is bad policy and bad democracy.
-                            They feel that guests and immigrants make America <a style={styles.link} href="https://www.nytimes.com/2017/02/07/business/economy/restricting-immigration-would-make-america-smaller-not-greater.html?ribbon-ad-idx=2&rref=business&module=Ribbon&version=origin&region=Header&action=click&contentCollection=Business%20Day&pgtype=article">
-                                       strong,</a>
+                            They feel that guests and immigrants make America
+                                       strong, >
                             increase the economy more than trade deals, and do not take American jobs.
                             Neither have immigrants from the seven proscribed countries
                              terrorized us.</p>
