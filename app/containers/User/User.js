@@ -8,7 +8,7 @@ import dateFormat from 'dateformat';
 import { Representative, AddressInput, ProgressMap, TreeGraph } from 'components';
 import { getUser, requestCall, requestLatLong } from './actions';
 import { Invite } from './Invite';
-import {getScore, countStates} from '../../Utilities/UserUtils'
+import {getScore, countStates, getFlatCalls, getPersonalCallsCount} from '../../Utilities/UserUtils'
 import { UserNode } from './UserNode';
 import {PieChart, Pie, Cell,Legend, Tooltip} from 'recharts';
 import { Dialog } from '@blueprintjs/core';
@@ -50,18 +50,6 @@ export const User = React.createClass({
 	loadData(userId) {
 		this.props.dispatch(getUser(userId));
 	},
-	returnCalls: function(user, distance) {
-		const children = user.children || [];
-		const userCalls = user.calls || [];
-		const callsWithDist = userCalls.map((call)=>{
-			call.distance = distance;
-			return call;
-		});
-		const childrensCalls = children.map((child)=> {
-			return this.returnCalls(child, distance+1);
-		});
-		return callsWithDist.concat(...childrensCalls);
-	},
 
 	callFunction: function(repId) {
 		this.props.dispatch(requestCall(repId, this.props.params.userId));
@@ -92,7 +80,7 @@ export const User = React.createClass({
 		const user = this.props.userData.user || {};
 		const reps = user.reps || [];
 		// const children = user.children || [];
-		const flatCalls = this.returnCalls(user, 0);
+		const flatCalls = getFlatCalls(user);
 		const score = getScore(user);
 		const shareUrl = 'https://fiftynifty.org/?ref=' + user.id; //When we get nicer urls, adda "getUrl" function
 		const statesCount = countStates(user);
@@ -104,7 +92,7 @@ export const User = React.createClass({
 		const presentName = isLocalUser ? 'Your' : user.name + "'s";
 		const joinDate = user.createdAt? dateFormat(new Date(user.createdAt), "mmmm dS, yyyy"): "";
 		const parent = this.getParent(user);
-		const callsCount = user.calls? user.calls.length: 0;
+		const callsCount = getPersonalCallsCount(user);
 
 		const isStoredUser = String(localUser.id) === this.props.params.userId;
 		return (
