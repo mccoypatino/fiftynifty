@@ -240,7 +240,7 @@ export const Landing = React.createClass({
 							<Button
 								loading={this.props.landingData.authenticationLoading}
 								type={'submit'} style={styles.button}
-								text={'Landline? Make us call you with a code'}
+								text={'Landline? Click for a call with your code'}
 								className={'pt-intent-primary pt-fill pt-large'}
 								onClick={this.callWithVerificationCode}/>
 						</form>
