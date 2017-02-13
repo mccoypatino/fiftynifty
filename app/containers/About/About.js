@@ -22,19 +22,19 @@ export const About = React.createClass({
                             We’ll help you make the call and express your message.
                         </p>
                         <p>
-                            The winners are the first ten chains to reach 50 states and
+                            The Challenge winners are the first ten chains to reach 50 states and
                             accumulate the most challenge points.  You get 250 points for making a call,
                             125 points for a call that your friend makes, 65 points for the call their
-                            friend makes, on and on.  Everyone on the chain earns points.  Points count
+                            friend makes, on and on.  Everyone on the chain earns points for calls they and others make.  Points count
                             for your first call to each of your two senators and your representative.
-                            You get a bonus for a &quotgrand slam&quot -- a network that reaches all 435
+                            You get a bonus for a &quotgrand slam&quot &ndash a network that reaches all 435
                             representatives and 100 senators.
                         </p>
                         <p>
                             There is a leaderboard and a network view so you can
                             track how you are doing. You can also see how much of the
                             country your chain is covering. If you like, we will send
-                            you a progress text each morning.
+                            you a progress text each morning. (This feature will premier soon.)
                         </p>
                         <p>Join by telling us your name or nickname,
                             your zip code and your phone number.
@@ -45,7 +45,7 @@ export const About = React.createClass({
                             you directly to their office.  Just answer the phone to talk.
                             Touch <a href="#hints" >here</a> for hints about what to say.</p>
                         <p>
-                            This is an MIT Media Lab research experiment being done by
+                            This is an MIT Media Lab research experiment being run by
                             Andrew Lippman in the Viral Communications Group to
                             understand and encourage the propagation of
                             social activities through personal networks.
@@ -59,8 +59,8 @@ export const About = React.createClass({
                             We also use your name so you can track the
                             progress of your network on the map. You have the option of
                             supressing that information.  We will never present results of our
-                            research in a way that allows you to be identified and we will destroy
-                            any personal information at the conclusion of the challenge.
+                            research in a way that allows you to be identified and  and we will never 
+                            sell or reveal your phone number or zipcode. You must be 18 to join the challenge.
                         </p>
                         <p>We welcome your feedback: <a href={'mailto:fiftynifty@media.mit.edu'} style={styles.link}>Contact us at fiftynifty@media.mit.edu</a>
                         </p>
@@ -80,9 +80,11 @@ export const About = React.createClass({
                     <div>
 
                         <h3 style={styles.title}> Hints and a guide</h3>
-                        <p>To play, sign up, make calls, and pass the ball to friends by sending them the invitation link.  You should tell them what to expect when they follow the link, and suggest that they do it on their phone.  We have presented an issue we think is important, but you are welcome to encourage your friends to call about <em>any</em> issue they care about.</p>
-                        <p>When you hit the call button on your phone, we will call your congressperson and ring you right back.  You will see an incoming call from a number you won't recognize.  That's just us making the connection.  We do this to keep score by knowing that you really did make the call. </p>
-                        <p>When you get through, tell your Congressperson your name, that you are a consituent, and that you want to tell them your opinion on an issue.  They may ask for your address to verify that you live in their district or state.  You can tell them that you are a voter, and you can ask for them to get back to you about the issue.</p>
+                        <p>To play, sign up, make calls, and pass the ball to friends by sending them the invitation link.  You should tell them what to expect when they follow the link, and suggest that they do it on their mobile phone.  We have presented an issue we think is important, but you are welcome to encourage your friends to call about <em>any</em> issue they care about.</p>
+                        <p>When you sign up we will text you a verification code on your mobile phone or call you on a land line and read the code to you.  This insures that your number is correct.</p>
+
+                        <p>When you hit the call button on your phone, we will call your congressperson and ring you right back.  You will see an incoming call from a number you won't recognize.  That's just us making the connection.  We do this to keep score by verifying that you really did make the call. </p>
+                        <p>When you get through, tell your Congressperson your name, that you are a constituent, and that you want to tell them your opinion on an issue.  Feel free to ask for the congressperson’s opinion.  They may ask for your address to verify that you live in their district or state. You can optionally tell them that you are a voter, and you can ask for them to get back to you about the issue.</p>
 
                     </div>
 
@@ -96,7 +98,7 @@ export const About = React.createClass({
                         </p>
                         <p>Calls work!  And they're easy to do.  We'll help make it even easier.</p>
 
-                        <p>You may think that it's impossible to pass a message to someone in every state.  It's far easier than you think.  Some studies have shown that everyone is only an average of six people away from anyone else.  A psychologist <a href=  "https://en.wikipedia.org/wiki/Six_degrees_of_separation"> tested this in the 1960's by asking people to get a letter to someone they didn't know, by sending it to someone they did.</a> For a while there was a lot of buzz about your &quotBacon Number&quot.  That number told how many people you were away from Kevin Bacon.  It's also called &quotThe Small World Problem&quot.  <em>You can meet the challenge!</em></p>
+                        <p>You may think that it's impossible to pass a message to someone in every state.  It's far easier than you think.  Some studies have shown that everyone is only an average of six people away from anyone else.  A psychologist <a href=  "https://en.wikipedia.org/wiki/Six_degrees_of_separation"> tested this in the 1960's </a>by asking people to get a letter to someone they didn't know, by sending it to someone they did. For a while there was a lot of buzz about the &quotBacon Number&quot.  That number told how many people any actor was removed from Kevin Bacon.  It's also called &quotThe Small World Problem&quot.  <em>You can meet the challenge!</em></p>
                         <p>Remember the challenge!  50 calls in 50 states.  Multiplied by all of us.</p>
                     </div>
                     <div>
@@ -104,18 +106,21 @@ export const About = React.createClass({
                     </div>
                     <div>
                         <h3 style={styles.title}>  Closing the Borders </h3>
-                        <p> The new Executive Order has thrown us into turmoil.
-                            Whether you agree with the order, are confused by it, or are think our government
-                            ought to be more thoughtful in its actions, now is the time to make your opinion known by
+                        <p> The new Executive Order “Protecting the Nation from Foreign Terrorist Entry into the 
+                                       United States” and the aftermath has thrown the country into turmoil.
+                            Whether you agree with the order and the courts’ interpretation of it, are confused by it, 
+                                       or are think our government ought to be more thoughtful in its actions, now is the time to make your 
+                                       opinion known by
                             <i> calling your congressman!</i></p>
 
                         <p>Many think the order is bad policy and bad democracy.
-                            They feel that guests and immigrants make America strong,
+                            They feel that guests and immigrants make America <a style={styles.link} href="https://www.nytimes.com/2017/02/07/business/economy/restricting-immigration-would-make-america-smaller-not-greater.html?ribbon-ad-idx=2&rref=business&module=Ribbon&version=origin&region=Header&action=click&contentCollection=Business%20Day&pgtype=article">
+                                       strong,</a>
                             increase the economy more than trade deals, and do not take American jobs.
                             Neither do immigrants from the seven proscribed countries
-                            <a style={styles.link} href="https://www.nytimes.com/2017/02/07/business/economy/restricting-immigration-would-make-america-smaller-not-greater.html?ribbon-ad-idx=2&rref=business&module=Ribbon&version=origin&region=Header&action=click&contentCollection=Business%20Day&pgtype=article"> terrorize us.</a> </p>
+                             terrorize us.</p>
                         <p>Many others support the ban in the interests of keeping the country safe.
-                            President Trump is following through on the promise he made during the campaign.
+                            President Trump is following through on a promise he made during the campaign.
                             Many voted for him based on his promises.</p>
 
 
