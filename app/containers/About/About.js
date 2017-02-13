@@ -27,7 +27,7 @@ export const About = React.createClass({
                             125 points for a call that your friend makes, 65 points for the call their
                             friend makes, on and on.  Everyone on the chain earns points for calls they and others make.  Points count
                             for your first call to each of your two senators and your representative.
-                            You get a bonus for a &quotgrand slam&quot &ndash a network that reaches all 435
+                            You get a bonus for a 'grand slam' -- a network that reaches all 435
                             representatives and 100 senators.
                         </p>
                         <p>
@@ -40,7 +40,7 @@ export const About = React.createClass({
                             your zip code and your phone number.
                             We'll figure out your Congresspeople.
                             We'll also connect you to them and register your points for the call.
-                            You can call now or later &ndash its easy:
+                            You can call now or later -- its easy:
                             press the "call" button and we'll call you back and patch
                             you directly to their office.  Just answer your phone to talk.
                             Touch <a href="#hints" >here</a> for hints about what to say.</p>
@@ -100,9 +100,9 @@ export const About = React.createClass({
                         </p>
                         <p>Calls work!  And they're easy to do.  We'll help make it even easier.</p>
 
-                        <p>You may think that it's impossible to pass a message to someone in every state.  It's far easier than you think.  Some studies have shown that everyone is only an average of six people away from anyone else.  A psychologist <a href=  "https://en.wikipedia.org/wiki/Six_degrees_of_separation"> tested this in the 1960's </a>by asking people to get a letter to someone they didn't know, by sending it to someone they did. For a while there was a lot of buzz about the &quotBacon Number&quot.  That number told how many people any actor was removed from Kevin Bacon.  
+                        <p>You may think that it's impossible to pass a message to someone in every state.  It's far easier than you think.  Some studies have shown that everyone is only an average of six people away from anyone else.  A psychologist <a href=  "https://en.wikipedia.org/wiki/Six_degrees_of_separation"> tested this in the 1960's </a>by asking people to get a letter to someone they didn't know, by sending it to someone they did. For a while there was a lot of buzz about the 'Bacon Number'.  That number told how many people any actor was removed from Kevin Bacon.  
                                        It's also called <a href="https://snap.stanford.edu/class/cs224w-readings/travers69smallworld.pdf">
-                                       &quotThe Small World Problem&quot.</a>  <em>You can meet the challenge!</em></p>
+                                       'The Small World Problem'.</a>  <em>You can meet the challenge!</em></p>
                         <p>Remember the challenge!  50 calls in 50 states.  Multiplied by all of us.</p>
                     </div>
                     <div>
