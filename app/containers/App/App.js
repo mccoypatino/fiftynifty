@@ -27,6 +27,13 @@ export const App = React.createClass({
 	},
 
 	render() {
+		const devBannerStyle = {
+			color: '#000',
+			backgroundColor: '#ffd400',
+			textAlign: 'center',
+			fontSize: '1.5em',
+			padding: '.5em 0em',
+		};
 		return (
 			<StyleRoot>
 				<Helmet 
@@ -49,6 +56,9 @@ export const App = React.createClass({
 						{ name: 'twitter:image:alt', content: 'Fifty Nifty' },
 					]} 
 				/> 
+				{!this.isProduction() &&
+					<div style={devBannerStyle}>Development Mode</div>
+				}
 				<AppNav location={this.props.location} params={this.props.params} />
 				<div style={{ minHeight: '600px' }}>{this.props.children}</div>
 				<AppFooter />
