@@ -11,9 +11,9 @@ export const Song = React.createClass({
 				<div style={styles.content}>
 					<iframe style={styles.video} src="https://www.youtube.com/embed/b7jv7H4TGXc" frameBorder="0" allowFullScreen />
 					<iframe style={styles.video} src="https://www.youtube.com/embed/Z2Gqe3doat0" frameBorder="0" allowFullScreen />
+					<iframe style={styles.video} src="https://www.youtube.com/embed/6XkTl4LFzCY" frameBorder="0" allowFullScreen />
 					<iframe style={styles.video} src="https://www.youtube.com/embed/sxr6NFimibY" frameBorder="0" allowFullScreen />
 					<iframe style={styles.video} src="https://www.youtube.com/embed/Lju29keIRuc" frameBorder="0" allowFullScreen />
-					<iframe style={styles.video} src="https://www.youtube.com/embed/6XkTl4LFzCY" frameBorder="0" allowFullScreen />
 				</div>
 				
 			</div>
