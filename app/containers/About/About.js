@@ -118,10 +118,9 @@ export const About = React.createClass({
                             <i> calling your congressman! Urge them to take a strong public stand and let the nation know their opinion in no uncertain terms.</i></p>
 
                         <p>Many think the order is bad policy and bad democracy.
-                            They feel that guests and immigrants make America
-                                       strong, >
-                            increase the economy more than trade deals, and do not take American jobs.
-                            Neither have immigrants from the seven proscribed countries
+                            They feel that guests and immigrants make America strong,
+                             increase the economy more than trade deals, and do not take American jobs.
+                             Neither have immigrants from the seven proscribed countries
                              terrorized us.</p>
                         <p>Many others support the ban in the interests of keeping the country safe.
                             President Trump is following through on a promise he made during the campaign.
