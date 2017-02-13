@@ -22,10 +22,7 @@ export const HowToPlay  = React.createClass({
 
 					<div style={styles.sectionText}>
 						<div style={styles.sectionTitle}>Join</div>
-						Join the challenge by
-						filling in your details. This
-						way we can tell you who
-						your Representative and Senators are.
+						Provide your zipcode and phone to connect directly to your Represenative and Senators.
 					</div>
 				</Link>
 
