@@ -70,7 +70,7 @@ export const About = React.createClass({
                             <Link to={"/"}><button className={"pt-button pt-intent-primary pt-fill pt-large"}>Join The Game</button></Link>
                         </div>
                         <div>
-                            As you invite more friends to the game - your network will grow will look similar to this:
+                            As you invite more friends to the game - your network will grow to look similar to this:
                             <div style={{width:'100%', textAlign:'center'}}><img style={{width:'90%'}} src={'static/network.png'}/></div>
                         </div>
                         <div>
