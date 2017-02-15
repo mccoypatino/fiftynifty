@@ -25,7 +25,7 @@ export const TreeGraph = React.createClass({
             this.tooltip.setAttributeNS(null, "visibility", "visible");
         }
     },
-    hideToolTip: function() {
+    hideToolTip: function(evt) {
         if (this.tooltip) {
             this.tooltip.setAttribute(null, "visibility", "hidden")
         }
@@ -76,7 +76,7 @@ export const TreeGraph = React.createClass({
 				<g key={node.data.id} className="node"
 				   transform={`translate(${node.x}, ${node.y})`}>
 					<circle r="7" style={{fill:`${fillColor}`, stroke:'none'}}
-                        onMouseMove={this.showToolTip(event)} onMouseOut={this.hideToolTip()} />
+                        onMouseMove={this.showToolTip()} onMouseOut={this.hideToolTip()} />
                     <a href={`/${node.data.id}`}>
                         <text y="2pt" fontSize="6pt" fontFamily="sans-serif" textAnchor="middle">{this.nameToInitials(node.data.name)}</text>
                     </a>
