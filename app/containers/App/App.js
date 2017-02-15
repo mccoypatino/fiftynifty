@@ -48,6 +48,7 @@ export const App = React.createClass({
 						{ property: 'og:image', content: 'https://www.fiftynifty.org/static/american-flag.jpg' },
 						{ property: 'og:image:url', content: 'https://www.fiftynifty.org/static/american-flag.jpg' },
 						{ property: 'og:image:width', content: '500' },
+						{ property: 'fb:app_id', content: '375710412814285' },
 						{ name: 'twitter:card', content: 'summary' },
 						{ name: 'twitter:site', content: '@isTravis' },
 						{ name: 'twitter:title', content: 'Fifty Nifty' },
