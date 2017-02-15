@@ -1,5 +1,4 @@
 /* eslint-disable strict */
-'use strict';
 
 const path = require('path');
 const webpack = require('webpack');
@@ -56,7 +55,10 @@ module.exports = {
 			{
 				test: /\.js?$/,
 				loader: 'babel-loader',
-				include: path.join(__dirname, 'app'),
+				include: [
+					path.resolve('app'),
+					path.resolve('node_modules/react-phone-number-input'),
+				],
 				query: {
 					plugins: [
 						['transform-object-assign']

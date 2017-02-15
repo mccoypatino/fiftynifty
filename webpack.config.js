@@ -24,7 +24,8 @@ module.exports = {
 				test: /\.js?/,
 				loader: 'babel-loader',
 				include: [
-					path.resolve('app')
+					path.resolve('app'),
+					path.resolve('node_modules/react-phone-number-input'),
 				],
 				query: {
 					plugins: [
