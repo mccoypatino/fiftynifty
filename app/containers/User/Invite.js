@@ -30,7 +30,9 @@ export const Invite = React.createClass({
 
     render() {
         const shareUrl = this.props.url;
-        const title = "Join the Fifty Nifty Game!";
+        const title = 'Join the Fifty Nifty Game!';
+        const mailTitle = 'You need to call your congressman';
+        const mailBody = 'Hi, \n';
 
         return (
             <div id="invite" style={styles.sectionBackground}>
@@ -38,6 +40,7 @@ export const Invite = React.createClass({
                 <div style={styles.inviteHeader}>Invite</div>
                 <p>Invite people to join your network by joining Fifty Nifty with this link:</p>
                 <p style={styles.inviteLink}><a href={shareUrl}>{shareUrl}</a></p>
+                <a href={`mailto:?subject=${encodeURI(mailTitle)}&body=${encodeURI(mailBody)}`}>Mail</a>
                 <CopyToClipboard style={styles.copyButton} text={shareUrl}
                                  onCopy={() => this.setState({copied: true})}>
                     <a role="button" className="pt-button pt-minimal"><span className="pt-icon-standard pt-icon-clipboard"/> Copy to clipboard</a>
