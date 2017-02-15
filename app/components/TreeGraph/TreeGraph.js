@@ -18,19 +18,6 @@ export const TreeGraph = React.createClass({
         return name? name.split(' ').map((word)=>{return word[0]}).join(''): '';
 	},
 
-    showToolTip: function(evt){
-	    if (this.tooltip) {
-            this.tooltip.setAttributeNS(null, "x", evt.clientX - 8);
-            this.tooltip.setAttributeNS(null, "y", evt.clientY - 5);
-            this.tooltip.setAttributeNS(null, "visibility", "visible");
-        }
-    },
-    hideToolTip: function(evt) {
-        if (this.tooltip) {
-            this.tooltip.setAttribute(null, "visibility", "hidden")
-        }
-
-    },
     componentDidMount() {
       const width = ReactDOM.findDOMNode(this.refs.treeContainer).clientWidth;
       this.setState({treeWidth: width});
@@ -75,8 +62,7 @@ export const TreeGraph = React.createClass({
                 node.data.id &&
 				<g key={node.data.id} className="node"
 				   transform={`translate(${node.x}, ${node.y})`}>
-					<circle r="7" style={{fill:`${fillColor}`, stroke:'none'}}
-                        onMouseMove={this.showToolTip()} onMouseOut={this.hideToolTip()} />
+					<circle r="7" style={{fill:`${fillColor}`, stroke:'none'}}/>
                     <a href={`/${node.data.id}`}>
                         <text y="2pt" fontSize="6pt" fontFamily="sans-serif" textAnchor="middle">{this.nameToInitials(node.data.name)}</text>
                     </a>
@@ -106,8 +92,6 @@ export const TreeGraph = React.createClass({
                         {links}
                         {nodes}
                 </g>
-                    {/*<text className="tooltip" id="tooltip"*/}
-                          {/*x="0" y="0" visibility="hidden" ref="tooltip">Tooltip</text>*/}
 				</svg>
 			</div>
         );
