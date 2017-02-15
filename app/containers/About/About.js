@@ -20,7 +20,7 @@ export const About = React.createClass({
 						<h3 style={styles.title}>
 							Closing the Borders
 						</h3>
-						<p> The new Executive Order “Protecting the Nation from Foreign Terrorist Entry into the United States” and the aftermath has thrown the country into turmoil. Whether you agree with the order and the courts’ interpretation of it, are confused by it, or are think our government ought to be more thoughtful in its actions, now is the time to make your opinion known by <i>calling your congressman! Urge them to take a strong public stand and let the nation know their opinion in no uncertain terms.</i></p>
+						<p> The new Executive Order “Protecting the Nation from Foreign Terrorist Entry into the United States” and the aftermath has thrown the country into turmoil. Whether you agree with the order and the courts’ interpretation of it, are confused by it, or are think our government ought to be more thoughtful in its actions, now is the time to make your opinion known by <i>calling your congressional representative! Urge them to take a strong public stand and let the nation know their opinion in no uncertain terms.</i></p>
 						<p> Many think the order is bad policy and bad democracy. They feel that guests and immigrants make America strong, increase the economy more than trade deals, and do not take American jobs. Neither have immigrants from the seven proscribed countries terrorized us.</p>
 						<p> Many others support the ban in the interests of keeping the country safe. President Trump is following through on a promise he made during the campaign. Many voted for him based on his promises.</p>
 						<p> Yet others want to support the President but think that he acted rashly and might have been more circumspect were his full cabinet in place to temper and fine tune his actions.</p>
@@ -30,7 +30,7 @@ export const About = React.createClass({
 							The Russian Role in U.S. Affairs
 						</h3>
 						<p> National Security Advisor Mike Flynn’s resigned after misleading Vice President Pence about his pre-inauguration phone calls with a Russian diplomat. The repercussions have just begun and the issue is likely to become more important in the coming days and weeks. Members of Congress from both parties are  starting to react. Now is the time to tell your Senators and Representatives what you think they should do and to learn where they stand.</p>
-						<p> Some think there should be a broad Congressional Investigation into President Trump’s entanglements with Russia, including their role in the recent election. This casts a cloud on the operation of our administration.</p>
+						<p> Some think there should be a broad Congressional investigation into President Trump’s entanglements with Russia, including their role in the recent election. This casts a cloud on the operation of our administration.</p>
 						<p> Others think that Flynn’s resignation is the end of the matter. There is nothing more to do. Other issues are more important.</p>
 						<p> Yet others want to give the new President his chance and wish he and his administration were more thoughtful in how they run the country.</p>
 
@@ -38,10 +38,7 @@ export const About = React.createClass({
 						<h3 style={styles.title}>
 							Make the call, spread the message
 						</h3>
-						<p> National Security Advisor Mike Flynn’s resigned after misleading Vice President Pence about his pre-inauguration phone calls with a Russian diplomat. The repercussions have just begun and the issue is likely to become more important in the coming days and weeks. Members of Congress from both parties are  starting to react. Now is the time to tell your Senators and Representatives what you think they should do and to learn where they stand.</p>
-						<p> Some think there should be a broad Congressional Investigation into President Trump’s entanglements with Russia, including their role in the recent election. This casts a cloud on the operation of our administration.</p>
-						<p> Others think that Flynn’s resignation is the end of the matter. There is nothing more to do. Other issues are more important.</p>
-						<p> Yet others want to give the new President his chance and wish he and his administration were more thoughtful in how they run the country.</p>
+						<p> No matter what side you take, now is the time to mobilize your network to make a phone call. You should also consider that even if you think your vote means nothing, your call means a lot. Representatives know that an active caller is a potential voter, and they count all votes. And all calls. There are only a few ways to make democracy work: voting is the broadest and most important one. But calling is more specific and more immediate. They can't poll or ask you about every issue, but you can tell them how you feel about the important</p>
 					</div>
 					<div>
 						<Link to={'/'}>
