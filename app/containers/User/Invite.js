@@ -30,7 +30,9 @@ export const Invite = React.createClass({
 
     render() {
         const shareUrl = this.props.url;
-        const title = "Join the Fifty Nifty Game!";
+        const title = 'Join the Fifty Nifty Game!';
+        const mailTitle = 'Call your congressman';
+        const mailBody = 'Hi, \n';
 
         return (
             <div id="invite" style={styles.sectionBackground}>
@@ -42,6 +44,8 @@ export const Invite = React.createClass({
                                  onCopy={() => this.setState({copied: true})}>
                     <a role="button" className="pt-button pt-minimal"><span className="pt-icon-standard pt-icon-clipboard"/> Copy to clipboard</a>
                 </CopyToClipboard>
+                <br/> <br/>
+                <a style={styles.button} className={'pt-button pt-minimal'} href={`mailto:?subject=${encodeURI(mailTitle)}&body=${encodeURI(mailBody)}`}>Send emails to your network</a> <br/>
                 <div>
                 <div style={styles.network}>
                     <FacebookShareButton
@@ -118,5 +122,13 @@ styles = {
     },
     copyButton: {
         color:"#d9d9d9",
-    }
+    },
+    button:{
+        color:'#003d59',
+        fontWeight: 'bold',
+        backgroundColor: 'white',
+        letterSpacing:'0em',
+        boxShadow:'0 2px #001C2B',
+
+    },
 };
