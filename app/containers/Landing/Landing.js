@@ -235,9 +235,7 @@ export const Landing = React.createClass({
 
 					</div>
 				</div>
-				{/*
-					<HowToPlay localUser={localUser}/>
-				*/}
+				
 
 				<MediaQuery query='(max-width: 767px)'>
 					<div style={styles.joinMobileBackground}>
@@ -270,6 +268,8 @@ export const Landing = React.createClass({
 						</form>
 					</div>
 				</Dialog>
+
+				<HowToPlay localUser={localUser}/>
 
 
 			</div>
