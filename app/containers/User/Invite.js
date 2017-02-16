@@ -45,7 +45,6 @@ export const Invite = React.createClass({
 		const he = 500;
 
 		// Twitter
-		https://twitter.com/intent/tweet?url=http%3A%2F%2Fstackoverflow.com%2Fusers%2F2943186%2Fyoussef-subehi&hashtags=stackoverflow%2Cexample%2Cyoussefusf&text=Im%20Sharing%20on%20Twitter&original_referer=http%3A%2F%2Fstackoverflow.com%2Fquestions%2F6208363%2Fsharing-a-url-with-a-query-string-on-twitter
 		const twitterText = encodeURI('Call your congresspeople! Join the FiftyNifty challenge, friends don’t let friends stay silent');
 		const twitterURL = `https://twitter.com/intent/tweet?url=${encodeURI(shareUrl)}&text=${twitterText}`;
 
