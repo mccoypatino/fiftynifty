@@ -140,11 +140,13 @@ export const User = React.createClass({
 																		Answer the call and you will be directly connected.
 																		Don’t worry about the actual number you see, it is our dialer.
 																	</div>
-																	<div style={{paddingTop:'1em'}}>
+																	<div style={{ paddingTop: '1em' }}>
 																		<h4>What Do I Say?</h4>
-																		Tell them your name and that you are a constituent,
-																	then your message. You might ask to be told their position.
-																		It’s easy, they want to hear from you.</div>
+																		You’ll reach a staffer. Tell them your name and that you are a constituent. <br /><br />
+																		Then your message: "I’d like so-and-so to take a strong position demanding a hearing on Russian Influence on our elections and government. I want to know whether there is more involved." <br /><br />
+																		You might ask to be told their position. <br /><br /> 
+																		It's easy, they want to hear from you.
+																	</div>
 																</div>
 															</Dialog>
 														</div>

@@ -17,13 +17,15 @@ export const About = React.createClass({
 						<p>When you invite friends to the Challenge, you should prompt them with an issue for them to call about.  We have presented below two issues that we think are important, current, and worth a phone call to your Congresspeople.  You are welcome to use another one in your invite.  The next version will let you add it here.</p>
 
 
+						{/*
 						<h3 style={styles.title}>
 							Closing the Borders
 						</h3>
-						<p> The new Executive Order “Protecting the Nation from Foreign Terrorist Entry into the United States” and the aftermath has thrown the country into turmoil. Whether you agree with the order and the courts’ interpretation of it, are confused by it, or are think our government ought to be more thoughtful in its actions, now is the time to make your opinion known by <i>calling your congressional representative! Urge them to take a strong public stand and let the nation know their opinion in no uncertain terms.</i></p>
+						<p> The new Executive Order “Protecting the Nation from Foreign Terrorist Entry into the United States” and the aftermath has thrown the country into turmoil. Whether you agree with the order and the courts’ interpretation of it, are confused by it, or are think our government ought to be more thoughtful in its actions, now is the time to make your opinion known by <i>calling your congressional representative! Urge them to take a strong public stand and let the nation know their opinion in no uncertain terms.</i></p>
 						<p> Many think the order is bad policy and bad democracy. They feel that guests and immigrants make America strong, increase the economy more than trade deals, and do not take American jobs. Neither have immigrants from the seven proscribed countries terrorized us.</p>
 						<p> Many others support the ban in the interests of keeping the country safe. President Trump is following through on a promise he made during the campaign. Many voted for him based on his promises.</p>
 						<p> Yet others want to support the President but think that he acted rashly and might have been more circumspect were his full cabinet in place to temper and fine tune his actions.</p>
+						*/}
 
 
 						<h3 style={styles.title}>

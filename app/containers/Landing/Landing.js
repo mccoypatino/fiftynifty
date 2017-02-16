@@ -114,11 +114,11 @@ export const Landing = React.createClass({
 		const refUser = this.props.landingData.referralDetails;
 		const error = this.state.error || this.props.landingData.signupError;
 		const authError = this.state.error || this.props.landingData.authenticationError;
-        const localUserData = localStorage.getItem('userData');
-        const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
-        const localUserScore = localUser? getScore(localUser): 0;
+		const localUserData = localStorage.getItem('userData');
+		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
+		const localUserScore = localUser? getScore(localUser): 0;
 
-        const inviteForm = (
+		const inviteForm = (
 			<div style={{padding: '1.6em'}}>
 				<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
 					<div style={{paddingBottom:'1em'}}>
@@ -132,11 +132,13 @@ export const Landing = React.createClass({
 				</div>
 			</div>
 		);
-        const refText = refUser && <div style={{textAlign:'center'}}><div style={styles.headerText}>{refUser.name} Invited You</div></div>
-        const joinForm = (
+		const refText = refUser && <div style={{textAlign:'center'}}><div style={styles.headerText}>{refUser.name} Invited You</div></div>
+		const joinForm = (
 			<div style={{padding: '1.6em'}}>
 				<div id="join" style={styles.headerCall} className={'pt-card pt-elevation-3'}>
-                    { refText }
+					<MediaQuery query='(min-width: 767px)'>
+						{ refText }
+					</MediaQuery>
 					<div style={styles.inputHeader}> Join The Challenge</div>
 					<form onSubmit={this.signupSubmit} style={styles.form}>
 						<label htmlFor={'name-input'} style={styles.inputLabel}>
@@ -168,8 +170,8 @@ export const Landing = React.createClass({
 					</form>
 				</div>
 			</div>
-        );
-        const joinNowButton = (
+		);
+		const joinNowButton = (
 			<div style={{width: '100%', textAlign: 'center'}}>
 				<div >
 					<Scrollchor to="#join"><Button
@@ -187,23 +189,44 @@ export const Landing = React.createClass({
 					<div style={styles.headerPresentation}>
 						<div style={styles.headerTextBlock}>
 							<div style={styles.section}>
-								<div style={styles.headerText}>Call your state reps.</div>
-								<div style={styles.headerText}>Enlist friends to call theirs.</div>
-								<div style={styles.headerText}>Collect All 50 States!</div>
+								<div style={styles.headerStep}>
+									<div style={styles.headerh1}>
+										Call your rep now
+									</div>
+									<div style={styles.headerh2}>
+										Real calls really matter.
+									</div>
+								</div>
+								<div style={styles.headerStep}>
+									<div style={styles.headerh1}>
+										Amplify your voice
+									</div>
+									<div style={styles.headerh2}>
+										Build your network, spread the word.
+									</div>
+								</div>
+								<div style={styles.headerStep}>
+									<div style={styles.headerh1}>
+										Cover the country
+									</div>
+									<div style={styles.headerh2}>
+										Track your progress.
+									</div>
+								</div>
 							</div>
 							{variant <= 50 &&
-								<p style={styles.headerTextBody}>Real phone calls from real constituents matter to elected officials. The Fifty Nifty Challenge:  Can you convince your friends to speak out on an important public issue and enlist their friends to do the same.  Making a call is easier than you think: keeping your chain alive takes passion and persuasion.  We’ll speed dial for you, you have to keep the message alive and the network growing.  We’ll show your score and reach to encourage you.</p>
+								<p style={styles.headerTextBody}>It doesn't matter if you are D, or R, or other, Russian involvement in our government needs to be investigated.  We’ll speed dial for you. We’ll help you prime your network.  Three clicks, three calls, and you’re done.</p>
 							}
 
 							{variant > 50 && 
-								<p style={styles.headerTextBody}>Call your Representatives in Congress NOW. It doesn't matter if you are D, or R, or other, it’s time to act and convince your network to follow suit.  Russian involvement on our government needs to be investigated.  Join the Challenge:  Call and enlist your friends to join.  Making a call is easier than you think: we’ll speed dial for you, you have to keep the message alive and the network growing.  We’ll show your score and reach to encourage you.</p>
+								<p style={styles.headerTextBody}>Join the Challenge:  Build a network that reaches all 50 states.  Call and enlist your friends to join. We’ll speed dial for you. We’ll help you prime your network.  Three clicks, three calls, and you’re done.</p>
 							}
 							
 							{localUser.id && <Link to={`/${localUser.id}`}> <div style={styles.welcomeLine}>Welcome {localUser.name}, Click here to see your progress</div></Link>}
 						</div>
 						<MediaQuery query='(max-width: 767px)'>
 							{!localUser.id && refText}
-							{!localUser.id && joinNowButton}
+							{false && joinNowButton}
 						</MediaQuery>
 						{!!localUser.id && inviteForm}
 						<MediaQuery query='(min-width: 767px)'>
@@ -212,7 +235,9 @@ export const Landing = React.createClass({
 
 					</div>
 				</div>
-				<HowToPlay localUser={localUser}/>
+				{/*
+					<HowToPlay localUser={localUser}/>
+				*/}
 
 				<MediaQuery query='(max-width: 767px)'>
 					<div style={styles.joinMobileBackground}>
@@ -319,10 +344,10 @@ styles = {
 		// color: '#cb0027',
 		color: '#da0f18',
 		fontSize: '1.8em',
-        fontFamily: 'mrs-eaves-roman-small-caps, sans-serif',
-        fontWeight: 'bold',
+		fontFamily: 'mrs-eaves-roman-small-caps, sans-serif',
+		fontWeight: 'bold',
 
-    '@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
+		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
 			textAlign: 'center',
 			maxWidth: '100%',
 		},
@@ -360,7 +385,7 @@ styles = {
 		fontSize: '1.4em',
 		display: 'block',
 		marginBottom: '1em',
-		textAlign: 'center'
+		textAlign: 'center',
 	},
 	inputLabel: {
 		fontSize: '1.25em',
@@ -431,24 +456,37 @@ styles = {
 		paddingTop: '.5em',
 	},
 	joinMobileBackground:{
-        backgroundImage: 'url("/static/hands.jpg")',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center center',
-        backgroundSize: 'cover',
+		backgroundImage: 'url("/static/hands.jpg")',
+		backgroundRepeat: 'no-repeat',
+		backgroundPosition: 'center center',
+		backgroundSize: 'cover',
 		maxWidth: '100%',
-        boxShadow: 'inset 0 0 0 100vw rgba(0,61,89,.6)',
+		boxShadow: 'inset 0 0 0 100vw rgba(0,61,89,.6)',
 	},
 	dialogBox: {
-        maxWidth: '100%',
-        top: '10%',
-    },
-    welcomeLine: {
+		maxWidth: '100%',
+		top: '10%',
+	},
+	welcomeLine: {
 		textAlign:'center',
 		padding:'1em',
 		fontWeight:'bold',
-        color: '#da0f18',
+		color: '#da0f18',
 		background: 'rgba( 255, 255, 255, 0.6)',
 		borderRadius: '5px',
 		letterSpacing:'0.05em',
-	}
+	},
+	headerStep: {
+		textAlign: 'center',
+		marginBottom: '20px',
+	},
+	headerh1: {
+		fontWeight: 'bold',
+		fontSize: '25px',
+		color: '#da0f18',
+	},
+	headerh2: {
+		fontSize: '15px',
+		// visibility: 'hidden',
+	},
 };
