@@ -14,7 +14,7 @@ export const About = React.createClass({
 						<h3 style={styles.title}>
 							Choosing your issue
 						</h3>
-						<p>When you invite friends to the Challenge, you should prompt them with an issue for them to call about.  We have presented below two issues that we think are important, current, and worth a phone call to your Congresspeople.  You are welcome to use another one in your invite.  The next version will let you add it here.</p>
+						<p>When you invite friends to the Challenge, you should prompt them with an issue for them to call about.  We have presented below two issues that we think are important, current, and worth a phone call to your Congressperson.  You are welcome to use another one in your invite.  The next version will let you add it here.</p>
 
 
 						{/*
@@ -95,7 +95,7 @@ export const About = React.createClass({
 
 					<div id="calls">
 						<h3 style={styles.title}>Calls Matter</h3>
-						<p> Democracy works because you elect people to act on your behalf. Congress knows what you want by your vote, by polling, and by your telling them directly. But they don't poll on every issue, and a poll is not as accurate as your personal expression. You can write, email, or phone. Of these, a live phone call from a constituent during business hours gets the most attention. Your call will be answered, most likely by a staffer whose job is to listen. When you talk directly to them, they report that to the congressman. As you talk to them, your point becomes clearer. If you leave a message, it is simply totaled and summarized. </p>
+						<p> Democracy works because you elect people to act on your behalf. Congress knows what you want by your vote, by polling, and by your telling them directly. But they don't poll on every issue, and a poll is not as accurate as your personal expression. You can write, email, or phone. Of these, a live phone call from a constituent during business hours gets the most attention. Your call will be answered, most likely by a staffer whose job is to listen. When you talk directly to them, they report that to the congressperson. As you talk to them, your point becomes clearer. If you leave a message, it is simply totaled and summarized. </p>
 						<p> Elected officials keep a record of eligible and active voters in their district or state. That's why you should give your name and address. Your call demonstrates your willingness to act on your opinions. Even if you didn't vote, you are heard because once you make the effort to call, you are more likely to make the effort to vote.</p>
 						<p> When you call, you are making democracy work better, more responsibly, and more responsively. You may worry that money counts a lot, but in the end, it's votes that actually put people in office. The goal of this challenge is to multiply your individual message by the power of your friends, and their friends. We want to show that a network can be more powerful than any other message they get. A network of citizens is what democracy is all about. </p>
 						<p> Calls work! And they're easy to do. We'll help make it even easier.</p>
