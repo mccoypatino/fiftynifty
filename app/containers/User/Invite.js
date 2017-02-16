@@ -45,7 +45,10 @@ export const Invite = React.createClass({
                     <a role="button" className="pt-button pt-minimal"><span className="pt-icon-standard pt-icon-clipboard"/> Copy to clipboard</a>
                 </CopyToClipboard>
                 <br/> <br/>
-                <a style={styles.button} className={'pt-button pt-minimal'} href={`mailto:?subject=${encodeURI(mailTitle)}&body=${encodeURI(mailBody)}`}>Send emails to your network</a> <br/>
+                {/*
+                    <a style={styles.button} className={'pt-button pt-minimal'} href={`mailto:?subject=${encodeURI(mailTitle)}&body=${encodeURI(mailBody)}`}>Send emails to your network</a> <br/>
+                */}
+                
                 <div>
                 <div style={styles.network}>
                     <FacebookShareButton

@@ -188,27 +188,32 @@ export const Landing = React.createClass({
 						<div style={styles.headerTextBlock}>
 							<div style={styles.section}>
 								<div style={styles.headerText}>Call your Reps!</div>
-								<div style={styles.headerText}>Make 3 calls, your friends do the rest</div>
-								<div style={styles.headerText}>Play for a better Democracy!</div>
+								<div style={styles.headerText}>Make a call, your friends do the rest</div>
+								{variant <= 50 &&
+									<div style={styles.headerText}>Collect all 50 States</div>
+								}
+
+								{variant > 50 && 
+									<div style={styles.headerText}>Play for a better Democracy!</div>
+								}
 							</div>
 							{variant <= 50 &&
-								
-								<p style={styles.headerTextBody}>President Trump’s Executive Order “Protecting the Nation from Foreign Terrorist Entry into the United States” has created a great deal of discussion. For your opinion to have impact, call your Congressional representatives and get your friends to do the same.  Live calls matter, so you are invited to join the FiftyNifty Challenge to build a network of 50 people in 50 states to call Congress directly and multiply their message.  The network with the most calls wins the Challenge, but we all win when we call for an effective democracy.  Read on to see how to win and hints to make your call easy and effective.</p>
+								<p style={styles.headerTextBody}>Real phone calls from real constituents matter to elected officials. The Fifty Nifty Challenge:  Can you convince your friends to speak out on an important public issue and enlist their friends to do the same.  Making a call is easier than you think: keeping your chain alive takes passion and persuasion.  We’ll speed dial for you, you have to keep the message alive and the network growing.  We’ll show your score and reach to encourage you.</p>
 							}
 
 							{variant > 50 && 
-								<p style={styles.headerTextBody}>Real phone calls from real constituents matter to elected officials. The Fifty Nifty Challenge is your chance to build a grassroots social network for action. Your goal is to get 50 people in 50 states to directly tell their congresspeople what they think. The network that makes the most calls wins and we all win when we call for an effective democracy. It’s a challenge for you and your friends, and a chance to watch the growth of your network. You can call about any issue of importance to you and we’ll suggest one when you learn more. Read on to see how to win and hints about what to say.</p>
+								<p style={styles.headerTextBody}>Call your Representatives in Congress NOW. It doesn't matter if you are D, or R, or other, it’s time to act and convince your network to follow suit.  Russian involvement on our government needs to be investigated.  Join the Challenge:  Call and enlist your friends to join.  Making a call is easier than you think: we’ll speed dial for you, you have to keep the message alive and the network growing.  We’ll show your score and reach to encourage you.</p>
 							}
 							
 							{localUser.id && <Link to={`/${localUser.id}`}> <div style={styles.welcomeLine}>Welcome {localUser.name}, Click here to see your progress</div></Link>}
 						</div>
 						<MediaQuery query='(max-width: 767px)'>
 							{!localUser.id && refText}
-                            {!localUser.id && joinNowButton}
+							{!localUser.id && joinNowButton}
 						</MediaQuery>
-                        {!!localUser.id && inviteForm}
+						{!!localUser.id && inviteForm}
 						<MediaQuery query='(min-width: 767px)'>
-                            {!localUser.id && joinForm}
+							{!localUser.id && joinForm}
 						</MediaQuery>
 
 					</div>
@@ -217,7 +222,7 @@ export const Landing = React.createClass({
 
 				<MediaQuery query='(max-width: 767px)'>
 					<div style={styles.joinMobileBackground}>
-                        {!localUser.id && joinForm}
+						{!localUser.id && joinForm}
 					</div>
 				</MediaQuery>
 
