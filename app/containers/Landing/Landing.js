@@ -187,8 +187,8 @@ export const Landing = React.createClass({
 					<div style={styles.headerPresentation}>
 						<div style={styles.headerTextBlock}>
 							<div style={styles.section}>
-								<div style={styles.headerText}>Call your State Reps.</div>
-								<div style={styles.headerText}>Enlist Friends to Call Theirs.</div>
+								<div style={styles.headerText}>Call your state reps.</div>
+								<div style={styles.headerText}>Enlist friends to call theirs.</div>
 								<div style={styles.headerText}>Collect All 50 States!</div>
 							</div>
 							{variant <= 50 &&
