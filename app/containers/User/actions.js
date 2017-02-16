@@ -16,6 +16,9 @@ export const REQUEST_LATLON_LOAD = 'user/REQUEST_LATLON_LOAD';
 export const REQUEST_LATLON_SUCCESS = 'user/REQUEST_LATLON_SUCCESS';
 export const REQUEST_LATLON_FAIL = 'user/REQUEST_LATLON_FAIL';
 
+export const POST_USER_UPDATE = 'user/POST_USER_UPDATE';
+
+
 /*--------*/
 // Define Action creators
 //
@@ -82,6 +85,30 @@ export function requestLatLong(address, userId) {
 		.catch((error) => {
 			console.log(error);
 			dispatch({ type: REQUEST_LATLON_FAIL, error });
+		});
+	};
+}
+
+export function postUser(name, zipcode) {
+	return (dispatch) => {
+		dispatch({ type: POST_USER_UPDATE });
+		return clientFetch('/api/user', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				name: name,
+				zipcode: zipcode,
+			})
+		})
+		.then((result) => {
+			dispatch({ type: POST_USER_SUCCESS, result });
+		})
+		.catch((error) => {
+			console.log(error);
+			dispatch({ type: POST_USER_FAIL, error });
 		});
 	};
 }
