@@ -33,7 +33,7 @@ export const Invite = React.createClass({
 		const title = 'Join the Fifty Nifty Game!';
 
 		// Mail
-		const mailTitle = 'Call your congressman';
+		const mailTitle = 'Call your congresspeople';
 		const mailBody = `${shareUrl}\n\nI am writing to enlist you in a network challenge — use your network for action. \n \nCall your Representatives in Congress NOW. It doesn't matter if you are D, or R, or other: every citizen should demand an exhaustive investigation to clear up the Russian mess. Flynn is the tip of the iceberg, but there may be an International Watergate brewing here. A month ago, The Department of Justice warned the White House, but no action was taken. (https://www.washingtonpost.com/world/national-security/justice-department-warned-white-house-that-flynn-could-be-vulnerable-to-russian-blackmail-officials-say/2017/02/13/fc5dab88-f228-11e6-8d72-263470bf0401_story.html?utm_term=.ae8dec347782) \n \nSince the White House has not taken action, the citizenry must. Our calls really matter, and Congress must act firmly. This tool, http://fiftynifty.org, was created by Andy Lippman and colleagues at the MIT Media Lab, and it will help you speed dial your representatives and alert your friends. \n \nCall your representatives. Ask your friends to call theirs. Demand an exhaustive investigation.  Take the FiftyNifty Challenge and make your network grow.`;
 
 		// Facebook
