@@ -187,15 +187,9 @@ export const Landing = React.createClass({
 					<div style={styles.headerPresentation}>
 						<div style={styles.headerTextBlock}>
 							<div style={styles.section}>
-								<div style={styles.headerText}>Call your Reps!</div>
-								<div style={styles.headerText}>Make a call, your friends do the rest</div>
-								{variant <= 50 &&
-									<div style={styles.headerText}>Collect all 50 States</div>
-								}
-
-								{variant > 50 && 
-									<div style={styles.headerText}>Play for a better Democracy!</div>
-								}
+								<div style={styles.headerText}>Call your State Reps.</div>
+								<div style={styles.headerText}>Enlist Friends to Call Theirs.</div>
+								<div style={styles.headerText}>Collect All 50 States!</div>
 							</div>
 							{variant <= 50 &&
 								<p style={styles.headerTextBody}>Real phone calls from real constituents matter to elected officials. The Fifty Nifty Challenge:  Can you convince your friends to speak out on an important public issue and enlist their friends to do the same.  Making a call is easier than you think: keeping your chain alive takes passion and persuasion.  We’ll speed dial for you, you have to keep the message alive and the network growing.  We’ll show your score and reach to encourage you.</p>
