@@ -38,6 +38,7 @@ export const Landing = React.createClass({
 	},
 
 	componentWillReceiveProps(nextProps) {
+		// Step 1: Show the auth panel after signup API request is completed
 		const lastLoading = this.props.landingData.signupLoading;
 		const nextLoading = nextProps.landingData.signupLoading;
 		const nextError = nextProps.landingData.signupError;
@@ -46,6 +47,7 @@ export const Landing = React.createClass({
 			this.setState({ showAuthenticationPanel: true });
 		}
 
+		// Step 2: Move on to user screen after auth API request is completed
 		const lastAuthLoading = this.props.landingData.authenticationLoading;
 		const nextAuthLoading = nextProps.landingData.authenticationLoading;
 		const nextAuthError = nextProps.landingData.authenticationError;
@@ -57,28 +59,26 @@ export const Landing = React.createClass({
 		}
 	},
 	
-	updateZipcode: function(evt) {
-		this.setState({
-			zipcode: evt.target.value.substring(0, 5)
-		});
+	updateZipcode: function(evt) { 
+		this.setState({ zipcode: evt.target.value.substring(0, 5) }); 
 	},
 
 	signupSubmit: function(evt) {
 		evt.preventDefault();
+		if (!this.state.name) 					{ return this.setState({ error: 'Name required' }); }
+		if (!this.state.zipcode) 				{ return this.setState({ error: 'Zipcode required' }); }
+		if (this.state.zipcode.length !== 5) 	{ return this.setState({ error: 'Zipcode must be 5 digits' }); }
+		if (!this.state.phone) 					{ return this.setState({ error: 'Phone Number required' }); }
+
+		this.setState({ error: undefined });
 		const refUser = this.props.landingData.referralDetails || {};
 		const referral = refUser.id || this.props.location.query.ref;
-		this.props.landingData.referralDetails
-		if (!this.state.name) { return this.setState({ error: 'Name required' }); }
-		if (!this.state.zipcode) { return this.setState({ error: 'Zipcode required' }); }
-		if (this.state.zipcode.length !== 5) { return this.setState({ error: 'Zipcode must be 5 digits' }); }
-		if (!this.state.phone) { return this.setState({ error: 'Phone Number required' }); }
-		this.setState({ error: undefined });
 		return this.props.dispatch(postUser(this.state.name, this.state.phone, this.state.zipcode, referral, window.variant));
 	},
 
 	authenticationSubmit: function(evt) {
 		evt.preventDefault();
-		if (!this.state.signupCode) { return this.setState({ error: 'Signup Code required' }); }
+		if (!this.state.signupCode) 			{ return this.setState({ error: 'Signup Code required' }); }
 		
 		this.setState({ error: undefined });
 		return this.props.dispatch(postUserAuthentication(this.state.phone, this.state.signupCode));
@@ -94,25 +94,15 @@ export const Landing = React.createClass({
 	},
 
 	loadData(userId) {
-		if (userId) {
-			this.props.dispatch(getReferralDetails(userId));
-		}
+		if (userId) { this.props.dispatch(getReferralDetails(userId)); }
 	},
 
 	render() {
-/* 
-	Still to do: 
-	* Form verification [done]
-	* Re-insert 
-	  <div style={styles.headerImage} />
-	  <div style={styles.headerSplash} /> ?
-*/
-		const refUser = this.props.landingData.referralDetails;
 		const error = this.state.error || this.props.landingData.signupError;
 		const authError = this.state.error || this.props.landingData.authenticationError;
 		const localUserData = localStorage.getItem('userData');
 		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
-		const localUserScore = localUser? getScore(localUser): 0;
+		// const localUserScore = localUser ? getScore(localUser) : 0;
 
 		const inviteForm = (
 			<div style={styles.joinForm}>
@@ -128,7 +118,10 @@ export const Landing = React.createClass({
 				</div>
 			</div>
 		);
-		const refText = refUser && <div style={{textAlign:'center'}}><div style={styles.headerText}>{refUser.name} Invited You</div></div>
+		
+		const refUser = this.props.landingData.referralDetails;
+		const refText = refUser && <div style={{textAlign:'center'}}><div style={styles.headerText}>{refUser.name} Invited You</div></div>;
+
 		const joinForm = (
 			<div style={styles.joinForm}>
 				<div id="join" style={styles.headerCall} className={'pt-card pt-elevation-3'}>
