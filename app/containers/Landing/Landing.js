@@ -119,7 +119,7 @@ export const Landing = React.createClass({
 		const localUserScore = localUser? getScore(localUser): 0;
 
 		const inviteForm = (
-			<div style={{padding: '1.6em'}}>
+			<div style={styles.joinForm}>
 				<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
 					<div style={{paddingBottom:'1em'}}>
 						<Link to={`/${localUser.id}`} >
@@ -134,7 +134,7 @@ export const Landing = React.createClass({
 		);
 		const refText = refUser && <div style={{textAlign:'center'}}><div style={styles.headerText}>{refUser.name} Invited You</div></div>
 		const joinForm = (
-			<div style={{padding: '1.6em'}}>
+			<div style={styles.joinForm}>
 				<div id="join" style={styles.headerCall} className={'pt-card pt-elevation-3'}>
 					<MediaQuery query='(min-width: 767px)'>
 						{ refText }
@@ -241,7 +241,7 @@ export const Landing = React.createClass({
 
 				<MediaQuery query='(max-width: 767px)'>
 					<div style={styles.joinMobileBackground}>
-						{!localUser.id && joinForm}
+						{!localUser.id && joinForm}	
 					</div>
 				</MediaQuery>
 
@@ -354,12 +354,13 @@ styles = {
 	},
 	headerTextBody: {
 		maxWidth: '500px',
-		padding: '1em 1em',
+		padding: '1em 0em',
 		fontSize: '1em',
 		lineHeight: '1.5',
 		textAlign: 'justify',
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
 			maxWidth: '100%',
+
 		},
 		fontWeight: '200',
 		color: 'white',
@@ -408,13 +409,19 @@ styles = {
 		padding: '0.5em 1em',
 	},
 	section: {
-		padding: '2em 1em',
+		padding: '2em 0em',
 		maxWidth: '1024px',
 		margin: '0 auto',
 	},
 	form: {
 		padding: 0,
 		margin: 0,
+	},
+	joinForm: {
+		padding: '1.6em',
+		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
+			padding: '0.5em',
+		},
 	},
 	sectionHeader: {
 		fontSize: '2em',
@@ -462,6 +469,7 @@ styles = {
 		backgroundSize: 'cover',
 		maxWidth: '100%',
 		boxShadow: 'inset 0 0 0 100vw rgba(0,61,89,.6)',
+		padding: '1em',
 	},
 	dialogBox: {
 		maxWidth: '100%',
@@ -477,16 +485,19 @@ styles = {
 		letterSpacing:'0.05em',
 	},
 	headerStep: {
-		textAlign: 'center',
+		textAlign: 'left',
 		marginBottom: '20px',
+		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
+			textAlign: 'center',
+		},
 	},
 	headerh1: {
 		fontWeight: 'bold',
-		fontSize: '25px',
+		fontSize: '2em',
 		color: '#da0f18',
 	},
 	headerh2: {
-		fontSize: '15px',
+		fontSize: '1.25em',
 		// visibility: 'hidden',
 	},
 };

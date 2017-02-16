@@ -62,14 +62,14 @@ export const Invite = React.createClass({
 				</CopyToClipboard>
 				<br /> 
 				<br />
-				<a style={styles.button} className={'pt-button pt-minimal'} href={`mailto:?subject=${encodeURI(mailTitle)}&body=${encodeURI(mailBody)}`}>
-					Send emails to your network
+				<a style={styles.button} className={'pt-button pt-fill'} href={`mailto:?subject=${encodeURI(mailTitle)}&body=${encodeURI(mailBody)}`}>
+					Invite via email
 				</a> 
 				<br /> 
 				<br />
 				<a 	
 					style={styles.button} 
-					className={'pt-button pt-minimal'} 
+					className={'pt-button pt-fill'} 
 					onClick={() =>{	
 						const xleft = (screen.width / 2) - (we / 2); // Centering
 						const xtop = (screen.height / 2) - (he / 2);
@@ -78,13 +78,13 @@ export const Invite = React.createClass({
 						'',
 						`toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,width=${we},height=${he},top=${xtop},left=${xleft}`); 
 					}}>
-					Send to your Facebook network
+					Invite your Facebook network
 				</a> 
 				<br /> 
 				<br />
 				<a 	
 					style={styles.button} 
-					className={'pt-button pt-minimal'} 
+					className={'pt-button pt-fill'} 
 					onClick={() =>{	
 						const xleft = (screen.width / 2) - (we / 2); // Centering
 						const xtop = (screen.height / 2) - (he / 2);
@@ -93,7 +93,7 @@ export const Invite = React.createClass({
 						'',
 						`toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,width=${we},height=${he},top=${xtop},left=${xleft}`); 
 					}}>
-					Send to your Twitter followers
+					Invite your Twitter followers
 				</a> 
 				{ /* <div>
 					<div style={styles.network}>
@@ -151,6 +151,9 @@ styles = {
 		fontWeight:'lighter',
 		width:'80%',
 		margin:'auto',
+        '@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
+            padding: '2em 0em',
+        },
 	},
 	inviteHeader: {
 		color:"#fff",
@@ -175,9 +178,7 @@ styles = {
 	button:{
 		color:'#003d59',
 		fontWeight: 'bold',
-		backgroundColor: 'white',
 		letterSpacing:'0em',
-		boxShadow:'0 2px #001C2B',
-
+        maxWidth: '250px',
 	},
 };
