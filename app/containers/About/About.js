@@ -14,7 +14,7 @@ export const About = React.createClass({
 						<h3 style={styles.title}>
 							Choosing your issue
 						</h3>
-						<p>When you invite friends to the Challenge, you should prompt them with an issue for them to call about.  We have presented below two issues that we think are important, current, and worth a phone call to your Congresspeople.  You are welcome to use another one in your invite.  The next version will let you add it here.</p>
+						<p>When you invite friends to the Challenge, you should prompt them with an issue for them to call about.  We have presented below two issues that we think are important, current, and worth a phone call to your Congressperson.  You are welcome to use another one in your invite.  The next version will let you add it here.</p>
 
 
 						{/*
