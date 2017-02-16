@@ -25,7 +25,7 @@ export const HowToPlay  = React.createClass({
 						<img style={{ width: '100%' }} alt={'network'} src={'static/network.png'} />
 					</div>
 
-					<p>And as your friends make calls and invite more friends, your progress map will start to fill.</p>
+					<p>As your friends make calls and invite more friends, your progress map will start to fill.</p>
 					<div style={styles.image}>
 						<img style={{ width: '100%' }} alt={'map'} src={'static/map.png'} />
 					</div>
@@ -92,7 +92,7 @@ styles = {
 	sectionHeader: {
 		fontSize: '2em',
 		fontWeight: 'lighter',
-		marginBottom: '1.5em',
+		margin: '1.5em 0em',
 		textAlign:'center',
 		color:'white',
 		letterSpacing:'0.1em',

@@ -355,7 +355,7 @@ styles = {
 	headerTextBody: {
 		maxWidth: '500px',
 		padding: '1em 0em',
-		fontSize: '1em',
+		fontSize: '1.15em',
 		lineHeight: '1.5',
 		textAlign: 'justify',
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
