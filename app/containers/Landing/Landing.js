@@ -188,7 +188,7 @@ export const Landing = React.createClass({
 						<div style={styles.headerTextBlock}>
 							<div style={styles.section}>
 								<div style={styles.headerText}>Call your Reps!</div>
-								<div style={styles.headerText}>Collect 50 States!</div>
+								<div style={styles.headerText}>Make 3 calls, your friends do the rest</div>
 								<div style={styles.headerText}>Play for a better Democracy!</div>
 							</div>
 							{variant <= 50 &&
