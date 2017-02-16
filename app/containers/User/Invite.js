@@ -60,7 +60,7 @@ export const Invite = React.createClass({
                 <div style={styles.network}>
                     <TwitterShareButton
                         url={shareUrl}
-                        title={'Join the Fifty Nifty challenge, mobilize your network, friends don’t let friends stay silent.'}>
+                        title={'Call your congresspeople! Join the FiftyNifty challenge, friends don’t let friends stay silent.'}>
                         <TwitterIcon
                             size={40}
                             round />
