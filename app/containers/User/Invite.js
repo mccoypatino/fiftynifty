@@ -151,7 +151,7 @@ styles = {
 		fontWeight:'lighter',
 		width:'80%',
 		margin:'auto',
-        '@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
+        '@media screen and (minResolution: 3dppx), screen and (maxWidth: 767px)': {
             padding: '2em 0em',
         },
 	},

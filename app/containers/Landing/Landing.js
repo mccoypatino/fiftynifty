@@ -1,16 +1,16 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
-import { Button } from '@blueprintjs/core';
+import { Button, Dialog } from '@blueprintjs/core';
 import Radium from 'radium';
 import Phone from 'react-phone-number-input';
+import Scrollchor from 'react-scrollchor';
+import MediaQuery from 'react-responsive';
+
 import { postUser, postUserAuthentication, getReferralDetails, getCallWithVerificationCode } from './actions';
 import HowToPlay from './HowToPlay';
 import Invite from '../User/Invite';
-import Scrollchor from 'react-scrollchor';
-import MediaQuery from 'react-responsive';
-import { Dialog } from '@blueprintjs/core';
-import { getScore } from '../../Utilities/UserUtils'
+import { getScore } from '../../Utilities/UserUtils';
 
 let styles;
 
@@ -41,13 +41,9 @@ export const Landing = React.createClass({
 		const lastLoading = this.props.landingData.signupLoading;
 		const nextLoading = nextProps.landingData.signupLoading;
 		const nextError = nextProps.landingData.signupError;
-		// const nextResult = nextProps.landingData.signupResult;
 		// If the phone number is already in use
-		// if (lastLoading && !nextLoading && !nextError && nextResult.id) {
 		if (lastLoading && !nextLoading && !nextError) {
 			this.setState({ showAuthenticationPanel: true });
-			// localStorage.setItem('userData', JSON.stringify(nextResult));
-			// browserHistory.push(`/${nextResult.id}`);
 		}
 
 		const lastAuthLoading = this.props.landingData.authenticationLoading;
