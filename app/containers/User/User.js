@@ -227,15 +227,18 @@ export const User = React.createClass({
 								<span style={{textAlign:'center', fontWeight:'lighter'}}> Score: <span style={styles.score}> {Math.floor(score)}</span></span>
 								<div style={{display:'inline-block', verticalAlign: 'middle', paddingLeft:'2em', paddingTop:'1em'}}>
 									<PieChart height={200} width={200}>
-										<Pie isAnimationActive={false} data={chartData} innerRadius={70} outerRadius={100} fill="rgba(102, 102, 102, 0.7)"
-											 stroke="none">
+										<Pie 
+												isAnimationActive={false} data={chartData} 
+												innerRadius={70} outerRadius={100} fill="rgba(102, 102, 102, 0.7)"
+												stroke="none">
 										</Pie>
 										<Pie data={chartData} innerRadius={70} outerRadius={100} fill="#82ca9d" stroke="none">
 											{
 												chartData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]}/>)
 											}</Pie>
-										<text x={100} y={100} textAnchor="middle" dominantBaseline="middle"
-											  fill="white" fontWeight="lighter">
+										<text 
+											x={100} y={100} textAnchor="middle" dominantBaseline="middle"
+											fill="white" fontWeight="lighter">
 											{statesCount} / 50 states
 										</text>
 									</PieChart>
@@ -369,7 +372,7 @@ styles = {
 	},
 	repsWrapper: {
 		margin: 'auto',
-		width: '80%',
+		width: '90%',
 		maxWidth: '350px',
 		backgroundColor: '#EAE4CA',
 		opacity: '0.95',
