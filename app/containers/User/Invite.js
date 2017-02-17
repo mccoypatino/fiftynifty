@@ -32,6 +32,8 @@ export const Invite = React.createClass({
 		const shareUrl = this.props.url;
 		const title = 'Join the Fifty Nifty Game!';
 
+		const hashtag = encodeURIComponent("#FiftyNifty")
+
 		// Mail
 		const mailTitle = 'Call Congress';
 		const mailBody = `I am writing to enlist you in a network challenge — use your network for action. Read the call to action below and MOST IMPORTANT, pass this on and convince your friends to follow suit. That’s the Fifty Nifty Challenge — use your grassroots networks to multiply your power.\n\nCall your Representatives in Congress NOW. It doesn't matter if you are D, or R, or other: every citizen should demand an exhaustive investigation to clear up the Russian mess. Flynn is the tip of the iceberg, but there may be an International Watergate brewing here. A month ago, The Department of Justice warned the White House, but no action was taken. (https://www.washingtonpost.com/world/national-security/justice-department-warned-white-house-that-flynn-could-be-vulnerable-to-russian-blackmail-officials-say/2017/02/13/fc5dab88-f228-11e6-8d72-263470bf0401_story.html?utm_term=.ae8dec347782)\n\nSince the White House has not taken action, the citizenry must. Our calls really matter, and Congress must act firmly. This tool, http://fiftynifty.org, was created by Andy Lippman and colleagues at the MIT Media Lab, and it will help you speed dial your representatives and alert your friends.\n\nClick or paste this link into your browser: ${shareUrl}`;
@@ -39,13 +41,13 @@ export const Invite = React.createClass({
 		// Facebook
 		const facebookTitle = encodeURI('Fifty Nifty');
 		const facebookDescription = encodeURI('It doesn\'t matter if you are D, or R, or other: every citizen should demand an exhaustive investigation to clear up the Russian mess. Our calls really matter, and Congress must act firmly. This tool will help you speed dial your representatives and enlist your friends.');
-		const facebookSummary = encodeURI('Call your Representatives in Congress NOW');
+		const facebookSummary = encodeURI('Call your Representatives in Congress NOW ')+hashtag;
 		const facebookURL = `https://www.facebook.com/sharer/sharer.php?title=${facebookTitle}&quote=${facebookSummary}&u=${encodeURI(shareUrl)}&description=${facebookDescription}`;
 		const we = 600;
 		const he = 500;
 
 		// Twitter
-		const twitterText = encodeURI('Call your congresspeople! Join the FiftyNifty challenge, friends don’t let friends stay silent');
+		const twitterText = encodeURI('Call your congresspeople! Join the challenge, friends don’t let friends stay silent ')+hashtag;
 		const twitterURL = `https://twitter.com/intent/tweet?url=${encodeURI(shareUrl)}&text=${twitterText}`;
 
 		return (
@@ -73,7 +75,6 @@ export const Invite = React.createClass({
 					onClick={() =>{	
 						const xleft = (screen.width / 2) - (we / 2); // Centering
 						const xtop = (screen.height / 2) - (he / 2);
-						console.log(screen.width + ' ' + screen.height + ' ' + xleft + ' ' + xtop);
 						window.open(facebookURL,
 						'',
 						`toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,width=${we},height=${he},top=${xtop},left=${xleft}`); 
@@ -88,7 +89,6 @@ export const Invite = React.createClass({
 					onClick={() =>{	
 						const xleft = (screen.width / 2) - (we / 2); // Centering
 						const xtop = (screen.height / 2) - (he / 2);
-						console.log(screen.width + ' ' + screen.height + ' ' + xleft + ' ' + xtop);
 						window.open(twitterURL,
 						'',
 						`toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,width=${we},height=${he},top=${xtop},left=${xleft}`); 
