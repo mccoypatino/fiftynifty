@@ -309,7 +309,7 @@ styles = {
 		position: 'relative',
 		// backgroundColor: '#cb0027',
 		zIndex: 2,
-		padding: 'calc(115px + 1em) 1em 3em',
+		padding: 'calc(115px + 0.2em) 1em 0.2em',
 		maxWidth: '1024px',
 		margin: '0 auto',
 		width: '100%',
@@ -343,13 +343,13 @@ styles = {
 	},
 	headerTextBody: {
 		maxWidth: '500px',
-		padding: '1em 0em',
+		padding: '0.3em 0em',
 		fontSize: '1.15em',
 		lineHeight: '1.5',
 		textAlign: 'justify',
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
 			maxWidth: '100%',
-
+			fontSize: '1em',
 		},
 		fontWeight: '200',
 		color: 'white',
@@ -459,6 +459,9 @@ styles = {
 		maxWidth: '100%',
 		boxShadow: 'inset 0 0 0 100vw rgba(0,61,89,.6)',
 		padding: '1em',
+		'@media screen and (max-width: 400px)': {
+			padding: '0em',
+		},
 	},
 	dialogBox: {
 		maxWidth: '100%',
