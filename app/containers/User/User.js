@@ -173,9 +173,10 @@ export const User = React.createClass({
 														<AddressInput geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
 														}
 
-														{reps.length === 3 && reps.map((rep, index)=> {
-															return (
-																<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
+														{reps.length === 3 && 
+															reps.map((rep, index)=> {
+																return (
+																	<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
 															);
 														})}
 													</div>
@@ -316,33 +317,32 @@ styles = {
 	},
 	sectionTitle: {
 		fontSize: '1.8em',
-		textAlign:'center',
-		letterSpacing:'0.1em',
-		padding:'0.8em 0',
-		fontWeight: 'lighter',
-		color:'white',
+		textAlign: 'center',
+		padding: '0.8em',
+		fontWeight: 'bold',
+		color: '#003d59',
 	},
-	score:{
-		fontSize:'3em',
-		textAlign:'center',
-		fontWeight:'bold',
-		paddingLeft:'0.2em'
+	score: {
+		fontSize: '3em',
+		textAlign: 'center',
+		fontWeight: 'bold',
+		paddingLeft: '0.2em'
 	},
 	centered: {
-		textAlign:'center',
+		textAlign: 'center',
 	},
 	repsSectionTitle: {
 		fontSize: '1.9em',
-		textAlign:'center',
-		letterSpacing:'0.1em',
-		paddingBottom:'1em',
+		textAlign: 'center',
+		letterSpacing: '0.1em',
+		paddingBottom: '1em',
 	},
 	progressBackground: {
-		background:"linear-gradient(rgba(28, 67, 90, 0.8),rgba(28, 67, 90, 0.8)), url('static/crowd.jpg') no-repeat center center",
-		backgroundSize:'cover',
+		background: "linear-gradient(rgba(28, 67, 90, 0.8),rgba(28, 67, 90, 0.8)), url('static/crowd.jpg') no-repeat center center",
+		backgroundSize: 'cover',
 	},
 	graphBackground: {
-		backgroundColor:"#003d59",
+		backgroundColor: "#003d59",
 	},
 	settingsBackground: {
 		backgroundColor: '#0b5577',
@@ -370,15 +370,18 @@ styles = {
 	repsWrapper: {
 		margin: 'auto',
 		width: '80%',
-		maxWidth:'350px',
-		backgroundColor:'#da022e',
-		opacity:'0.95',
+		maxWidth: '350px',
+		backgroundColor: '#EAE4CA',
+		opacity: '0.95',
 		fontWeight: 'lighter',
+		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
+			width: '90%',
+		},
 	},
 	repsBox: {
 		textAlign: 'left',
-		color:'white',
-		padding:'1em',
+		color: 'white',
+		padding: '1em',
 		//fontWeight: '200',
 	},
 	orCall: {
