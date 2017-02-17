@@ -41,7 +41,6 @@ export const Invite = React.createClass({
 		// Facebook
 		const facebookTitle = encodeURI('Fifty Nifty');
 		const facebookAppID = '375710412814285';
-		console.log(facebookAppID);
 		const facebookDescription = encodeURI('It doesn\'t matter if you are D, or R, or other: every citizen should demand an exhaustive investigation to clear up the Russian mess. Our calls really matter, and Congress must act firmly. This tool will help you speed dial your representatives and enlist your friends.');
 		const facebookURL = `https://www.facebook.com/sharer.php?app_id=${facebookAppID}&title=${facebookTitle}&u=${encodeURI(shareUrl)}&description=${facebookDescription}`;
 		const we = 600;
