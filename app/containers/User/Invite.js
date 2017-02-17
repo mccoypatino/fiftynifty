@@ -40,9 +40,9 @@ export const Invite = React.createClass({
 
 		// Facebook
 		const facebookTitle = encodeURI('Fifty Nifty');
+		const facebookAppID = '375710412814285';
 		const facebookDescription = encodeURI('It doesn\'t matter if you are D, or R, or other: every citizen should demand an exhaustive investigation to clear up the Russian mess. Our calls really matter, and Congress must act firmly. This tool will help you speed dial your representatives and enlist your friends.');
-		const facebookSummary = encodeURI('Call your Representatives in Congress NOW ')+hashtag;
-		const facebookURL = `https://www.facebook.com/sharer/sharer.php?title=${facebookTitle}&quote=${facebookSummary}&u=${encodeURI(shareUrl)}&description=${facebookDescription}`;
+		const facebookURL = `https://www.facebook.com/sharer.php?app_id=${facebookAppID}&title=${facebookTitle}&u=${encodeURI(shareUrl)}&description=${facebookDescription}`;
 		const we = 600;
 		const he = 500;
 
@@ -95,8 +95,8 @@ export const Invite = React.createClass({
 					}}>
 					Invite your Twitter followers
 				</a> 
-				{ /* <div>
-					<div style={styles.network}>
+				<div>
+{	/* 				<div style={styles.network}>
 						<FacebookShareButton
 							url={shareUrl}
 							title={'Join the Fifty Nifty challenge, mobilize your network, friends don’t let friends stay silent.'}
@@ -107,24 +107,24 @@ export const Invite = React.createClass({
 						</FacebookShareButton>
 					</div>
 					<div style={styles.network}>
-						<TwitterShareButton
-							url={shareUrl}
-							title={'Call your congresspeople! Join the FiftyNifty challenge, friends don’t let friends stay silent.'}>
-							<TwitterIcon
-								size={40}
-								round />
-						</TwitterShareButton>
-					</div>
+							<TwitterShareButton
+								url={shareUrl}
+								title={'Call your congresspeople! Join the FiftyNifty challenge, friends don’t let friends stay silent.'}>
+								<TwitterIcon
+									size={40}
+									round />
+							</TwitterShareButton>
+						</div>
 
-					<div style={styles.network}>
-						<GooglePlusShareButton
-							url={shareUrl}>
-							<GooglePlusIcon
-								size={40}
-								round />
-						</GooglePlusShareButton>
-					</div>
-				</div> */ }
+						<div style={styles.network}>
+							<GooglePlusShareButton
+								url={shareUrl}>
+								<GooglePlusIcon
+									size={40}
+									round />
+							</GooglePlusShareButton>
+					</div> */ }
+				</div> 
 			</div>
 			</div>
 		);
