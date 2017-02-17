@@ -39,8 +39,6 @@ export const Login = React.createClass({
 		}
 	},
 
-
-
 	updateCode: function(evt) {
 		this.setState({ code: evt.target.value });
 	},
@@ -86,9 +84,8 @@ export const Login = React.createClass({
 					}
 					
 					<label htmlFor={'phone-input'} style={styles.inputLabel}>
-						{ codeCreationSuccess ? 
-							<div className={'label-phone-input'}>Send another verification code</div> 
-							: <div className={'label-phone-input'}>Phone number</div> 
+						{ codeCreationSuccess &&
+							<div className={'label-phone-input'}>Send another verification code</div>  
 						}
 						{ codeCreationError && 
 							<div className={'pt-tag pt-minimal pt-intent-danger'}>An error occured: { codeCreationError }</div>
@@ -99,25 +96,35 @@ export const Login = React.createClass({
 					<div className={'verificationButtons pt-button-group pt-fill pt-large'}>
 						<Button 
 							type={'submit'} style={styles.button} 
-							text={'Text Me a verification Code'}
 							className={'pt-intent-primary'} 
 							onClick={this.formSubmit} 
-							loading={this.props.loginData.codeCreationLoading} />
+							loading={this.props.loginData.codeCreationLoading}>
+								<span 
+									style={{ verticalAlign: 'middle', fontSize: '0.85em', opacity: 1 }} 
+									className={'pt-icon-standard pt-icon-comment'} /> 
+								Text a code 
+							</Button>
 						<Button 
 							style={styles.button} 
-							text={'Call me with a verification Code'}
 							className={'pt-intent-primary'} 
 							onClick={this.createVerificationCodeByPhone} 
-							loading={this.props.loginData.codeCreationLoading} />
+							loading={this.props.loginData.codeCreationLoading}>
+								<span 
+									style={{ verticalAlign: 'middle', fontSize: '0.85em', opacity: 1 }} 
+									className={'pt-icon-standard pt-icon-phone'} /> 
+								Call with a code 
+							</Button>
+
 					</div>	
 				</form>
 
 				<div style={styles.section}>
 					<div style={styles.title}>Not Registered Yet?</div>
-					<Link to={"/"}><Button style={styles.button}
-										   className={'pt-button pt-intent-primary pt-fill pt-large'}
-										   text={'Click Here to Join The Game'}
-					/>
+					<Link to={'/'}>
+							<Button 	
+								style={styles.button}
+								className={'pt-button pt-intent-primary pt-fill pt-large'}
+								text={'Click Here to Join The Game'} />
 					</Link>
 				</div>
 			</div>
@@ -135,22 +142,11 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps)(Radium(Login));
 
 styles = {
-	section:{
-		padding: '1em',
-	},
-    title: {
-        fontSize: '2em',
-        fontWeight: 'lighter',
-        textAlign: 'center',
-        paddingBottom:'1em',
-        color:'white',
-        letterSpacing:'0.1em',
-    },
 	login: {
-        backgroundColor: '#003d59',
-        color:'white',
-		fontWeight:'lighter',
-		minHeight:'95vh',
+		backgroundColor: '#003d59',
+		color: 'white',
+		fontWeight: 'lighter',
+		minHeight: '95vh',
 	},
 	container: {
 		padding: 'calc(115px + 3em) 1em 3em',
