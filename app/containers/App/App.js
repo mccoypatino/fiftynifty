@@ -18,6 +18,12 @@ export const App = React.createClass({
 		const FocusStyleManager = require('@blueprintjs/core').FocusStyleManager;
 		FocusStyleManager.onlyShowFocusOnTabs();
 		window.variant = Math.ceil(Math.random() * 100);
+
+		const localUserData = localStorage.getItem('userData');
+		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
+		if (window.location.hostname !== 'localhost' && localUser.id) {
+			Raven.setUserContext({ userId: localUser.id });
+		}
 	},
 
 	isProduction: function() {
@@ -34,6 +40,7 @@ export const App = React.createClass({
 			fontSize: '1.5em',
 			padding: '.5em 0em',
 		};
+
 		return (
 			<StyleRoot>
 				<Helmet 
