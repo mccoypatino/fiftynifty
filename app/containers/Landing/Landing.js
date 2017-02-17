@@ -136,40 +136,48 @@ export const Landing = React.createClass({
 						<label htmlFor={'name-input'} style={styles.inputLabel}>
 							Name
 							<input	
-									id={'name-input'} 					className={'pt-input pt-large pt-fill'}
-									placeholder={'Nicknames are okay'} 	value={this.state.name}
-									onChange={(evt) => this.setState({ name: evt.target.value })} />
+								id={'name-input'} 						className={'pt-input pt-large pt-fill'}
+								placeholder={'Nicknames are okay'} 		value={this.state.name}
+								onChange={(evt) => this.setState({ name: evt.target.value })} />
 						</label>
 						<label htmlFor={'zip-input'} style={styles.inputLabel}>
 							Zipcode (where you vote)
-							<input id={'zip-input'} type={'number'} className={'pt-input pt-large pt-fill'}
-								   placeholder={'Where are you registered?'} value={this.state.zipcode}
-								   onChange={this.updateZipcode}/>
+							<input
+								id={'zip-input'} type={'number'} 			className={'pt-input pt-large pt-fill'}
+								placeholder={'Where are you registered?'} 	value={this.state.zipcode}
+								onChange={this.updateZipcode} />
 						</label>
 						<label htmlFor={'phone-input'} style={styles.inputLabel}>
 							Phone number (to connect you to your reps)
-							<Phone country={'US'} className={'pt-input pt-large pt-fill'}
-								   placeholder={'Enter your phone number'} value={this.state.phone}
-								   onChange={phone => this.setState({phone: phone})}/>
-							<div style={styles.inputSubtext}><span style={{ verticalAlign: 'middle', fontSize: '0.85em', opacity: 0.7 }} className={'pt-icon-standard pt-icon-lock'} /> Encrypted. We never sell or share your number.</div>
+							<Phone
+								country={'US'} 								className={'pt-input pt-large pt-fill'}
+								placeholder={'Enter your phone number'} 	value={this.state.phone}
+								onChange={phone => this.setState({ phone: phone })} />
+							<div style={styles.inputSubtext}>
+								<span 
+									style={{ verticalAlign: 'middle', fontSize: '0.85em', opacity: 0.7 }} 
+									className={'pt-icon-standard pt-icon-lock'} /> 
+								Encrypted. We never sell or share your number.</div>
 						</label>
 						<Button
 							loading={this.props.landingData.signupLoading}
 							type={'submit'} style={styles.button}
 							text={'Join the Challenge'}
 							className={'pt-intent-primary pt-fill pt-large'}
-							onClick={this.signupSubmit}/>
+							onClick={this.signupSubmit} />
 						<div style={styles.error}>{error}</div>
 					</form>
 				</div>
 			</div>
 		);
 		const joinNowButton = (
-			<div style={{width: '100%', textAlign: 'center'}}>
+			<div style={{ width: '100%', textAlign: 'center' }}>
 				<div >
-					<Scrollchor to="#join"><Button
-						role={"button"}
-						className={'pt-fill pt-button pt-intent-primary'}>Join Now</Button>
+					<Scrollchor to="#join">
+						<Button
+							role={'button'}
+							text={'Join now'}
+							className={'pt-fill pt-button pt-intent-primary'} />
 					</Scrollchor>
 				</div>
 			</div>
@@ -181,56 +189,43 @@ export const Landing = React.createClass({
 					<div style={styles.headerSplash} />
 					<div style={styles.headerPresentation}>
 						<div style={styles.headerTextBlock}>
+
 							<div style={styles.section}>
 								<div style={styles.headerStep}>
-									<div style={styles.headerh1}>
-										Call your rep now
-									</div>
-									<div style={styles.headerh2}>
-										Real calls really matter.
-									</div>
+									<div style={styles.headerh1}>	Call your rep now</div>
+									<div style={styles.headerh2}>	Real calls really matter.</div>
 								</div>
 								<div style={styles.headerStep}>
-									<div style={styles.headerh1}>
-										Amplify your voice
-									</div>
-									<div style={styles.headerh2}>
-										Build your network, spread the word.
-									</div>
+									<div style={styles.headerh1}>	Amplify your voice</div>
+									<div style={styles.headerh2}>	Build your network, spread the word.</div>
 								</div>
 								<div style={styles.headerStep}>
-									<div style={styles.headerh1}>
-										Cover the country
-									</div>
-									<div style={styles.headerh2}>
-										Track your progress.
-									</div>
+									<div style={styles.headerh1}>	Cover the country</div>
+									<div style={styles.headerh2}>	Track your progress.</div>
 								</div>
 							</div>
-							{variant <= 50 &&
-								<p style={styles.headerTextBody}>It doesn't matter if you are D, or R, or other, Russian involvement in our government needs to be investigated.  We’ll speed dial for you. We’ll help you prime your network.  Three clicks, three calls, and you’re done.</p>
-							}
 
-							{variant > 50 && 
-								<p style={styles.headerTextBody}>Join the Challenge:  Build a network that reaches all 50 states.  Call and enlist your friends to join. We’ll speed dial for you. We’ll help you prime your network.  Three clicks, three calls, and you’re done.</p>
-							}
-							
-							{localUser.id && <Link to={`/${localUser.id}`}> <div style={styles.welcomeLine}>Welcome {localUser.name}, Click here to see your progress</div></Link>}
+							<p style={styles.headerTextBody}>
+								{variant <= 50 ?
+									"It doesn't matter if you are D, or R, or other, Russian involvement in our government needs to be investigated.  We’ll speed dial for you. We’ll help you prime your network.  Three clicks, three calls, and you’re done." :
+									'Join the Challenge:  Build a network that reaches all 50 states.  Call and enlist your friends to join. We’ll speed dial for you. We’ll help you prime your network.  Three clicks, three calls, and you’re done.'
+								}
+							</p>
+							{localUser.id && 
+								<Link to={`/${localUser.id}`}> 
+									<div style={styles.welcomeLine}> Welcome {localUser.name}, Click here to see your progress </div>
+								</Link>}
 						</div>
-						<MediaQuery query='(max-width: 767px)'>
-							{!localUser.id && refText}
-							{false && joinNowButton}
-						</MediaQuery>
+
+						<MediaQuery query={'(max-width: 767px)'}> {!localUser.id && refText} {false && joinNowButton}</MediaQuery>
 						{!!localUser.id && inviteForm}
-						<MediaQuery query='(min-width: 767px)'>
-							{!localUser.id && joinForm}
-						</MediaQuery>
+						<MediaQuery query={'(min-width: 767px)'}> {!localUser.id && joinForm} </MediaQuery>
 
 					</div>
 				</div>
 				
 
-				<MediaQuery query='(max-width: 767px)'>
+				<MediaQuery query={'(max-width: 767px)'}>
 					<div style={styles.joinMobileBackground}>
 						{!localUser.id && joinForm}	
 					</div>
@@ -241,28 +236,29 @@ export const Landing = React.createClass({
 						<p>We've just sent you a text message with an authentication code. Please enter the numeric code here.</p>
 						<form onSubmit={this.authenticationSubmit} style={styles.form}>
 							<label htmlFor={'code-input'} style={styles.inputLabel}>
-								<input id={'code-input'} type={'number'}  className={'pt-input pt-large pt-fill'}
-									   placeholder={'Authentication Code'} value={this.state.signupCode}
-									   onChange={(evt) => this.setState({signupCode: evt.target.value})}/>
+								<input
+									id={'code-input'} type={'number'}	className={'pt-input pt-large pt-fill'}
+									placeholder={'Authentication Code'}	value={this.state.signupCode}
+									onChange={(evt) => this.setState({ signupCode: evt.target.value })} />
 							</label>
 							<Button
 								loading={this.props.landingData.authenticationLoading}
 								type={'submit'} style={styles.button}
 								text={'Submit Authentication Code'}
 								className={'pt-intent-primary pt-fill pt-large'}
-								onClick={this.authenticationSubmit}/>
+								onClick={this.authenticationSubmit} />
 							<div style={styles.error}>{authError}</div>
 							<Button
 								loading={this.props.landingData.authenticationLoading}
 								type={'submit'} style={styles.button}
 								text={'Landline? Click for a call with your code'}
 								className={'pt-intent-primary pt-fill pt-large'}
-								onClick={this.callWithVerificationCode}/>
+								onClick={this.callWithVerificationCode} />
 						</form>
 					</div>
 				</Dialog>
 
-				<HowToPlay localUser={localUser}/>
+				<HowToPlay localUser={localUser} />
 
 
 			</div>
@@ -280,7 +276,7 @@ export default connect(mapStateToProps)(Radium(Landing));
 
 styles = {
 	container: {
-		maxWidth:'100vw',
+		maxWidth: '100vw',
 	},
 	header: {
 		position: 'relative',		
@@ -310,8 +306,8 @@ styles = {
 		zIndex: 1,
 	},
 	headerPresentation: {
-		//backgroundColor: '#cb0027',
 		position: 'relative',
+		// backgroundColor: '#cb0027',
 		zIndex: 2,
 		padding: 'calc(115px + 1em) 1em 3em',
 		maxWidth: '1024px',
@@ -455,9 +451,9 @@ styles = {
 		fontSize: '1.25em',
 		paddingTop: '.5em',
 	},
-	joinMobileBackground:{
-		backgroundImage: 'url("/static/hands.jpg")',
+	joinMobileBackground: {
 		backgroundRepeat: 'no-repeat',
+		backgroundColor: 'rgb(0, 61, 89)',
 		backgroundPosition: 'center center',
 		backgroundSize: 'cover',
 		maxWidth: '100%',
@@ -469,13 +465,13 @@ styles = {
 		top: '10%',
 	},
 	welcomeLine: {
-		textAlign:'center',
-		padding:'1em',
-		fontWeight:'bold',
+		textAlign: 'center',
+		padding: '1em',
+		fontWeight: 'bold',
 		color: '#da0f18',
 		background: 'rgba( 255, 255, 255, 0.6)',
 		borderRadius: '5px',
-		letterSpacing:'0.05em',
+		letterSpacing: '0.05em',
 	},
 	headerStep: {
 		textAlign: 'left',
