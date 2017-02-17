@@ -140,11 +140,10 @@ styles = {
 	},
 	content: {
 		maxWidth: '1024px',
-		margin: '0 auto',
+		margin: '0 auto 2em',
 		color: 'white',
 		fontSize: '1.1em',
 		lineHeight: '1.4',
-		marginBottom: '2em',
 		letterSpacing: '1px',
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
 			padding: '0em .5em',
