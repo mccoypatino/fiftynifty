@@ -98,8 +98,6 @@ export const Landing = React.createClass({
 	},
 
 	render() {
-		const error = this.state.error || this.props.landingData.signupError;
-		const authError = this.state.error || this.props.landingData.authenticationError;
 		const localUserData = localStorage.getItem('userData');
 		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
 		// const localUserScore = localUser ? getScore(localUser) : 0;
@@ -107,34 +105,40 @@ export const Landing = React.createClass({
 		const inviteForm = (
 			<div style={styles.joinForm}>
 				<div style={styles.headerCall} className={'pt-card pt-elevation-3'}>
-					<div style={{paddingBottom:'1em'}}>
+					<div style={{ paddingBottom: '1em' }}>
 						<Link to={`/${localUser.id}`} >
-							<Button style={styles.button}
+							<Button 
+									style={styles.button}
 									text={'Call Your Representatives'}
-									className={'pt-intent-danger pt-fill pt-large'}/>
+									className={'pt-intent-danger pt-fill pt-large'} />
 						</Link>
 					</div>
-					<Invite url={`https://fiftynifty.org/?ref=${localUser.id}`}/>
+					<Invite url={`https://fiftynifty.org/?ref=${localUser.id}`} />
 				</div>
 			</div>
 		);
 		
 		const refUser = this.props.landingData.referralDetails;
-		const refText = refUser && <div style={{textAlign:'center'}}><div style={styles.headerText}>{refUser.name} Invited You</div></div>;
+		const refText = refUser && <div style={{ textAlign: 'center' }}>
+										<div style={styles.headerText}>{refUser.name} invited You</div>
+									</div>;
 
+		const error = this.state.error || this.props.landingData.signupError;
+		const authError = this.state.error || this.props.landingData.authenticationError;
 		const joinForm = (
 			<div style={styles.joinForm}>
 				<div id="join" style={styles.headerCall} className={'pt-card pt-elevation-3'}>
-					<MediaQuery query='(min-width: 767px)'>
+					<MediaQuery query={'(min-width: 767px)'}>
 						{ refText }
 					</MediaQuery>
-					<div style={styles.inputHeader}> Join The Challenge</div>
+					<div style={styles.inputHeader}> Join The Challenge	</div>
 					<form onSubmit={this.signupSubmit} style={styles.form}>
 						<label htmlFor={'name-input'} style={styles.inputLabel}>
 							Name
-							<input id={'name-input'} className={'pt-input pt-large pt-fill'}
-								   placeholder={'Nicknames are okay'} value={this.state.name}
-								   onChange={(evt) => this.setState({name: evt.target.value})}/>
+							<input	
+									id={'name-input'} 					className={'pt-input pt-large pt-fill'}
+									placeholder={'Nicknames are okay'} 	value={this.state.name}
+									onChange={(evt) => this.setState({ name: evt.target.value })} />
 						</label>
 						<label htmlFor={'zip-input'} style={styles.inputLabel}>
 							Zipcode (where you vote)
