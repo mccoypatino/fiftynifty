@@ -1,22 +1,19 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Link, browserHistory } from 'react-router';
-import { Spinner } from '@blueprintjs/core';
+import { Link } from 'react-router';
+import { Spinner, Dialog } from '@blueprintjs/core';
 import Radium from 'radium';
 import dateFormat from 'dateformat';
-// import fetch from 'isomorphic-fetch';
+
 import { Representative, AddressInput, ProgressMap, TreeGraph } from 'components';
+
 import { getUser, requestCall, requestLatLong } from './actions';
 import { Invite } from './Invite';
-import {getScore, countStates, getFlatCalls, getPersonalCallsCount} from '../../Utilities/UserUtils'
-import { UserNode } from './UserNode';
-import {PieChart, Pie, Cell,Legend, Tooltip} from 'recharts';
-import { Dialog } from '@blueprintjs/core';
+import { getScore, countStates, getFlatCalls, getPersonalCallsCount } from '../../Utilities/UserUtils';
+// import { UserNode } from './UserNode';
+import { PieChart, Pie, Cell } from 'recharts';
 
 let styles;
-
-// Shamelessly stolen from the call-congress code
-// const CONGRESS_API_URL = `https://congress.api.sunlightfoundation.com/legislators/locate?apikey=${process.env.SUNLIGHT_FOUNDATION_KEY}`;
 
 export const User = React.createClass({
 	propTypes: {
@@ -29,13 +26,13 @@ export const User = React.createClass({
 	getInitialState() {
 		return {
 			reps: [],
-            callDialogOpen: false,
+			callDialogOpen: false,
 		};
 	},
 
-    toggleCallDialog: function() {
-        this.setState({ callDialogOpen: !this.state.callDialogOpen });
-    },
+	toggleCallDialog: function() {
+		this.setState({ callDialogOpen: !this.state.callDialogOpen });
+	},
 
 	componentWillMount() {
 		this.loadData(this.props.params.userId);
@@ -66,15 +63,15 @@ export const User = React.createClass({
 	getParent: function(user) {
 		const userLevel  = user.hierarchyLevel;
 		if (user.ancestors) {
-            const parent = user.ancestors.filter((ancestor) => {
-                if (ancestor.hierarchyLevel === (userLevel - 1)) {
-                    return ancestor;
-                }
-            });
-            return parent.length>0? parent[0] : false;
-        }
-        return false;
-    },
+			const parent = user.ancestors.filter((ancestor) => {
+				if (ancestor.hierarchyLevel === (userLevel - 1)) {
+					return ancestor;
+				}
+			});
+			return parent.length>0? parent[0] : false;
+		}
+		return false;
+	},
 
 	render() {
 		const user = this.props.userData.user || {};
@@ -161,10 +158,10 @@ export const User = React.createClass({
 															<div>
 																<div>
 																	<div style={styles.section}>
-                                                                    {reps.map((rep, index)=> {
-                                                                        return (
+																	{reps.map((rep, index)=> {
+																		return (
 																			<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
-                                                                        );})}
+																		);})}
 																	</div>
 																	<div> Unfortunately, you are not fully represented in congress.</div>
 																	<div>You can still join the game by inviting your friends from other states and encouraging them to call</div>
@@ -186,11 +183,11 @@ export const User = React.createClass({
 												</div>
 
 											{/*<p style={styles.orCall}>Or you can call <a style={styles.link} href="tel:508-659-9127">(508) 659-9127</a>  and we'll connect you</p>*/}
-	                                        {isLocalUser &&
+											{isLocalUser &&
 												<div style={styles.centered}>
 													<button type="button" className={'pt-button pt-minimal pt-icon-log-out pt-intent-danger'} onClick={this.logout}>Logout</button>
 												</div>
-	                                        }
+											}
 
 										</div>
 
@@ -358,14 +355,14 @@ styles = {
 		top: 0,
 		left: 0,
 	},
-    progressBackground: {
-        backgroundImage: 'url("/static/protest.jpg")',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center center',
-        backgroundSize: 'cover',
-        top: 0,
-        left: 0,
-    },
+	progressBackground: {
+		backgroundImage: 'url("/static/protest.jpg")',
+		backgroundRepeat: 'no-repeat',
+		backgroundPosition: 'center center',
+		backgroundSize: 'cover',
+		top: 0,
+		left: 0,
+	},
 	repsBackgroundSplash: {
 		background: 'linear-gradient(rgba(0,60,88, 0.8),rgba(0,60,88, 0.8))',//'#1c435a',
 
@@ -402,32 +399,32 @@ styles = {
 		textAlign:'center',
 		paddingTop:'2em',
 	},
-    button:{
+	button:{
 		color:'white',
-        fontWeight: 'lighter',
-        backgroundColor: '#003d59',
-        letterSpacing:'0.1em',
-        boxShadow:'0 2px #001C2B',
+		fontWeight: 'lighter',
+		backgroundColor: '#003d59',
+		letterSpacing:'0.1em',
+		boxShadow:'0 2px #001C2B',
 
 	},
 	link:{
 		color:'#da022e',
 		fontWeight:'bold',
 	},
-    dialogBox: {
-        maxWidth: '100%',
-        top: '10%',
-    },
-    userInfoWrapper: {
-    	textAlign: 'center',
-    },
+	dialogBox: {
+		maxWidth: '100%',
+		top: '10%',
+	},
+	userInfoWrapper: {
+		textAlign: 'center',
+	},
 	userInfo: {
 		color:'#000',
 		textAlign:'center',
 		background:'rgba(255, 255, 255, 0.6)',
 		borderRadius:'5px',
-        margin: 'auto',
-        display: 'inline-block',
+		margin: 'auto',
+		display: 'inline-block',
 		lineHeight:'1.5em',
 		padding: '1em',
 	},

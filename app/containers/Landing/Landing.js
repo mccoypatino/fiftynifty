@@ -452,8 +452,8 @@ styles = {
 		paddingTop: '.5em',
 	},
 	joinMobileBackground: {
-		backgroundImage: 'url("/static/hands.jpg")',
 		backgroundRepeat: 'no-repeat',
+		backgroundColor: 'rgb(0, 61, 89)',
 		backgroundPosition: 'center center',
 		backgroundSize: 'cover',
 		maxWidth: '100%',
