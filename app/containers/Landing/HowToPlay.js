@@ -1,10 +1,12 @@
 import React, { PropTypes } from 'react';
 import Radium from 'radium';
-import { Link as UnwrappedLink} from 'react-router';
+import { Link as UnwrappedLink } from 'react-router';
+
 const Link = Radium(UnwrappedLink);
+
 let styles;
 
-export const HowToPlay  = React.createClass({
+export const HowToPlay = React.createClass({
 
 	propTypes: {
 		localUser: PropTypes.object,
@@ -31,7 +33,7 @@ export const HowToPlay  = React.createClass({
 					</div>
 
 					<Link to={'/about'}>
-						<p style={styles.learnMore}><button style={{color:'white'}} type="button" className="pt-button pt-intent-primary pt-icon-add" >Learn More</button></p>
+						<p style={styles.learnMore}><button style={{ color: 'white' }} type="button" className="pt-button pt-intent-primary pt-icon-add" >Learn More</button></p>
 					</Link>
 					{/* <div style={styles.sectionHeader} id="howToPlay">How to Play</div>
 					<Link to={localUserId ? `/${localUserId}` : '/#join'} style={styles.howToPlaySection} className={'pt-card pt-elevation-3'}>
@@ -73,7 +75,7 @@ export const HowToPlay  = React.createClass({
 
 				</div>
 			</div>
-		)
+		);
 	}
 
 });
@@ -83,32 +85,32 @@ export default Radium(HowToPlay);
 
 styles = {
 	section: {
-		backgroundColor:"#003d59",
+		backgroundColor: '#003d59',
 		padding: '2em 1em',
 		margin: '0 auto',
-		backgroundSize:'cover',
+		backgroundSize: 'cover',
 		fontWeight: 'lighter',
 	},
 	sectionHeader: {
 		fontSize: '2em',
 		fontWeight: 'lighter',
 		margin: '1.5em 0em',
-		textAlign:'center',
-		color:'white',
-		letterSpacing:'0.1em',
+		textAlign: 'center',
+		color: 'white',
+		letterSpacing: '0.1em',
 	},
 	howToPlaySection: {
 		// display:'table-cell',
 		position: 'relative',
 		display: 'inline-block',
 		textDecoration: 'none',
-		width:'48%',
+		width: '48%',
 		margin: '0px 1% 10px',
-		textAlign:'left',
+		textAlign: 'left',
 		height: 150,
 		verticalAlign: 'top',
 		padding: '1.75em 1em',
-		color:'white',
+		color: 'white',
 		backgroundColor: 'rgba(255, 255, 255, 0.25)',
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
 			width: '100%',
@@ -132,12 +134,12 @@ styles = {
 		paddingBottom: '0.5em',
 	},
 	learnMore: {
-		textAlign:'center',
-		color:'white',
-		padding:'1em',
+		textAlign: 'center',
+		color: 'white',
+		padding: '1em',
 	},
-	content:{
-		maxWidth:'1024px',
+	content: {
+		maxWidth: '1024px',
 		margin: '0 auto',
 		color: 'white',
 		fontSize: '1.1em',
