@@ -47,8 +47,8 @@ export const Invite = React.createClass({
 		const he = 500;
 
 		// Twitter
-		const twitterText = encodeURI('Call your congresspeople! Join the challenge, friends don’t let friends stay silent ')+hashtag;
-		const twitterURL = `https://twitter.com/intent/tweet?url=${encodeURI(shareUrl)}&text=${twitterText}`;
+		const twitterText = encodeURI('Call your congresspeople! Join the challenge, friends don’t let friends stay silent ');
+		const twitterURL = `https://twitter.com/intent/tweet?url=${encodeURI(shareUrl)}&text=${twitterText}&hashtags=Fiftynifty`;
 
 		return (
 			<div id="invite" style={styles.sectionBackground}>
