@@ -128,9 +128,7 @@ export const Landing = React.createClass({
 		const joinForm = (
 			<div style={styles.joinForm}>
 				<div id="join" style={styles.headerCall} className={'pt-card pt-elevation-3'}>
-					<MediaQuery query={'(min-width: 767px)'}>
 						{ refText }
-					</MediaQuery>
 					<div style={styles.inputHeader}> Join The Challenge	</div>
 					<form onSubmit={this.signupSubmit} style={styles.form}>
 						<label htmlFor={'name-input'} style={styles.inputLabel}>
@@ -217,19 +215,12 @@ export const Landing = React.createClass({
 								</Link>}
 						</div>
 
-						<MediaQuery query={'(max-width: 767px)'}> {!localUser.id && refText} {false && joinNowButton}</MediaQuery>
 						{!!localUser.id && inviteForm}
-						<MediaQuery query={'(min-width: 767px)'}> {!localUser.id && joinForm} </MediaQuery>
+						{!localUser.id && joinForm}
 
 					</div>
 				</div>
-				
 
-				<MediaQuery query={'(max-width: 767px)'}>
-					<div style={styles.joinMobileBackground}>
-						{!localUser.id && joinForm}	
-					</div>
-				</MediaQuery>
 
 				<Dialog isOpen={this.state.showAuthenticationPanel} onClose={this.closeAuthenticationPanel} title={'Authenticate your Phone number'} style={styles.dialogBox}>
 					<div className="pt-dialog-body">
