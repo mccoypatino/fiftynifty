@@ -22,7 +22,7 @@ export const App = React.createClass({
 		const localUserData = localStorage.getItem('userData');
 		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
 		if (window.location.hostname !== 'localhost' && localUser.id) {
-			Raven.setUserContext({ name: nextResult.name, userId: nextResult.id });
+			Raven.setUserContext({ name: localUser.name, userId: localUser.id });
 		}
 	},
 
