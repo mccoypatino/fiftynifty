@@ -97,12 +97,6 @@ export const Landing = React.createClass({
 		if (userId) { this.props.dispatch(getReferralDetails(userId)); }
 	},
 
-	break: function() {
-		console.log('Trying to break');
-		const x = y + 5;
-		console.log(NOTAVAR);
-	},
-
 	render() {
 		const localUserData = localStorage.getItem('userData');
 		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
@@ -227,8 +221,6 @@ export const Landing = React.createClass({
 					</div>
 				</div>
 
-				<button className={'pt-button pt-intent-danger'} onClick={this.break}>BREAK</button>
-				
 				<Dialog isOpen={this.state.showAuthenticationPanel} onClose={this.closeAuthenticationPanel} title={'Authenticate your Phone number'} style={styles.dialogBox}>
 					<div className="pt-dialog-body">
 						<p>We've just sent you a text message with an authentication code. Please enter the numeric code here.</p>

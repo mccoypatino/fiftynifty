@@ -36,7 +36,7 @@ export const Login = React.createClass({
 		if (lastLoading && !nextLoading && !nextError && nextResult.id) {
 			localStorage.setItem('userData', JSON.stringify(nextResult));
 			if (window.location.hostname !== 'localhost') {
-				Raven.setUserContext({ name: nextResult.name, userId: nextResult.id });
+				Raven.setUserContext({ username: nextResult.name, userId: nextResult.id });
 			}
 			browserHistory.push(`/${nextResult.id}`);
 		}
