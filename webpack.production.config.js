@@ -20,7 +20,6 @@ class CleanPlugin {
 module.exports = {
 	entry: {
 		js: ['./app/index'],
-		vendor: ['react', 'react-dom', 'radium', 'crypto-js', 'redux', 'rangy', 'immutable', 'intl']
 	},
 	devtool: '#source-map',
 	output: {
