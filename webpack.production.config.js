@@ -18,15 +18,23 @@ class CleanPlugin {
 }
 
 module.exports = {
-	entry: './app/index',
+	entry: {
+		js: ['./app/index'],
+		vendor: ['react', 'react-dom', 'radium', 'crypto-js', 'redux', 'rangy', 'immutable', 'intl']
+	},
 	devtool: '#source-map',
 	output: {
 		path: path.join(__dirname, 'dist'),
-		filename: 'app.[hash].js',
+		filename: '[name].[chunkhash].js',
+		chunkFilename: '[name].[chunkhash].js',
 		publicPath: '/'
 	},
 	plugins: [
 		new webpack.optimize.OccurrenceOrderPlugin(),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'vendor',
+			minChunks: Infinity,
+		}),
 		new CleanPlugin({
 			files: ['dist/*']
 		}),
@@ -38,8 +46,11 @@ module.exports = {
 		new webpack.optimize.UglifyJsPlugin({
 			compressor: {
 				warnings: false,
-				screw_ie8: true
-			}
+				screw_ie8: true,
+				unused: true,
+				dead_code: true,
+			},
+			sourceMap: true,
 		}),
 		new HtmlWebpackPlugin({
 			template: 'index.html',
@@ -47,7 +58,6 @@ module.exports = {
 		new HtmlPluginRemove(/<script type="text\/javascript" src="\/app.js"><\/script>/),
 		new CopyWebpackPlugin([
 			{ from: 'static', to: 'static' },
-			{ from: '_redirects' },
 		])
 	],
 	module: {
