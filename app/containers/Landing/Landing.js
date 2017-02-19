@@ -163,10 +163,11 @@ export const Landing = React.createClass({
 								placeholder={'Enter your phone number'} 	value={this.state.phone}
 								onChange={phone => this.setState({ phone: phone })} />
 							<div style={styles.inputSubtext}>
-								<span 
-									style={{ verticalAlign: 'middle', fontSize: '0.85em', opacity: 0.7 }} 
+								<div 
+									style={{ float: 'left', position: 'relative', top: '2px', fontSize: '0.85em', width: '10px', height: '20px', opacity: 0.7, marginRight: '7px', }} 
 									className={'pt-icon-standard pt-icon-lock'} /> 
-								Encrypted. We never sell or share your number.</div>
+								Encrypted. We never sell or share your number. View our <Link style={styles.linkWithUnderline} to={'/about#legal'}>privacy policy</Link>.
+							</div>
 						</label>
 						<Button
 							loading={this.props.landingData.signupLoading}
@@ -388,6 +389,9 @@ styles = {
 		fontSize: '0.85em',
 		opacity: 0.7,
 		paddingTop: '0.25em',
+		'@media screen and (min-resolution: 3dppx), screen and (max-width: 437px)': {
+			fontSize: '0.75em',
+		},
 	},
 	button: {
 		verticalAlign: 'bottom',
@@ -497,4 +501,7 @@ styles = {
 	centered: {
 		textAlign: 'center',
 	},
+	linkWithUnderline: {
+		textDecoration: 'underline',
+	}
 };
