@@ -35,6 +35,9 @@ export const Login = React.createClass({
 		// If the phone number is already in use
 		if (lastLoading && !nextLoading && !nextError && nextResult.id) {
 			localStorage.setItem('userData', JSON.stringify(nextResult));
+			if (window.location.hostname !== 'localhost') {
+				Raven.setUserContext({ username: nextResult.name, userId: nextResult.id });
+			}
 			browserHistory.push(`/${nextResult.id}`);
 		}
 	},
