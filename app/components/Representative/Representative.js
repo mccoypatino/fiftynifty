@@ -15,11 +15,16 @@ export const Representative = React.createClass({
 		return {
 			callDialogOpen: false,
 			clickedConnect: false,
+			cardOpen: false,
 		};
 	},
 
 	toggleCallDialog: function() {
 		this.setState({callDialogOpen: !this.state.callDialogOpen, clickedConnect: false });
+	},
+
+	toggleCard: function() {
+		this.setState({ cardOpen: !this.state.cardOpen });
 	},
 
 	callNumber: function() {
@@ -32,9 +37,9 @@ export const Representative = React.createClass({
 
 	render() {
 		const repData = this.props.repData || {};
-		const connectButtonClass = this.state.clickedConnect? 'pt-button pt-active' : 'pt-button pt-intent-primary';
+		const connectButtonClass = this.state.clickedConnect ? 'pt-button pt-active' : 'pt-button pt-intent-primary';
 		return (
-			<div style={styles.container} className={'pt-card pt-interactive'} onClick={this.toggleCallDialog}>
+			<div style={this.state.cardOpen ? styles.containerSelected : styles.container} className={'pt-card pt-interactive pt-elevation-2'} onClick={this.toggleCallDialog}>
 				<div style={styles.repInfoContainer}>
 					<img 
 						style={styles.repImage}
@@ -44,10 +49,10 @@ export const Representative = React.createClass({
 					<div style={styles.repName}>{repData.first_name} <br /> {repData.last_name}</div>
 					<p style={styles.repText}>
 						{`(${repData.party}) `}
-						{repData.chamber === 'senate' ? 'Senator' : `Representative`}</p>
+						{repData.chamber === 'senate' ? 'Senator' : 'Representative'}</p>
 				</div>
 				<div style={styles.repCallContainer}>
-					<td style={styles.callText}>Call</td>
+					<td style={styles.callText}>How to call</td>
 				</div>		
 				<Dialog isOpen={this.state.callDialogOpen} onClose={this.toggleCallDialog} title={`Call your ${repData.chamber === 'senate' ? 'Senator' : 'Representative'}`} style={styles.dialogBox}>
 					<div className="pt-dialog-body">
@@ -85,6 +90,15 @@ styles = {
 		position: 'relative',
 		height: '148px',
 	},
+	containerSelected: {
+		margin: '1em 0em',
+		padding: '0em',
+		backgroundColor: '#F2F0E6',
+		color: '#003d59',
+		position: 'relative',
+		width: '748px',
+		right: '200px',
+	},
 	repImage: {
 		float: 'left',
 		height: '100%',
@@ -116,12 +130,15 @@ styles = {
 		display: 'table',
 		verticalAlign: 'middle',
 		height: '25%',
-		width: '100%',
+		width: 'calc(100% + 1px)',
+		borderBottomLeftRadius: '3px',
+		borderBottomRightRadius: '3px',
 		backgroundColor: '#003d59',
 		color: '#F2F0E6',
 	},
 	callText: {
 		height: '100%',
+		color: '#EAE4CA',
 	},
 	button: {
 		color: 'white',

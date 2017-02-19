@@ -323,7 +323,7 @@ styles = {
 		textAlign: 'center',
 		padding: '0.8em',
 		fontWeight: 'bold',
-		color: '#003d59',
+		color: '#EAE4CA',
 	},
 	score: {
 		fontSize: '3em',
@@ -373,8 +373,8 @@ styles = {
 	repsWrapper: {
 		margin: 'auto',
 		width: '90%',
-		maxWidth: '350px',
-		backgroundColor: '#EAE4CA',
+		maxWidth: '370px',
+		backgroundColor: '#9A3131',
 		opacity: '0.95',
 		fontWeight: 'lighter',
 		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
@@ -384,7 +384,7 @@ styles = {
 	repsBox: {
 		textAlign: 'left',
 		color: 'white',
-		padding: '1em',
+		padding: '1.3em',
 		//fontWeight: '200',
 	},
 	orCall: {

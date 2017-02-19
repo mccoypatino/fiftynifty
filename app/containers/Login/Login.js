@@ -53,7 +53,7 @@ export const Login = React.createClass({
 		if (!this.props.loginData.codeCreationSuccess) {
 			this.props.dispatch(createVerificationCode(this.state.phone, 'text'));
 		} else {
-			this.props.dispatch(checkVerificationCode(this.state.phone, this.state.code))
+			this.props.dispatch(checkVerificationCode(this.state.phone, this.state.code));
 		}
 	},
 
