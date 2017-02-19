@@ -97,6 +97,11 @@ export const Landing = React.createClass({
 		if (userId) { this.props.dispatch(getReferralDetails(userId)); }
 	},
 
+	logout: function() {
+		localStorage.removeItem('userData');
+		window.location = '/';
+	},
+
 	render() {
 		const localUserData = localStorage.getItem('userData');
 		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
@@ -115,6 +120,12 @@ export const Landing = React.createClass({
 					</div>
 					<Invite url={`https://fiftynifty.org/?ref=${localUser.id}`} />
 				</div>
+			</div>
+		);
+
+		const logoutForm = (
+			<div style={styles.centered}>
+				<button type="button" className={'pt-button pt-minimal pt-icon-log-out pt-intent-danger'} onClick={this.logout}>Logout</button>
 			</div>
 		);
 		
@@ -216,6 +227,7 @@ export const Landing = React.createClass({
 						</div>
 
 						{!!localUser.id && inviteForm}
+						{!!localUser.id && logoutForm}
 						{!localUser.id && joinForm}
 
 					</div>
@@ -481,5 +493,8 @@ styles = {
 	headerh2: {
 		fontSize: '1.25em',
 		// visibility: 'hidden',
+	},
+	centered: {
+		textAlign: 'center',
 	},
 };
