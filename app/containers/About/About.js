@@ -111,7 +111,7 @@ export const About = React.createClass({
 						</Link>
 					</div>
 					<div id="legal">
-						<h3 style={styles.title}>Who we are</h3>
+						<h3 style={styles.title}>Who we are and Privacy</h3>
 						<p> This is an MIT Media Lab research experiment being run by Andrew Lippman in the Viral Communications Group to understand and encourage the propagation of social activities through personal networks. Your participation is voluntary and there is no compensation for joining. Normal phone charges may apply. We will not use any personally identifiable information in our research. Anything you enter will be encrypted before storage. We ask that you use a name or nickname so that people you invite can see who it came from. We also use your name so you can track the progress of your network on the map. You have the option of suppressing that information. We will never present results of our research in a way that allows you to be identified and and we will never sell or reveal your phone number or zipcode. You must be 18 to join the challenge. </p>
 						<p> Remember the challenge!  50 calls in 50 states.  Multiplied by all of us.</p>
 					</div>
