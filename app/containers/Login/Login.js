@@ -56,7 +56,7 @@ export const Login = React.createClass({
 		if (!this.props.loginData.codeCreationSuccess) {
 			this.props.dispatch(createVerificationCode(this.state.phone, 'text'));
 		} else {
-			this.props.dispatch(checkVerificationCode(this.state.phone, this.state.code))
+			this.props.dispatch(checkVerificationCode(this.state.phone, this.state.code));
 		}
 	},
 
@@ -75,7 +75,7 @@ export const Login = React.createClass({
 							Code for { this.state.phone }? { verificationError && 
 								<div className={'pt-tag pt-minimal pt-intent-danger'}>An error occured: { verificationError }</div>
 							}
-							<input id={'code-input'} type={'number'} className={'pt-input pt-large pt-fill'} placeholder={'6-digit code e.g. 568082'} value={this.state.code} onChange={this.updateCode} />
+							<input id={'code-input'} type={'number'} className={'pt-input pt-large pt-fill'} placeholder={'6-digit code e.g. 568082'} value={this.state.code} onChange={this.updateCode} autoFocus={codeCreationSuccess} />
 							<Button 
 								type={'submit'} style={styles.button} 
 								text={'Verify the code'}
@@ -93,7 +93,7 @@ export const Login = React.createClass({
 						{ codeCreationError && 
 							<div className={'pt-tag pt-minimal pt-intent-danger'}>An error occured: { codeCreationError }</div>
 						}
-						<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'Enter your phone number'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} />
+						<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'Enter your phone number'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} autoFocus={!codeCreationSuccess} />
 					</label>
 
 					<div className={'verificationButtons pt-button-group pt-fill pt-large'}>
