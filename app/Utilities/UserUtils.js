@@ -1,5 +1,5 @@
 
-const CALL_THRESHOLD = 20;
+const CALL_THRESHOLD = 15;
 
 export function getScore(user) {
     let score = 0;

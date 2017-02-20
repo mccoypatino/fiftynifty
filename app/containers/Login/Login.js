@@ -75,7 +75,7 @@ export const Login = React.createClass({
 							Code for { this.state.phone }? { verificationError && 
 								<div className={'pt-tag pt-minimal pt-intent-danger'}>An error occured: { verificationError }</div>
 							}
-							<input id={'code-input'} type={'number'} className={'pt-input pt-large pt-fill'} placeholder={'6-digit code e.g. 568082'} value={this.state.code} onChange={this.updateCode}  autoFocus={codeCreationSuccess} />
+							<input id={'code-input'} type={'number'} className={'pt-input pt-large pt-fill'} placeholder={'6-digit code e.g. 568082'} value={this.state.code} onChange={this.updateCode} autoFocus={codeCreationSuccess} />
 							<Button 
 								type={'submit'} style={styles.button} 
 								text={'Verify the code'}
