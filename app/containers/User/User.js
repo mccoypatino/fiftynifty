@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { Spinner, Dialog } from '@blueprintjs/core';
+import { Spinner, Dialog, Button } from '@blueprintjs/core';
 import Radium from 'radium';
 import dateFormat from 'dateformat';
 
@@ -102,7 +102,7 @@ export const User = React.createClass({
 
 	render() {
 		const user = this.props.userData.user || {};
-		console.log(user)
+		console.log(user);
 		const reps = user.reps || [];
 		// const children = user.children || [];
 		const flatCalls = getFlatCalls(user);
