@@ -36,12 +36,20 @@ export const Invite = React.createClass({
 
 		// Mail
 		const mailTitle = 'Call Congress';
-		const mailBody = `I am writing to enlist you in a network challenge — use your network for action. Read the call to action below and MOST IMPORTANT, pass this on and convince your friends to follow suit. That’s the Fifty Nifty Challenge — use your grassroots networks to multiply your power.\n\nCall your Representatives in Congress NOW. It doesn't matter if you are D, or R, or other: every citizen should demand an exhaustive investigation to clear up the Russian mess. Flynn is the tip of the iceberg, but there may be an International Watergate brewing here. A month ago, The Department of Justice warned the White House, but no action was taken. (https://www.washingtonpost.com/world/national-security/justice-department-warned-white-house-that-flynn-could-be-vulnerable-to-russian-blackmail-officials-say/2017/02/13/fc5dab88-f228-11e6-8d72-263470bf0401_story.html?utm_term=.ae8dec347782)\n\nSince the White House has not taken action, the citizenry must. Our calls really matter, and Congress must act firmly. This tool, http://fiftynifty.org, was created by Andy Lippman and colleagues at the MIT Media Lab, and it will help you speed dial your representatives and alert your friends.\n\nClick or paste this link into your browser: ${shareUrl}`;
+		const mailBody = `I am enlisting you in a Challenge.  Your mission is to build a network that spans all 50 states and inspires friends to call their Congresspeople about an issue of importance.  The app makes calling and inviting friends easy:  three clicks and you’re done.  It keeps a score of calls and shows a map of where your network spreads.
+
+Calls matter!  Issues matter!  More than ever it’s important to get your voice heard effectively.  And to use the network to multiply it, hence the Challenge.
+
+This challenge is about issues like the Immigration Executive Order, potential Russian interference in the government and the Affordable Care Act.  But when you call, you can say whatever you like.
+
+This tool, ${shareUrl}, was created by Andy Lippman and colleagues at the MIT Media Lab, and it will help you speed dial your representatives and alert your friends.  Follow the link below to learn more.  Check the leaderboard to see how you do.
+
+Click or paste this link into your browser: ${shareUrl}`;
 
 		// Facebook
 		const facebookTitle = encodeURI('Fifty Nifty');
 		const facebookAppID = '375710412814285';
-		const facebookDescription = encodeURI('It doesn\'t matter if you are D, or R, or other: every citizen should demand an exhaustive investigation to clear up the Russian mess. Our calls really matter, and Congress must act firmly. This tool will help you speed dial your representatives and enlist your friends.');
+		const facebookDescription = encodeURI('Call your congresspeople! Join the challenge, friends don’t let friends stay silent. #FiftyNifty');
 		const facebookURL = `https://www.facebook.com/sharer.php?app_id=${facebookAppID}&title=${facebookTitle}&u=${encodeURI(shareUrl)}&description=${facebookDescription}`;
 		const we = 600;
 		const he = 500;
@@ -79,7 +87,7 @@ export const Invite = React.createClass({
 						'',
 						`toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,width=${we},height=${he},top=${xtop},left=${xleft}`); 
 					}}>
-					Invite your Facebook network
+					Post on Facebook
 				</a> 
 				<br /> 
 				<br />
@@ -93,38 +101,8 @@ export const Invite = React.createClass({
 						'',
 						`toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,width=${we},height=${he},top=${xtop},left=${xleft}`); 
 					}}>
-					Invite your Twitter followers
+					Post on Twitter
 				</a> 
-				<div>
-{	/* 				<div style={styles.network}>
-						<FacebookShareButton
-							url={shareUrl}
-							title={'Join the Fifty Nifty challenge, mobilize your network, friends don’t let friends stay silent.'}
-							text={'This is a social phone tree that I am joining.  Let’s call our congressmen and speak out.  If we reach 50 states, we win.'}>
-							<FacebookIcon
-								size={40}
-								round />
-						</FacebookShareButton>
-					</div>
-					<div style={styles.network}>
-							<TwitterShareButton
-								url={shareUrl}
-								title={'Call your congresspeople! Join the FiftyNifty challenge, friends don’t let friends stay silent.'}>
-								<TwitterIcon
-									size={40}
-									round />
-							</TwitterShareButton>
-						</div>
-
-						<div style={styles.network}>
-							<GooglePlusShareButton
-								url={shareUrl}>
-								<GooglePlusIcon
-									size={40}
-									round />
-							</GooglePlusShareButton>
-					</div> */ }
-				</div> 
 			</div>
 			</div>
 		);
