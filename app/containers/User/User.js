@@ -54,7 +54,7 @@ export const User = React.createClass({
 		if (this.state.zipcodeToUpdate.length !== 5) { return this.setState({ error: 'Zipcode must be 5 digits' }); }
 		//if (!this.state.phone) { return this.setState({ error: 'Phone Number required' }); }
 		this.setState({ error: undefined });
-		return this.props.dispatch(postUser(this.state.nameToUpdate, this.state.zipcodeToUpdate));
+		return this.props.dispatch(postUserUpdate(this.state.nameToUpdate, this.state.zipcodeToUpdate));
 	},
 
     toggleCallDialog: function() {
