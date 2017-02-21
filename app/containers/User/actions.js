@@ -93,7 +93,7 @@ export function requestLatLong(address, userId) {
 
 export function putUserUpdate(userId, name, zipcode) {
 	return (dispatch) => {
-		dispatch({ type: POST_USER_UPDATE });
+		dispatch({ type: POST_USER_UPDATE_LOAD });
 		return clientFetch('/api/user/update', {
 			method: 'PUT',
 			headers: {
