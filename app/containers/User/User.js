@@ -6,7 +6,7 @@ import Radium from 'radium';
 import dateFormat from 'dateformat'; 
 import fetch from 'isomorphic-fetch';
 import { Representative, AddressInput, ProgressMap, TreeGraph } from 'components';
-import { getUser, requestCall, requestLatLong } from './actions';
+import { getUser, requestCall, requestLatLong, putUserUpdate } from './actions';
 import { Invite } from './Invite';
 import {getScore, countStates, getFlatCalls, getPersonalCallsCount} from '../../Utilities/UserUtils'
 import { UserNode } from './UserNode';
@@ -54,7 +54,7 @@ export const User = React.createClass({
 		if (this.state.zipcodeToUpdate.length !== 5) { return this.setState({ error: 'Zipcode must be 5 digits' }); }
 		//if (!this.state.phone) { return this.setState({ error: 'Phone Number required' }); }
 		this.setState({ error: undefined });
-		return this.props.dispatch(postUser(this.state.nameToUpdate, this.state.zipcodeToUpdate));
+		return this.props.dispatch(putUserUpdate(this.props.params.userId, this.state.nameToUpdate, this.state.zipcodeToUpdate));
 	},
 
     toggleCallDialog: function() {
