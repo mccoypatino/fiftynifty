@@ -432,37 +432,37 @@ styles = {
 		//fontWeight: '200',
 	},
 	orCall: {
-		textAlign:'center',
-		color:'white',
-		padding:'1em',
-		fontWeight:'lighter',
+		textAlign: 'center',
+		color: 'white',
+		padding: '1em',
+		fontWeight: 'lighter',
 	},
-	familySection:{
-		textAlign:'center',
-		paddingTop:'1em',
+	familySection: {
+		textAlign: 'center',
+		paddingTop: '1em',
 	},
-	progressSection:{
-		padding:'2em 0',
-		color:'white',
+	progressSection: {
+		padding: '2em 0',
+		color: 'white',
 	},
-	scoreStats:{
-		textAlign:'center',
-		paddingTop:'2em',
+	scoreStats: {
+		textAlign: 'center',
+		paddingTop: '2em',
 	},
-	button:{
-		color:'white',
+	button: {
+		color: 'white',
 		fontWeight: 'lighter',
 		backgroundColor: '#003d59',
-		letterSpacing:'0.1em',
-		boxShadow:'0 2px #001C2B',
+		letterSpacing: '0.1em',
+		boxShadow: '0 2px #001C2B',
 
 	},
 	buttonSettings: {
 		verticalAlign: 'bottom',
 	},
-	link:{
-		color:'#da022e',
-		fontWeight:'bold',
+	link: {
+		color: '#da022e',
+		fontWeight: 'bold',
 	},
 	dialogBox: {
 		maxWidth: '100%',
