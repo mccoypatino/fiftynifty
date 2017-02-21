@@ -18,6 +18,12 @@ export const App = React.createClass({
 		const FocusStyleManager = require('@blueprintjs/core').FocusStyleManager;
 		FocusStyleManager.onlyShowFocusOnTabs();
 		window.variant = Math.ceil(Math.random() * 100);
+
+		const localUserData = localStorage.getItem('userData');
+		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
+		if (window.location.hostname !== 'localhost' && localUser.id) {
+			Raven.setUserContext({ username: localUser.name, userId: localUser.id });
+		}
 	},
 
 	isProduction: function() {
@@ -34,6 +40,7 @@ export const App = React.createClass({
 			fontSize: '1.5em',
 			padding: '.5em 0em',
 		};
+
 		return (
 			<StyleRoot>
 				<Helmet 
@@ -45,14 +52,15 @@ export const App = React.createClass({
 						{ property: 'og:type', content: 'website' },
 						{ property: 'og:description', content: 'Play for a better Democracy' },
 						{ property: 'og:url', content: 'https://www.fiftynifty.org/' },
-						{ property: 'og:image', content: 'https://www.fiftynifty.org/static/american-flag.jpg' },
-						{ property: 'og:image:url', content: 'https://www.fiftynifty.org/static/american-flag.jpg' },
+						{ property: 'og:image', content: 'https://www.fiftynifty.org/static/share-img.jpg' },
+						{ property: 'og:image:url', content: 'https://www.fiftynifty.org/static/share-img.jpg' },
 						{ property: 'og:image:width', content: '500' },
+						{ property: 'fb:app_id', content: '375710412814285' },
 						{ name: 'twitter:card', content: 'summary' },
 						{ name: 'twitter:site', content: '@isTravis' },
 						{ name: 'twitter:title', content: 'Fifty Nifty' },
 						{ name: 'twitter:description', content: 'Play for a better Democracy' },
-						{ name: 'twitter:image', content: 'https://www.fiftynifty.org/static/american-flag.jpg' },
+						{ name: 'twitter:image', content: 'https://www.fiftynifty.org/static/share-img.jpg' },
 						{ name: 'twitter:image:alt', content: 'Fifty Nifty' },
 					]} 
 				/> 

@@ -10,7 +10,10 @@ import configureStore from './configureStore';
 import fetch from 'isomorphic-fetch';
 
 const store = configureStore();
-ga.initialize('UA-91586776-1');
+if (window.location.hostname !== 'localhost') {
+	ga.initialize('UA-91586776-1');
+	Raven.config('https://554e59867e864ae48c5ab57899c8f0a5@sentry.io/140276').install()
+}
 
 if (/PhantomJS/.test(window.navigator.userAgent)) { require('es6-promise').polyfill(); }
 

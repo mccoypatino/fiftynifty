@@ -35,11 +35,12 @@ export const Login = React.createClass({
 		// If the phone number is already in use
 		if (lastLoading && !nextLoading && !nextError && nextResult.id) {
 			localStorage.setItem('userData', JSON.stringify(nextResult));
+			if (window.location.hostname !== 'localhost') {
+				Raven.setUserContext({ username: nextResult.name, userId: nextResult.id });
+			}
 			browserHistory.push(`/${nextResult.id}`);
 		}
 	},
-
-
 
 	updateCode: function(evt) {
 		this.setState({ code: evt.target.value });
@@ -55,7 +56,7 @@ export const Login = React.createClass({
 		if (!this.props.loginData.codeCreationSuccess) {
 			this.props.dispatch(createVerificationCode(this.state.phone, 'text'));
 		} else {
-			this.props.dispatch(checkVerificationCode(this.state.phone, this.state.code))
+			this.props.dispatch(checkVerificationCode(this.state.phone, this.state.code));
 		}
 	},
 
@@ -74,7 +75,7 @@ export const Login = React.createClass({
 							Code for { this.state.phone }? { verificationError && 
 								<div className={'pt-tag pt-minimal pt-intent-danger'}>An error occured: { verificationError }</div>
 							}
-							<input id={'code-input'} type={'number'} className={'pt-input pt-large pt-fill'} placeholder={'6-digit code e.g. 568082'} value={this.state.code} onChange={this.updateCode} />
+							<input id={'code-input'} type={'number'} className={'pt-input pt-large pt-fill'} placeholder={'6-digit code e.g. 568082'} value={this.state.code} onChange={this.updateCode} autoFocus={codeCreationSuccess} />
 							<Button 
 								type={'submit'} style={styles.button} 
 								text={'Verify the code'}
@@ -86,38 +87,47 @@ export const Login = React.createClass({
 					}
 					
 					<label htmlFor={'phone-input'} style={styles.inputLabel}>
-						{ codeCreationSuccess ? 
-							<div className={'label-phone-input'}>Send another verification code</div> 
-							: <div className={'label-phone-input'}>Phone number</div> 
+						{ codeCreationSuccess &&
+							<div className={'label-phone-input'}>Send another verification code</div>  
 						}
 						{ codeCreationError && 
 							<div className={'pt-tag pt-minimal pt-intent-danger'}>An error occured: { codeCreationError }</div>
 						}
-						<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'Enter your phone number'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} />
+						<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'Enter your phone number'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} autoFocus={!codeCreationSuccess} />
 					</label>
 
 					<div className={'verificationButtons pt-button-group pt-fill pt-large'}>
 						<Button 
 							type={'submit'} style={styles.button} 
-							text={'Text Me a verification Code'}
 							className={'pt-intent-primary'} 
 							onClick={this.formSubmit} 
-							loading={this.props.loginData.codeCreationLoading} />
+							loading={this.props.loginData.codeCreationLoading}>
+								<span 
+									style={{ verticalAlign: 'middle', fontSize: '0.85em', opacity: 1 }} 
+									className={'pt-icon-standard pt-icon-comment'} /> 
+								Text a code 
+							</Button>
 						<Button 
 							style={styles.button} 
-							text={'Call me with a verification Code'}
 							className={'pt-intent-primary'} 
 							onClick={this.createVerificationCodeByPhone} 
-							loading={this.props.loginData.codeCreationLoading} />
+							loading={this.props.loginData.codeCreationLoading}>
+								<span 
+									style={{ verticalAlign: 'middle', fontSize: '0.85em', opacity: 1 }} 
+									className={'pt-icon-standard pt-icon-phone'} /> 
+								Call with a code 
+							</Button>
+
 					</div>	
 				</form>
 
 				<div style={styles.section}>
 					<div style={styles.title}>Not Registered Yet?</div>
-					<Link to={"/"}><Button style={styles.button}
-										   className={'pt-button pt-intent-primary pt-fill pt-large'}
-										   text={'Click Here to Join The Game'}
-					/>
+					<Link to={'/'}>
+							<Button 	
+								style={styles.button}
+								className={'pt-button pt-intent-primary pt-fill pt-large'}
+								text={'Click Here to Join The Game'} />
 					</Link>
 				</div>
 			</div>
@@ -135,22 +145,11 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps)(Radium(Login));
 
 styles = {
-	section:{
-		padding: '1em',
-	},
-    title: {
-        fontSize: '2em',
-        fontWeight: 'lighter',
-        textAlign: 'center',
-        paddingBottom:'1em',
-        color:'white',
-        letterSpacing:'0.1em',
-    },
 	login: {
-        backgroundColor: '#003d59',
-        color:'white',
-		fontWeight:'lighter',
-		minHeight:'95vh',
+		backgroundColor: '#003d59',
+		color: 'white',
+		fontWeight: 'lighter',
+		minHeight: '95vh',
 	},
 	container: {
 		padding: 'calc(115px + 3em) 1em 3em',
