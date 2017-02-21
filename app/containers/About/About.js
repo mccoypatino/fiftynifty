@@ -139,8 +139,8 @@ export const About = React.createClass({
 						<p> When you hit the call button on your phone, we will call your congressperson and ring you right back. You will see an incoming call from a number you won't recognize. That's just us making the connection. We do this to keep score by verifying that you really did make the call.</p>
 						<p> Call a senator or representative is intimidating. That’s why calls matter. Your call will be answered by a staffer who is there to talk to you and  we are making it as easy as possible. It helps to have some plan for what to say:</p>
 						<ul>
-							<li> Tell your Congressperson your name, that you are a constituent, and that you want to tell them your opinion on an issue.</li>
-							<li> Say that National Security matters a lot to you, or introduce your issue</li>
+							<li> Tell your Congressperson your name, and that you are a constituent.</li>
+							<li> Say that you'd like to comment on an issue, or ask the Congressperson's stance.</li>
 							<li> Present what you think your Congressperson should do, be it have a hearing, make a public statement, or support a law. </li>
 							<li> If you know his or her stance, you can express your agreement or disagreement.</li>
 						</ul>
