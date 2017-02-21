@@ -140,9 +140,8 @@ export const User = React.createClass({
 																	<div style={{ paddingTop: '1em' }}>
 																		<h4>What Do I Say?</h4>
 																		You’ll reach a staffer. Tell them your name and that you are a constituent. <br /><br />
-																		Then your message: "I’d like so-and-so to take a strong position demanding a hearing on Russian Influence on our elections and government. I want to know whether there is more involved." <br /><br />
-																		You might ask to be told their position. <br /><br /> 
-																		It's easy, they want to hear from you.
+																		Then your message: It’s easy to ask their position on the issue you are calling about. The staffer will tell you. Then you can thank them and note your support or disagreement. You can also add your comments on the President’s position and indicate your support or disagreements with him or how he is working. <br /><br />
+																		It's easy, they want to hear from you. If they are modern, they’ll take your email address to let the congressperson respond.
 																	</div>
 																</div>
 															</Dialog>
