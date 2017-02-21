@@ -129,7 +129,7 @@ export const Landing = React.createClass({
 			<div style={styles.joinForm}>
 				<div id="join" style={styles.headerCall} className={'pt-card pt-elevation-3'}>
 						{ refText }
-					<div style={styles.inputHeader}> Join The Challenge	</div>
+					<div style={styles.inputHeader}> Join The Challenge Here	</div>
 					<form onSubmit={this.signupSubmit} style={styles.form}>
 						<label htmlFor={'name-input'} style={styles.inputLabel}>
 							Name
@@ -191,7 +191,7 @@ export const Landing = React.createClass({
 
 							<div style={styles.section}>
 								<div style={styles.headerStep}>
-									<div style={styles.headerh1}>	Call your rep now</div>
+									<div style={styles.headerh1}>	Call Congress now</div>
 									<div style={styles.headerh2}>	Real calls really matter.</div>
 								</div>
 								<div style={styles.headerStep}>
@@ -200,14 +200,14 @@ export const Landing = React.createClass({
 								</div>
 								<div style={styles.headerStep}>
 									<div style={styles.headerh1}>	Cover the country</div>
-									<div style={styles.headerh2}>	Track your progress.</div>
+									<div style={styles.headerh2}>	Reach 50 states.</div>
 								</div>
 							</div>
 
 							<p style={styles.headerTextBody}>
 								{variant <= 50 ?
-									"It doesn't matter if you are D, or R, or other, Russian involvement in our government needs to be investigated.  We’ll speed dial for you. We’ll help you prime your network.  Three clicks, three calls, and you’re done." :
-									'Join the Challenge:  Build a network that reaches all 50 states.  Call and enlist your friends to join. We’ll speed dial for you. We’ll help you prime your network.  Three clicks, three calls, and you’re done.'
+									"It doesn't matter if you are D, or R, or other, make your voice heard on important issues.  We’ll speed dial for you. We’ll help you prime your network.  Three clicks and you’re done. Track your progress." :
+									'Join the Challenge: Reach 50 states to win. Enlist friends across the country. We’ll speed dial for you. We’ll help you prime your network.  Three clicks and you’re done. Track your progress.'
 								}
 							</p>
 							{localUser.id && 
