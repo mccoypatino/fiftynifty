@@ -129,7 +129,7 @@ export const Landing = React.createClass({
 			<div style={styles.joinForm}>
 				<div id="join" style={styles.headerCall} className={'pt-card pt-elevation-3'}>
 						{ refText }
-					<div style={styles.inputHeader}> Join The Challenge	</div>
+					<div style={styles.inputHeader}> Join The Challenge Here	</div>
 					<form onSubmit={this.signupSubmit} style={styles.form}>
 						<label htmlFor={'name-input'} style={styles.inputLabel}>
 							Name
@@ -152,10 +152,11 @@ export const Landing = React.createClass({
 								placeholder={'Enter your phone number'} 	value={this.state.phone}
 								onChange={phone => this.setState({ phone: phone })} />
 							<div style={styles.inputSubtext}>
-								<span 
-									style={{ verticalAlign: 'middle', fontSize: '0.85em', opacity: 0.7 }} 
+								<div 
+									style={{ float: 'left', position: 'relative', top: '2px', fontSize: '0.85em', width: '10px', height: '20px', opacity: 0.7, marginRight: '7px', }} 
 									className={'pt-icon-standard pt-icon-lock'} /> 
-								Encrypted. We never sell or share your number.</div>
+								Encrypted. We never sell or share your number. View our <Link style={styles.linkWithUnderline} to={'/about#legal'}>privacy policy</Link>.
+							</div>
 						</label>
 						<Button
 							loading={this.props.landingData.signupLoading}
@@ -190,7 +191,7 @@ export const Landing = React.createClass({
 
 							<div style={styles.section}>
 								<div style={styles.headerStep}>
-									<div style={styles.headerh1}>	Call your rep now</div>
+									<div style={styles.headerh1}>	Call Congress now</div>
 									<div style={styles.headerh2}>	Real calls really matter.</div>
 								</div>
 								<div style={styles.headerStep}>
@@ -199,14 +200,14 @@ export const Landing = React.createClass({
 								</div>
 								<div style={styles.headerStep}>
 									<div style={styles.headerh1}>	Cover the country</div>
-									<div style={styles.headerh2}>	Track your progress.</div>
+									<div style={styles.headerh2}>	Reach 50 states.</div>
 								</div>
 							</div>
 
 							<p style={styles.headerTextBody}>
 								{variant <= 50 ?
-									"It doesn't matter if you are D, or R, or other, Russian involvement in our government needs to be investigated.  We’ll speed dial for you. We’ll help you prime your network.  Three clicks, three calls, and you’re done." :
-									'Join the Challenge:  Build a network that reaches all 50 states.  Call and enlist your friends to join. We’ll speed dial for you. We’ll help you prime your network.  Three clicks, three calls, and you’re done.'
+									"It doesn't matter if you are D, or R, or other, make your voice heard on important issues.  We’ll speed dial for you. We’ll help you prime your network.  Three clicks and you’re done. Track your progress." :
+									'Join the Challenge: Reach 50 states to win. Enlist friends across the country. We’ll speed dial for you. We’ll help you prime your network.  Three clicks and you’re done. Track your progress.'
 								}
 							</p>
 							{localUser.id && 
@@ -376,6 +377,9 @@ styles = {
 		fontSize: '0.85em',
 		opacity: 0.7,
 		paddingTop: '0.25em',
+		'@media screen and (min-resolution: 3dppx), screen and (max-width: 437px)': {
+			fontSize: '0.75em',
+		},
 	},
 	button: {
 		verticalAlign: 'bottom',
@@ -482,4 +486,10 @@ styles = {
 		fontSize: '1.25em',
 		// visibility: 'hidden',
 	},
+	centered: {
+		textAlign: 'center',
+	},
+	linkWithUnderline: {
+		textDecoration: 'underline',
+	}
 };
