@@ -88,7 +88,7 @@ styles = {
 	container: {
 		margin: '1em 0em',
 		padding: '0em',
-		backgroundColor: '#F2F0E6',
+		backgroundColor: 'white',
 		color: '#003d59',
 		position: 'relative',
 		height: '148px',
@@ -141,7 +141,7 @@ styles = {
 	},
 	callText: {
 		height: '100%',
-		color: '#EAE4CA',
+		color: 'white',
 	},
 	button: {
 		color: 'white',

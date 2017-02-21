@@ -131,7 +131,7 @@ export const User = React.createClass({
 												<div style={styles.repsBox} className={'pt-elevation-3'}>
 													<div style={styles.sectionTitle}>Your Representatives</div>
 														<div style={styles.centered}>
-															<button role={'button'} style={styles.button} className={'pt-button pt-minimal'} onClick={this.toggleCallDialog}>How to call?</button>
+															{/*<button role={'button'} style={styles.button} className={'pt-button pt-minimal'} onClick={this.toggleCallDialog}>How to call?</button>*/}
 															<Dialog isOpen={this.state.callDialogOpen} onClose={this.toggleCallDialog} title={'How To Call'} style={styles.dialogBox}>
 																<div className="pt-dialog-body">
 																	<div>When you press call, we will dial your representative and call you back automatically.
@@ -314,11 +314,12 @@ styles = {
 		padding: '2em 0em',
 	},
 	sectionTitle: {
-		fontSize: '1.8em',
+		color: '#fff',
+		fontSize: '1.9em',
 		textAlign: 'center',
-		padding: '0.8em',
-		fontWeight: 'bold',
-		color: '#EAE4CA',
+		letterSpacing: '0.1em',
+		paddingBottom: '1em',
+		fontWeight: '200',
 	},
 	score: {
 		fontSize: '3em',
