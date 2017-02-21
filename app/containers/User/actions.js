@@ -16,9 +16,15 @@ export const REQUEST_LATLON_LOAD = 'user/REQUEST_LATLON_LOAD';
 export const REQUEST_LATLON_SUCCESS = 'user/REQUEST_LATLON_SUCCESS';
 export const REQUEST_LATLON_FAIL = 'user/REQUEST_LATLON_FAIL';
 
+<<<<<<< HEAD
 export const POST_USER_UPDATE_LOAD = 'user/POST_USER_UPDATE_LOAD';
 export const POST_USER_UPDATE_SUCCESS = 'user/POST_USER_UPDATE_SUCCESS';
 export const POST_USER_UPDATE_FAIL = 'user/POST_USER_UPDATE_FAIL';
+=======
+export const POST_USER_UPDATE = 'user/POST_USER_UPDATE';
+export const POST_USER_SUCCESS = 'user/POST_USER_SUCCESS';
+export const POST_USER_FAIL = 'user/POST_USER_FAIL';
+>>>>>>> 55f4ef6161ef3b3eb595cab1601aaf0cf991755a
 
 
 /*--------*/
@@ -91,16 +97,17 @@ export function requestLatLong(address, userId) {
 	};
 }
 
-export function postUserUpdate(userId, name, zipcode) {
+export function putUserUpdate(userId, name, zipcode) {
 	return (dispatch) => {
-		dispatch({ type: POST_USER_UPDATE_LOAD });
+		dispatch({ type: POST_USER_UPDATE });
 		return clientFetch('/api/user/update', {
-			method: 'POST',
+			method: 'PUT',
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
+				userId: userId,
 				name: name,
 				zipcode: zipcode,
 			})
