@@ -1,28 +1,14 @@
 import React, { PropTypes } from 'react';
-import {
-	ShareButtons,
-	generateShareIcon,
-} from 'react-share';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Radium from 'radium';
 
 
 let styles;
 
-const {
-	FacebookShareButton,
-	GooglePlusShareButton,
-	TwitterShareButton,
-} = ShareButtons;
-
-const FacebookIcon = generateShareIcon('facebook');
-const TwitterIcon = generateShareIcon('twitter');
-const GooglePlusIcon = generateShareIcon('google');
-
-
 export const Invite = React.createClass({
 	propTypes: {
 		shareUrl: PropTypes.string,
+		url: PropTypes.string,
 	},
 	getInitialState() {
 		return { copied: false };
@@ -30,9 +16,6 @@ export const Invite = React.createClass({
 
 	render() {
 		const shareUrl = this.props.url;
-		const title = 'Join the Fifty Nifty Game!';
-
-		const hashtag = encodeURIComponent("#FiftyNifty")
 
 		// Mail
 		const mailTitle = 'Call Congress';
@@ -116,34 +99,34 @@ styles = {
 		display: 'inline-block',
 		textAlign: 'center',
 		margin: '1em 1em',
-		opacity:'1'
+		opacity: '1'
 	},
 	sectionBackground: {
-		backgroundColor:"#003c58",
+		backgroundColor: '#003c58',
 	},
 	inviteSection: {
 		textAlign: 'center',
-		color:'white',
-		opacity:'1',
+		color: 'white',
+		opacity: '1',
 		padding: '2em',
-		fontWeight:'lighter',
-		width:'80%',
-		margin:'auto',
-        '@media screen and (minResolution: 3dppx), screen and (maxWidth: 767px)': {
-            padding: '2em 0em',
-        },
+		fontWeight: 'lighter',
+		width: '80%',
+		margin: 'auto',
+		'@media screen and (minResolution: 3dppx), screen and (maxWidth: 767px)': {
+			padding: '2em 0em',
+		},
 	},
 	inviteHeader: {
-		color:"#fff",
+		color: '#fff',
 		fontSize: '1.9em',
-		textAlign:'center',
-		letterSpacing:'0.1em',
-		paddingBottom:'1em',
+		textAlign: 'center',
+		letterSpacing: '0.1em',
+		paddingBottom: '1em',
 		fontWeight: '200',
 	},
 	inviteLink: {
-		fontWeight:'bold',
-		fontSize:'1.2em',
+		fontWeight: 'bold',
+		fontSize: '1.2em',
 		WebkitUserSelect: 'text',  /* Chrome all / Safari all */
 		MozUserSelect: 'text',     /* Firefox all */
 		MsUserSelect: 'text',      /* IE 10+ */
@@ -151,12 +134,12 @@ styles = {
 
 	},
 	copyButton: {
-		color:"#d9d9d9",
+		color: '#d9d9d9',
 	},
-	button:{
-		color:'#003d59',
+	button: {
+		color: '#003d59',
 		fontWeight: 'bold',
-		letterSpacing:'0em',
-        maxWidth: '250px',
+		letterSpacing: '0em',
+		maxWidth: '250px',
 	},
 };
