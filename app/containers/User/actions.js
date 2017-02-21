@@ -16,9 +16,9 @@ export const REQUEST_LATLON_LOAD = 'user/REQUEST_LATLON_LOAD';
 export const REQUEST_LATLON_SUCCESS = 'user/REQUEST_LATLON_SUCCESS';
 export const REQUEST_LATLON_FAIL = 'user/REQUEST_LATLON_FAIL';
 
-export const POST_USER_UPDATE = 'user/POST_USER_UPDATE';
-export const POST_USER_SUCCESS = 'user/POST_USER_SUCCESS';
-export const POST_USER_FAIL = 'user/POST_USER_FAIL';
+export const POST_USER_UPDATE_LOAD = 'user/POST_USER_UPDATE_LOAD';
+export const POST_USER_UPDATE_SUCCESS = 'user/POST_USER_UPDATE_SUCCESS';
+export const POST_USER_UPDATE_FAIL = 'user/POST_USER_UPDATE_FAIL';
 
 
 /*--------*/
@@ -107,11 +107,11 @@ export function putUserUpdate(userId, name, zipcode) {
 			})
 		})
 		.then((result) => {
-			dispatch({ type: POST_USER_SUCCESS, result });
+			dispatch({ type: POST_USER_UPDATE_SUCCESS, result });
 		})
 		.catch((error) => {
 			console.log(error);
-			dispatch({ type: POST_USER_FAIL, error });
+			dispatch({ type: POST_USER_UPDATE_FAIL, error });
 		});
 	};
 }
