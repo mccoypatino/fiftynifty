@@ -65,8 +65,9 @@ export const User = React.createClass({
 		if (user.ancestors) {
 			const parent = user.ancestors.filter((ancestor) => {
 				if (ancestor.hierarchyLevel === (userLevel - 1)) {
-					return ancestor;
+					return true;
 				}
+				return false;
 			});
 			return parent.length > 0 ? parent[0] : false;
 		}
@@ -334,12 +335,8 @@ styles = {
 		letterSpacing: '0.1em',
 		paddingBottom: '1em',
 	},
-	progressBackground: {
-		background: "linear-gradient(rgba(28, 67, 90, 0.8),rgba(28, 67, 90, 0.8)), url('static/crowd.jpg') no-repeat center center",
-		backgroundSize: 'cover',
-	},
 	graphBackground: {
-		backgroundColor: "#003d59",
+		backgroundColor: '#003d59',
 	},
 	settingsBackground: {
 		backgroundColor: '#0b5577',
