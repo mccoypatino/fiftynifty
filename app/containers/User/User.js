@@ -173,9 +173,10 @@ export const User = React.createClass({
 														<AddressInput geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
 														}
 
-														{reps.length === 3 && reps.map((rep, index)=> {
-															return (
-																<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
+														{reps.length === 3 && 
+															reps.map((rep, index)=> {
+																return (
+																	<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
 															);
 														})}
 													</div>
@@ -221,8 +222,10 @@ export const User = React.createClass({
 								<div style={{ display: 'inline-block', verticalAlign: 'middle', paddingLeft: '2em', paddingTop: '1em' }}>
 									<PieChart height={200} width={200}>
 										<Pie 
-											isAnimationActive={false} data={chartData} innerRadius={70} outerRadius={100} fill="rgba(102, 102, 102, 0.7)"
-											stroke="none" />
+												isAnimationActive={false} data={chartData} 
+												innerRadius={70} outerRadius={100} fill="rgba(102, 102, 102, 0.7)"
+												stroke="none">
+										</Pie>
 										<Pie data={chartData} innerRadius={70} outerRadius={100} fill="#82ca9d" stroke="none">
 											{
 												chartData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)
@@ -312,10 +315,9 @@ styles = {
 	sectionTitle: {
 		fontSize: '1.8em',
 		textAlign: 'center',
-		letterSpacing: '0.1em',
-		padding: '0.8em 0',
-		fontWeight: 'lighter',
-		color: 'white',
+		padding: '0.8em',
+		fontWeight: 'bold',
+		color: '#EAE4CA',
 	},
 	score: {
 		fontSize: '3em',
@@ -332,8 +334,12 @@ styles = {
 		letterSpacing: '0.1em',
 		paddingBottom: '1em',
 	},
+	progressBackground: {
+		background: "linear-gradient(rgba(28, 67, 90, 0.8),rgba(28, 67, 90, 0.8)), url('static/crowd.jpg') no-repeat center center",
+		backgroundSize: 'cover',
+	},
 	graphBackground: {
-		backgroundColor: '#003d59',
+		backgroundColor: "#003d59",
 	},
 	settingsBackground: {
 		backgroundColor: '#0b5577',
@@ -359,16 +365,19 @@ styles = {
 	},
 	repsWrapper: {
 		margin: 'auto',
-		width: '80%',
-		maxWidth: '350px',
-		backgroundColor: '#da022e',
+		width: '90%',
+		maxWidth: '370px',
+		backgroundColor: '#9A3131',
 		opacity: '0.95',
 		fontWeight: 'lighter',
+		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
+			width: '90%',
+		},
 	},
 	repsBox: {
 		textAlign: 'left',
 		color: 'white',
-		padding: '1em',
+		padding: '1.3em',
 		//fontWeight: '200',
 	},
 	orCall: {
