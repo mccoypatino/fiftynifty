@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import Radium from 'radium';
-import { Link } from 'react-router';
+// import { Link } from 'react-router';
 import { Dialog } from '@blueprintjs/core';
 
 let styles;
@@ -20,7 +20,7 @@ export const Representative = React.createClass({
 	},
 
 	toggleCallDialog: function() {
-		this.setState({callDialogOpen: !this.state.callDialogOpen, clickedConnect: false });
+		this.setState({ callDialogOpen: !this.state.callDialogOpen, clickedConnect: false });
 	},
 
 	toggleCard: function() {
@@ -29,7 +29,7 @@ export const Representative = React.createClass({
 
 	callNumber: function() {
 		// const number = this.refs.number.value;
-		this.setState({clickedConnect: true });
+		this.setState({ clickedConnect: true });
 		const repName = `${this.props.repData.first_name} ${this.props.repData.last_name}`;
 		this.props.callFunction(this.props.repData.bioguide_id, repName);
 
@@ -57,9 +57,11 @@ export const Representative = React.createClass({
 				<Dialog isOpen={this.state.callDialogOpen} onClose={this.toggleCallDialog} title={`Call your ${repData.chamber === 'senate' ? 'Senator' : 'Representative'}`} style={styles.dialogBox}>
 					<div className="pt-dialog-body">
 						<h4>
-
 							{repData.first_name} {repData.last_name}
-							<span style={{ padding: '1em' }}> <button role={'button'} className={connectButtonClass} onClick={this.callNumber}>{this.state.clickedConnect?'Calling you now...': 'Click to Connect'}</button></span>
+							<span style={{ textAlign: 'center', marginLeft: '1em', width: '100%', }}> 
+								<button role={'button'} className={connectButtonClass} onClick={this.callNumber}>
+									<span className={'pt-icon-standard pt-icon-phone'} />
+									{this.state.clickedConnect ? 'Calling you now...' : 'Click to Connect'}</button></span>
 						</h4>
 						<p>{repData.chamber === 'senate' ? 'Senator ' : 'Representative '} for {repData.chamber === 'senate' ? repData.state : `district ${repData.district} in ${repData.state}`}</p>
 						<h6>What do I say?</h6>
@@ -68,7 +70,8 @@ export const Representative = React.createClass({
 							Then your message: "I'd like so-and-so to take a strong position demanding a hearing on Russian Influence on our elections and government. I want to know whether there is more involved." <br /><br />
 							You might ask to be told their position. <br /><br /> 
 							It's easy, they want to hear from you.
-						</p>						<div><b>We’ll call your Congressperson and call you back.  Answer the phone to be connected</b></div>
+						</p>						<div><b>We’ll call your Congressperson and call you back.  Answer the phone to be connected.</b>
+					</div>
 
 
 					</div>

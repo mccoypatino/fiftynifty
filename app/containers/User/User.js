@@ -65,8 +65,9 @@ export const User = React.createClass({
 		if (user.ancestors) {
 			const parent = user.ancestors.filter((ancestor) => {
 				if (ancestor.hierarchyLevel === (userLevel - 1)) {
-					return ancestor;
+					return true;
 				}
+				return false;
 			});
 			return parent.length > 0 ? parent[0] : false;
 		}
@@ -177,8 +178,9 @@ export const User = React.createClass({
 															reps.map((rep, index)=> {
 																return (
 																	<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
-															);
-														})}
+																);
+															})
+														}
 													</div>
 
 												</div>
@@ -222,10 +224,9 @@ export const User = React.createClass({
 								<div style={{ display: 'inline-block', verticalAlign: 'middle', paddingLeft: '2em', paddingTop: '1em' }}>
 									<PieChart height={200} width={200}>
 										<Pie 
-												isAnimationActive={false} data={chartData} 
-												innerRadius={70} outerRadius={100} fill="rgba(102, 102, 102, 0.7)"
-												stroke="none">
-										</Pie>
+											isAnimationActive={false} data={chartData} 
+											innerRadius={70} outerRadius={100} fill="rgba(102, 102, 102, 0.7)"
+											stroke="none" />
 										<Pie data={chartData} innerRadius={70} outerRadius={100} fill="#82ca9d" stroke="none">
 											{
 												chartData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)
@@ -334,12 +335,8 @@ styles = {
 		letterSpacing: '0.1em',
 		paddingBottom: '1em',
 	},
-	progressBackground: {
-		background: "linear-gradient(rgba(28, 67, 90, 0.8),rgba(28, 67, 90, 0.8)), url('static/crowd.jpg') no-repeat center center",
-		backgroundSize: 'cover',
-	},
 	graphBackground: {
-		backgroundColor: "#003d59",
+		backgroundColor: '#003d59',
 	},
 	settingsBackground: {
 		backgroundColor: '#0b5577',
