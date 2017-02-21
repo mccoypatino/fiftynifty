@@ -295,22 +295,24 @@ export const User = React.createClass({
 								<form  style={styles.form}>
 									<label htmlFor={'name-input'} style={styles.inputLabel}>
 									Name
-										<input id={'name-input'} className={'pt-input pt-large pt-fill'}
-										placeholder={user.name} value={this.state.nameToUpdate}
-										onChange={(evt) => this.setState({nameToUpdate: evt.target.value})}/>
+										<input 
+											id={'name-input'} className={'pt-input pt-large pt-fill'}
+											placeholder={user.name} value={this.state.nameToUpdate}
+											onChange={(evt) => this.setState({ nameToUpdate: evt.target.value })} />
 									</label>
 									<label htmlFor={'zip-input'} style={styles.inputLabel}>
 										Zipcode (where you vote)
-										<input id={'zip-input'} type={'number'} className={'pt-input pt-large pt-fill'}
-										placeholder={'Where are you registered?'} value={this.state.zipcodeToUpdate}
-										onChange={this.updateZipcode}/>
+										<input 
+											id={'zip-input'} type={'number'} className={'pt-input pt-large pt-fill'}
+											placeholder={'Where are you registered?'} value={this.state.zipcodeToUpdate}
+											onChange={this.updateZipcode} />
 									</label>
 										<Button
-										//loading={} this.props.landingData.signupLoading and this.signupSubmit for onClick={}
+										// loading={} this.props.landingData.signupLoading and this.signupSubmit for onClick={}
 										type={'submit'} style={styles.buttonSettings}
 										text={'Update Settings'}
 										className={'pt-intent-primary pt-fill pt-large'}
-										onClick={this.updateSubmit} //also on error div, would be {error} component inside but not defined yet
+										onClick={this.updateSubmit} // also on error div, would be {error} component inside but not defined yet
 										/> 
 									<div style={styles.error}>{error}</div> 
 								</form>
