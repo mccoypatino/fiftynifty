@@ -65,8 +65,9 @@ export const User = React.createClass({
 		if (user.ancestors) {
 			const parent = user.ancestors.filter((ancestor) => {
 				if (ancestor.hierarchyLevel === (userLevel - 1)) {
-					return ancestor;
+					return true;
 				}
+				return false;
 			});
 			return parent.length > 0 ? parent[0] : false;
 		}
@@ -140,9 +141,8 @@ export const User = React.createClass({
 																	<div style={{ paddingTop: '1em' }}>
 																		<h4>What Do I Say?</h4>
 																		You’ll reach a staffer. Tell them your name and that you are a constituent. <br /><br />
-																		Then your message: "I’d like so-and-so to take a strong position demanding a hearing on Russian Influence on our elections and government. I want to know whether there is more involved." <br /><br />
-																		You might ask to be told their position. <br /><br /> 
-																		It's easy, they want to hear from you.
+																		Then your message: It’s easy to ask their position on the issue you are calling about. The staffer will tell you. Then you can thank them and note your support or disagreement. You can also add your comments on the President’s position and indicate your support or disagreements with him or how he is working. <br /><br />
+																		It's easy, they want to hear from you. If they are modern, they’ll take your email address to let the congressperson respond.
 																	</div>
 																</div>
 															</Dialog>
@@ -174,11 +174,13 @@ export const User = React.createClass({
 														<AddressInput geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
 														}
 
-														{reps.length === 3 && reps.map((rep, index)=> {
-															return (
-																<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
-															);
-														})}
+														{reps.length === 3 && 
+															reps.map((rep, index)=> {
+																return (
+																	<Representative key={`rep-${index}`} repData={rep} callFunction={this.callFunction} />
+																);
+															})
+														}
 													</div>
 
 												</div>
@@ -222,7 +224,8 @@ export const User = React.createClass({
 								<div style={{ display: 'inline-block', verticalAlign: 'middle', paddingLeft: '2em', paddingTop: '1em' }}>
 									<PieChart height={200} width={200}>
 										<Pie 
-											isAnimationActive={false} data={chartData} innerRadius={70} outerRadius={100} fill="rgba(102, 102, 102, 0.7)"
+											isAnimationActive={false} data={chartData} 
+											innerRadius={70} outerRadius={100} fill="rgba(102, 102, 102, 0.7)"
 											stroke="none" />
 										<Pie data={chartData} innerRadius={70} outerRadius={100} fill="#82ca9d" stroke="none">
 											{
@@ -313,10 +316,9 @@ styles = {
 	sectionTitle: {
 		fontSize: '1.8em',
 		textAlign: 'center',
-		letterSpacing: '0.1em',
-		padding: '0.8em 0',
-		fontWeight: 'lighter',
-		color: 'white',
+		padding: '0.8em',
+		fontWeight: 'bold',
+		color: '#EAE4CA',
 	},
 	score: {
 		fontSize: '3em',
@@ -360,16 +362,19 @@ styles = {
 	},
 	repsWrapper: {
 		margin: 'auto',
-		width: '80%',
-		maxWidth: '350px',
-		backgroundColor: '#da022e',
+		width: '90%',
+		maxWidth: '370px',
+		backgroundColor: '#9A3131',
 		opacity: '0.95',
 		fontWeight: 'lighter',
+		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
+			width: '90%',
+		},
 	},
 	repsBox: {
 		textAlign: 'left',
 		color: 'white',
-		padding: '1em',
+		padding: '1.3em',
 		//fontWeight: '200',
 	},
 	orCall: {
