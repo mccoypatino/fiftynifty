@@ -22,8 +22,8 @@ export const AddressInput = React.createClass({
 	render() {
 		return (
 			<form onSubmit={this.requestAddress}>
-				<label>
-					We couldn't determine who are your representatives. Please enter your address:
+				<label htmlFor={'address-input'} style={styles.inputLabel}>
+					Please enter your address:
 					<input id={'address-input'} type={'text'} className={'pt-input pt-large pt-fill'} placeholder={'Powered by Google Maps'} onChange={this.updateAddress} />
 				</label>
 				<Button type={'submit'} loading={this.props.isLoading} className={'pt-button pt-intent-primary'} text={'Submit'} />
@@ -35,5 +35,9 @@ export const AddressInput = React.createClass({
 export default Radium(AddressInput);
 
 styles = {
-
+	inputLabel: {
+		fontSize: '1.25em',
+		display: 'block',
+		marginBottom: '1em',
+	},
 };
