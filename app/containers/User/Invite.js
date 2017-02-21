@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Radium from 'radium';
 
-
 let styles;
 
 export const Invite = React.createClass({
@@ -46,13 +45,15 @@ Click or paste this link into your browser: ${shareUrl}`;
 			<div style={styles.inviteSection}>
 				<div style={styles.inviteHeader}>Invite</div>
 				<p>Invite people to join your network by joining Fifty Nifty with this link:</p>
-				<p style={styles.inviteLink}><a href={shareUrl}>{shareUrl}</a></p>
-				<CopyToClipboard 
-								style={styles.copyButton} 
-								text={shareUrl}
-								onCopy={() => this.setState({ copied: true })}>
-					<a role="button" className="pt-button pt-minimal"><span className="pt-icon-standard pt-icon-clipboard" /> Copy to clipboard</a>
-				</CopyToClipboard>
+				<div style={styles.inviteLink} className={'pt-input-group pt-fill'}>
+					<input className={'pt-input'} readOnly={true} value={shareUrl} />
+					<CopyToClipboard 
+									style={styles.copyButton} 
+									text={shareUrl}
+									onCopy={() => this.setState({ copied: true })}>
+						<a role="button" className="pt-button pt-copy"><span className="pt-icon-standard pt-icon-clipboard" />Copy</a>
+					</CopyToClipboard>
+				</div>
 				<br /> 
 				<br />
 				<a style={styles.button} className={'pt-button pt-fill'} href={`mailto:?subject=${encodeURI(mailTitle)}&body=${encodeURI(mailBody)}`}>
@@ -132,9 +133,6 @@ styles = {
 		MsUserSelect: 'text',      /* IE 10+ */
 		UserSelect: 'text'          /* Likely future */
 
-	},
-	copyButton: {
-		color: '#d9d9d9',
 	},
 	button: {
 		color: '#003d59',
