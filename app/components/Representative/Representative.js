@@ -58,12 +58,12 @@ export const Representative = React.createClass({
 					<div className="pt-dialog-body">
 						<h4>
 							{repData.first_name} {repData.last_name}
+							<span style={{ textAlign: 'center', marginLeft: '1em', width: '100%', }}> 
+								<button role={'button'} className={connectButtonClass} onClick={this.callNumber}>
+									<span className={'pt-icon-standard pt-icon-phone'} />
+									{this.state.clickedConnect ? 'Calling you now...' : 'Click to Connect'}</button></span>
 						</h4>
 						<p>{repData.chamber === 'senate' ? 'Senator ' : 'Representative '} for {repData.chamber === 'senate' ? repData.state : `district ${repData.district} in ${repData.state}`}</p>
-						<div style={{ textAlign: 'center', margin: '1em 0em', width: '100%', }}> 
-							<button role={'button'} className={connectButtonClass} onClick={this.callNumber}>
-								<span className={'pt-icon-standard pt-icon-phone'} />
-								{this.state.clickedConnect ? 'Calling you now...' : 'Click to Connect'}</button></div>
 						<h6>What do I say?</h6>
 						<p>						
 							You'll reach a staffer. Tell them your name and that you are a constituent. <br /><br />
