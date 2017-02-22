@@ -20,6 +20,7 @@ export const POST_USER_UPDATE_LOAD = 'user/POST_USER_UPDATE_LOAD';
 export const POST_USER_UPDATE_SUCCESS = 'user/POST_USER_UPDATE_SUCCESS';
 export const POST_USER_UPDATE_FAIL = 'user/POST_USER_UPDATE_FAIL';
 
+
 /*--------*/
 // Define Action creators
 //
