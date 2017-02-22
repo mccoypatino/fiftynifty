@@ -316,9 +316,10 @@ styles = {
 	sectionTitle: {
 		fontSize: '1.8em',
 		textAlign: 'center',
-		padding: '0.8em',
-		fontWeight: 'bold',
-		color: '#EAE4CA',
+		letterSpacing: '0.1em',
+		padding: '0.8em 0',
+		fontWeight: 'lighter',
+		color: 'white',
 	},
 	score: {
 		fontSize: '3em',
@@ -374,7 +375,7 @@ styles = {
 	repsBox: {
 		textAlign: 'left',
 		color: 'white',
-		padding: '1.3em',
+		padding: '1em',
 		//fontWeight: '200',
 	},
 	orCall: {

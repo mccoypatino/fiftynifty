@@ -45,15 +45,13 @@ Click or paste this link into your browser: ${shareUrl}`;
 			<div style={styles.inviteSection}>
 				<div style={styles.inviteHeader}>Invite</div>
 				<p>Invite people to join your network by joining Fifty Nifty with this link:</p>
-				<div style={styles.inviteLink} className={'pt-input-group pt-fill'}>
-					<input className={'pt-input'} readOnly={true} value={shareUrl} />
-					<CopyToClipboard 
-									style={styles.copyButton} 
-									text={shareUrl}
-									onCopy={() => this.setState({ copied: true })}>
-						<a role="button" className="pt-button pt-copy"><span className="pt-icon-standard pt-icon-clipboard" />Copy</a>
-					</CopyToClipboard>
-				</div>
+				<p style={styles.inviteLink}><a href={shareUrl}>{shareUrl}</a></p>
+				<CopyToClipboard 
+								style={styles.copyButton} 
+								text={shareUrl}
+								onCopy={() => this.setState({ copied: true })}>
+					<a role="button" className="pt-button pt-minimal"><span className="pt-icon-standard pt-icon-clipboard" /> Copy to clipboard</a>
+				</CopyToClipboard>
 				<br /> 
 				<br />
 				<a style={styles.button} className={'pt-button pt-fill'} href={`mailto:?subject=${encodeURI(mailTitle)}&body=${encodeURI(mailBody)}`}>
@@ -140,4 +138,7 @@ styles = {
 		letterSpacing: '0em',
 		maxWidth: '250px',
 	},
+    copyButton: {
+        color:"#d9d9d9",
+    },
 };
