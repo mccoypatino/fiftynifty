@@ -273,7 +273,7 @@ styles = {
 		position: 'relative',		
 	},
 	headerImage: {
-		backgroundImage: 'url("/static/hands.jpg")',
+		backgroundColor: '#003D59',
 		backgroundRepeat: 'no-repeat',
 		backgroundPosition: 'center center',
 		backgroundSize: 'cover',

@@ -175,7 +175,7 @@ styles = {
 		display: 'block'
 	},
 	link: {
-		color: '#ff6f70',
+		color: '#ff6f70'
 	},
 	title: {
 		fontSize: '2em',
