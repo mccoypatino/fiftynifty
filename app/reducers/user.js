@@ -106,7 +106,7 @@ export default function reducer(state = defaultState, action) {
 		});
 	case POST_USER_UPDATE_SUCCESS:
 		return state.merge({
-			updateLoading: flase,
+			updateLoading: false,
 			updateError: undefined,
 			user: action.result,
 		});
