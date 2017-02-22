@@ -273,7 +273,7 @@ styles = {
 		position: 'relative',		
 	},
 	headerImage: {
-		backgroundColor: '#003D59',
+        backgroundImage: 'url("/static/protest.jpg")',
 		backgroundRepeat: 'no-repeat',
 		backgroundPosition: 'center center',
 		backgroundSize: 'cover',
@@ -286,10 +286,8 @@ styles = {
 	},
 	headerSplash: {
 		position: 'absolute',
-		// backgroundColor: 'rgba(19, 24, 187, 0.7)',
-		// backgroundImage: 'url("/static/denim.png")',
 		backgroundColor: '#003D59',
-		opacity: 0.8,
+		opacity: 0.92,
 		top: 0,
 		left: 0,
 		width: '100%',
