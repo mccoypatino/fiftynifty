@@ -47,13 +47,17 @@ export const User = React.createClass({
 		// const referral = refUser.id || this.props.location.query.ref;
 		// this.props.landingData.referralDetails
 		const user = this.props.userData.user
-		if (!this.state.nameToUpdate) { this.setState({nameToUpdate: user.name}); }
-		if (!this.state.zipcodeToUpdate) { this.setState({zipcodeToUpdate: user.zipcode}); }
+		if (!this.state.nameToUpdate) { this.setState({nameToUpdate: user.name}, function() {
+			this.props.dispatch(putUserUpdate(this.props.params.userId, this.state.nameToUpdate, this.state.zipcodeToUpdate));
+		}); }
+		if (!this.state.zipcodeToUpdate) { this.setState({zipcodeToUpdate: user.zipcode}, function() {
+			this.props.dispatch(putUserUpdate(this.props.params.userId, this.state.nameToUpdate, this.state.zipcodeToUpdate));
+		}); }
 		else if (this.state.zipcodeToUpdate.length !== 5) { return this.setState({ error: 'Zipcode must be 5 digits' }); } // i want zipcode provied in userData, going to look in the api for it
-		console.log(this.state.zipcodeToUpdate.length)
+		console.log(this.state.zipcodeToUpdate)
+		console.log(this.state.nameToUpdate)
 		// if (!this.state.phone) { return this.setState({ error: 'Phone Number required' }); }
 		this.setState({ error: undefined });
-		console.log(this.state.zipcodeToUpdate.length)
 		this.toggleSettingsDialog();
 		return this.props.dispatch(putUserUpdate(this.props.params.userId, this.state.nameToUpdate, this.state.zipcodeToUpdate));
 	},
