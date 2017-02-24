@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import Radium from 'radium';
+import { Popover, Position } from '@blueprintjs/core';
 
 let styles;
 
@@ -44,17 +45,24 @@ Click or paste this link into your browser: ${shareUrl}`;
 			<div id="invite" style={styles.sectionBackground}>
 			<div style={styles.inviteSection}>
 				<div style={styles.inviteHeader}>Invite</div>
+
 				<p>Invite people to join your network by joining Fifty Nifty with this link:</p>
-				<p style={styles.inviteLink}><a href={shareUrl}>{shareUrl}</a></p>
-				<CopyToClipboard 
-								style={styles.copyButton} 
-								text={shareUrl}
-								onCopy={() => this.setState({ copied: true })}>
-					<a role="button" className="pt-button pt-minimal"><span className="pt-icon-standard pt-icon-clipboard" /> Copy to clipboard</a>
-				</CopyToClipboard>
-				<br /> 
-				<br />
-				<a style={styles.button} className={'pt-button pt-fill'} href={`mailto:?subject=${encodeURI(mailTitle)}&body=${encodeURI(mailBody)}`}>
+
+                <div style={styles.linkWrapper}>
+                    <div className={'pt-control-group  pt-fill'} style={{ width: '100%' }}>
+                        <input type="text" className="pt-input" value={shareUrl} readOnly={true} style={{ width: '220px' }} />
+                        <Popover popoverClassName="pt-popover-content-sizing pt-dark" content={<p>Copied!</p>} position={Position.BOTTOM}>
+                            <CopyToClipboard
+                                style={{ height: '100%' }}
+                                text={shareUrl}
+                                onCopy={() => this.setState({ copied: true })}>
+                                <button className="pt-button pt-icon-clipboard" />
+                            </CopyToClipboard>
+                        </Popover>
+                    </div>
+                </div>
+                <br />
+                <a style={styles.button} className={'pt-button pt-fill'} href={`mailto:?subject=${encodeURI(mailTitle)}&body=${encodeURI(mailBody)}`}>
 					Invite via email
 				</a> 
 				<br /> 
@@ -123,22 +131,16 @@ styles = {
 		paddingBottom: '1em',
 		fontWeight: '200',
 	},
-	inviteLink: {
-		fontWeight: 'bold',
-		fontSize: '1.2em',
-		WebkitUserSelect: 'text',  /* Chrome all / Safari all */
-		MozUserSelect: 'text',     /* Firefox all */
-		MsUserSelect: 'text',      /* IE 10+ */
-		UserSelect: 'text'          /* Likely future */
-
-	},
 	button: {
 		color: '#003d59',
 		fontWeight: 'bold',
 		letterSpacing: '0em',
 		maxWidth: '250px',
 	},
-    copyButton: {
-        color:"#d9d9d9",
-    },
+	linkWrapper: {
+		width: '100%',
+		margin: '0 auto',
+		textAlign: 'center',
+		maxWidth: '250px',
+	},
 };

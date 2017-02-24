@@ -5,12 +5,10 @@ import { Button, Dialog } from '@blueprintjs/core';
 import Radium from 'radium';
 import Phone from 'react-phone-number-input';
 import Scrollchor from 'react-scrollchor';
-import MediaQuery from 'react-responsive';
 
 import { postUser, postUserAuthentication, getReferralDetails, getCallWithVerificationCode } from './actions';
 import HowToPlay from './HowToPlay';
 import Invite from '../User/Invite';
-import { getScore } from '../../Utilities/UserUtils';
 
 let styles;
 
@@ -273,7 +271,7 @@ styles = {
 		position: 'relative',		
 	},
 	headerImage: {
-        backgroundImage: 'url("/static/protest.jpg")',
+		backgroundImage: 'url("/static/protest.jpg")',
 		backgroundRepeat: 'no-repeat',
 		backgroundPosition: 'center center',
 		backgroundSize: 'cover',
