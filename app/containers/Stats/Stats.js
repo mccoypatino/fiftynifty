@@ -65,7 +65,7 @@ styles = {
     },
     content: {
         padding: '175px 0em 3em',
-        maxWidth: '600px',
+        maxWidth: '1100px',
         margin: '0 auto',
     },
     title: {
