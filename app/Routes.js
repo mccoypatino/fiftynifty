@@ -21,6 +21,7 @@ export default (
 		<Route path="/login" getComponent={getComponent('Login')} />
 		<Route path="/about" getComponent={getComponent('About')} />
 		<Route path="/song" getComponent={getComponent('Song')} />
+		<Route path="/stats" getComponent={getComponent('Stats')} />
 		<Route path="/:userId" getComponent={getComponent('User')} />
 
 		<Route path="*" getComponent={getComponent('NoMatch')} />

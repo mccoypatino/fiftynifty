@@ -73,3 +73,26 @@ export function getStatesArcs(user) {
     })
     return arcs.concat(...childrensArcs);
 }
+
+export function flattenUser(user) {
+    const result = [];
+    const children = user.children || [];
+    children.forEach((child)=>{
+        let userStates = getStates(child);
+        result.push({'user':child, 'states':userStates, 'statesCount': userStates.length, 'score':getScore(child) });
+    });
+    const childrenUsers = children.map((child)=>{
+        return flattenUser(child);
+    });
+    return result.concat(...childrenUsers);
+}
+
+export function flattenLeaders(users) {
+    const result = [];
+    users.forEach((user)=>{
+        let userStates = getStates(user);
+        result.push({'user':user, 'states':userStates, 'statesCount': userStates.length, 'score':getScore(user) });
+        result.push.apply(result, flattenUser(user))
+    });
+    return result;
+}

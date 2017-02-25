@@ -6,7 +6,8 @@ import React, { PropTypes } from 'react';
 import statesDefaults from './states-defaults';
 import objectAssign from 'object-assign';
 import Radium from 'radium';
-import {getStatesArcs} from '../../Utilities/UserUtils'
+import {getStatesArcs} from '../../Utilities/UserUtils';
+import chroma from 'chroma-js';
 
 const map = function (val, in_min, in_max, out_min, out_max) {
     return (val - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
@@ -35,6 +36,7 @@ export const ProgressMap  = React.createClass({
 	propTypes: {
 		callsData: PropTypes.array,
 		user:PropTypes.object,
+		isGlobal: PropTypes.bool,
 	},
 
     getInitialState() {
@@ -54,6 +56,7 @@ export const ProgressMap  = React.createClass({
 
 	reducedData: function(){
 		let statesCount = {};
+		let maxVal = 0
 		if (this.props.callsData.length>0) {
 			this.props.callsData.forEach((call)=>
 			{
@@ -68,9 +71,11 @@ export const ProgressMap  = React.createClass({
 						'value': 1
 					};
 				}
+				maxVal = Math.max(maxVal, statesCount[call.state].value);
 			});
+			const colorScale = d3.scaleLinear().domain([0, maxVal]).range(["#bcbddc", "#3f007d"]);
 			Object.keys(statesCount).forEach((state)=> {
-				statesCount[state].fillColor = '#fdb81e'; //this.linearPalleteScale(statesCount[state].colorValue);
+				statesCount[state].fillColor = this.props.isGlobal? colorScale(statesCount[state].colorValue) : '#fdb81e';
 			});
 
 		}
@@ -183,25 +188,27 @@ export const ProgressMap  = React.createClass({
 			position: 'relative',
 			width: '100%'
 		};
-		const arcsCount = getStatesArcs(this.props.user).length;
-		const bubblesCount = this.bubblesData().length;
+		if (!this.props.isGlobal) {
+            const arcsCount = getStatesArcs(this.props.user).length;
+            const bubblesCount = this.bubblesData().length;
 
-        const arcs = this.state.showCallsFlow? getStatesArcs(this.props.user) : [];
-        const bubbles = this.state.showCallsCount? this.bubblesData():  [];
-        if (this.datamap) {
-            this.datamap.arc(arcs);
-            this.datamap.bubbles(bubbles);
-		}
+            const arcs = this.state.showCallsFlow ? getStatesArcs(this.props.user) : [];
+            const bubbles = this.state.showCallsCount ? this.bubblesData() : [];
+            if (this.datamap) {
+                this.datamap.arc(arcs);
+                this.datamap.bubbles(bubbles);
+            }
+        }
 
 		return (
 			<div>
 			<div ref="container" style={style}></div>
-				{arcsCount>0 && <ShowButton show={this.state.showCallsFlow} text="Invites Flow" onClick={this.toggleCallsFlow}/>}
-				{bubblesCount>0 && <ShowButton show={this.state.showCallsCount} text="Calls Count" onClick={this.toggleCallsCount}/>}
+				{!this.props.isGlobal && arcsCount>0 && <ShowButton show={this.state.showCallsFlow} text="Invites Flow" onClick={this.toggleCallsFlow}/>}
+				{!this.props.isGlobal && bubblesCount>0 && <ShowButton show={this.state.showCallsCount} text="Calls Count" onClick={this.toggleCallsCount}/>}
 			</div>
 
 		);
-	}
+        }
 });
 
 export default Radium (ProgressMap);
