@@ -188,9 +188,11 @@ export const ProgressMap  = React.createClass({
 			position: 'relative',
 			width: '100%'
 		};
+		let arcsCount = 0;
+		let bubblesCount = 0;
 		if (!this.props.isGlobal) {
-            const arcsCount = getStatesArcs(this.props.user).length;
-            const bubblesCount = this.bubblesData().length;
+            arcsCount = getStatesArcs(this.props.user).length;
+            bubblesCount = this.bubblesData().length;
 
             const arcs = this.state.showCallsFlow ? getStatesArcs(this.props.user) : [];
             const bubbles = this.state.showCallsCount ? this.bubblesData() : [];
