@@ -32,10 +32,10 @@ export const Stats = React.createClass({
                     <div style={styles.title}>Game Stats</div>
                     <div style={styles.numbersWrapper}>
                         <div style={styles.numberHeader}>Active Players:</div>
-                        <div style={styles.number}>{allUsers.length+400}</div>
+                        <div style={styles.number}>{allUsers.length}</div>
 
                         <div style={styles.numberHeader}>Calls made:</div>
-                        <div style={styles.number}>{flatCalls.length+200}</div>
+                        <div style={styles.number}>{flatCalls.length}</div>
                     </div>
 
                     <div>
