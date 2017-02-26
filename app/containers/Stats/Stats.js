@@ -17,6 +17,23 @@ export const Stats = React.createClass({
 		this.props.dispatch(getLeaderboard());
 	},
 
+	secondsToHoursMinutsSeconds: function(time) {
+		const hrs = ~~(time / 3600);
+		const mins = ~~((time % 3600) / 60);
+		const secs = time % 60;
+
+// Output like "1:01" or "4:03:59" or "123:03:59"
+		let ret = '';
+
+		if (hrs > 0) {
+			ret += '' + hrs + ':' + (mins < 10 ? '0' : '');
+		}
+
+		ret += '' + mins + ':' + (secs < 10 ? '0' : '');
+		ret += '' + secs;
+		return ret;
+	},
+
 	render() {
 		const leaders = this.props.leaderboardData.leaders || [];
 		const allUsers = flattenLeaders(leaders);
@@ -25,6 +42,9 @@ export const Stats = React.createClass({
 			return user.user.calls.filter((call)=>call.duration >= CALL_THRESHOLD);
 		});
 		const flatCalls = [].concat(...allCalls);
+		console.log(flatCalls);
+		const totalCallLength = flatCalls.reduce((pre, cur) => { console.log(pre, cur); return pre + cur.duration; }, 0);
+		const totalLengthStr = this.secondsToHoursMinutsSeconds(totalCallLength);
 
 		return (
             <div style={styles.container}>
@@ -36,6 +56,10 @@ export const Stats = React.createClass({
 
                         <div style={styles.numberHeader}>Calls made:</div>
                         <div style={styles.number}>{flatCalls.length}</div>
+
+						<div style={styles.numberHeader}>Total Calls Length:</div>
+						<div style={styles.number}>{totalLengthStr}</div>
+
                     </div>
 
                     <div>
@@ -78,15 +102,15 @@ styles = {
 		letterSpacing: '0.1em',
 		position: 'relative',
 	},
-    numbersWrapper: {
-	    textAlign: 'center',
+	numbersWrapper: {
+		textAlign: 'center',
 
-    },
-    number: {
-	    fontSize: '4em',
-        fontWeight: 'bold',
-    },
-    numberHeader: {
-	    padding: '0.5em'
-    }
+	},
+	number: {
+		fontSize: '4em',
+		fontWeight: 'bold',
+	},
+	numberHeader: {
+		padding: '0.5em'
+	}
 };
