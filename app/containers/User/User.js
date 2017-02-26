@@ -43,6 +43,7 @@ export const User = React.createClass({
 
 	updateSubmit: function(evt) {
 		evt.preventDefault();
+
 		// const refUser = this.props.landingData.referralDetails || {};
 		// const referral = refUser.id || this.props.location.query.ref;
 		// this.props.landingData.referralDetails
@@ -311,7 +312,7 @@ export const User = React.createClass({
 										Zipcode (where you vote)
 										<input 
 											id={'zip-input'} type={'number'} className={'pt-input pt-large pt-fill'}
-											placeholder={'Where are you registered?'} value={this.state.zipcodeToUpdate}
+											placeholder={user.zipcode} value={this.state.zipcodeToUpdate}
 											onChange={this.updateZipcode} />
 									</label>
 										<Button
