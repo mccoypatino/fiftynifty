@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import Radium from 'radium';
-// import { Link } from 'react-router';
+import { Link } from 'react-router';
 import { Dialog } from '@blueprintjs/core';
 
 let styles;
@@ -52,7 +52,7 @@ export const Representative = React.createClass({
 						{repData.chamber === 'senate' ? 'Senator' : 'Representative'}</p>
 				</div>
 				<div style={styles.repCallContainer}>
-					<td style={styles.callText}>How to call</td>
+					<div style={styles.callText}>Call Now</div>
 				</div>		
 				<Dialog isOpen={this.state.callDialogOpen} onClose={this.toggleCallDialog} title={`Call your ${repData.chamber === 'senate' ? 'Senator' : 'Representative'}`} style={styles.dialogBox}>
 					<div className="pt-dialog-body">
@@ -127,7 +127,7 @@ styles = {
 		lineHeight: '1.5em',
 	},
 	repCallContainer: {
-		padding: '0em 1em 0em 1em',
+		padding: '0.6em',
 		borderTop: '0.5px solid rgba(30, 30, 30, .2)',
 		textAlign: 'center',
 		display: 'table',

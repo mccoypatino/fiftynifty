@@ -314,12 +314,12 @@ styles = {
 		padding: '2em 0em',
 	},
 	sectionTitle: {
-		color: '#fff',
 		fontSize: '1.9em',
 		textAlign: 'center',
 		letterSpacing: '0.1em',
-		paddingBottom: '1em',
-		fontWeight: '200',
+		padding: '0.8em 0',
+		fontWeight: 'lighter',
+		color: 'white',
 	},
 	score: {
 		fontSize: '3em',
@@ -375,7 +375,7 @@ styles = {
 	repsBox: {
 		textAlign: 'left',
 		color: 'white',
-		padding: '1.3em',
+		padding: '1em',
 		//fontWeight: '200',
 	},
 	orCall: {
