@@ -34,16 +34,40 @@ export const Stats = React.createClass({
 		return ret;
 	},
 
-	render() {
+	getAllUsers() {
 		const leaders = this.props.leaderboardData.leaders || [];
 		const allUsers = flattenLeaders(leaders);
+		return allUsers;
+	},
+
+	getActivePlayerCount(users) {
+		return users.length;
+	},
+
+	getCalls(users) {
 		const CALL_THRESHOLD = 15;
-		const allCalls = allUsers.map((user)=> {
+		const allCalls = users.map((user)=> {
 			return user.user.calls.filter((call)=>call.duration >= CALL_THRESHOLD);
 		});
 		const flatCalls = [].concat(...allCalls);
-		console.log(flatCalls);
-		const totalCallLength = flatCalls.reduce((pre, cur) => { console.log(pre, cur); return pre + cur.duration; }, 0);
+		return flatCalls;
+	},
+
+	getCallCount(calls) {
+		return calls.length;
+	},
+
+	getTotalCallLength(calls) {
+		const totalCallLength = calls.reduce((pre, cur) => { console.log(pre, cur); return pre + cur.duration; }, 0);
+		return totalCallLength;
+	},
+
+	render() {
+		const allUsers = this.getAllUsers();
+		const playerCount = this.getActivePlayerCount(allUsers);
+		const calls = this.getCalls(allUsers);
+		const callCount = this.getCallCount(calls);
+		const totalCallLength = this.getTotalCallLength(calls);
 		const totalLengthStr = this.secondsToHoursMinutsSeconds(totalCallLength);
 
 		return (
@@ -52,10 +76,10 @@ export const Stats = React.createClass({
                     <div style={styles.title}>Game Stats</div>
                     <div style={styles.numbersWrapper}>
                         <div style={styles.numberHeader}>Active Players:</div>
-                        <div style={styles.number}>{allUsers.length}</div>
+                        <div style={styles.number}>{playerCount}</div>
 
                         <div style={styles.numberHeader}>Calls made:</div>
-                        <div style={styles.number}>{flatCalls.length}</div>
+                        <div style={styles.number}>{callCount}</div>
 
 						<div style={styles.numberHeader}>Total Calls Length:</div>
 						<div style={styles.number}>{totalLengthStr}</div>
@@ -64,7 +88,7 @@ export const Stats = React.createClass({
 
                     <div>
                         <div style={styles.title}>Global Game Map</div>
-                        <ProgressMap callsData={flatCalls} isGlobal={true} />
+                        <ProgressMap callsData={calls} isGlobal={true} />
                     </div>
                 </div>
             </div>
