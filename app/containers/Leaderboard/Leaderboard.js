@@ -4,7 +4,7 @@ import { Link, browserHistory } from 'react-router';
 import { Button, Spinner } from '@blueprintjs/core';
 import Radium from 'radium';
 import { getLeaderboard } from './actions';
-import {getScore, getStates} from '../../Utilities/UserUtils';
+import { flattenLeaders } from '../../Utilities/UserUtils';
 
 let styles;
 
@@ -20,32 +20,9 @@ export const Leaderboard = React.createClass({
 		this.props.dispatch(getLeaderboard());
 	},
 
-    flattenUser: function(user) {
-        const result = [];
-        const children = user.children || [];
-        children.forEach((child)=>{
-            let userStates = getStates(child);
-            result.push({'user':child, 'states':userStates, 'statesCount': userStates.length, 'score':getScore(child) });
-        });
-        const childrenUsers = children.map((child)=>{
-            return this.flattenUser(child);
-        });
-        return result.concat(...childrenUsers);
-    },
-
-	flattenLeaders: function(users) {
-		const result = [];
-		users.forEach((user)=>{
-			let userStates = getStates(user);
-            result.push({'user':user, 'states':userStates, 'statesCount': userStates.length, 'score':getScore(user) });
-            result.push.apply(result, this.flattenUser(user))
-		});
-        return result
-	},
-	
 	render() {
         const leaders = this.props.leaderboardData.leaders || [];
-        const flatLeaders = this.flattenLeaders(leaders).sort(function (a, b) {
+        const flatLeaders = flattenLeaders(leaders).sort(function (a, b) {
             return cmp(a.statesCount, b.statesCount) || cmp(a.score, b.score)
         }).reverse().slice(0, 10);
 		return (
