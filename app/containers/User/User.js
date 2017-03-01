@@ -249,7 +249,7 @@ export const User = React.createClass({
 						<div style={styles.section}>
 							<div style={styles.familySection}>
 								<div style={styles.sectionTitle}>{presentName} Fifty Nifty Family</div>
-								<TreeGraph data={user} />
+								<TreeGraph data={user} isGlobal={false}/>
 							</div>
 						</div>
 					</div>
