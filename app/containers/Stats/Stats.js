@@ -3,7 +3,7 @@ import Radium from 'radium';
 import { getLeaderboard } from '../Leaderboard/actions';
 import { connect } from 'react-redux';
 import { flattenLeaders } from '../../Utilities/UserUtils';
-import { ProgressMap } from 'components';
+import { ProgressMap, TreeGraph } from 'components';
 
 let styles;
 
@@ -90,6 +90,18 @@ export const Stats = React.createClass({
                         <div style={styles.title}>Global Game Map</div>
                         <ProgressMap callsData={calls} isGlobal={true} />
                     </div>
+					<div>
+						<div style={styles.title}>Entire Network</div>
+						{leaders.map((user)=> {
+							const currStyle = user.children.length > 1 ? styles.fullWidth : styles.smallTree;
+							return (
+								<div key={user.id} style={ currStyle }>
+									<TreeGraph data={user} isGlobal={true} />
+								</div>
+							);
+						}
+						)}
+					</div>
                 </div>
             </div>
 		);
@@ -136,5 +148,12 @@ styles = {
 	},
 	numberHeader: {
 		padding: '0.5em'
+	},
+	fullWidth: {
+		width: '100%',
+	},
+	smallTree: {
+		display: 'inline-block',
+		width: '10%',
 	}
 };
