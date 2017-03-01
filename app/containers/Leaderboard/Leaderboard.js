@@ -20,11 +20,37 @@ export const Leaderboard = React.createClass({
 		this.props.dispatch(getLeaderboard());
 	},
 
-	render() {
+    getInitialState() {
+		return {
+			leaderSort: 'byStateCount',
+		};
+	},
+
+    leadersByStateCount() {
         const leaders = this.props.leaderboardData.leaders || [];
-        const flatLeaders = flattenLeaders(leaders).sort(function (a, b) {
-            return cmp(a.statesCount, b.statesCount) || cmp(a.score, b.score)
-        }).reverse().slice(0, 10);
+        const flatLeaders = flattenLeaders(leaders).sort(function (a,b) {
+            return cmp(a.statesCount, b.statesCount) || cmp(a.score, b.score);
+        }).reverse().slice(0,10);
+        console.log("called");
+        return flatLeaders;
+    },
+
+    leadersByScore() {
+        const leaders = this.props.leaderboardData.leaders || [];
+        const flatLeaders = flattenLeaders(leaders).sort(function (a,b) {
+            return cmp(a.score, b.score);
+        }).reverse().slice(0,10);
+        return flatLeaders;
+    },
+
+	render() {
+        let leaders = [];
+        if (this.state.leaderSort === 'byStateCount') {
+            leaders = this.leadersByStateCount();
+        }
+        else if (this.state.leaderSort === 'byScore') {
+            leaders = this.leadersByScore();
+        }
 		return (
 		    <div style={styles.flagImage}>
                 <div style={styles.flagSplash}>
@@ -35,7 +61,7 @@ export const Leaderboard = React.createClass({
                                 <Spinner />
                             </div>
                             }
-                            {flatLeaders.map((user)=>{
+                            {leaders.map((user)=>{
                                 return(
                                     <Leader key={user.user.id} leader={user}/>)
                                 })}
