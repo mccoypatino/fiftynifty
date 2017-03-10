@@ -114,7 +114,7 @@ export const Leader = React.createClass({
     },
     componentDidMount() {
         this.loadTimeout = setTimeout(()=>this.setState({
-            didRender:true
+            didRender: true
         }),0);
     },
 
