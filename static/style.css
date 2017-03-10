@@ -76,6 +76,7 @@ body {
 	/*font-size: 14px;*/
 	font-weight: 400;
 	transition: box-shadow 100ms cubic-bezier(0.4, 1, 0.75, 0.9);
+	min-width: 100%;
 }
 
 .react-phone-number-input__country.rrui__select.rrui__select--collapsed {
