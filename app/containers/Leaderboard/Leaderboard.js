@@ -90,16 +90,9 @@ export const Leaderboard = React.createClass({
                                 <Spinner />
                             </div>
                             }
-                            <div style={styles.sortTitle}>Sort By:</div>
-                            <button role={'button'} style={styles.sortButton} className={'pt-button count-sort'} onClick={this.toggleByStateCount}>State Count</button>
-                            <button role={'button'} style={styles.sortButton} className={'pt-button score-sort'} onClick={this.toggleByScore}>Score</button>
-                            <button role={'button'} style={styles.sortButton} className={'pt-button invites-sort'} onClick={this.toggleByNumChildren}>Invites</button>
-                            {myLeader && 
-                                <div style={styles.myLeader}><Leader key={myId} leader={myLeader} index={myLeaderIndex+1}/></div>
-                            }
-                            {leaders.slice(0,10).map((user, index)=>{
+                            {flatLeaders.map((user)=>{
                                 return(
-                                    <Leader key={user.user.id} leader={user} index={index+1}/>)
+                                    <Leader key={user.user.id} leader={user}/>)
                                 })}
                         </div>
                     </div>
@@ -112,7 +105,7 @@ export const Leaderboard = React.createClass({
 export const Leader = React.createClass({
     propTypes: {
         leader: PropTypes.object,
-        index: PropTypes.number,
+
     },
     getInitialState () {
         return {
@@ -136,7 +129,7 @@ export const Leader = React.createClass({
         return(
             <div style={styles.leaderRow}>
                 <div style={styles.section}>
-                    <span style={styles.leaderIndex}>{this.props.index}</span><Link style={styles.leaderName} to={`/${user.user.id}`}>{user.user.name}</Link>
+                    <Link style={styles.leaderName} to={`/${user.user.id}`}>{user.user.name}</Link>
                     <div style={styles.statesBar}>
                         <div style={styles.outerBar}>
                             <div style={styles.progressbar(percent)}></div>
@@ -144,7 +137,6 @@ export const Leader = React.createClass({
                         <div style={styles.statesCount}>{Math.min(user.statesCount, 50)} / 50</div>
                     </div>
                     <div style={styles.score}>{Math.floor(user.score)} Points</div>
-                    <div style={styles.numInvites}>{user.user.children ? user.user.children.length : 0} Invites Sent</div>
                 </div>
             </div>
         )
@@ -244,31 +236,11 @@ styles = {
         fontSize:'1em',
         fontWeight: 'bold',
     },
-    leaderIndex:{
-        color: '#ff6f70',
-        fontSize:'2em',
-        fontWeight: 'bold',
-        marginRight: '5px',
-    },
-    myLeader:{
-        marginTop: '5px',
-        marginBottom:'30px',
-    },
     score:{
-        display: 'inline-block',
+        display: 'block',
         fontSize:'0.9em',
         fontWeight:'light',
-        paddingTop: '1em',
-        width: '50%',
-        textAlign: 'center',
-    },
-    numInvites:{
-        display: 'inline-block',
-        fontSize:'0.9em',
-        fontWeight:'light',
-        paddingTop: '1em',
-        width: '50%',
-        textAlign: 'center',
+        paddingTop: '1em'
     },
     flagImage: {
         backgroundImage: 'url("/static/american-flag.jpg")',
@@ -284,17 +256,6 @@ styles = {
     },
     centered: {
         textAlign:'center',
-    },
-
-    sortTitle: {
-        display: 'inline-block',
-        color: '#FFFFFF',
-    },
-
-    sortButton: {
-        display: 'inline-block',
-        marginLeft: '5px',
-        marginBottom: '5px',
-    },
+    }
 
 };
