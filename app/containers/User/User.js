@@ -117,7 +117,6 @@ export const User = React.createClass({
 										<span style={this.props.userData.loading ? { opacity: 0 } : {}}>
 											{user.name}, {user.state} 
 										</span>
-
 										{this.props.userData.loading &&
 											<div style={[styles.loader]}>
 												<Spinner />
@@ -127,7 +126,6 @@ export const User = React.createClass({
 									{isLocalUser &&
 										<div>
 											<div style={styles.repsWrapper}>
-
 												<div style={styles.repsBox} className={'pt-elevation-3'}>
 													<div style={styles.sectionTitle}>Your Representatives</div>
 														<div style={styles.centered}>
