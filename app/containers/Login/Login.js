@@ -22,10 +22,6 @@ export const Login = React.createClass({
 			code: '',
 		};
 	},
- 
-	// componentWillMount() {
-	// 	console.log(this.props.location.query);
-	// },
 
 	componentWillReceiveProps(nextProps) {
 		const lastLoading = this.props.loginData.verificationLoading;

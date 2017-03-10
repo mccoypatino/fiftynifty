@@ -28,10 +28,10 @@ export const POST_USER_UPDATE_FAIL = 'user/POST_USER_UPDATE_FAIL';
 // action objects (e.g. {type:example, payload:data} ) within dispatch()
 // function calls
 /*--------*/
-export function getUser(userId) {
+export function getUser(userId, hash) {
 	return (dispatch) => {
 		dispatch({ type: GET_USER_LOAD });
-		return clientFetch(`/api/user?userId=${userId}`)
+		return clientFetch(`/api/user?userId=${userId}${ hash ? `&hash=${hash}` : ''}`)
 		.then((result) => {
 			dispatch({ type: GET_USER_SUCCESS, result });
 		})
@@ -42,7 +42,7 @@ export function getUser(userId) {
 	};
 }
 
-export function requestCall(repId, id) {
+export function requestCall(repId, id, hash) {
 	return (dispatch) => {
 		dispatch({ type: REQUEST_CALL_LOAD });
 		return clientFetch('/api/callfromserver', {
@@ -54,6 +54,7 @@ export function requestCall(repId, id) {
 			body: JSON.stringify({
 				id: id,
 				repId: repId,
+				hash: hash,
 			})
 		})
 		.then((result) => {
@@ -66,7 +67,7 @@ export function requestCall(repId, id) {
 	};
 }
 
-export function requestLatLong(address, userId) {
+export function requestLatLong(address, userId, hash) {
 	return (dispatch) => {
 		dispatch({ type: REQUEST_LATLON_LOAD });
 		return clientFetch('/api/user/address', {
@@ -78,11 +79,11 @@ export function requestLatLong(address, userId) {
 			body: JSON.stringify({
 				address: address,
 				userId: userId,
+				hash: hash,
 			})
 		})
 		.then((result) => {
 			dispatch({ type: REQUEST_LATLON_SUCCESS, result });
-			console.log(result);
 		})
 		.catch((error) => {
 			console.log(error);
@@ -91,10 +92,10 @@ export function requestLatLong(address, userId) {
 	};
 }
 
-export function putUserUpdate(userId, name, zipcode) {
+export function putUserUpdate(userId, hash, name, zipcode) {
 	return (dispatch) => {
 		dispatch({ type: POST_USER_UPDATE_LOAD });
-		return clientFetch('/api/user/update', {
+		return clientFetch('/api/user', {
 			method: 'PUT',
 			headers: {
 				Accept: 'application/json',
@@ -102,6 +103,7 @@ export function putUserUpdate(userId, name, zipcode) {
 			},
 			body: JSON.stringify({
 				userId: userId,
+				hash: hash,
 				name: name,
 				zipcode: zipcode,
 			})
