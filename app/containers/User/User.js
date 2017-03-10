@@ -202,14 +202,15 @@ export const User = React.createClass({
 																		); 
 																	})}
 																	</div>
-																	<div> Unfortunately, you are not fully represented in congress.</div>
-																	<div>You can still join the game by inviting your friends from other states and encouraging them to call</div>
+
+																	<div>Apologies. We had trouble finding all your representatives.</div>
+																	<div>You can still join the game by calling those we did find or inviting your friends from other states and encouraging them to call.</div>
 																</div>
 															</div>
 														}
 
 														{reps.length > 3 &&
-														<AddressInput geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
+															<AddressInput geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
 														}
 
 														{reps.length === 3 && 

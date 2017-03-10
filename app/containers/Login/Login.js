@@ -66,71 +66,71 @@ export const Login = React.createClass({
 		const verificationError = this.props.loginData.verificationError;
 		return (
 			<div style={styles.login}>
-			<div style={styles.container}>
-				<div style={styles.title}>Login</div>
-				<form onSubmit={this.formSubmit} style={styles.form}>
-					{
-						codeCreationSuccess &&
-						<label htmlFor={'code-input'} style={styles.inputLabel}>
-							Code for { this.state.phone }? { verificationError && 
-								<div className={'pt-tag pt-minimal pt-intent-danger'}>An error occured: { verificationError }</div>
+				<div style={styles.container}>
+					<div style={styles.title}>Login</div>
+					<form onSubmit={this.formSubmit} style={styles.form}>
+						{
+							codeCreationSuccess &&
+							<label htmlFor={'code-input'} style={styles.inputLabel}>
+								Code for { this.state.phone }? { verificationError && 
+									<div className={'pt-tag pt-minimal pt-intent-danger'}>An error occured: { verificationError }</div>
+								}
+								<input id={'code-input'} type={'number'} className={'pt-input pt-large pt-fill'} placeholder={'6-digit code e.g. 568082'} value={this.state.code} onChange={this.updateCode} autoFocus={codeCreationSuccess} />
+								<Button 
+									type={'submit'} style={styles.button} 
+									text={'Verify the code'}
+									className={'pt-intent-primary pt-fill pt-large'} 
+									onClick={this.formSubmit} 
+									loading={this.props.loginData.verificationLoading} />
+							</label>
+
+						}
+						
+						<label htmlFor={'phone-input'} style={styles.inputLabel}>
+							{ codeCreationSuccess &&
+								<div className={'label-phone-input'}>Send another verification code</div>  
 							}
-							<input id={'code-input'} type={'number'} className={'pt-input pt-large pt-fill'} placeholder={'6-digit code e.g. 568082'} value={this.state.code} onChange={this.updateCode} autoFocus={codeCreationSuccess} />
-							<Button 
-								type={'submit'} style={styles.button} 
-								text={'Verify the code'}
-								className={'pt-intent-primary pt-fill pt-large'} 
-								onClick={this.formSubmit} 
-								loading={this.props.loginData.verificationLoading} />
+							{ codeCreationError && 
+								<div className={'pt-tag pt-minimal pt-intent-danger'}>An error occured: { codeCreationError }</div>
+							}
+							<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'Enter your phone number'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} autoFocus={!codeCreationSuccess} />
 						</label>
 
-					}
-					
-					<label htmlFor={'phone-input'} style={styles.inputLabel}>
-						{ codeCreationSuccess &&
-							<div className={'label-phone-input'}>Send another verification code</div>  
-						}
-						{ codeCreationError && 
-							<div className={'pt-tag pt-minimal pt-intent-danger'}>An error occured: { codeCreationError }</div>
-						}
-						<Phone country={'US'} className={'pt-input pt-large pt-fill'} placeholder={'Enter your phone number'} value={this.state.phone} onChange={phone => this.setState({ phone: phone })} autoFocus={!codeCreationSuccess} />
-					</label>
+						<div className={'verificationButtons pt-button-group pt-fill pt-large'}>
+							<Button 
+								type={'submit'} style={styles.button} 
+								className={'pt-intent-primary'} 
+								onClick={this.formSubmit} 
+								loading={this.props.loginData.codeCreationLoading}>
+									<span 
+										style={{ verticalAlign: 'middle', fontSize: '0.85em', opacity: 1 }} 
+										className={'pt-icon-standard pt-icon-comment'} /> 
+									Text a code 
+								</Button>
+							<Button 
+								style={styles.button} 
+								className={'pt-intent-primary'} 
+								onClick={this.createVerificationCodeByPhone} 
+								loading={this.props.loginData.codeCreationLoading}>
+									<span 
+										style={{ verticalAlign: 'middle', fontSize: '0.85em', opacity: 1 }} 
+										className={'pt-icon-standard pt-icon-phone'} /> 
+									Call with a code 
+								</Button>
 
-					<div className={'verificationButtons pt-button-group pt-fill pt-large'}>
-						<Button 
-							type={'submit'} style={styles.button} 
-							className={'pt-intent-primary'} 
-							onClick={this.formSubmit} 
-							loading={this.props.loginData.codeCreationLoading}>
-								<span 
-									style={{ verticalAlign: 'middle', fontSize: '0.85em', opacity: 1 }} 
-									className={'pt-icon-standard pt-icon-comment'} /> 
-								Text a code 
-							</Button>
-						<Button 
-							style={styles.button} 
-							className={'pt-intent-primary'} 
-							onClick={this.createVerificationCodeByPhone} 
-							loading={this.props.loginData.codeCreationLoading}>
-								<span 
-									style={{ verticalAlign: 'middle', fontSize: '0.85em', opacity: 1 }} 
-									className={'pt-icon-standard pt-icon-phone'} /> 
-								Call with a code 
-							</Button>
+						</div>	
+					</form>
 
-					</div>	
-				</form>
-
-				<div style={styles.section}>
-					<div style={styles.title}>Not Registered Yet?</div>
-					<Link to={'/'}>
-							<Button 	
-								style={styles.button}
-								className={'pt-button pt-intent-primary pt-fill pt-large'}
-								text={'Click Here to Join The Game'} />
-					</Link>
+					<div style={styles.section}>
+						<div style={styles.title}>Not Registered Yet?</div>
+						<Link to={'/'}>
+								<Button 	
+									style={styles.button}
+									className={'pt-button pt-intent-primary pt-fill pt-large'}
+									text={'Click Here to Join The Game'} />
+						</Link>
+					</div>
 				</div>
-			</div>
 			</div>
 		);
 	}
