@@ -31,7 +31,6 @@ export const Leaderboard = React.createClass({
         const flatLeaders = flattenLeaders(leaders).sort(function (a,b) {
             return cmp(a.statesCount, b.statesCount) || cmp(a.score, b.score);
         }).reverse();
-        console.log("called");
         return flatLeaders;
     },
 
@@ -68,7 +67,6 @@ export const Leaderboard = React.createClass({
 	render() {
         let leaders = [];
         const myId = JSON.parse(localStorage.getItem('userData'))["id"];
-        console.log(myId);
         if (this.state.leaderSort === 'byStateCount') {
             leaders = this.leadersByStateCount();
         }
@@ -79,7 +77,6 @@ export const Leaderboard = React.createClass({
             leaders = this.leadersByNumChildren();
         }
         const myLeaderIndex = leaders.findIndex(function (leader) {
-            console.log(leader.user.id);
             return leader.user.id === myId;
         });
         const myLeader = leaders[myLeaderIndex];

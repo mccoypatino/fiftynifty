@@ -17,10 +17,6 @@ import {
 	REQUEST_LATLON_SUCCESS,
 	REQUEST_LATLON_FAIL,
 
-	POST_USER_UPDATE_LOAD,
-	POST_USER_UPDATE_SUCCESS,
-	POST_USER_UPDATE_FAIL, 
-
 } from 'containers/User/actions';
 
 /* ------------------- */
@@ -36,9 +32,6 @@ const defaultState = Immutable.Map({
 
 	latLonLoading: false,
 	latLonError: undefined,
-
-	updateLoading: false,
-	updateError: undefined,
 
 });
 
@@ -98,22 +91,6 @@ export default function reducer(state = defaultState, action) {
 		return state.merge({
 			latLonLoading: false,
 			latLonError: action.error,
-		});
-	case POST_USER_UPDATE_LOAD:
-		return state.merge({
-			updateLoading: true,
-			updateError: undefined,
-		});
-	case POST_USER_UPDATE_SUCCESS:
-		return state.merge({
-			updateLoading: false,
-			updateError: undefined,
-			user: action.result,
-		});
-	case POST_USER_UPDATE_FAIL:
-		return state.merge({
-			updateLoading: false,
-			updateError: action.error,
 		});
 
 	default:

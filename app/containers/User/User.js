@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { Spinner, Dialog, Button } from '@blueprintjs/core';
+import { Spinner, Dialog } from '@blueprintjs/core';
 import Radium from 'radium';
 import dateFormat from 'dateformat';
 
 import { Representative, AddressInput, ProgressMap, TreeGraph } from 'components';
 
-import { getUser, requestCall, requestLatLong, putUserUpdate } from './actions';
+import { getUser, requestCall, requestLatLong } from './actions';
 import { Invite } from './Invite';
 import { getScore, countStates, getFlatCalls, getPersonalCallsCount } from '../../Utilities/UserUtils';
 // import { UserNode } from './UserNode';
@@ -21,53 +21,17 @@ export const User = React.createClass({
 		location: PropTypes.object,
 		params: PropTypes.object,
 		dispatch: PropTypes.func,
-		landingData: PropTypes.object,
 	},
 
 	getInitialState() {
 		return {
 			reps: [],
-			nameToUpdate: '',
-			zipcodeToUpdate: '',
 			callDialogOpen: false,
-			settingsDialogOpen: false,
-			error: undefined
 		};
-	},
-
-	updateZipcode: function(evt) {
-		this.setState({
-			zipcodeToUpdate: evt.target.value.substring(0, 5)
-		});
-	},
-
-	updateSubmit: function(evt) {
-		evt.preventDefault();
-
-		// const refUser = this.props.landingData.referralDetails || {};
-		// const referral = refUser.id || this.props.location.query.ref;
-		// this.props.landingData.referralDetails
-		const user = this.props.userData.user
-		if (!this.state.nameToUpdate) { this.setState({nameToUpdate: user.name}, function() {
-			this.props.dispatch(putUserUpdate(this.props.params.userId, this.state.nameToUpdate, this.state.zipcodeToUpdate));
-		}); }
-		if (!this.state.zipcodeToUpdate) { this.setState({zipcodeToUpdate: user.zipcode}, function() {
-			this.props.dispatch(putUserUpdate(this.props.params.userId, this.state.nameToUpdate, this.state.zipcodeToUpdate));
-		}); }
-		else if (this.state.zipcodeToUpdate.length !== 5) { return this.setState({ error: 'Zipcode must be 5 digits' }); } // i want zipcode provied in userData, going to look in the api for it
-		console.log(this.state.zipcodeToUpdate)
-		console.log(this.state.nameToUpdate)
-		// if (!this.state.phone) { return this.setState({ error: 'Phone Number required' }); }
-		this.setState({ error: undefined });
-		this.toggleSettingsDialog();
-		return this.props.dispatch(putUserUpdate(this.props.params.userId, this.state.nameToUpdate, this.state.zipcodeToUpdate));
 	},
 
 	toggleCallDialog: function() {
 		this.setState({ callDialogOpen: !this.state.callDialogOpen });
-	},
-	toggleSettingsDialog: function() {
-		this.setState({ settingsDialogOpen: !this.state.settingsDialogOpen });
 	},
 
 	componentWillMount() {
@@ -112,7 +76,6 @@ export const User = React.createClass({
 
 	render() {
 		const user = this.props.userData.user || {};
-		console.log(user);
 		const reps = user.reps || [];
 		// const children = user.children || [];
 		const flatCalls = getFlatCalls(user);
@@ -130,7 +93,6 @@ export const User = React.createClass({
 		const callsCount = getPersonalCallsCount(user);
 
 		const isStoredUser = String(localUser.id) === this.props.params.userId;
-		const error = this.state.error || this.props.landingData.signupError;
 		return (
 			<div>
 				<div style={styles.repsBackground}>
@@ -155,7 +117,6 @@ export const User = React.createClass({
 										<span style={this.props.userData.loading ? { opacity: 0 } : {}}>
 											{user.name}, {user.state} 
 										</span>
-
 										{this.props.userData.loading &&
 											<div style={[styles.loader]}>
 												<Spinner />
@@ -165,7 +126,6 @@ export const User = React.createClass({
 									{isLocalUser &&
 										<div>
 											<div style={styles.repsWrapper}>
-
 												<div style={styles.repsBox} className={'pt-elevation-3'}>
 													<div style={styles.sectionTitle}>Your Representatives</div>
 														<div style={styles.centered}>
@@ -202,14 +162,15 @@ export const User = React.createClass({
 																		); 
 																	})}
 																	</div>
-																	<div> Unfortunately, you are not fully represented in congress.</div>
-																	<div>You can still join the game by inviting your friends from other states and encouraging them to call</div>
+
+																	<div>Apologies. We had trouble finding all your representatives.</div>
+																	<div>You can still join the game by calling those we did find or inviting your friends from other states and encouraging them to call.</div>
 																</div>
 															</div>
 														}
 
 														{reps.length > 3 &&
-														<AddressInput geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
+															<AddressInput geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
 														}
 
 														{reps.length === 3 && 
@@ -297,34 +258,8 @@ export const User = React.createClass({
 					<div style={styles.settingsBackground}>
 						<div style={styles.plainContainer}>
 							<div style={styles.sectionTitle}>Settings</div>
-							<p>Mistype your zipcode or name? Change it below.</p>
-							<button role={'button'} style={styles.button} className={'pt-button pt-minimal'} onClick={this.toggleSettingsDialog}>Change Your Settings</button>
-							<Dialog isOpen={this.state.settingsDialogOpen} onClose={this.toggleSettingsDialog} title={'Change Settings'} style={styles.dialogBox}>
-								<form  style={styles.form}>
-									<label htmlFor={'name-input'} style={styles.inputLabel}>
-									Name
-										<input 
-											id={'name-input'} className={'pt-input pt-large pt-fill'}
-											placeholder={user.name} value={this.state.nameToUpdate}
-											onChange={(evt) => this.setState({ nameToUpdate: evt.target.value })} />
-									</label>
-									<label htmlFor={'zip-input'} style={styles.inputLabel}>
-										Zipcode (where you vote)
-										<input 
-											id={'zip-input'} type={'number'} className={'pt-input pt-large pt-fill'}
-											placeholder={user.zipcode} value={this.state.zipcodeToUpdate}
-											onChange={this.updateZipcode} />
-									</label>
-										<Button
-										// loading={} this.props.landingData.signupLoading and this.signupSubmit for onClick={}
-										type={'submit'} style={styles.buttonSettings}
-										text={'Update Settings'}
-										className={'pt-intent-primary pt-fill pt-large'}
-										onClick={this.updateSubmit} // also on error div, would be {error} component inside but not defined yet
-										/> 
-									<div style={styles.error}>{error}</div> 
-								</form>
-							</Dialog>
+							<p>Mistype your zipcode or name? Email us at <a href={'mailto:fiftynifty@media.mit.edu'}>fiftynifty@media.mit.edu</a> and we can update your profile.</p>
+							<p>Richer profile settings coming soon.</p>
 						</div>
 					</div>
 				}
@@ -337,7 +272,6 @@ export const User = React.createClass({
 function mapStateToProps(state) {
 	return {
 		userData: state.user.toJS(),
-		landingData: state.landing.toJS(),
 	};
 }
 
@@ -467,10 +401,6 @@ styles = {
 		backgroundColor: '#003d59',
 		letterSpacing: '0.1em',
 		boxShadow: '0 2px #001C2B',
-
-	},
-	buttonSettings: {
-		verticalAlign: 'bottom',
 	},
 	link: {
 		color: '#da022e',
@@ -480,22 +410,9 @@ styles = {
 		maxWidth: '100%',
 		top: '10%',
 	},
-	inputLabel: {
-		fontSize: '1.25em',
-		display: 'block',
-		marginBottom: '1em',
-	},
-	form: {
-		padding: 0,
-		margin: 0,
-	},
-	error: { 
-		color: 'rgb(203, 0, 39)',
-		fontSize: '1.25em',
-		paddingTop: '.5em',
-	},
 	userInfoWrapper: {
 		textAlign: 'center',
+		padding: '1em',
 	},
 	userInfo: {
 		color: '#000',

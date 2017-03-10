@@ -9,3 +9,4 @@ misc/*
 translations/messages
 .idea/
 text
+config.js
