@@ -89,6 +89,7 @@ export const User = React.createClass({
 		// this.props.landingData.referralDetails
 
 		if (this.state.zipcodeInput.length !== 5) { return this.setState({ error: 'Zipcode must be 5 digits' }); }
+		if (this.state.nameInput.length === 0) { return this.setState({ error: 'Name is required' }); }
 
 		this.setState({ error: undefined });
 		this.props.dispatch(putUserUpdate(this.props.params.userId, this.props.userData.user.hash, this.state.nameInput, this.state.zipcodeInput));
@@ -166,7 +167,7 @@ export const User = React.createClass({
 		const callsCount = getPersonalCallsCount(user);
 
 		const isStoredUser = String(localUser.id) === this.props.params.userId;
-		const error = this.state.error;
+		const error = this.state.error || this.props.userData.updateError;
 		return (
 			<div>
 				<div style={styles.repsBackground}>
@@ -362,7 +363,10 @@ export const User = React.createClass({
 									loading={this.props.userData.updateLoading}
 									onClick={this.updateSubmit} /> 
 
-								<div style={styles.error}>{error}</div> 
+								{!!error &&
+									<div className={'pt-callout'} style={styles.error}>{error}</div> 
+								}
+								
 							</form>
 
 							{/*<p>Mistype your zipcode or name? Change it below.</p>
@@ -562,6 +566,7 @@ styles = {
 		color: 'rgb(203, 0, 39)',
 		fontSize: '1.25em',
 		paddingTop: '.5em',
+		marginTop: '0.5em',
 	},
 	userInfoWrapper: {
 		textAlign: 'center',
