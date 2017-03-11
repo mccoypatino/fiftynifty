@@ -1,13 +1,13 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { Spinner, Dialog } from '@blueprintjs/core';
+import { Spinner, Dialog, Button } from '@blueprintjs/core';
 import Radium from 'radium';
 import dateFormat from 'dateformat';
 
 import { Representative, AddressInput, ProgressMap, TreeGraph } from 'components';
 
-import { getUser, requestCall, requestLatLong } from './actions';
+import { getUser, requestCall, requestLatLong, putUserUpdate } from './actions';
 import { Invite } from './Invite';
 import { getScore, countStates, getFlatCalls, getPersonalCallsCount } from '../../Utilities/UserUtils';
 // import { UserNode } from './UserNode';
@@ -26,34 +26,106 @@ export const User = React.createClass({
 	getInitialState() {
 		return {
 			reps: [],
+			nameToUpdate: '',
+			zipcodeToUpdate: '',
 			callDialogOpen: false,
+			settingsDialogOpen: false,
+
+			nameInput: '',
+			zipcodeInput: '',
+			error: undefined
 		};
+	},
+
+	componentWillMount() {
+		const localUserData = localStorage.getItem('userData');
+		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
+		this.loadData(this.props.params.userId, localUser.hash);
+	},
+
+	componentWillReceiveProps(nextProps) {
+		if (this.props.params.userId !== nextProps.params.userId) {
+			const localUserData = localStorage.getItem('userData');
+			const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
+			this.loadData(nextProps.params.userId, localUser.hash);
+		}
+
+		const prevUserData = this.props.userData.user || {};
+		const nextUserData = nextProps.userData.user || {};
+		if (!prevUserData.id && nextUserData.id) {
+			this.setState({
+				nameInput: nextUserData.name,
+				zipcodeInput: nextUserData.zipcode,
+			});
+		}
+
+		const lastUpdateLoading = this.props.userData.updateLoading;
+		const nextUpdateLoading = nextProps.userData.updateLoading;
+		const nextUpdateError = nextProps.userData.updateError;
+		const nextUpdateResult = nextProps.userData.user;
+		if (lastUpdateLoading && !nextUpdateLoading && !nextUpdateError && nextUpdateResult.id) {
+			localStorage.setItem('userData', JSON.stringify(nextUpdateResult));
+			if (window.location.hostname !== 'localhost') {
+				Raven.setUserContext({ username: nextUpdateResult.name, userId: nextUpdateResult.id });
+			}
+		}
+	},
+
+	loadData(userId, hash) {
+		this.props.dispatch(getUser(userId, hash));
+	},
+
+	// updateZipcode: function(evt) {
+	// 	this.setState({
+	// 		zipcodeToUpdate: evt.target.value.substring(0, 5)
+	// 	});
+	// },
+
+	updateSubmit: function(evt) {
+		evt.preventDefault();
+
+		// const refUser = this.props.landingData.referralDetails || {};
+		// const referral = refUser.id || this.props.location.query.ref;
+		// this.props.landingData.referralDetails
+
+		if (this.state.zipcodeInput.length !== 5) { return this.setState({ error: 'Zipcode must be 5 digits' }); }
+
+		this.setState({ error: undefined });
+		this.props.dispatch(putUserUpdate(this.props.params.userId, this.props.userData.user.hash, this.state.nameInput, this.state.zipcodeInput));
+
+		// if (!this.state.nameToUpdate) { this.setState({nameToUpdate: user.name}, function() {
+		// 	this.props.dispatch(putUserUpdate(this.props.params.userId, this.props.userData.user.hash, this.state.nameToUpdate, this.state.zipcodeToUpdate));
+		// }); }
+		// if (!this.state.zipcodeToUpdate) { this.setState({zipcodeToUpdate: user.zipcode}, function() {
+		// 	this.props.dispatch(putUserUpdate(this.props.params.userId, this.props.userData.user.hash, this.state.nameToUpdate, this.state.zipcodeToUpdate));
+		// }); }
+		// else if (this.state.zipcodeToUpdate.length !== 5) { return this.setState({ error: 'Zipcode must be 5 digits' }); } // i want zipcode provied in userData, going to look in the api for it
+		// console.log(this.state.zipcodeToUpdate)
+		// console.log(this.state.nameToUpdate)
+		// if (!this.state.phone) { return this.setState({ error: 'Phone Number required' }); }
+		// this.setState({ error: undefined });
+		// this.toggleSettingsDialog();
+		// return this.props.dispatch(putUserUpdate(this.props.params.userId, this.state.nameToUpdate, this.state.zipcodeToUpdate));
 	},
 
 	toggleCallDialog: function() {
 		this.setState({ callDialogOpen: !this.state.callDialogOpen });
 	},
+	// toggleSettingsDialog: function() {
+	// 	this.setState({ settingsDialogOpen: !this.state.settingsDialogOpen });
+	// },
 
-	componentWillMount() {
-		this.loadData(this.props.params.userId);
-	},
-
-	componentWillReceiveProps(nextProps) {
-		if (this.props.params.userId !== nextProps.params.userId) {
-			this.loadData(nextProps.params.userId);
-		}
-	},
-
-	loadData(userId) {
-		this.props.dispatch(getUser(userId));
-	},
 
 	callFunction: function(repId) {
-		this.props.dispatch(requestCall(repId, this.props.params.userId));
+		const localUserData = localStorage.getItem('userData');
+		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
+		this.props.dispatch(requestCall(repId, this.props.params.userId, localUser.hash));
 	},
 
 	geolocateFunction: function(address) {
-		this.props.dispatch(requestLatLong(address, this.props.params.userId));
+		const localUserData = localStorage.getItem('userData');
+		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
+		this.props.dispatch(requestLatLong(address, this.props.params.userId, localUser.hash));
 	},
 	logout: function() {
 		localStorage.removeItem('userData');
@@ -76,6 +148,7 @@ export const User = React.createClass({
 
 	render() {
 		const user = this.props.userData.user || {};
+		// console.log(user);
 		const reps = user.reps || [];
 		// const children = user.children || [];
 		const flatCalls = getFlatCalls(user);
@@ -86,13 +159,14 @@ export const User = React.createClass({
 		const COLORS = ['#cb0027', 'rgba(0,0,0,0)'];
 		const localUserData = localStorage.getItem('userData');
 		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
-		const isLocalUser = localUser.id && localUser.id === user.id;
+		const isLocalUser = localUser.id && localUser.id === user.id && localUser.hash && user.hash;
 		const presentName = isLocalUser ? 'Your' : user.name + "'s";
 		const joinDate = user.createdAt ? dateFormat(new Date(user.createdAt), 'mmmm dS, yyyy') : '';
 		const parent = this.getParent(user);
 		const callsCount = getPersonalCallsCount(user);
 
 		const isStoredUser = String(localUser.id) === this.props.params.userId;
+		const error = this.state.error;
 		return (
 			<div>
 				<div style={styles.repsBackground}>
@@ -131,7 +205,10 @@ export const User = React.createClass({
 												<div style={styles.repsBox} className={'pt-elevation-3'}>
 													<div style={styles.sectionTitle}>Your Representatives</div>
 														<div style={styles.centered}>
-															<button role={'button'} style={styles.button} className={'pt-button pt-minimal'} onClick={this.toggleCallDialog}>How to call?</button>
+															{reps.length > 3 === false &&
+																<button role={'button'} style={styles.button} className={'pt-button pt-minimal'} onClick={this.toggleCallDialog}>How to call?</button>	
+															}
+															
 															<Dialog isOpen={this.state.callDialogOpen} onClose={this.toggleCallDialog} title={'How To Call'} style={styles.dialogBox}>
 																<div className="pt-dialog-body">
 																	<div>When you press call, we will dial your representative and call you back automatically.
@@ -164,14 +241,15 @@ export const User = React.createClass({
 																		); 
 																	})}
 																	</div>
-																	<div> Unfortunately, you are not fully represented in congress.</div>
-																	<div>You can still join the game by inviting your friends from other states and encouraging them to call</div>
+
+																	<div>Apologies. We had trouble finding all your representatives.</div>
+																	<div>You can still join the game by calling those we did find or inviting your friends from other states and encouraging them to call.</div>
 																</div>
 															</div>
 														}
 
 														{reps.length > 3 &&
-														<AddressInput geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
+															<AddressInput geolocateFunction={this.geolocateFunction} isLoading={this.props.userData.latLonLoading} />
 														}
 
 														{reps.length === 3 && 
@@ -259,8 +337,61 @@ export const User = React.createClass({
 					<div style={styles.settingsBackground}>
 						<div style={styles.plainContainer}>
 							<div style={styles.sectionTitle}>Settings</div>
-							<p>Mistype your zipcode or name? Email us at <a href={'mailto:fiftynifty@media.mit.edu'}>fiftynifty@media.mit.edu</a> and we can update your profile.</p>
-							<p>Richer profile settings coming soon.</p>
+							<p>Update your name or zipcode.</p>
+							<form style={styles.form}>
+								<label htmlFor={'name-input'} style={styles.inputLabel}>
+								Name
+									<input 
+										id={'name-input'} className={'pt-input pt-large pt-fill'}
+										placeholder={'Enter your name'} value={this.state.nameInput}
+										onChange={(evt) => this.setState({ nameInput: evt.target.value })} />
+								</label>
+
+								<label htmlFor={'zip-input'} style={styles.inputLabel}>
+									Zipcode (where you vote)
+									<input 
+										id={'zip-input'} type={'number'} className={'pt-input pt-large pt-fill'}
+										placeholder={'Enter your zipcode'} value={this.state.zipcodeInput}
+										onChange={(evt) => this.setState({ zipcodeInput: evt.target.value.substring(0, 5) })} />
+								</label>
+
+								<Button
+									type={'submit'}
+									text={'Update Settings'}
+									className={'pt-intent-primary pt-fill pt-large'}
+									loading={this.props.userData.updateLoading}
+									onClick={this.updateSubmit} /> 
+
+								<div style={styles.error}>{error}</div> 
+							</form>
+
+							{/*<p>Mistype your zipcode or name? Change it below.</p>
+														<button role={'button'} style={styles.button} className={'pt-button pt-minimal'} onClick={this.toggleSettingsDialog}>Change Your Settings</button>
+														<Dialog isOpen={this.state.settingsDialogOpen} onClose={this.toggleSettingsDialog} title={'Change Settings'} style={styles.dialogBox}>
+															<form  style={styles.form}>
+																<label htmlFor={'name-input'} style={styles.inputLabel}>
+																Name
+																	<input 
+																		id={'name-input'} className={'pt-input pt-large pt-fill'}
+																		placeholder={user.name} value={this.state.nameToUpdate}
+																		onChange={(evt) => this.setState({ nameToUpdate: evt.target.value })} />
+																</label>
+																<label htmlFor={'zip-input'} style={styles.inputLabel}>
+																	Zipcode (where you vote)
+																	<input 
+																		id={'zip-input'} type={'number'} className={'pt-input pt-large pt-fill'}
+																		placeholder={user.zipcode} value={this.state.zipcodeToUpdate}
+																		onChange={this.updateZipcode} />
+																</label>
+																	<Button
+																	type={'submit'} style={styles.buttonSettings}
+																	text={'Update Settings'}
+																	className={'pt-intent-primary pt-fill pt-large'}
+																	onClick={this.updateSubmit} // also on error div, would be {error} component inside but not defined yet
+																	/> 
+																<div style={styles.error}>{error}</div> 
+															</form>
+														</Dialog>*/}
 						</div>
 					</div>
 				}
@@ -376,6 +507,7 @@ styles = {
 		textAlign: 'left',
 		color: 'white',
 		padding: '1em',
+		marginBottom: '2em',
 		//fontWeight: '200',
 	},
 	orCall: {
@@ -402,6 +534,7 @@ styles = {
 		backgroundColor: '#003d59',
 		letterSpacing: '0.1em',
 		boxShadow: '0 2px #001C2B',
+
 	},
 	link: {
 		color: '#da022e',
@@ -411,9 +544,27 @@ styles = {
 		maxWidth: '100%',
 		top: '10%',
 	},
+	inputLabel: {
+		fontSize: '1.25em',
+		display: 'block',
+		marginBottom: '1em',
+	},
+	form: {
+		textAlign: 'left',
+		padding: 0,
+		margin: '0 auto',
+		maxWidth: '400px',
+		'@media screen and (min-resolution: 3dppx), screen and (max-width: 767px)': {
+			maxWidth: '100%',
+		},
+	},
+	error: { 
+		color: 'rgb(203, 0, 39)',
+		fontSize: '1.25em',
+		paddingTop: '.5em',
+	},
 	userInfoWrapper: {
 		textAlign: 'center',
-		padding: '1em',
 	},
 	userInfo: {
 		color: '#000',
