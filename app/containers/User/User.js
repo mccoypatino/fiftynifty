@@ -26,10 +26,7 @@ export const User = React.createClass({
 	getInitialState() {
 		return {
 			reps: [],
-			nameToUpdate: '',
-			zipcodeToUpdate: '',
 			callDialogOpen: false,
-			settingsDialogOpen: false,
 
 			nameInput: '',
 			zipcodeInput: '',
@@ -75,47 +72,19 @@ export const User = React.createClass({
 		this.props.dispatch(getUser(userId, hash));
 	},
 
-	// updateZipcode: function(evt) {
-	// 	this.setState({
-	// 		zipcodeToUpdate: evt.target.value.substring(0, 5)
-	// 	});
-	// },
-
 	updateSubmit: function(evt) {
 		evt.preventDefault();
-
-		// const refUser = this.props.landingData.referralDetails || {};
-		// const referral = refUser.id || this.props.location.query.ref;
-		// this.props.landingData.referralDetails
 
 		if (this.state.zipcodeInput.length !== 5) { return this.setState({ error: 'Zipcode must be 5 digits' }); }
 		if (this.state.nameInput.length === 0) { return this.setState({ error: 'Name is required' }); }
 
 		this.setState({ error: undefined });
 		this.props.dispatch(putUserUpdate(this.props.params.userId, this.props.userData.user.hash, this.state.nameInput, this.state.zipcodeInput));
-
-		// if (!this.state.nameToUpdate) { this.setState({nameToUpdate: user.name}, function() {
-		// 	this.props.dispatch(putUserUpdate(this.props.params.userId, this.props.userData.user.hash, this.state.nameToUpdate, this.state.zipcodeToUpdate));
-		// }); }
-		// if (!this.state.zipcodeToUpdate) { this.setState({zipcodeToUpdate: user.zipcode}, function() {
-		// 	this.props.dispatch(putUserUpdate(this.props.params.userId, this.props.userData.user.hash, this.state.nameToUpdate, this.state.zipcodeToUpdate));
-		// }); }
-		// else if (this.state.zipcodeToUpdate.length !== 5) { return this.setState({ error: 'Zipcode must be 5 digits' }); } // i want zipcode provied in userData, going to look in the api for it
-		// console.log(this.state.zipcodeToUpdate)
-		// console.log(this.state.nameToUpdate)
-		// if (!this.state.phone) { return this.setState({ error: 'Phone Number required' }); }
-		// this.setState({ error: undefined });
-		// this.toggleSettingsDialog();
-		// return this.props.dispatch(putUserUpdate(this.props.params.userId, this.state.nameToUpdate, this.state.zipcodeToUpdate));
 	},
 
 	toggleCallDialog: function() {
 		this.setState({ callDialogOpen: !this.state.callDialogOpen });
 	},
-	// toggleSettingsDialog: function() {
-	// 	this.setState({ settingsDialogOpen: !this.state.settingsDialogOpen });
-	// },
-
 
 	callFunction: function(repId) {
 		const localUserData = localStorage.getItem('userData');
@@ -369,33 +338,6 @@ export const User = React.createClass({
 								
 							</form>
 
-							{/*<p>Mistype your zipcode or name? Change it below.</p>
-														<button role={'button'} style={styles.button} className={'pt-button pt-minimal'} onClick={this.toggleSettingsDialog}>Change Your Settings</button>
-														<Dialog isOpen={this.state.settingsDialogOpen} onClose={this.toggleSettingsDialog} title={'Change Settings'} style={styles.dialogBox}>
-															<form  style={styles.form}>
-																<label htmlFor={'name-input'} style={styles.inputLabel}>
-																Name
-																	<input 
-																		id={'name-input'} className={'pt-input pt-large pt-fill'}
-																		placeholder={user.name} value={this.state.nameToUpdate}
-																		onChange={(evt) => this.setState({ nameToUpdate: evt.target.value })} />
-																</label>
-																<label htmlFor={'zip-input'} style={styles.inputLabel}>
-																	Zipcode (where you vote)
-																	<input 
-																		id={'zip-input'} type={'number'} className={'pt-input pt-large pt-fill'}
-																		placeholder={user.zipcode} value={this.state.zipcodeToUpdate}
-																		onChange={this.updateZipcode} />
-																</label>
-																	<Button
-																	type={'submit'} style={styles.buttonSettings}
-																	text={'Update Settings'}
-																	className={'pt-intent-primary pt-fill pt-large'}
-																	onClick={this.updateSubmit} // also on error div, would be {error} component inside but not defined yet
-																	/> 
-																<div style={styles.error}>{error}</div> 
-															</form>
-														</Dialog>*/}
 						</div>
 					</div>
 				}
