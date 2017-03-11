@@ -67,8 +67,15 @@ export const Leaderboard = React.createClass({
 
 	render() {
         let leaders = [];
+
+        const localUserData = localStorage.getItem('userData');
+        const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
+        const loggedIn = localUser.id && localUser.hash;
+        // !! Please use logged in when trying to display 'myId' - we need to make sure both userId and userHash exist in localstorage.
+        
         const myId = JSON.parse(localStorage.getItem('userData'))["id"];
         console.log(myId);
+
         if (this.state.leaderSort === 'byStateCount') {
             leaders = this.leadersByStateCount();
         }

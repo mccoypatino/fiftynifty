@@ -14,12 +14,13 @@ export const AppFooter = React.createClass({
 	render() {
 		const localUserData = localStorage.getItem('userData');
 		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
-
+		const loggedIn = localUser.id && localUser.hash;
+		
 		return (
 			<div style={styles.container}>
 				<a href={'mailto:fiftynifty@media.mit.edu'} className={'link'} style={styles.item}>Contact us at fiftynifty@media.mit.edu</a>
 
-				{!!localUser.id && 
+				{!!loggedIn && 
 					<button type="button" className={'pt-button pt-minimal pt-icon-log-out pt-intent-danger'} onClick={this.logout}>Logout</button>
 				}
 			</div>
