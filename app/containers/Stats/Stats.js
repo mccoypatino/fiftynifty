@@ -58,18 +58,18 @@ export const Stats = React.createClass({
 	},
 
 	getTotalCallLength(calls) {
-		const totalCallLength = calls.reduce((pre, cur) => { console.log(pre, cur); return pre + cur.duration; }, 0);
+		const totalCallLength = calls.reduce((pre, cur) => { return pre + cur.duration; }, 0);
 		return totalCallLength;
 	},
 
 	render() {
+		// const leaders = this.props.leaderboardData.leaders || [];
 		const allUsers = this.getAllUsers();
 		const playerCount = this.getActivePlayerCount(allUsers);
 		const calls = this.getCalls(allUsers);
 		const callCount = this.getCallCount(calls);
 		const totalCallLength = this.getTotalCallLength(calls);
 		const totalLengthStr = this.secondsToHoursMinutsSeconds(totalCallLength);
-
 		return (
             <div style={styles.container}>
                 <div style={styles.content}>
@@ -92,15 +92,14 @@ export const Stats = React.createClass({
                     </div>
 					<div>
 						<div style={styles.title}>Entire Network</div>
-						{leaders.map((user)=> {
-							const currStyle = user.children.length > 1 ? styles.fullWidth : styles.smallTree;
+						{allUsers.map((user)=> { return user.user; }).map((user)=> {
+							const currStyle = user.children && user.children.length > 1 ? styles.fullWidth : styles.smallTree;
 							return (
-								<div key={user.id} style={ currStyle }>
+								<div key={`user-${user.id}`} style={ currStyle }>
 									<TreeGraph data={user} isGlobal={true} />
 								</div>
 							);
-						}
-						)}
+						})}
 					</div>
                 </div>
             </div>
