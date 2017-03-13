@@ -80,13 +80,11 @@ export const Leaderboard = React.createClass({
 		}		else if (this.state.leaderSort === 'byNumChildren') {
 			leaders = this.leadersByNumChildren();
 		}
-		console.log('111');
+
+		const leadersRows = leaders.slice(0, 10).map((user, index)=>{
+			return (<Leader key={user.user.id} leader={user} index={index + 1} />);})
         const myLeaderIndex = leaders.findIndex((leader) => leader.user.id === localUser.id );
-        console.log('222');
 		const myLeader = loggedIn ? leaders[myLeaderIndex] : null;
-		console.log("my leader", myLeader);
-		console.log("my index", myLeaderIndex);
-		console.log(loggedIn)
 		return (
 		    <div style={styles.flagImage}>
                 <div style={styles.flagSplash}>
@@ -98,17 +96,13 @@ export const Leaderboard = React.createClass({
                             </div>
                             }
                             <div style={styles.sortTitle}>Sort By:</div>
-                            <button role={'button'} style={styles.sortButton} className={'pt-button count-sort'} onClick={this.toggleByStateCount}>State Count</button>
-                            <button role={'button'} style={styles.sortButton} className={'pt-button score-sort'} onClick={this.toggleByScore}>Score</button>
-                            <button role={'button'} style={styles.sortButton} className={'pt-button invites-sort'} onClick={this.toggleByNumChildren}>Invites</button>
+                            <button role={'button'} style={styles.sortButton} className={'pt-button pt-minimal count-sort'} onClick={this.toggleByStateCount}>State Count</button>
+                            <button role={'button'} style={styles.sortButton} className={'pt-button pt-minimal score-sort'} onClick={this.toggleByScore}>Score</button>
+                            <button role={'button'} style={styles.sortButton} className={'pt-button pt-minimal invites-sort'} onClick={this.toggleByNumChildren}>Invites</button>
                             {loggedIn && myLeader &&
                                 <div style={styles.myLeader}><Leader key={localUser.id} leader={myLeader} index={myLeaderIndex + 1} /></div>
                             }
-                            {(leaders.length>0) && leaders.slice(0, 10).map((user, index)=>{
-                                return (
-
-                                    <Leader key={user.user.id} leader={user} index={index + 1} />);
-                            })}
+							{leadersRows}
                         </div>
                     </div>
                 </div>
@@ -141,7 +135,6 @@ export const Leader = React.createClass({
 	render() {
 		const user = this.props.leader;
 		const percent = this.state.didRender ? (Math.min(user.statesCount, 50) / 50.0) * 100 : 0;
-        console.log(user, this.props.index);
 		return (
             <div style={styles.leaderRow}>
                 <div style={styles.section}>
@@ -153,7 +146,7 @@ export const Leader = React.createClass({
                         <div style={styles.statesCount}>{Math.min(user.statesCount, 50)} / 50</div>
                     </div>
                     <div style={styles.score}>{Math.floor(user.score)} Points</div>
-                    <div style={styles.numInvites}>{user.user.children ? user.user.children.length : 0} Invites Sent</div>
+                    <div style={styles.numInvites}>{user.user.children ? user.user.children.length : 0} Friends Joined</div>
                 </div>
             </div>
 		);
@@ -227,6 +220,8 @@ styles = {
 		background: '#dce4ef',
 		borderBottom: '3px solid rgba(8, 48, 74, 0.5)',
 		opacity: '1',
+        boxSizing: 'border-box',
+        transition: 'all 0.2s ease-out',
 	},
 	outerBar: {
 	    width: 'calc(100% - 90px)',
@@ -255,8 +250,8 @@ styles = {
 	},
     numberCircle: {
         borderRadius: '50%',
-        width: '60px',
-        fontSize: '1.5em',
+        width: '55px',
+        fontSize: '1.2em',
         fontWeight: 'bold',
         border: '4px solid #666',
         display: 'inline-block',
@@ -264,9 +259,9 @@ styles = {
 
     },
 	leaderIndex: {
-		color: '#ff6f70',
+		color: '#666',
         textAlign: 'center',
-        lineHeight: '52px',
+        lineHeight: '47px',
         display: 'block',
 	},
 	myLeader: {
@@ -314,6 +309,12 @@ styles = {
 		display: 'inline-block',
 		marginLeft: '5px',
 		marginBottom: '5px',
+        color: 'white',
+        fontWeight: 'lighter',
+        backgroundColor: '#cf1e34',
+        letterSpacing: '0.1em',
+        boxShadow: '0 1px rgba(72, 72, 72, 0.8)',
+		opacity: '1',
 	},
 
 };
