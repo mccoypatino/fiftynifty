@@ -131,7 +131,7 @@ export const Landing = React.createClass({
 						<Button 
 								style={styles.button}
 								text={'Already registered? Login here'}
-								className={'pt-fill'} />
+								className={'pt-fill pt-intent-primary pt-large'} />
 					</Link>
 				</div>
 				<div id="join" style={styles.headerCall} className={'pt-card pt-elevation-3'}>
@@ -498,6 +498,6 @@ styles = {
 		textDecoration: 'underline',
 	},
 	backLogin: {
-		margin: '0em 1em 1em 1em',
+		margin: '0.5em 1em 1em 1em',
 	},
 };

@@ -121,8 +121,14 @@ styles = {
 	tagline: {
 		opacity: '0.5',
 		fontSize: '13px',
+		':hover': {
+			color: 'white',
+		}
 	},
-	
+	logoAndTagline: {
+		textDecoration: 'none',
+		color: 'white',
+	},
 	linkWrapper: {
 		display: 'table',
 		width: '100%',
