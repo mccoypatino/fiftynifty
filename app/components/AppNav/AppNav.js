@@ -31,26 +31,28 @@ export const AppNav = React.createClass({
 						<div className={'show-child-on-hover'} style={styles.logoWrapper}>
 							<Link to={'/'}>
 								<div style={styles.logo} className={'header-logo'} />
+								<div style={styles.tagline}>
+									An MIT Media Lab Experiment</div>
 							</Link>
 
 							<div style={styles.songWrapper} className={'hidden-child'}>
-								<Link to={'/song'} className={'pt-button pt-minimal pt-icon-music'} style={styles.songIcon}/>
+								<Link to={'/song'} className={'pt-button pt-minimal pt-icon-music'} style={styles.songIcon} />
 							</div>
 						</div>
 						
 						
 						<div style={styles.linkWrapper}>
-							<Link to={'/'} style={styles.link(pathname==='/')}>Home</Link>
+							<Link to={'/'} style={styles.link(pathname === '/')}>Home</Link>
 							
 							{!!loggedIn &&
-								<Link to={`/${localUser.id}`} style={styles.link(pathname===`/${localUser.id}`)}>Your Profile</Link>
+								<Link to={`/${localUser.id}`} style={styles.link(pathname === `/${localUser.id}`)}>Your Profile</Link>
 							}
 							{!loggedIn &&
-								<Link to={'/login'} style={styles.link(pathname==='/login')}>Login</Link>
+								<Link to={'/login'} style={styles.link(pathname === '/login')}>Login</Link>
 							}
 							
-							<Link to={'/leaderboard'} style={styles.link(pathname==='/leaderboard')}>Leaderboard</Link>
-							<Link to={'/about'} style={styles.link(pathname==='/about')}>About</Link>
+							<Link to={'/leaderboard'} style={styles.link(pathname === '/leaderboard')}>Leaderboard</Link>
+							<Link to={'/about'} style={styles.link(pathname === '/about')}>About</Link>
 						</div>
 					</div>
 					

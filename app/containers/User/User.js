@@ -390,7 +390,7 @@ styles = {
 		padding: '2em 0em',
 	},
 	sectionTitle: {
-		fontSize: '1.9em',
+		fontSize: '1.8em',
 		textAlign: 'center',
 		letterSpacing: '0.1em',
 		padding: '0.8em 0',

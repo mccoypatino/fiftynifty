@@ -272,7 +272,7 @@ styles = {
 		position: 'relative',		
 	},
 	headerImage: {
-		backgroundColor: '#003D59',
+		backgroundImage: 'url("/static/protest.jpg")',
 		backgroundRepeat: 'no-repeat',
 		backgroundPosition: 'center center',
 		backgroundSize: 'cover',
