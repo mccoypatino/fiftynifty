@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route } from 'react-router';
-// import { App, Landing, Leaderboard, Login, NoMatch, User, About, Song } from 'containers';
 
 function getComponent(component) {
 	return (location, cb)=> {

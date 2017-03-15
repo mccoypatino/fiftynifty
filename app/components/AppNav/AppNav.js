@@ -19,7 +19,9 @@ export const AppNav = React.createClass({
 
 	render() {
 		const localUserData = localStorage.getItem('userData');
-		const user = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
+		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
+		const loggedIn = localUser.id && localUser.hash;
+
 		const location = this.props.location || {};
 		const pathname = location.pathname;
 		return (
@@ -39,12 +41,14 @@ export const AppNav = React.createClass({
 						
 						<div style={styles.linkWrapper}>
 							<Link to={'/'} style={styles.link(pathname==='/')}>Home</Link>
-                            {!!user.id &&
-							<Link to={`/${user.id}`} style={styles.link(pathname===`/${user.id}`)}>Your Profile</Link>
+                            
+                            {!!loggedIn &&
+								<Link to={`/${localUser.id}`} style={styles.link(pathname===`/${localUser.id}`)}>Your Profile</Link>
                             }
-                            {!user.id &&
-							<Link to={'/login'} style={styles.link(pathname==='/login')}>Login</Link>
+                            {!loggedIn &&
+								<Link to={'/login'} style={styles.link(pathname==='/login')}>Login</Link>
                             }
+                            
 							<Link to={'/leaderboard'} style={styles.link(pathname==='/leaderboard')}>Leaderboard</Link>
 							<Link to={'/about'} style={styles.link(pathname==='/about')}>About</Link>
 						</div>

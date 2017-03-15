@@ -98,6 +98,7 @@ export const Landing = React.createClass({
 	render() {
 		const localUserData = localStorage.getItem('userData');
 		const localUser = localUserData && localUserData.length > 1 ? JSON.parse(localUserData) : {};
+		const loggedIn = localUser.id && localUser.hash;
 		// const localUserScore = localUser ? getScore(localUser) : 0;
 
 		const inviteForm = (
@@ -208,14 +209,14 @@ export const Landing = React.createClass({
 									'Join the Challenge: Reach 50 states to win. Enlist friends across the country. We’ll speed dial for you. We’ll help you prime your network.  Three clicks and you’re done. Track your progress.'
 								}
 							</p>
-							{localUser.id && 
+							{loggedIn && 
 								<Link to={`/${localUser.id}`}> 
 									<div style={styles.welcomeLine}> Welcome {localUser.name}, Click here to see your progress </div>
 								</Link>}
 						</div>
 
-						{!!localUser.id && inviteForm}
-						{!localUser.id && joinForm}
+						{!!loggedIn && inviteForm}
+						{!loggedIn && joinForm}
 
 					</div>
 				</div>
