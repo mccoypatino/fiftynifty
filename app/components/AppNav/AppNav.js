@@ -29,7 +29,7 @@ export const AppNav = React.createClass({
 				<div style={styles.navContent}>
 					<div style={{ display: 'inline-block' }}>
 						<div className={'show-child-on-hover'} style={styles.logoWrapper}>
-							<Link to={'/'}>
+							<Link to={'/'} style={styles.logoAndTagline}>
 								<div style={styles.logo} className={'header-logo'} />
 								<div style={styles.tagline}>
 									An MIT Media Lab Experiment</div>
@@ -69,15 +69,15 @@ export default Radium(AppNav);
 
 styles = {
 	navStyle: {
-			minHeight: '75px',
-			// lineHeight: '75px',
-			// boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.5)',
-			position: 'absolute',
-			zIndex: '3',
-			width: '100%',
-			maxWidth: '100vw',
-			overflow: 'hidden',
-			color: 'white',
+		minHeight: '75px',
+		// lineHeight: '75px',
+		// boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.5)',
+		position: 'absolute',
+		zIndex: '3',
+		width: '100%',
+		maxWidth: '100vw',
+		overflow: 'hidden',
+		color: 'white',
 	},
 	navContent: {
 		padding: '1.5em 1em 1.5em 1em',
@@ -113,13 +113,14 @@ styles = {
 		backgroundRepeat: 'no-repeat',
 		'@media (min-width: 635px)': {
 			width: '500px',
-			height: '63px',
+			height: '58px',
 		},
 		// See styles.css for image use
 		// Need to set images there so they pre-load correctly.
 	},
 	tagline: {
-		
+		opacity: '0.5',
+		fontSize: '13px',
 	},
 	
 	linkWrapper: {

@@ -126,6 +126,14 @@ export const Landing = React.createClass({
 		const authError = this.state.error || this.props.landingData.authenticationError;
 		const joinForm = (
 			<div style={styles.joinForm}>
+				<div style={styles.backLogin}>
+					<Link to={'/login'}>
+						<Button 
+								style={styles.button}
+								text={'Already registered? Login here'}
+								className={'pt-fill'} />
+					</Link>
+				</div>
 				<div id="join" style={styles.headerCall} className={'pt-card pt-elevation-3'}>
 						{ refText }
 					<div style={styles.inputHeader}> Join The Challenge Here	</div>
@@ -488,5 +496,8 @@ styles = {
 	},
 	linkWithUnderline: {
 		textDecoration: 'underline',
-	}
+	},
+	backLogin: {
+		margin: '0em 1em 1em 1em',
+	},
 };
