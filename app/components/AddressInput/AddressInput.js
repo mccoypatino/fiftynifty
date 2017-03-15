@@ -35,17 +35,10 @@ export const AddressInput = React.createClass({
 export default Radium(AddressInput);
 
 styles = {
-<<<<<<< HEAD
-	inputLabel: {
-		fontSize: '1.25em',
-		display: 'block',
-		marginBottom: '1em',
-=======
 	input: {
 		margin: '0.5em 0em',
 	},
 	form: {
 		margin: '0.5em 0em',
->>>>>>> f1e3eb78d74d13630d9f4a27e4b70ee100872596
 	},
 };
