@@ -60,7 +60,7 @@ export const TreeGraph = React.createClass({
 			const fillColor = this.colorMap[Object.keys(statesDefaults).indexOf(node.data.state)] || '#d9ccc6';
 			let alpha = 1;
 			if (node.data.calls) {
-                alpha = node.data.calls.length > 0 ? 1 : 0.25;
+                alpha = node.data.calls.length > 0 ? 1 : 0.6;
             }
 			return (
                 node.data.id &&
