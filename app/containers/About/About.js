@@ -56,7 +56,7 @@ export const About = React.createClass({
 							Then what
 						</h3>
 						<p>	Pick an issue.  Use our suggestions or promote your own. It’s your network. Use the Facebook, Twitter, or email buttons to invite friends. <em>Keep doing this to remind them!</em> </p>
-						<p>	We'll figure out your Congresspeople. We'll speed-dial for you and register your points for the call. You can call now or later.  Business hours are best. It’s easy: press the "call" button and we'll call you back and patch you directly to their office. Just answer your phone to talk. <Link to={'/about/#hints'} style={styles.link}>Click here</Link> for hints on what to say.</p>
+						<p>	We'll identify your Congresspeople. We'll speed-dial for you and register your points for the call. You can call now or later.  Business hours are best. It’s easy: press the "call" button and we'll call you back and patch you directly to their office. Just answer your phone to talk. <Link to={'/about/#hints'} style={styles.link}>Click here</Link> for hints on what to say.</p>
 
 						<p>(We welcome your feedback: Contact us at <Link to={'mailto:fiftynifty@media.mit.edu'} style={styles.link}>fiftynifty@media.mit.edu</Link>)</p>
 

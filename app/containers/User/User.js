@@ -177,8 +177,7 @@ export const User = React.createClass({
 														<div style={styles.centered}>
 															{reps.length > 3 === false &&
 																<button role={'button'} style={styles.button} className={'pt-button pt-minimal'} onClick={this.toggleCallDialog}>How to call?</button>	
-															}
-															
+															}			
 															<Dialog isOpen={this.state.callDialogOpen} onClose={this.toggleCallDialog} title={'How To Call'} style={styles.dialogBox}>
 																<div className="pt-dialog-body">
 																	<div>When you press call, we will dial your representative and call you back automatically.
