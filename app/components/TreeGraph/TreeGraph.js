@@ -58,12 +58,16 @@ export const TreeGraph = React.createClass({
 		const nodes = nodesList.map(node => {
             // get color by state
 			const fillColor = this.colorMap[Object.keys(statesDefaults).indexOf(node.data.state)] || '#d9ccc6';
+			let alpha = 1;
+			if (node.data.calls) {
+                alpha = node.data.calls.length > 0 ? 1 : 0.25;
+            }
 			return (
                 node.data.id &&
 				<g
 key={node.data.id} className="node"
 				   transform={`translate(${node.x}, ${node.y})`}>
-					<circle r="7" style={{ fill: `${fillColor}`, stroke: 'none' }} />
+					<circle r="7" style={{ fill: `${chroma(fillColor).alpha(alpha).css()}`, stroke: 'none' }} />
                     <a href={`/${node.data.id}`}>
                         <text y="2pt" fontSize="6pt" fontFamily="sans-serif" textAnchor="middle">{this.nameToInitials(node.data.name)}</text>
                     </a>
