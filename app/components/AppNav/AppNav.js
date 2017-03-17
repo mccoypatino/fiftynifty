@@ -32,7 +32,7 @@ export const AppNav = React.createClass({
 							<Link to={'/'} style={styles.logoAndTagline}>
 								<div style={styles.logo} className={'header-logo'} />
 								<div style={styles.tagline}>
-									An MIT Media Lab Experiment</div>
+									An MIT Media Lab Project</div>
 							</Link>
 
 							<div style={styles.songWrapper} className={'hidden-child'}>
