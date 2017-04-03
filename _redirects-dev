@@ -1,5 +1,5 @@
 /favicon.ico  /static/favicon.ico
 /robots.txt  /static/robots.txt
 /static/*  /static/:splat
-/api/*  https://fiftynifty-api-dev.herokuapp.com/:splat  200
+/api/*  https://fiftynifty-nophone-api.herokuapp.com/:splat  200
 /*    /index.html   200
