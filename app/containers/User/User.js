@@ -30,6 +30,7 @@ export const User = React.createClass({
 
 			nameInput: '',
 			zipcodeInput: '',
+			emailInput: '',
 			error: undefined
 		};
 	},
@@ -53,6 +54,7 @@ export const User = React.createClass({
 			this.setState({
 				nameInput: nextUserData.name,
 				zipcodeInput: nextUserData.zipcode,
+				emailInput: nextUserData.email,
 			});
 		}
 
@@ -79,7 +81,7 @@ export const User = React.createClass({
 		if (this.state.nameInput.length === 0) { return this.setState({ error: 'Name is required' }); }
 
 		this.setState({ error: undefined });
-		this.props.dispatch(putUserUpdate(this.props.params.userId, this.props.userData.user.hash, this.state.nameInput, this.state.zipcodeInput));
+		this.props.dispatch(putUserUpdate(this.props.params.userId, this.props.userData.user.hash, this.state.nameInput, this.state.zipcodeInput, this.state.emailInput));
 	},
 
 	toggleCallDialog: function() {
@@ -323,6 +325,15 @@ export const User = React.createClass({
 										placeholder={'Enter your zipcode'} value={this.state.zipcodeInput}
 										onChange={(evt) => this.setState({ zipcodeInput: evt.target.value.substring(0, 5) })} />
 								</label>
+
+								<label htmlFor={'email-input'} style={styles.inputLabel}>
+									Email address
+									<input 
+										id={'email-input'} type={'email'} className={'pt-input pt-large pt-fill'}
+										placeholder={'Enter your email address'} value={this.state.emailInput}
+										onChange={(evt) => this.setState({ emailInput: evt.target.value })} />
+								</label>
+
 
 								<Button
 									type={'submit'}
