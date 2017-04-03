@@ -79,29 +79,29 @@ export function postUser(name, phone, zipcode, parentId, variant) {
 }
 
 export function getReferralDetails(userId) {
-    return (dispatch) => {
-        dispatch({ type: GET_USER_LOAD });
-        return clientFetch(`/api/user/simple?userId=${userId}`)
-            .then((result) => {
-                dispatch({ type: GET_USER_SUCCESS, result });
-            })
-            .catch((error) => {
-                console.log(error);
-                dispatch({ type: GET_USER_FAIL, error });
-            });
-    };
+	return (dispatch) => {
+		dispatch({ type: GET_USER_LOAD });
+		return clientFetch(`/api/user/simple?userId=${userId}`)
+			.then((result) => {
+				dispatch({ type: GET_USER_SUCCESS, result });
+			})
+			.catch((error) => {
+				console.log(error);
+				dispatch({ type: GET_USER_FAIL, error });
+			});
+	};
 }
 
 export function getCallWithVerificationCode(phone) {
-    return (dispatch) => {
-        dispatch({ type: GET_CALL_LOAD });
-        return clientFetch(`/api/callAuthenticate/${phone}`)
-            .then((result) => {
-                dispatch({ type: GET_CALL_SUCCESS, result });
-            })
-            .catch((error) => {
-                console.log(error);
-                dispatch({ type: GET_CALL_FAIL, error });
-            });
-    };
+	return (dispatch) => {
+		dispatch({ type: GET_CALL_LOAD });
+		return clientFetch(`/api/callAuthenticate/${phone}`)
+			.then((result) => {
+				dispatch({ type: GET_CALL_SUCCESS, result });
+			})
+			.catch((error) => {
+				console.log(error);
+				dispatch({ type: GET_CALL_FAIL, error });
+			});
+	};
 }
