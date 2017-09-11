@@ -146,10 +146,10 @@ export const Landing = React.createClass({
 								onChange={(evt) => this.setState({ name: evt.target.value })} />
 						</label>
 						<label htmlFor={'zip-input'} style={styles.inputLabel}>
-							Zipcode (where you vote)
+							Idea
 							<input
 								id={'zip-input'} type={'number'} 			className={'pt-input pt-large pt-fill'}
-								placeholder={'Where are you registered?'} 	value={this.state.zipcode}
+								placeholder={'What is your idea?'} 	value={this.state.zipcode}
 								onChange={this.updateZipcode} />
 						</label>
 						<label htmlFor={'phone-input'} style={styles.inputLabel}>
